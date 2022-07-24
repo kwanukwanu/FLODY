@@ -1,11 +1,13 @@
 <template>
-  <div>
-    <h1>HOME VIEW</h1>
-  </div>
+  <h2>Group Main</h2>
 </template>
 
 <script>
-
 export default {
+
 }
 </script>
+
+<style>
+
+</style>
