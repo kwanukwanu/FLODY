@@ -5,7 +5,7 @@
     <li><router-link to="home/main">로그인 메인</router-link></li>
     <li><router-link to="home/membership">회원가입</router-link></li>
   </ul>
-    <router-view/>
+    <router-v                                                                                                                                                                                                                                                                                                                                                       iew/>
     <!--
     <svg width="284" height="68" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
