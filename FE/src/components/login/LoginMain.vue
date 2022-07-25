@@ -77,8 +77,9 @@
     <br>
     <b-container>
       <b-row class="justify-content-md-center">
-        <b-card style="height: 15; max-width: 50rem; background-color: #F8F3F3;">
+        <b-card style="height: 15; max-width: 40rem; background-color: #F8F3F3;">
           <b-container ref="form">
+            <br>
             <b-row>
               <b-col>
                 <b-form-input placeholder="이메일 주소" required style="border: none;"></b-form-input>
@@ -95,8 +96,7 @@
             <br>
             <b-button text @click="submit" style="color: #453535; background-color: #E1D3D2; border: none">로그인
             </b-button>
-            <br>
-            <br>
+            <br><br>
             <b-row>
               <b-col>
                 <b-button @click="joinForm" variant="link" style="color: #B99B9A; text-decoration: none; font-weight: 100;">아이디 찾기</b-button>
@@ -112,7 +112,8 @@
         </b-card>
       </b-row>
     </b-container>
-</template>
+    <br><br>
+    </template>
 
 <script>
 export default{

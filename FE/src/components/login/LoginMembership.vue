@@ -113,13 +113,11 @@
             <br>
             <b-button text @click="submit" style="color: #453535; background-color: #E1D3D2; border: none">회원가입
             </b-button>
-            <br><br>
           </b-container>
         </b-card>
       </b-row>
     </b-container>  
             <br><br>
-   
 </template>
 
 <script>
