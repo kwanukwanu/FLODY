@@ -1,5 +1,6 @@
 <template>
 <div id="app">
+  <my-page-nav-bar/>
   <header-bar/>
   <router-view />
   <footer-bar/>
@@ -9,12 +10,14 @@
 <script>
 import HeaderBar from "@/components/layout/HeaderNavBar.vue";
 import FooterBar from "@/components/layout/FooterNavBar.vue";
+import MyPageNavBar from './components/layout/MyPageNavBar.vue';
 
 export default{
   name:"App",
   components:{
     HeaderBar,
     FooterBar,
+    MyPageNavBar,
   },
 }
 </script>
