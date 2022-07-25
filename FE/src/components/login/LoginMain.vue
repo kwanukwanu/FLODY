@@ -99,13 +99,13 @@
             <br>
             <b-row>
               <b-col>
-                <b-button @click="joinForm" variant="link" style="color: #B99B9A;">아이디 찾기</b-button>
+                <b-button @click="joinForm" variant="link" style="color: #B99B9A; text-decoration: none; font-weight: 100;">아이디 찾기</b-button>
               </b-col>
               <b-col>
-                <b-button @click="joinForm" variant="link" style="color: #B99B9A;">비밀번호 찾기</b-button>
+                <b-button @click="joinForm" variant="link" style="color: #B99B9A; text-decoration: none;">비밀번호 찾기</b-button>
               </b-col>
               <b-col>
-                <b-button @click="joinForm" variant="link" style="color: #B99B9A;">회원가입</b-button>
+                <b-button @click="joinForm" variant="link" style="color: #B99B9A; text-decoration: none;">회원가입</b-button>
               </b-col>
             </b-row>
           </b-container>

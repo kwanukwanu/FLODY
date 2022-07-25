@@ -49,4 +49,15 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+
+#app {
+	font-family: basic-scans, sans-serif;
+  color : #666565;
+	font-size: 1em;
+	line-height: 1.6;
+	margin: 0;
+	min-height: 100%;
+	position: relative;
+	padding-bottom: 120px;
+}
 </style>
