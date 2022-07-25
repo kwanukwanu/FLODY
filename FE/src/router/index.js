@@ -55,6 +55,29 @@ const routes = [
     path:'/group',
     name:'group',
     component: () =>import("@/views/GroupView.vue"),
+    redirect: '/group/main',
+    children:[
+      {
+        path:"main",
+        name:"groupmain",
+        component:()=>import("@/components/group/GroupMain.vue"),
+      },
+      {
+        path:"calandar",
+        name:'groupcalandar',
+        component:()=>import("@/components/group/GroupCalandar.vue"),
+      },
+      {
+        path:"chart",
+        name:"groupchart",
+        component:()=>import("@/components/group/GroupChart.vue"),
+      },
+      {
+        path:"todo",
+        name:"grouptodo",
+        component:()=>import("@/components/group/GroupTodo.vue")
+      }
+    ]
   },
   {
     path:'/board',

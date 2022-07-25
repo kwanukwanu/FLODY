@@ -77,7 +77,7 @@
     <br>
     <b-container>
       <b-row class="justify-content-md-center">
-        <b-card style="height: 15rem; max-width: 50rem; background-color: #F8F3F3;">
+        <b-card style="height: 15; max-width: 50rem; background-color: #F8F3F3;">
           <b-container ref="form">
             <b-row>
               <b-col>
@@ -92,6 +92,7 @@
               <br>
               <br>
             </b-row>
+            <br>
             <b-button text @click="submit" style="color: #453535; background-color: #E1D3D2; border: none">로그인
             </b-button>
             <br>
