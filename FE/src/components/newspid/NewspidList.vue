@@ -8,7 +8,7 @@
         </b-col>
         <b-col style="background-color: #ffffff;">
           <b-row>
-            <b-col>
+            <b-col cols="2">
               <b-avatar variant="info" src="https://placekitten.com/300/300" size="50px"></b-avatar>
             </b-col>
             <b-col>
@@ -21,7 +21,7 @@
           </b-row>
           <hr style="margin: 5px;">
           <b-row>
-            <b-col>
+            <b-col cols="2">
               <b-avatar variant="info" src="https://placekitten.com/300/300" size="50px"></b-avatar>
             </b-col>
             <b-col>
