@@ -78,8 +78,9 @@
     <br>
     <b-container>
       <b-row class="justify-content-md-center">
-        <b-card style="height: 24rem; max-width: 50rem; background-color: #F8F3F3;">
+        <b-card style="height: 27rem; max-width: 40rem; background-color: #F8F3F3;">
           <b-container ref="form">
+            <br>
             <b-row>
               <b-col>
                 <b-form-input placeholder="이메일 주소" required style="border: none;"></b-form-input>
@@ -94,13 +95,13 @@
             <br>
             <b-row>
               <b-col>
-                <b-form-input placeholder="비밀번호" style="border: none;"></b-form-input>
+                <b-form-input type = "password" placeholder="비밀번호" style="border: none;"></b-form-input>
               </b-col>
             </b-row>
             <br>
             <b-row>
               <b-col>
-                <b-form-input placeholder="비밀번호 확인" style="border: none;"></b-form-input>
+                <b-form-input type = "password" placeholder="비밀번호 확인" style="border: none;"></b-form-input>
               </b-col>
             </b-row>
             <br>
@@ -112,17 +113,13 @@
             <br>
             <b-button text @click="submit" style="color: #453535; background-color: #E1D3D2; border: none">회원가입
             </b-button>
-            <br>
+            <br><br>
           </b-container>
         </b-card>
       </b-row>
-    </b-container>
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    </b-container>  
+            <br><br>
+   
 </template>
 
 <script>

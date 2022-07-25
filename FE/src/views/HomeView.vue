@@ -2,8 +2,8 @@
   <div class="home">
   <h1>Login View</h1>
     <ul>
-    <li><router-link to="home/main">로그인 메인</router-link></li>
-    <li><router-link to="home/membership">회원가입</router-link></li>
+    <li><router-link to="/main">로그인 메인</router-link></li>
+    <li><router-link to="/membership">회원가입</router-link></li>
   </ul>
     <router-view/>
     <!--
