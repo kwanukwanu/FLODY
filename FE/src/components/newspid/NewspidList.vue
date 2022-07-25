@@ -25,8 +25,10 @@
               <b-avatar variant="info" src="https://placekitten.com/300/300" size="50px"></b-avatar>
             </b-col>
             <b-col>
-              <div style="width: 90px; display: inline; padding: 4px 0px;">Brown_Cat</div>
-              <div style="width: 90px; display: inline; padding: 4px 0px;"> 공부를 놓지 않는다. 취한다.</div>
+              <b-row>
+                <div style="width: 90px; display: inline; padding: 4px 0px;">Brown_Cat</div>
+                <div style="width: 200px; display: inline; padding: 4px 0px;"> 공부를 놓지 않는다. 취한다.</div>
+              </b-row>
             </b-col>
           </b-row>
         </b-col>
