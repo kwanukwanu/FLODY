@@ -108,7 +108,7 @@
                 <b-button @click="joinForm" variant="link" style="color: #B99B9A; text-decoration: none;">회원가입</b-button>
               </b-col>
             </b-row>
-          </b-container>
+            </b-container>
         </b-card>
       </b-row>
     </b-container>
