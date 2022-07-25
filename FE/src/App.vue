@@ -1,9 +1,7 @@
 <template>
 <div id="app">
-  <b-col>
     <group-nav-bar/>
     <my-page-nav-bar/>
-  </b-col>
   <header-bar/>
   <router-view />
   <footer-bar/>

@@ -30,6 +30,11 @@ const routes = [
         path:'calandar',
         name:'studycalandar',
         component:()=>import("@/components/study/StudyCalander.vue"),
+      },
+      {
+        path:'todo',
+        name:'studytodo',
+        component:()=>import("@/components/study/StudyTodo.vue"),
       }
     ]
   },
