@@ -43,7 +43,23 @@ const routes = [
         path:'list',
         name:'newspidlist',
         component: ()=>import("@/components/newspid/NewspidList.vue"),
+      },
+      {
+        path:'item',
+        name:'newspiditem',
+        component: ()=>import("@/components/newspid/items/NewspidItem"),
+      },
+      {
+        path:'detail',
+        name:'newspiddetail',
+        component: ()=>import("@/components/newspid/items/NewspidItem"),
+      },
+      {
+        path:'item',
+        name:'newspiditem',
+        component: ()=>import("@/components/newspid/items/NewspidItem"),
       }
+
     ]
   },
   {
