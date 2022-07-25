@@ -1,6 +1,9 @@
 <template>
 <div id="app">
-  <my-page-nav-bar/>
+  <b-col>
+    <group-nav-bar/>
+    <my-page-nav-bar/>
+  </b-col>
   <header-bar/>
   <router-view />
   <footer-bar/>
@@ -11,6 +14,7 @@
 import HeaderBar from "@/components/layout/HeaderNavBar.vue";
 import FooterBar from "@/components/layout/FooterNavBar.vue";
 import MyPageNavBar from './components/layout/MyPageNavBar.vue';
+import GroupNavBar from './components/layout/GroupNavBar.vue';
 
 export default{
   name:"App",
@@ -18,6 +22,7 @@ export default{
     HeaderBar,
     FooterBar,
     MyPageNavBar,
+    GroupNavBar,
   },
 }
 </script>

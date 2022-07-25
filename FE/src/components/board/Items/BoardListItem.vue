@@ -1,6 +1,5 @@
 <template>
-  <div> 마이 페이지</div>
-  <hr>
+  <h3>BoardListItem</h3>
 </template>
 
 <script>

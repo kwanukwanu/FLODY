@@ -23,12 +23,28 @@ const routes = [
   {
     path: '/study',
     name: 'study',
-    component: () =>import("@/views/StudyView.vue")
+    component: () =>import("@/views/StudyView.vue"),
+    redirect:'/study/calandar',
+    children:[
+      {
+        path:'calandar',
+        name:'studycalandar',
+        component:()=>import("@/components/study/StudyCalander.vue"),
+      }
+    ]
   },
   {
     path:'/newspid',
     name:'newspid',
-    component: () =>import("@/views/NewspidView.vue")
+    component: () =>import("@/views/NewspidView.vue"),
+    redirect:'/newspid/list',
+    children:[
+      {
+        path:'list',
+        name:'newspidlist',
+        component: ()=>import("@/components/newspid/NewspidList.vue"),
+      }
+    ]
   },
   {
     path: '/search',

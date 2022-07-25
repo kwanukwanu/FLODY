@@ -1,6 +1,5 @@
 <template>
-  <div> 마이 페이지</div>
-  <hr>
+  <h2>newspid List</h2>
 </template>
 
 <script>

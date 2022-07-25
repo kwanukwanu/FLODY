@@ -1,6 +1,5 @@
 <template>
-  <div> 마이 페이지</div>
-  <hr>
+  <h2> Study calandar</h2>
 </template>
 
 <script>
