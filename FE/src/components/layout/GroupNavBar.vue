@@ -1,6 +1,5 @@
 <template>
-  <div> 마이 페이지</div>
-  <hr>
+  <div> 스터디 그룹 </div>
 </template>
 
 <script>
