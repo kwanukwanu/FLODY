@@ -1,6 +1,6 @@
 <template>
-<div class="head">
-  <!--
+  <div class="head">
+    <!--
   <h1>Header</h1>
 
   <router-link to="/">login</router-link>
@@ -10,38 +10,69 @@
   <router-link to="/search"> search </router-link>
   <router-link to="/board"> board </router-link>
   -->
-   <b-card style="max-width: 32rem; max-height: 45rem; background-color: #F8F3F3;" class="mb-2">
+    <b-card
+      style="max-width: 32rem; max-height: 45rem; background-color: #f8f3f3"
+      class="mb-2"
+    >
       <b-container>
         <b-row>
           <b-card-text>Menu</b-card-text>
         </b-row>
-        <hr>
+        <hr />
         <b-row>
-          <b-button variant="link" style="color: black; text-decoration: none;">👩 ‍ 내 공부방</b-button>
+          <b-button
+            variant="link"
+            @click="gotoPage('/study')"
+            style="color: black; text-decoration: none"
+            >👩 ‍ 내 공부방</b-button
+          >
         </b-row>
         <b-row>
-          <b-button variant="link" style="color: black; text-decoration: none;">📰 뉴스피드</b-button>
+          <b-button
+            variant="link"
+            @click="gotoPage('/newspid')"
+            style="color: black; text-decoration: none"
+            >📰 뉴스피드</b-button
+          >
         </b-row>
         <b-row>
-          <b-button variant="link" style="color: black; text-decoration: none;">🔥 공부게시판</b-button>
+          <b-button
+            variant="link"
+            @click="gotoPage('/board')"
+            style="color: black; text-decoration: none"
+            >🔥 공부게시판</b-button
+          >
         </b-row>
         <b-row>
-          <b-button variant="link" style="color: black; text-decoration: none;">🔍 자격증 검색</b-button>
+          <b-button
+            variant="link"
+            @click="gotoPage('/search')"
+            style="color: black; text-decoration: none"
+            >🔍 자격증 검색</b-button
+          >
         </b-row>
         <b-row>
-          <b-button variant="link" style="color: black; text-decoration: none;">✏ 게시글 작성</b-button>
+          <b-button
+            variant="link"
+            @click="gotoPage('/newspid')"
+            style="color: black; text-decoration: none"
+            >✏ 게시글 작성</b-button
+          >
         </b-row>
       </b-container>
     </b-card>
-</div>
+  </div>
 </template>
 
 <script>
 export default {
-
-}
+  methods: {
+    gotoPage(link) {
+      console.log(link);
+      this.$router.push(link);
+    },
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
