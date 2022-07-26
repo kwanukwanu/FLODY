@@ -78,7 +78,7 @@
       <b-container>
         <b-row>
           <b-col>
-            <b-avatar></b-avatar>
+            <b-avatar src="https://placekitten.com/300/300"></b-avatar>
           </b-col>
           <b-col>
             <b-row>
