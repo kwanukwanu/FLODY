@@ -74,22 +74,22 @@
         fill="#064635" />
     </svg>
 
-    <b-card style="max-width: 32rem; background-color: #F8F3F3;" class="mb-2">
+    <b-card style="max-width: 22rem; background-color: #F8F3F3;" class="mb-2">
       <b-container>
         <b-row>
           <b-col>
-            <b-avatar></b-avatar>
+            <b-avatar variant="info" src="https://placekitten.com/300/300" size="55px"></b-avatar>
           </b-col>
           <b-col>
             <b-row>
-              <b-card-text>Sofie_Marso</b-card-text>
+              <b-card-text style="font-weight: bold; font-size: large;">Sofie_Marso</b-card-text>
             </b-row>
             <b-row>
               <b-col>
-                <b-button variant="link" style="color: #B99B9A;" v-b-modal.modal-1>목표 등록</b-button>
+                <b-button variant="link" style="color: #B99B9A; text-decoration: none;" v-b-modal.modal-1>목표 등록</b-button>
               </b-col>
               <b-col>
-                <b-button variant="link" style="color: #B99B9A;">LOGOUT</b-button>
+                <b-button variant="link" style="color: #B99B9A; text-decoration: none;">LOGOUT</b-button>
               </b-col>
             </b-row>
           </b-col>
