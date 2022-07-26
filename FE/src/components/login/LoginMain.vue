@@ -113,38 +113,6 @@
       </b-row>
     </b-container>
     <br><br>
-    <b-button v-b-modal.modal-1>목표 등록</b-button>
-
-    <b-modal id="modal-1" centered title="목표 등록" style="text-align: center;">
-      <b-card style="height: 15; max-width: 40rem; background-color: #F8F3F3;">
-        <b-container ref="form">
-          <h2 style="text-align: center;">목표 등록</h2>
-          <b-row style="margin-bottom: 10px;">
-            <b-col>
-              <b-form-select style="border: none;"></b-form-select>
-            </b-col>
-            <b-col>
-              <b-form-input placeholder="시험 이름" required style="border: none;"></b-form-input>
-            </b-col>
-          </b-row>
-          <b-row style="margin-bottom: 10px;">
-            <b-col>
-              <b-form-input type="date" placeholder="날짜 선택" style="border: none;"></b-form-input>
-            </b-col>
-          </b-row>
-          <b-button text @click="submit" style="color: #453535; background-color: #E1D3D2; border: none">등록</b-button>
-          <template #modal-footer="{ cancel, ok }">
-            <b-button size="sm" variant="danger" @click="cancel()">
-              취소
-            </b-button>
-            <b-button size="sm" style="color: #453535; background-color: #E1D3D2; border: none" @click="ok()">
-              등록
-            </b-button>
-          </template>
-          </b-container>
-      </b-card>
-    </b-modal>
-    
     </template>
 
 <script>
