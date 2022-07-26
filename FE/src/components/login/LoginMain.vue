@@ -113,6 +113,23 @@
       </b-row>
     </b-container>
     <br><br>
+    <h2>Goal Insert</h2>
+    <b-card style="height: 15; max-width: 40rem; background-color: #F8F3F3;">
+          <b-container ref="form">
+            <h2 style="text-align: center;">목표 등록</h2>
+            <b-row style="margin-bottom: 10px;">
+              <b-col>
+                <b-form-input placeholder="시험 선택" required style="border: none;"></b-form-input>
+              </b-col>
+            </b-row>
+            <b-row style="margin-bottom: 10px;">
+              <b-col>
+                <b-form-input type="type-date" placeholder="날짜 선택" style="border: none;"></b-form-input>
+              </b-col>
+            </b-row>
+            <b-button text @click="submit" style="color: #453535; background-color: #E1D3D2; border: none">등록</b-button>
+            </b-container>
+        </b-card>
     </template>
 
 <script>
