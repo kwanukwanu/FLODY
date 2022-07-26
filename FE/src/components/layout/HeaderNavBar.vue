@@ -11,7 +11,7 @@
   <router-link to="/board"> board </router-link>
   -->
     <b-card
-      style="max-width: 32rem; max-height: 45rem; background-color: #f8f3f3"
+      style="max-width: 12rem; max-height: 45rem; background-color: #f8f3f3"
       class="mb-2"
     >
       <b-container>
