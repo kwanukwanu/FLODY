@@ -79,23 +79,78 @@
               <h5 style="text-align: left; font-weight: bold;">가입동기</h5>
             </b-row>
             <b-row>
-              <b-form-textarea id="textarea" v-model="textEx1" placeholder="Enter something..." rows="3" max-rows="6" style="border: 1px solid; border-color: #A48282;">
+              <b-form-textarea id="textarea" v-model="textEx1" placeholder="Enter something..." rows="3" max-rows="6"
+                style="border: 1px solid; border-color: #A48282;">
               </b-form-textarea>
             </b-row>
           </b-col>
         </b-row>
         <b-row align-h="around" style="margin-top: 10px;">
           <b-col>
-            <b-button text style="color: #453535; background-color: #E1D3D2; border: none">스터디 생성하기</b-button>
+            <b-button text style="color: #453535; background-color: #E1D3D2; border: none" v-b-modal.modal-2>스터디 생성하기
+            </b-button>
           </b-col>
           <b-col>
-            <b-button text style="color: #453535; background-color: #E1D3D2; border: none" @click="gotoPage('/study')">신청하기</b-button>
+            <b-button text style="color: #453535; background-color: #E1D3D2; border: none" @click="gotoPage('/study')">
+              신청하기</b-button>
           </b-col>
         </b-row>
 
       </b-container>
     </b-card>
   </div>
+
+  <b-modal id="modal-2" centered title="스터디 생성" style="text-align: center;">
+    <b-card style="height: 15; max-width: 40rem; background-color: #F8F3F3;">
+      <b-container ref="form">
+        <b-row style="margin-bottom: 10px;">
+          <b-col cole="3" style="padding: 0">
+            <div style="padding: 6px 6px; font-weight: bold;">스터디 명 :</div>
+          </b-col>
+          <b-col cols="9" style="padding: 0">
+            <b-form-input required style="border: none;"></b-form-input>
+          </b-col>
+        </b-row>
+        <b-row style="margin-bottom: 5px; text-align: left;">
+          <div style="font-weight: bold;">스터디원 목록</div>
+        </b-row>
+        <b-row style="margin-bottom: 10px;">
+          <b-col cols="10" style="padding: 0; margin-left: 10px;">
+            <b-form-input aria-placeholder="추가하고자 하는 스터디원의 아이디 입력" required style="border: none;"></b-form-input>
+          </b-col>
+          <b-col style="padding: 0; margin-left: 6px;">
+            <b-button text style="color: #453535; background-color: #E1D3D2; border: none">추가</b-button>
+          </b-col>
+        </b-row>
+        <b-row style="margin-bottom: 5px; text-align: left;">
+          <div style="font-weight: bold;">스터디원 리스트</div>
+        </b-row>
+        <b-row style="margin-bottom: 10px;">
+          <b-col>
+            이 부분 고민
+          </b-col>
+        </b-row>
+        <b-row style="margin-bottom: 5px; text-align: left;">
+          <div style="font-weight: bold;">스터디 소개글</div>
+        </b-row>
+        <b-row style="margin-bottom: 10px;">
+          <b-col>
+            <b-form-textarea id="textarea" v-model="textEx1" placeholder="Enter something..." rows="3" max-rows="6"
+                style="border: 1px solid; border-color: #A48282;">
+              </b-form-textarea>
+          </b-col>
+        </b-row>
+        <template #modal-footer="{ cancel, ok }">
+          <b-button size="sm" variant="danger" @click="cancel()">
+            취소
+          </b-button>
+          <b-button size="sm" style="color: #453535; background-color: #E1D3D2; border: none" @click="ok()">
+            등록
+          </b-button>
+        </template>
+      </b-container>
+    </b-card>
+  </b-modal>
 </template>
 
 <script>

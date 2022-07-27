@@ -4,7 +4,7 @@
       <b-container>
         <b-row>
           <b-col style="text-align: left; padding: 6px 12px;">
-            <b-card-text style="font-weight: bold;">현재 스터디 목록</b-card-text>
+            <b-card-text style="font-weight: bold; color: #786666">현재 스터디 목록</b-card-text>
           </b-col>
           <b-col cols="2">
             <b-button class="plus_button" variant="link" style="text-decoration: none; font-weight: 600;" @click="gotoPage('/club')">+</b-button>
