@@ -1,8 +1,6 @@
 <template>
-
   <b-navbar toggleable="lg" type="light" variant="light">
     <b-navbar-nav>
-      <!-- <b-nav-item> -->
       <b-row>
         <b-col cols="5">
           <router-link to="/">
@@ -83,29 +81,20 @@
           </router-link>
         </b-col>
         <b-col class="navbar">
-          <router-link :to="{ name: 'study' }" class="nav-link"> 내 공부방</router-link>
+          <router-link :to = "{ name: 'study' }" class="nav-link"> 내 공부방</router-link>
         </b-col>
-        <!-- </b-nav-item>
-          <b-nav-item> -->
         <b-col class="navbar">
           <router-link :to="{ name: 'newspid' }" class="nav-link"> 뉴스피드</router-link>
         </b-col>
-        <!-- </b-nav-item>
-          <b-nav-item> -->
         <b-col class="navbar">
           <router-link :to="{ name: 'board' }" class="nav-link"> 공부게시판</router-link>
         </b-col>
-        <!-- </b-nav-item>
-          <b-nav-item> -->
         <b-col class="navbar">
           <router-link :to="{ name: 'search' }" class="nav-link"> 자격증 검색</router-link>
         </b-col>
-        <!-- </b-nav-item>
-          <b-nav-item> -->
         <b-col class="navbar">
           <router-link :to="{ name: 'newspid' }" class="nav-link"> 게시글 작성</router-link>
         </b-col>
-        <!-- </b-nav-item> -->
       </b-row>
     </b-navbar-nav>
   </b-navbar>
@@ -124,8 +113,8 @@ export default {
 
 <style>
 nav .navbar-nav a.router-link-active {
+	color: #064635;
   font-weight: bold;
-  color: #440f81 !important;
 }
 .logo{
   margin-top:17px;
