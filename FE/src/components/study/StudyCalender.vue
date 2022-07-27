@@ -1,6 +1,6 @@
 <template>
-  <div>Study calandar</div>
   <v-calendar 
+  is-expanded
   :attributes='attributes' 
   @dayclick="onDayClick" 
   @update:from-page="onUpdatePage" 
@@ -12,7 +12,6 @@
   @transition-start="onTransitionStart"
   @transition-end="onTransitionEnd"
   ></v-calendar>
-  <div>calendar end</div>
 </template>
 
 <script>
