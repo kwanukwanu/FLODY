@@ -131,12 +131,7 @@
         </b-row>
         <hr>
         <h5>해당 이름을 가진 스터디 목록 (5개씩 페이징 처리)</h5>
-        <b-table id="my-table" :items="items" :per-page="perPage" :current-page="currentPage" small></b-table>
-
-        <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="my-table">
-        </b-pagination>
-
-        <p class="mt-3">Current Page: {{ currentPage }}</p>
+        <b-table striped hover :items="items" :fields="fields"></b-table>
 
       </b-container>
     </b-card>
@@ -146,27 +141,17 @@
 <script>
 export default{
   data() {
-      return {
-        perPage: 3,
-        currentPage: 1,
-        items: [
-          { id: 1, first_name: 'Fred', last_name: 'Flintstone' },
-          { id: 2, first_name: 'Wilma', last_name: 'Flintstone' },
-          { id: 3, first_name: 'Barney', last_name: 'Rubble' },
-          { id: 4, first_name: 'Betty', last_name: 'Rubble' },
-          { id: 5, first_name: 'Pebbles', last_name: 'Flintstone' },
-          { id: 6, first_name: 'Bamm Bamm', last_name: 'Rubble' },
-          { id: 7, first_name: 'The Great', last_name: 'Gazzoo' },
-          { id: 8, first_name: 'Rockhead', last_name: 'Slate' },
-          { id: 9, first_name: 'Pearl', last_name: 'Slaghoople' }
-        ]
-      }
-    },
-    computed: {
-      rows() {
-        return this.items.length
-      }
+    return {
+      // Note `isActive` is left out and will not appear in the rendered table
+      fields: ['번호', '스터디 이름', '스터디 장', '체크'],
+      items: [
+        { isActive: true, 번호: 1, '스터디 이름': '정처기 뿌셔', '스터디 장': 'Super_Mario', '체크': true },
+        { isActive: true, 번호: 2, '스터디 이름': '2022 정보처리기사 2회 실기 스터디', '스터디 장': 'Kim', '체크': true },
+        { isActive: true, 번호: 3, '스터디 이름': '정처기 2주 집중 스터디', '스터디 장': 'Speed', '체크': true },
+        { isActive: true, 번호: 4, '스터디 이름': '야 너두 정처기 합격 할 수 있어', '스터디 장': 'Jo', '체크': true },
+      ]
     }
+  }
 }
 </script>
 

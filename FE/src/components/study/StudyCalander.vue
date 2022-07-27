@@ -1,32 +1,51 @@
 <template>
   <div>Study calandar</div>
-  <DatePicker
-    v-model="dates"
-    :value="null"
-    color="red"
-    style="background-color: #fafafa"
-  ></DatePicker>
+  <v-calendar :attributes='attributes'></v-calendar>
   <div>calendar end</div>
 </template>
 
 <script>
-import "v-calendar/dist/style.css";
-import { DatePicker } from "v-calendar";
 export default {
-  components: {
-    DatePicker,
-  },
   data() {
-    return {
-      dates: [
-        { start: new Date(2022, 7, 1), end: new Date(2022, 7, 5) },
-        { start: new Date(2022, 7, 10), end: new Date(2022, 7, 15) },
-      ],
-      range: {
-        start: new Date(2022, 0, 1),
-        end: new Date(2022, 0, 5),
+    //todo : description(할 일), isComplete(완료여부), dates(날짜), color(색상표시)
+    // weekday : 요일, 1(일),2(월),3(화),4(수),5(목),6(금),7(토)
+    const todos = [
+      {
+        description: 'Take Noah to basketball practice.',
+        isComplete: false,
+        dates: { months:7, days: 18},
+        color: 'red',
       },
+      {
+        description: 'Take Noah to basketball practice.',
+        isComplete: true,
+        dates: { weekdays: 5 },
+        color: 'blue',
+      },
+    ];
+    return {
+      incId: todos.length,
+      todos,
     };
+  },
+  computed: {
+    attributes() {
+      return [
+        // Attributes for todos
+        ...this.todos.map(todo => ({
+          dates: todo.dates,
+          dot: {
+            color: todo.color,
+            class: todo.isComplete ? 'opacity-75' : '',
+          },
+          popover: {
+            label: todo.description,
+            visibility: 'focus'
+          },
+          customData: todo,
+        })),
+      ];
+    },
   },
 };
 </script>
