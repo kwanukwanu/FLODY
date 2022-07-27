@@ -122,7 +122,19 @@ const routes = [
       }
     ],
   },
-  
+  {
+    path:'/club',
+    name:'club',
+    component: () =>import("@/views/ClubView.vue"),
+    redirect:"/club/main",
+    children:[
+      {
+        path:"main",
+        name:"clubmain",
+        component:() => import("@/components/club/ClubSearch.vue"),
+      },
+    ],
+  },
 ]
 
 const router = createRouter({
