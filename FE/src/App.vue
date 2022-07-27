@@ -27,7 +27,7 @@ export default{
 
 
 <style>
-#app {
+/* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -57,5 +57,33 @@ nav a.router-link-exact-active {
 	min-height: 100%;
 	position: relative;
 	padding-bottom: 120px;
+} */
+html,
+body {
+	height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+	font-weight: bold;
+	color: chartreuse;
+}
+
+a.router-link-exact-active {
+	color: #3aa4ca;
+}
+
+#app {
+	font-family: basic-scans, sans-serif;
+	font-size: 1em;
+	line-height: 1.6;
+	margin: 0;
+	min-height: 100%;
+	position: relative;
+	padding-bottom: 133px;
 }
 </style>
