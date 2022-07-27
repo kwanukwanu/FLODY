@@ -1,14 +1,13 @@
 <template>
-  <h1>StudyView</h1>
-  <ul>
-    <li><router-link to="/study/calandar">스터디 캘린더</router-link></li>    
-    <li><router-link to="/study/todo">스터디 ToDo</router-link></li>    
-  </ul>
-  <router-view/>
+  <study-calender></study-calender>
+  <study-todo></study-todo>
 </template>
 
 <script>
+import StudyCalender from '@/components/study/StudyCalender.vue'
+import StudyTodo from '@/components/study/StudyTodo.vue'
 export default {
+  components: { StudyCalender,StudyTodo },
 
 }
 </script>

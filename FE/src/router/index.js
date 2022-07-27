@@ -24,7 +24,6 @@ const routes = [
     path: '/study',
     name: 'study',
     component: () =>import("@/views/StudyView.vue"),
-    redirect:'/study/calendar',
     children:[
       {
         path:'calendar',
@@ -42,7 +41,6 @@ const routes = [
     path:'/newspid',
     name:'newspid',
     component: () =>import("@/views/NewspidView.vue"),
-    redirect:'/newspid/list',
     children:[
       {
         path:'list',
