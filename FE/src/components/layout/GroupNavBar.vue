@@ -16,7 +16,7 @@
         <details>
           <summary style="font-weight: bold; margin-top: 7px;">
             정처기 뿌셔
-            <b-button>이동</b-button>
+            <b-button @click="gotoPage('/group')">이동</b-button>
           </summary>
           <ul>
             <li style="text-align: left;">
@@ -38,7 +38,7 @@
         <details>
           <summary style="font-weight: bold;">
             오픽 유잼
-            <b-button>이동</b-button>
+            <b-button @click="gotoPage('/group')">이동</b-button>
           </summary>
           <ul>
             <li style="text-align: left;">
