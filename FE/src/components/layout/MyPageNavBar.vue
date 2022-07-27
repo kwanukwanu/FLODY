@@ -3,12 +3,14 @@
       <b-container>
         <b-row>
           <b-col cols="3">
-            <b-avatar variant="info" src="https://placekitten.com/300/300" size="50px"></b-avatar>
+            <div class="pic">
+            <b-avatar variant="info" src="https://placekitten.com/300/300" size="47.5px"></b-avatar> </div>
           </b-col>
+         
           <b-col cols="9">
           <b-row>
           <b-col>
-              <b-card-text style="font-weight: bold; font-size: large;">Sofie_Marso_joayo</b-card-text>
+              <b-card-text style="margin-left:3px; font-weight: bold; font-size: large;">Sofie_Marso_joayo</b-card-text>
             </b-col>
           </b-row>
             <b-row>
@@ -25,18 +27,18 @@
 
 
         <b-row>
-          <b-col>
+          <b-col cols="8">
             <b-card-text class="test_name">정보처리기사</b-card-text>
           </b-col>
-          <b-col>
+          <b-col cols="4">
             <b-card-text class="howmuchleft" style="color:#BC6464; font-weight: bold;">D-3</b-card-text>
           </b-col>
         </b-row>
         <b-row>
-          <b-col>
+          <b-col cols="8">
             <b-card-text class="test_name">OPIC</b-card-text>
           </b-col>
-          <b-col>
+          <b-col cols="4">
             <b-card-text class="howmuchleft" style="color:#BC6464; font-weight: bold;">D-6</b-card-text>
           </b-col>
         </b-row>
@@ -85,7 +87,10 @@ export default {
 .test_name{
   text-align: right;
 }
-.howmuchleft{
-  text-align: center;
+.howmuchleft {
+  text-align: left;
+}
+.pic{
+  margin-top: 5px;
 }
 </style>
