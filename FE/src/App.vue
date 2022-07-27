@@ -1,8 +1,8 @@
 <template>
 <div id="app">
-    <group-nav-bar/>
+    <header-bar/>
     <my-page-nav-bar/>
-  <header-bar/>
+    <group-nav-bar/>
   <router-view />
   <footer-bar/>
 </div>
