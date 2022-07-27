@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <h5>
-      <br><br>
+      <br><br><br><br>
      © 2022 FLODY from SSAFY<br><br></h5>
      <h6>
      대전광역시 유성구 동서대로 98-39, 삼성화재 유성연수원 042-820-7385<br>

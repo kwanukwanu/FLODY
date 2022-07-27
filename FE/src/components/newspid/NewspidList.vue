@@ -1,5 +1,4 @@
 <template>
-  <h2>newspid List</h2>
   <b-card style="max-width: 70rem; background-color: #FBF1EE;">
     <b-container ref="form">
       <b-row>

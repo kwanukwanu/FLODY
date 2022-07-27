@@ -77,7 +77,6 @@
     </svg>
     </div>
     <br>
-    <br>
     <b-container>
       <b-row class="justify-content-md-center">
         <b-card style="height: 27rem; max-width: 40rem; background-color: #F8F3F3;">
@@ -121,7 +120,6 @@
         </b-card>
       </b-row>
     </b-container>  
-            <br><br>
 </template>
 
 <script>
@@ -133,9 +131,10 @@ export default {
 <style>
 .logo{
   text-align: center;
-  margin-right: 42px;
+  margin-right: 44px;
 }
 .button{
+  margin-top: 10px;
   text-align: center;
 }
 </style>

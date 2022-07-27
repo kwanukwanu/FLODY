@@ -1,11 +1,19 @@
 <template>
-<div id="app">
-    <header-bar/>
-    <my-page-nav-bar/>
-    <group-nav-bar/>
-  <router-view />
-  <footer-bar/>
-</div>
+  <div id="app">
+    <b-container>
+      <header-bar />
+      <b-row>
+        <b-col cols="3">
+          <my-page-nav-bar />
+          <group-nav-bar />
+        </b-col>
+        <b-col cols="9">
+          <router-view />
+        </b-col>
+      </b-row>
+    </b-container>
+    <footer-bar />
+  </div>
 </template>
 
 <script>
@@ -74,7 +82,8 @@ a:hover {
 }
 
 a.router-link-exact-active {
-	color: #3aa4ca;
+	color: #064635;
+  font-weight: bold;
 }
 
 #app {
