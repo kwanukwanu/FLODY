@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top:12px;"></div>
-  <b-card style="max-width: 20rem; max-height: 45rem; background-color: #f8f3f3" class="mb-2">
+  <b-card style="max-width: 20rem; max-height: 45rem; background-color: #f8f3f3; min-height:100%;" class="mb-2">
       <b-container>
         <b-row>
           <b-col style="text-align: left; padding: 6px 12px;">
