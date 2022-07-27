@@ -115,37 +115,29 @@
   </b-container>
   <br><br>
   <div>
-    <b-card style="max-width: 32rem; max-height: 45rem; background-color: #f8f3f3" class="mb-2">
+    <b-card>
       <b-container>
+        <h2>스터디 가입하기</h2>
         <b-row>
-          <b-col style="text-align: left; padding: 6px 12px;">
-            <b-card-text style="font-weight: bold;">현재 스터디 목록</b-card-text>
+          <b-col cole="2">
+            <div style="padding: 6px 6px;">스터디 명 : </div>
+          </b-col>
+          <b-col cols="8">
+            <b-form-input required style="border: none; background-color: #F1EBEB;"></b-form-input>
           </b-col>
           <b-col cols="2">
-            <b-button variant="link" style="text-decoration: none; font-weight: 100;">+</b-button>
+            <b-button>검색</b-button>
           </b-col>
         </b-row>
-        <hr style="margin: 5px;"/>
-        <b-row style="text-align: left;">
-          <details>
-            <summary style="font-weight: bold;">정처기 뿌셔</summary>
-            <ul>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/300" style="margin: 0px 5px 5px 0px;"></b-avatar>Super_Mario</li>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/200" style="margin: 0px 5px 5px 0px;"></b-avatar>Bat_Man</li>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/100" style="margin: 0px 5px 5px 0px;"></b-avatar>Cinderella</li>
-            </ul>
-          </details>
-        </b-row>
-        <b-row style="text-align: left;">
-          <details>
-            <summary style="font-weight: bold;">오픽 유잼</summary>
-            <ul>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/250" style="margin: 0px 5px 5px 0px;"></b-avatar>Drunken_Tiger</li>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/240" style="margin: 0px 5px 5px 0px;"></b-avatar>girl_girls</li>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/150" style="margin: 0px 5px 5px 0px;"></b-avatar>Oh_My_Boy</li>
-            </ul>
-          </details>
-        </b-row>
+        <hr>
+        <h5>해당 이름을 가진 스터디 목록 (5개씩 페이징 처리)</h5>
+        <b-table id="my-table" :items="items" :per-page="perPage" :current-page="currentPage" small></b-table>
+
+        <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="my-table">
+        </b-pagination>
+
+        <p class="mt-3">Current Page: {{ currentPage }}</p>
+
       </b-container>
     </b-card>
   </div>
@@ -153,6 +145,28 @@
 
 <script>
 export default{
+  data() {
+      return {
+        perPage: 3,
+        currentPage: 1,
+        items: [
+          { id: 1, first_name: 'Fred', last_name: 'Flintstone' },
+          { id: 2, first_name: 'Wilma', last_name: 'Flintstone' },
+          { id: 3, first_name: 'Barney', last_name: 'Rubble' },
+          { id: 4, first_name: 'Betty', last_name: 'Rubble' },
+          { id: 5, first_name: 'Pebbles', last_name: 'Flintstone' },
+          { id: 6, first_name: 'Bamm Bamm', last_name: 'Rubble' },
+          { id: 7, first_name: 'The Great', last_name: 'Gazzoo' },
+          { id: 8, first_name: 'Rockhead', last_name: 'Slate' },
+          { id: 9, first_name: 'Pearl', last_name: 'Slaghoople' }
+        ]
+      }
+    },
+    computed: {
+      rows() {
+        return this.items.length
+      }
+    }
 }
 </script>
 
