@@ -24,12 +24,12 @@ const routes = [
     path: '/study',
     name: 'study',
     component: () =>import("@/views/StudyView.vue"),
-    redirect:'/study/calandar',
+    redirect:'/study/calendar',
     children:[
       {
-        path:'calandar',
-        name:'studycalandar',
-        component:()=>import("@/components/study/StudyCalander.vue"),
+        path:'calendar',
+        name:'studycalendar',
+        component:()=>import("@/components/study/StudyCalender.vue"),
       },
       {
         path:'todo',
@@ -104,6 +104,7 @@ const routes = [
     path:'/board',
     name:'board',
     component: () =>import("@/views/BoardView.vue"),
+    redirect:'/board/main',
     children:[
       {
         path:"main",

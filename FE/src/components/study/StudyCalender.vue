@@ -1,6 +1,7 @@
 <template>
   <div>Study calandar</div>
-  <v-calendar :attributes='attributes' 
+  <v-calendar 
+  :attributes='attributes' 
   @dayclick="onDayClick" 
   @update:from-page="onUpdatePage" 
   @update:to-page="onUpdatePageTo" 
@@ -96,9 +97,10 @@ export default {
     dates() {
       return this.days.map(day => day.date);
     },
+    // 날짜별 속성을 지정하려면 여기서
     attributes() {
       return [
-        // Attributes for todos
+        // todos data를 Attribute에 저장
         ...this.todos.map(todo => ({
           dates: todo.dates,
           dot: {
@@ -111,6 +113,19 @@ export default {
           },
           customData: todo,
         })),
+
+        // range 지정
+        {
+          // 범위만큼 색 칠하기
+          highlight: {
+            start: { fillMode: 'light' }, // 연한색으로 칠하기
+            base: { fillMode: 'light' },
+            end: { fillMode: 'light' },
+          },
+          // 범위 지정
+          // '월'은 0부터 11까지(원하는 월 -1로 설정)
+          dates: { start: new Date(2022, 6, 14), end: new Date(2022, 6, 18) },
+        },
       ];
     },
   },
