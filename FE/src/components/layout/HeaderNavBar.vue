@@ -80,7 +80,7 @@
             </svg>
           </router-link>
         </b-col>
-        <b-col class="navbar">
+        <b-col class="navbar" >
           <router-link :to = "{ name: 'study' }" class="nav-link"> 내 공부방</router-link>
         </b-col>
         <b-col class="navbar">
@@ -91,9 +91,6 @@
         </b-col>
         <b-col class="navbar">
           <router-link :to="{ name: 'search' }" class="nav-link"> 자격증 검색</router-link>
-        </b-col>
-        <b-col class="navbar">
-          <router-link :to="{ name: 'newspid' }" class="nav-link"> 게시글 작성</router-link>
         </b-col>
       </b-row>
     </b-navbar-nav>

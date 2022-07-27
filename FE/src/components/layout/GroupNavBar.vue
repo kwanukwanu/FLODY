@@ -15,9 +15,9 @@
           <details>
             <summary style="font-weight: bold; margin-top: 7px;">정처기 뿌셔</summary>
             <ul>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/300" style="margin: 0px 5px 5px 0px;"></b-avatar>  Super_Mario</li>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/200" style="margin: 0px 5px 5px 0px;"></b-avatar>  Bat_Man</li>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/100" style="margin: 0px 5px 5px 0px;"></b-avatar>  Cinderella</li>
+              <li style="text-align: left;"><b-avatar size="30px" src="https://placekitten.com/300/300" style="margin: 0px 5px 5px 0px;"></b-avatar>  Super_Mario</li>
+              <li style="text-align: left;"><b-avatar size="30px" src="https://placekitten.com/300/200" style="margin: 0px 5px 5px 0px;"></b-avatar>  Bat_Man</li>
+              <li style="text-align: left;"><b-avatar size="30px" src="https://placekitten.com/300/100" style="margin: 0px 5px 5px 0px;"></b-avatar>  Cinderella</li>
             </ul>
           </details>
         </b-row>
@@ -25,13 +25,13 @@
           <details>
             <summary style="font-weight: bold;">오픽 유잼</summary>
             <ul>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/250" style="margin: 0px 5px 5px 0px;"></b-avatar>  Drunken_Tiger</li>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/240" style="margin: 0px 5px 5px 0px;"></b-avatar>  girl_girls</li>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/150" style="margin: 0px 5px 5px 0px;"></b-avatar>  Oh_My_Boy</li>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/230" style="margin: 0px 5px 5px 0px;"></b-avatar>  pussy_cat</li>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/170" style="margin: 0px 5px 5px 0px;"></b-avatar>  ronaldo</li>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/180" style="margin: 0px 5px 5px 0px;"></b-avatar>  messi_god</li>
-              <li style="text-align: left;"><b-avatar src="https://placekitten.com/300/190" style="margin: 0px 5px 5px 0px;"></b-avatar>  heungmini</li>
+              <li style="text-align: left;"><b-avatar size="30px" src="https://placekitten.com/300/250" style="margin: 0px 5px 5px 0px;"></b-avatar>  Drunken_Tiger</li>
+              <li style="text-align: left;"><b-avatar size="30px" src="https://placekitten.com/300/240" style="margin: 0px 5px 5px 0px;"></b-avatar>  girl_girls</li>
+              <li style="text-align: left;"><b-avatar size="30px" src="https://placekitten.com/300/150" style="margin: 0px 5px 5px 0px;"></b-avatar>  Oh_My_Boy</li>
+              <li style="text-align: left;"><b-avatar size="30px" src="https://placekitten.com/300/230" style="margin: 0px 5px 5px 0px;"></b-avatar>  pussy_cat</li>
+              <li style="text-align: left;"><b-avatar size="30px" src="https://placekitten.com/300/170" style="margin: 0px 5px 5px 0px;"></b-avatar>  ronaldo</li>
+              <li style="text-align: left;"><b-avatar size="30px" src="https://placekitten.com/300/180" style="margin: 0px 5px 5px 0px;"></b-avatar>  messi_god</li>
+              <li style="text-align: left;"><b-avatar size="30px" src="https://placekitten.com/300/190" style="margin: 0px 5px 5px 0px;"></b-avatar>  heungmini</li>
             </ul>
           </details>
         </b-row>
