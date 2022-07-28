@@ -3,20 +3,20 @@
     <b-card>
       <b-container>
         <h2>스터디 가입하기</h2>
-        <b-row>
-          <b-col cole="2">
-            <div style="padding: 6px 6px; font-weight: bold;">스터디 명 : </div>
+        <b-row id="header">
+          <b-col id="header_name" cole="2">
+            <div style="padding: 6px 6px; font-weight: bold;">스터디 명 :</div>
           </b-col>
-          <b-col cols="8">
+          <b-col id="header_input" cols="8">
             <b-form-input required style="border: none; background-color: #F1EBEB;"></b-form-input>
           </b-col>
-          <b-col cols="2">
+          <b-col id="header_button" cols="2">
             <b-button>검색</b-button>
           </b-col>
         </b-row>
-        <hr>
+        <hr />
         <!-- 테이블 -->
-        <h5 style="text-align: left; font-weight: bold;">해당 이름을 가진 스터디 목록 (5개씩 페이징 처리)</h5>
+        <h5 id="table_name" style="text-align: left; font-weight: bold;">해당 이름을 가진 스터디 목록 (5개씩 페이징 처리)</h5>
         <b-table :items="items" :fields="fields" striped responsive="sm">
           <template #cell(show_details)="row">
             <b-button size="sm" @click="row.toggleDetails" class="mr-2">
@@ -45,53 +45,54 @@
             </b-card>
           </template>
         </b-table>
-        <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">&lt; </b-button>
-        <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">1</b-button>
-        <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">2</b-button>
-        <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">3</b-button>
-        <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">&gt; </b-button>
+        <div id="table_pagination" style="text-align: center;">
+          <b-button class="page_button" variant="link">&lt; </b-button>
+          <b-button class="page_button" variant="link">1</b-button>
+          <b-button class="page_button" variant="link">2</b-button>
+          <b-button class="page_button" variant="link">3</b-button>
+          <b-button class="page_button" variant="link">&gt; </b-button>
+        </div>
 
-        <b-row style="margin-top: 10px;">
-          <b-col style="margin-right: 10px;">
-            <b-row>
-              <h5 style="text-align: left; font-weight: bold;">해당 스터디의 정보 및 소개</h5>
+        <b-row id="study_info">
+          <b-col id="study_intro">
+            <b-row id="study_intro_line">
+              <h5 id="study_intro_title">해당 스터디의 정보 및 소개</h5>
             </b-row>
-            <b-row style="border: 1px solid; border-color: #A48282; border-radius: 7px;">
+            <b-row id="study_intro_content">
               <div>의지박약 친구들끼리 머리 맞대고 공부하실분들을 찾습니다.</div>
             </b-row>
           </b-col>
-          <b-col>
-            <b-row>
-              <h5 style="text-align: left; font-weight: bold;">스터디원 목록</h5>
+          <b-col id="study_people">
+            <b-row id="study_people_line">
+              <h5 id="study_people_title">스터디원 목록</h5>
             </b-row>
-            <b-row style="border: 1px solid; border-color: #A48282; border-radius: 7px;">
-              <ul style="list-style-position: inside; margin: 0;">
-                <li style="text-align: left; padding-left: 6rem;">Super_Mario</li>
-                <li style="text-align: left; padding-left: 6rem;">Bat_Man</li>
-                <li style="text-align: left; padding-left: 6rem;">Chinderella</li>
+            <b-row id="study_people_box">
+              <ul id="study_people_group">
+                <li class="study_people_person">Super_Mario</li>
+                <li class="study_people_person">Bat_Man</li>
+                <li class="study_people_person">Chinderella</li>
               </ul>
             </b-row>
           </b-col>
         </b-row>
-        <b-row style="margin-top: 10px;">
-          <b-col>
-            <b-row>
-              <h5 style="text-align: left; font-weight: bold;">가입동기</h5>
+
+        <b-row id="study_motive">
+          <b-col id="study_motive_col">
+            <b-row id="study_motive_line">
+              <h5 id="study_motive_title">가입동기</h5>
             </b-row>
-            <b-row>
-              <b-form-textarea id="textarea" v-model="textEx1" placeholder="Enter something..." rows="3" max-rows="6"
-                style="border: 1px solid; border-color: #A48282;">
-              </b-form-textarea>
+            <b-row id="study_motive_line2">
+              <b-form-textarea id="study_motive_input" placeholder="Enter something..." rows="3" max-rows="6"></b-form-textarea>
             </b-row>
           </b-col>
         </b-row>
-        <b-row align-h="around" style="margin-top: 10px;">
-          <b-col>
-            <b-button text style="color: #453535; background-color: #E1D3D2; border: none" v-b-modal.modal-2>스터디 생성하기
+        <b-row id="study_button" align-h="around">
+          <b-col id="study_button_make">
+            <b-button id="study_button_make_button" text v-b-modal.study_create>스터디 생성하기
             </b-button>
           </b-col>
-          <b-col>
-            <b-button text style="color: #453535; background-color: #E1D3D2; border: none" @click="gotoPage('/study')">
+          <b-col id="study_button_application">
+            <b-button id="study_button_application_button" text @click="gotoPage('/study')">
               신청하기</b-button>
           </b-col>
         </b-row>
@@ -100,44 +101,44 @@
     </b-card>
   </div>
 
-  <b-modal id="modal-2" centered title="스터디 생성" style="text-align: center;">
-    <b-card style="height: 15; max-width: 40rem; background-color: #F8F3F3;">
-      <b-container ref="form">
-        <b-row style="margin-bottom: 10px;">
-          <b-col cole="3" style="padding: 0">
-            <div style="padding: 6px 6px; font-weight: bold;">스터디 명 :</div>
+  <b-modal id="study_create" centered title="스터디 생성">
+    <b-card id="modal_card" style="height: 15; max-width: 40rem; background-color: #F8F3F3;">
+      <b-container id="modal_container" ref="form">
+        <b-row id="study_name_line" style="margin-bottom: 10px;">
+          <b-col id="study_name_title_space" cole="3" style="padding: 0">
+            <div id="study_name_title" style="padding: 6px 6px; font-weight: bold;">스터디 명 :</div>
           </b-col>
-          <b-col cols="9" style="padding: 0">
-            <b-form-input required style="border: none;"></b-form-input>
-          </b-col>
-        </b-row>
-        <b-row style="margin-bottom: 5px; text-align: left;">
-          <div style="font-weight: bold;">스터디원 목록</div>
-        </b-row>
-        <b-row style="margin-bottom: 10px;">
-          <b-col cols="10" style="padding: 0; margin-left: 10px;">
-            <b-form-input aria-placeholder="추가하고자 하는 스터디원의 아이디 입력" required style="border: none;"></b-form-input>
-          </b-col>
-          <b-col style="padding: 0; margin-left: 6px;">
-            <b-button text style="color: #453535; background-color: #E1D3D2; border: none">추가</b-button>
+          <b-col id="study_name_input_space" cols="9" style="padding: 0">
+            <b-form-input id="study_name_input" required style="border: none;"></b-form-input>
           </b-col>
         </b-row>
-        <b-row style="margin-bottom: 5px; text-align: left;">
-          <div style="font-weight: bold;">스터디원 리스트</div>
+        <b-row id="study_lookup_line" style="margin-bottom: 5px; text-align: left;">
+          <div id="study_lookup_title" style="font-weight: bold;">스터디원 목록</div>
         </b-row>
-        <b-row style="margin-bottom: 10px;">
-          <b-col>
+        <b-row id="study_lookup_line2" style="margin-bottom: 10px;">
+          <b-col id="study_lookup_input_space" cols="10" style="padding: 0; margin-left: 10px;">
+            <b-form-input id="study_lookup_input" aria-placeholder="추가하고자 하는 스터디원의 아이디 입력" required style="border: none;"></b-form-input>
+          </b-col>
+          <b-col id="study_lookup_button_space" style="padding: 0; margin-left: 6px;">
+            <b-button id="study_lookup-button" text style="color: #453535; background-color: #E1D3D2; border: none">추가</b-button>
+          </b-col>
+        </b-row>
+        <b-row id="study_hold_line" style="margin-bottom: 5px; text-align: left;">
+          <div id="study_hold_title" style="font-weight: bold;">스터디원 리스트</div>
+        </b-row>
+        <b-row id="study_hold_line2" style="margin-bottom: 10px;">
+          <b-col id="study_hold_list_space">
             이 부분 고민
           </b-col>
         </b-row>
-        <b-row style="margin-bottom: 5px; text-align: left;">
-          <div style="font-weight: bold;">스터디 소개글</div>
+        <b-row id="study_letter_line" style="margin-bottom: 5px; text-align: left;">
+          <div id="study_letter_title" style="font-weight: bold;">스터디 소개글</div>
         </b-row>
-        <b-row style="margin-bottom: 10px;">
-          <b-col>
-            <b-form-textarea id="textarea" v-model="textEx1" placeholder="Enter something..." rows="3" max-rows="6"
-                style="border: 1px solid; border-color: #A48282;">
-              </b-form-textarea>
+        <b-row id="study_letter_line2" style="margin-bottom: 10px;">
+          <b-col id="study_letter_input_space">
+            <b-form-textarea id="study_letter_input" v-model="textEx1" placeholder="Enter something..." rows="3" max-rows="6"
+              style="border: 1px solid; border-color: #A48282;">
+            </b-form-textarea>
           </b-col>
         </b-row>
         <template #modal-footer="{ cancel, ok }">
@@ -176,4 +177,104 @@ export default{
 </script>
 
 <style>
+#header > #header_name {
+  text-align: center;
+  padding: 0
+}
+
+#header > #header_input {
+  padding: 0;
+}
+
+hr {
+  margin: 10px 0px;
+}
+
+#table_pagination {
+  text-align: center;
+}
+
+#table_pagination > .page_button {
+  color: black; 
+  text-decoration: none; 
+  font-weight: 100;
+}
+
+#study_info {
+  margin-top: 10px;
+}
+
+#study_info > #study_intro {
+  margin-right: 10px;
+}
+
+#study_info > #study_intro > #study_intro_line >#study_intro_title {
+  text-align: left; 
+  font-weight: bold;
+}
+
+#study_info > #study_intro >#study_intro_content {
+  border: 1px solid; 
+  border-color: #A48282; 
+  border-radius: 7px;
+}
+
+#study_info > #study_people > #study_people_line > #study_people_title {
+  text-align: left; 
+  font-weight: bold;
+}
+
+#study_info > #study_people > #study_people_box {
+  border: 1px solid; 
+  border-color: #A48282; 
+  border-radius: 7px;
+}
+
+#study_info >#study_people > #study_people_box > #study_people_group {
+  list-style-position: inside; 
+  margin: 0;
+}
+
+#study_info > #study_people > #study_people_box > #study_people_group > .study_people_person{
+  text-align: left; 
+  padding-left: 6rem;
+}
+
+#study_motive {
+  margin-top: 10px;
+}
+
+#study_motive > #study_motive_col > #study_motive_line > #study_motive_title {
+  text-align: left; 
+  font-weight: bold;
+}
+
+#study_motive > #study_motive_col > #study_motive_line2 > #study_motive_input {
+  border: 1px solid; 
+  border-color: #A48282;
+}
+
+#study_button {
+  margin-top: 10px;
+}
+
+#study_button > #study_button_make {
+  text-align: center;
+}
+
+#study_button > #study_button_make > #study_button_make_button {
+  color: #453535; 
+  background-color: #E1D3D2; 
+  border: none;
+}
+
+#study_button > #study_button_application {
+  text-align: center;
+}
+
+#study_button > #study_button_application > #study_button_application_button {
+  color: #453535; 
+  background-color: #E1D3D2; 
+  border: none;
+}
 </style>
