@@ -1,16 +1,16 @@
 <template>
-  <v-calendar 
-  is-expanded
-  :attributes='attributes' 
-  @dayclick="onDayClick" 
-  @update:from-page="onUpdatePage" 
-  @update:to-page="onUpdatePageTo" 
-  @daymouseenter = "onMouseEnter"
-  @daymouseleave="onMouseLeave"
-  @dayfocusin="onDayFocusIn"
-  @dayfocusout="onDayFocusOut"
-  @transition-start="onTransitionStart"
-  @transition-end="onTransitionEnd"
+  <v-calendar
+    is-expanded
+    :attributes="attributes"
+    @dayclick="onDayClick"
+    @update:from-page="onUpdatePage"
+    @update:to-page="onUpdatePageTo"
+    @daymouseenter="onMouseEnter"
+    @daymouseleave="onMouseLeave"
+    @dayfocusin="onDayFocusIn"
+    @dayfocusout="onDayFocusOut"
+    @transition-start="onTransitionStart"
+    @transition-end="onTransitionEnd"
   ></v-calendar>
 </template>
 
@@ -25,31 +25,31 @@ export default {
     // weekdays : 요일, 1(일),2(월),3(화),4(수),5(목),6(금),7(토)
     const todos = [
       {
-        description: 'Take Noah to basketball practice.',
+        description: "Take Noah to basketball practice.",
         isComplete: false,
-        dates: { months:7, days: 18},
-        color: 'red',
+        dates: { months: 7, days: 18 },
+        color: "red",
       },
       {
-        description: 'Take Noah to basketball practice.',
+        description: "Take Noah to basketball practice.",
         isComplete: true,
         dates: { weekdays: 5 },
-        color: 'blue',
+        color: "blue",
       },
     ];
     return {
       incId: todos.length,
       todos,
-      days:[],
+      days: [],
     };
   },
   methods: {
     // 참고 : https://vcalendar.io/examples/datepickers.html
     onDayClick(day) {
-      console.log("click")
+      console.log("click");
       console.log(day);
       console.log(day.id);
-      const idx = this.days.findIndex(d => d.id === day.id);
+      const idx = this.days.findIndex((d) => d.id === day.id);
       if (idx >= 0) {
         this.days.splice(idx, 1);
       } else {
@@ -75,40 +75,40 @@ export default {
       //console.log("mouseLeave");
       console.log(data);
     },
-    onDayFocusIn(data){
+    onDayFocusIn(data) {
       //console.log("focusIn");
       console.log(data);
     },
-    onDayFocusOut(data){
+    onDayFocusOut(data) {
       //console.log("focusOut");
       console.log(data);
     },
-    onTransitionStart(data){
+    onTransitionStart(data) {
       //console.log("transitionStart");
       console.log(data);
     },
-    onTransitionEnd(data){
+    onTransitionEnd(data) {
       //console.log("transitionEnd");
       console.log(data);
-    }
+    },
   },
   computed: {
     dates() {
-      return this.days.map(day => day.date);
+      return this.days.map((day) => day.date);
     },
     // 날짜별 속성을 지정하려면 여기서
     attributes() {
       return [
         // todos data를 Attribute에 저장
-        ...this.todos.map(todo => ({
+        ...this.todos.map((todo) => ({
           dates: todo.dates,
           dot: {
             color: todo.color,
-            class: todo.isComplete ? 'opacity-75' : '',
+            class: todo.isComplete ? "opacity-75" : "",
           },
           popover: {
             label: todo.description,
-            visibility: 'focus'
+            visibility: "focus",
           },
           customData: todo,
         })),
@@ -117,9 +117,9 @@ export default {
         {
           // 범위만큼 색 칠하기
           highlight: {
-            start: { fillMode: 'light' }, // 연한색으로 칠하기
-            base: { fillMode: 'light' },
-            end: { fillMode: 'light' },
+            start: { fillMode: "light" }, // 연한색으로 칠하기
+            base: { fillMode: "light" },
+            end: { fillMode: "light" },
           },
           // 범위 지정
           // '월'은 0부터 11까지(원하는 월 -1로 설정)
