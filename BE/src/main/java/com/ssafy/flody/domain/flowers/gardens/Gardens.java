@@ -1,5 +1,6 @@
-package com.ssafy.flody.domain.dmessages;
+package com.ssafy.flody.domain.flowers.gardens;
 
+import com.ssafy.flody.domain.flowers.Flowers;
 import com.ssafy.flody.domain.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,33 +16,26 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class DMessages {
+public class Gardens {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long dmNo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long garNo;
 
     @NotNull
-    @ManyToOne(targetEntity = Users.class)
-    @JoinColumn(name="use_no")
-    private Long sender;
+    @ManyToOne(targetEntity = Flowers.class)
+    @JoinColumn(name = "flo_no")
+    private Long floNo;
 
     @NotNull
     @ManyToOne(targetEntity = Users.class)
     @JoinColumn(name = "use_no")
-    private Long receiver;
+    private Long useNo;
 
     @NotNull
-    private Boolean type;
+    private Date startDate;
+
+    private Date endDate;
 
     @NotNull
-    private String content;
-
-    @NotNull
-    private Date time;
-
-    @NotNull
-    private Boolean like;
-
-    @NotNull
-    private Boolean check;
+    private int exp;
 }

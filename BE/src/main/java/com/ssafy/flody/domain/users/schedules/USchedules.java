@@ -1,4 +1,4 @@
-package com.ssafy.flody.domain.dmessages;
+package com.ssafy.flody.domain.users.schedules;
 
 import com.ssafy.flody.domain.users.Users;
 import lombok.AllArgsConstructor;
@@ -15,33 +15,27 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class DMessages {
+public class USchedules {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long dmNo;
-
-    @NotNull
-    @ManyToOne(targetEntity = Users.class)
-    @JoinColumn(name="use_no")
-    private Long sender;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long usNo;
 
     @NotNull
     @ManyToOne(targetEntity = Users.class)
     @JoinColumn(name = "use_no")
-    private Long receiver;
+    private Long useNo;
 
     @NotNull
-    private Boolean type;
+    private String title;
+
+    private String detail;
 
     @NotNull
-    private String content;
+    private Date startDate;
 
     @NotNull
-    private Date time;
+    private Date endDate;
 
     @NotNull
-    private Boolean like;
-
-    @NotNull
-    private Boolean check;
+    private Boolean done;
 }

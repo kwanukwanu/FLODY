@@ -15,7 +15,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Entity
 public class Users {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long useNo;
