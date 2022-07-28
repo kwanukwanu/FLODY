@@ -1,14 +1,12 @@
-package com.ssafy.flody.domain.flowers.categories;
+package com.ssafy.flody.domain.flowers;
 
+import com.ssafy.flody.domain.flowers.categories.FCategories;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Getter
@@ -16,13 +14,21 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class FCategories {
+public class Flowers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long floNo;
+
+    @NotNull
+    @ManyToOne(targetEntity = FCategories.class)
+    @JoinColumn(name = "fc_no")
     private Long fcNo;
 
     @NotNull
     private String name;
 
-    private String period;
+    private String content;
+
+    @NotNull
+    private String url;
 }
