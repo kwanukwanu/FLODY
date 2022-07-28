@@ -118,6 +118,11 @@ const routes = [
         path:"detail",
         name:"boarddetail",
         component:() => import("@/components/board/BoardDetail.vue"),
+      },
+      {
+        path:"write",
+        name:"boardwrite",
+        component:() => import("@/components/board/BoardWrite.vue"),
       }
     ],
   },

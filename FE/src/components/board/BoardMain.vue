@@ -112,12 +112,10 @@ export default {
   margin-bottom: 1.8rem;
   border-color: #e4dada;
   max-width: 70rem; 
-  max-height: 12rem;
 }
 .free_and_honey{
   margin-bottom: 1.8rem;
   border-color: #e4dada;
   max-width: 32rem; 
-  max-height: 12rem
 }
 </style>
