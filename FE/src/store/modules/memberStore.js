@@ -1,13 +1,15 @@
-import jwt_decode from "jwt-decode";
+import jwt_decode from "vue-jwt-decode";
 //import { login } from "@/api/member.js";
 //import { findById } from "../../api/member";
+
+// 회원가입 및 로그인을 수행하는 js파일
 
 const memberStore = {
   namespaced: true,
   state: {
-    isLogin: false,
-    isLoginError: false,
-    userInfo: null, //로그인이 제대로 되면 이름 이메일 등이 있을 것
+    isLogin: false, // 로그인 여부
+    isLoginError: false, // 로그인 에러 확인
+    userInfo: null, // 유저 정보, 로그인이 제대로 되면 이름 이메일 등이 있을 것
   },
   getters: {
     checkUserInfo: function (state) {
@@ -29,25 +31,37 @@ const memberStore = {
   actions: {
     async userConfirm({ commit }, user) {
       //멤버 로그인에서 여기로
-      await login(
-        user,
-        (response) => {
-          if (response.data.message == "success") {
-            let token = response.data["access-token"];
-            commit("SET_IS_LOGIN", true);
-            commit("SET_IS_LOGIN_ERROR", false);
-            sessionStorage.setItem("access-token", token);
-          } else {
-            commit("SET_IS_LOGIN", false);
-            commit("SET_IS_LOGIN_ERROR", true);
-          }
-        },
-        () => {},
-      );
+
+      console.log("userConfirm : " + user);
+
+      // axios 작업
+      // await login(
+      //   user,
+      //   (response) => {
+      //     if (response.data.message == "success") {
+      //       let token = response.data["access-token"];
+      //       commit("SET_IS_LOGIN", true);
+      //       commit("SET_IS_LOGIN_ERROR", false);
+      //       sessionStorage.setItem("access-token", token);
+      //     } else {
+      //       commit("SET_IS_LOGIN", false);
+      //       commit("SET_IS_LOGIN_ERROR", true);
+      //     }
+      //   },
+      //   () => { },
+      // );
+
+      // 현재는 로그인이 되도록 설정
+      commit("SET_IS_LOGIN", true);
+      commit("SET_IS_LOGIN_ERROR", false);
     },
+
     getUserInfo({ commit }, token) {
       let decode_token = jwt_decode(token);
       console.log(decode_token.userid);
+
+      // axios 필요
+      /*
       findById(
         decode_token.userid,
         (response) => {
@@ -63,6 +77,14 @@ const memberStore = {
           console.log(error);
         },
       );
+      */
+
+      const data = {
+        id: "ssafy",
+        password: "1234",
+        name: "김싸피",
+      };
+      commit("SET_USER_INFO", data);
     },
   },
 };

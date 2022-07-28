@@ -1,14 +1,16 @@
 // axios 객체
 import axios from "axios";
+import { API_BASE_URL } from "@/config";
 
-function createApi() {
-    return axios.create({
-        //baseURL: process.env.VUE_APP_API_SERVER,
-        baseURL: "http://localhost:9999/api",
-        headers: {
-            "Content-Type": "application/json",
-        }
-    });
+// axios 객체 생성
+function apiInstance() {
+  const instance = axios.create({
+    baseURL: API_BASE_URL,
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+  return instance;
 }
 
-export { createApi };
+export { apiInstance };

@@ -1,14 +1,11 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
+
+import { memberStore } from "@/store/modules/memberStore.js";
+import { boardStore } from "@/store/modules/boardStore.js";
+import { groupStore } from "@/store/modules/groupStore.js";
 
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
-  }
-})
+    modules: { memberStore, boardStore, groupStore },
+  },
+});
