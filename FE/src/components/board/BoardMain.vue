@@ -73,7 +73,7 @@
 export default {
   data() {
     return {
-          items_popular: [
+        items_popular: [
         { '제목': '자유 | 오픽 공부 하기 싫다', '조회수': '7,799'},
         { '제목': '후기 | 삼수 끝의 정보처리기사 합격 후기...', '조회수': '8,677'},
         { '제목': '꿀팁 | toeic speaking honey tip 제공합니다 드루오세요', '조회수': '4.1만'},
@@ -100,8 +100,7 @@ export default {
         { '제목': '정보보안기사 합격 후기입니다.', '조회수': '4,001'},
         { '제목': '토익스피킹 레벨 7 생생 후기!', '조회수': '3,221'},
         { '제목': '임상심리사 합격 후기', '조회수': '1,211'},
-      ]
-      
+      ]     
   }
   }
 }
@@ -121,10 +120,4 @@ export default {
   max-width: 32rem; 
   max-height: 12rem
 }
-table.b-table thead th.w10{
-    width: 80%;
-  }
-  table.b-table thead th.w20{
-    width: 20%;
-  }
 </style>
