@@ -4,7 +4,7 @@
         <b-row>
           <b-col cols="3">
             <div class="pic">
-            <b-avatar variant="info" src="https://placekitten.com/300/300" size="47.5px"></b-avatar> </div>
+            <b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar> </div>
           </b-col>
          
           <b-col cols="9">
@@ -62,6 +62,7 @@
               <b-form-input type="date" placeholder="날짜 선택" style="border: none;"></b-form-input>
             </b-col>
           </b-row>
+          <br>
           <b-button text @click="submit" style="color: #453535; background-color: #E1D3D2; border: none">등록</b-button>
           <!-- <template #modal-footer="{ cancel, ok }">
             <b-button size="sm" variant="danger" @click="cancel()">
@@ -91,6 +92,6 @@ export default {
   text-align: left;
 }
 .pic{
-  margin-top: 5px;
+  margin-top: 6px;
 }
 </style>
