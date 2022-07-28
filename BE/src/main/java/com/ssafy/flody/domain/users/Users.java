@@ -1,12 +1,17 @@
 package com.ssafy.flody.domain.users;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Users {
@@ -15,37 +20,26 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long useNo;
 
-    @Column(unique = true, nullable = false)
+    @NotNull
+    @UniqueElements
     private String id;
 
-    @Column(nullable = false)
+    @NotNull
     private String password;
 
-    @Column(nullable = false)
+    @NotNull
     private String profile;
 
-    @Column(nullable = false)
+    @NotNull
     private String name;
 
-    @Column(nullable = false)
+    @NotNull
     private String nickname;
 
     private String address;
 
-    @Column(nullable = false)
+    @NotNull
     private String phone;
 
     private Boolean admin;
-
-    @Builder
-    public Users(String id, String password, String profile, String name, String nickname, String address, String phone, Boolean admin) {
-        this.id = id;
-        this.password = password;
-        this.profile = profile;
-        this.name = name;
-        this.nickname = nickname;
-        this.address = address;
-        this.phone = phone;
-        this.admin = admin;
-    }
 }
