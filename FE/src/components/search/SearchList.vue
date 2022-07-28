@@ -1,12 +1,13 @@
 <template>
   <div>
     <b-table striped hover :items="items"></b-table>
-
-    <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">&lt; </b-button>
-    <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">1</b-button>
-    <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">2</b-button>
-    <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">3</b-button>
-    <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">&gt; </b-button>
+    <div class="paging">
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">&lt; </b-button>
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">1</b-button>
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">2</b-button>
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">3</b-button>
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">&gt; </b-button>
+    </div>
   </div>
 </template>
 
@@ -24,5 +25,7 @@ export default {
 </script>
 
 <style>
-
+.paging{
+  text-align: center;
+}
 </style>

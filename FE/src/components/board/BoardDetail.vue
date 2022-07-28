@@ -1,5 +1,5 @@
 <template>
-  <h2> Board Details </h2>
+  <h2> Board Details(게시물 상세) </h2>
 </template>
 
 <script>

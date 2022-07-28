@@ -87,7 +87,7 @@
           <router-link :to="{ name: 'newspid' }" class="nav-link"> 뉴스피드</router-link>
         </b-col>
         <b-col class="navbar">
-          <router-link :to="{ name: 'board' }" class="nav-link"> 공부게시판</router-link>
+          <router-link :to="{ name: 'boardmain' }" class="nav-link"> 공부게시판</router-link>
         </b-col>
         <b-col class="navbar">
           <router-link :to="{ name: 'search' }" class="nav-link"> 자격증 검색</router-link>
