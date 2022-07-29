@@ -7,7 +7,7 @@ import jwt_decode from "vue-jwt-decode";
 const memberStore = {
   namespaced: true,
   state: {
-    isLogin: false, // 로그인 여부
+    isLogin: "false", // 로그인 여부
     isLoginError: false, // 로그인 에러 확인
     userInfo: null, // 유저 정보, 로그인이 제대로 되면 이름 이메일 등이 있을 것
   },

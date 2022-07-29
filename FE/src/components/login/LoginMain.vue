@@ -129,7 +129,7 @@
           <div class="button">
             <b-button
               text
-              @click="submit"
+              @click="confirm"
               style="color: #453535; background-color: #e1d3d2; border: none"
               >로그인
             </b-button>
@@ -168,6 +168,10 @@
                   style="color: #b99b9a; text-decoration: none"
                   >회원가입
                 </b-button>
+                <div>
+                  카운트 : {{ count }} <br />
+                  isLogin : {{ isLogin }}
+                </div>
               </div>
             </b-col>
           </b-row>
@@ -206,11 +210,30 @@ export default {
       ],
     };
   },
+  setup() {
+    return {};
+  },
   computed: {
+    ...mapState(["count"]),
     ...mapState(memberStore, ["isLogin", "isLoginError"]),
   },
   methods: {
     ...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
+    ...mapActions("addcount"),
+    async confirm() {
+      console.log("click");
+      this.addcount(this.count);
+      // 로그인 정보 확인
+      await this.userConfirm(this.user);
+      //let token = sessionStorage.getItem("access-token");
+      console.log(this.isLogin);
+      if (this.isLogin) {
+        //await this.getUserInfo(token);
+        this.$router.push({ name: "study" });
+      } else {
+        alert("아이디 및 비밀번호가 일치하지 않습니다.");
+      }
+    },
     gotoPage(link) {
       console.log(link);
       this.$router.push(link);
