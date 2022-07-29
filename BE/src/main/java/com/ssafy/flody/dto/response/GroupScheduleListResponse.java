@@ -2,8 +2,7 @@ package com.ssafy.flody.dto.response;
 
 public class GroupScheduleListResponse {
     private Long groNo;
-    // or
-    //private String groupName;
+    private Long gsNo;
     private String title;
     private String startDate;
     private String endDate;
