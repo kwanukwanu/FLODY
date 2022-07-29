@@ -3,6 +3,7 @@ package com.ssafy.flody.dto.request.Boards;
 
 //request로 유저 넘버/ 카테고리 넘버를 받을 수 있을지 : 포스팅 시에 카테고리 넘버만 받고 service에서 처리한다고 했던 기억 O
 
+import com.ssafy.flody.domain.boards.Boards;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,7 +28,7 @@ public class BoardCreateRequest {
         this.hashtag = hashtag;
     }
     // DTO to ENTITY
-/*    public Boards toEntity(){
+    public Boards toEntity(){
         return Boards.builder()
                 .useNo(useNo)
                 .catNo(catNo)
@@ -36,5 +37,5 @@ public class BoardCreateRequest {
                 .content(content)
                 .hashtag(hashtag)
                 .build();
-    }*/
+    }
 }

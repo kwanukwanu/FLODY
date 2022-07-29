@@ -6,23 +6,17 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class FlowerCreateRequest {
+public class GardenUpdateRequest {
     private Long useNo;
     private Long floNo;
     private Integer exp;
 
     @Builder
-    public  FlowerCreateRequest(Long useNo, Long floNo, Integer exp){
+    public GardenUpdateRequest(
+            Long useNo, Long floNo, Integer exp
+    ){
         this.useNo = useNo;
         this.floNo = floNo;
         this.exp = exp;
     }
-    // DTO to ENTITY
-/*    public Flowers toEntity(){
-        return Flowers.builder()
-                .useNo(useNo)
-                .floNo(floNo)
-                .exp(exp)
-                .build();
-    }*/
 }
