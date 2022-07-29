@@ -1,4 +1,4 @@
-package com.ssafy.flody.domain.groups;
+package com.ssafy.flody.domain.licences.departments;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,21 +10,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Groups {
+public class Departments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long groNo;
+    private Long depNo;
 
     @NotNull
-    private String name;
+    private String udeptnm;
 
     @NotNull
-    private Date foundDate;
+    private int udeptcd;
 }
