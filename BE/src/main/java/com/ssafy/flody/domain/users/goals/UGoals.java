@@ -15,6 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "u_goals")
 public class UGoals {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -15,6 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "d_messages")
 public class DMessages {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,12 +23,12 @@ public class DMessages {
 
     @NotNull
     @ManyToOne(targetEntity = Users.class)
-    @JoinColumn(name="use_no")
+    @JoinColumn(name="sender")
     private Long sender;
 
     @NotNull
     @ManyToOne(targetEntity = Users.class)
-    @JoinColumn(name = "use_no")
+    @JoinColumn(name = "receiver")
     private Long receiver;
 
     @NotNull

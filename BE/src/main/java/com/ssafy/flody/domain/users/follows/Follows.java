@@ -17,11 +17,11 @@ import javax.persistence.*;
 public class Follows {
     @Id
     @ManyToOne(targetEntity = Users.class)
-    @JoinColumn(name = "use_no")
+    @JoinColumn(name = "follower")
     private Long follower;
 
     @Id
     @ManyToOne(targetEntity = Users.class)
-    @JoinColumn(name = "use_no")
+    @JoinColumn(name = "following")
     private Long following;
 }
