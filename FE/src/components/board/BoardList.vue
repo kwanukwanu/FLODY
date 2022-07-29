@@ -8,12 +8,11 @@
           <hr>
           <b-table fixed hover :items="items_popular" class="common">
           </b-table>
-          <router-link :to="{name:'boardwrite'}"><div class="pencil"><svg width="24" height="24" fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="m2.5 21.5 5.55-2.134c.354-.137.532-.205.698-.294.147-.08.288-.17.42-.273.149-.116.283-.25.552-.52L21 7a2.828 2.828 0 1 0-4-4L5.72 14.28c-.269.269-.403.403-.519.552a3.008 3.008 0 0 0-.273.42c-.089.166-.157.344-.294.699L2.5 21.5Zm0 0 2.058-5.351c.147-.383.221-.574.347-.662a.5.5 0 0 1 .38-.08c.15.028.295.173.585.463l2.26 2.26c.29.29.435.435.464.586a.5.5 0 0 1-.08.379c-.089.126-.28.2-.663.347L2.5 21.5Z"
-                stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg></div></router-link>
+          <div style="text-align: right;">
+            <b-button variant="link" style="padding: 0px 12px; color: #B99B9A; text-decoration: none;"
+              v-b-modal.modal-2>
+              글쓰기</b-button>
+          </div>
         </b-col>
       </b-row>
     </b-card>
@@ -30,6 +29,55 @@
       <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">&gt; </b-button>
     </div>
   </b-container>
+  <br><br>
+
+  <b-row style="margin-bottom: 10px;">
+    <b-col cols="3">
+      <b-form-select></b-form-select>
+    </b-col>
+    <b-col cols="3">
+      <b-form-select></b-form-select>
+    </b-col>
+    <b-col cols="5">
+      <b-form-input placeholder="검색어를 입력해주세요"></b-form-input>
+    </b-col>
+    <b-col cols="1">
+      <b-button style="color: #453535; background-color: #e1d3d2; border: none">검색</b-button>
+    </b-col>
+  </b-row>
+
+  <!-- 임시-->
+  <br><br>
+  <div style="text-align: center;">
+    <router-link :to="{name:'boarddetail'}">게시물 상세 보기</router-link>
+  </div>
+
+
+  <b-modal hide-footer id="modal-2" centered title="새 게시물 만들기" style="text-align: center;">
+    <b-card style="height: 29rem; max-width: 30rem; background-color: #F8F3F3;">
+      <b-container ref="form">
+        <!-- <h2 style="text-align: center;">목표 등록</h2> -->
+        <b-row style="margin-bottom: 10px;">
+          <b-col>
+            <b-form-input placeholder="제목을 입력하세요" required style="border: none;"></b-form-input>
+          </b-col>
+        </b-row>
+        <b-row style="margin-bottom: 10px;">
+          <b-col>
+            <b-form-select style="border: none;"></b-form-select>
+          </b-col>
+        </b-row>
+        <b-row style="margin-bottom: 10px;">
+          <b-col>
+            <b-form-textarea id="content" placeholder="내용 입력..." rows="10" max-rows="15" required style="border: none;">
+            </b-form-textarea>
+          </b-col>
+        </b-row>
+        <br>
+        <b-button text @click="submit" style="color: #453535; background-color: #E1D3D2; border: none">게시</b-button>
+      </b-container>
+    </b-card>
+  </b-modal>
 </template>
 
 <script>
@@ -64,9 +112,6 @@ export default {
   margin-bottom: 1.8rem;
   border-color: #e4dada;
   max-width: 70rem; 
-}
-.pencil{
-  text-align: right;
 }
 .paging{
   text-align: center;
