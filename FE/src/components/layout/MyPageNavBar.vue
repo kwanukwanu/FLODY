@@ -10,7 +10,7 @@
           <b-col cols="9">
           <b-row>
           <b-col>
-              <b-card-text style="margin-left:3px; font-weight: bold; font-size: large;">Sofie_Marso_joayo</b-card-text>
+              <b-card-text style="margin-left:3px; font-weight: bold; font-size: large;">dfsdf</b-card-text>
             </b-col>
           </b-row>
             <b-row>
@@ -79,8 +79,20 @@
 </template>
 
 <script>
-export default {
+import { computed } from "vue";
+import { useStore } from "vuex";
 
+const store = useStore();
+const userInfo = computed(() => store.state.memberStore);
+
+console.dir(userInfo);
+export default {
+  setup() {
+    const store = useStore();
+    const userInfo = computed(() => store.state.memberStore);
+
+    return { userInfo };
+  }
 }
 </script>
 
