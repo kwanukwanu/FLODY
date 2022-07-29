@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Builder
@@ -31,9 +32,12 @@ public class Comments {
     @JoinColumn(name = "boa_no")
     private Long boaNo;
 
-    @ManyToOne(targetEntity = Comments.class)
-    @JoinColumn(name = "com_no")
-    private Long upper;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "fk_comments_upper_comments_comno", referencedColumnName = "com_no")
+//    private Comments upper;
+
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent", cascade = CascadeType.ALL)
+//    private List<Comments> upper;
 
     @NotNull
     private String comment;

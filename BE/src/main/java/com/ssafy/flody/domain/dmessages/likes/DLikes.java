@@ -14,6 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "d_likes")
 @IdClass(DLikesId.class)
 public class DLikes {
 

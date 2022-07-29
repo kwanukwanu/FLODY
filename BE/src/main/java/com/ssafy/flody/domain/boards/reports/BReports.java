@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "b_reports")
 @IdClass(BReportsId.class)
 public class BReports {
     @Id
