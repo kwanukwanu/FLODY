@@ -42,7 +42,7 @@
           <div style="text-align: left; padding: 0px; font-weight: bold; font-size: 25px;">girl_girls</div>
         </b-col>
         <b-col cols="2" style="text-align: left; padding: 0px;">
-          <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100; border: 1px solid;">메세지 보내기</b-button>
+          <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100; border: 1px solid;">메시지 보내기</b-button>
         </b-col>
         <b-col style="text-align: left; padding-left: 4px;">
           <b-button variant="link" style="color: white; background-color: #83A39A; text-decoration: none; font-weight: 100; border: 1px solid;">팔로우</b-button>
