@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class CommentCreateRequestDto {
     private Long useNo;
     private Long boaNo;
-    private Long upper;
+//    private Long upper;
     private String comment;
     // 가져와서 +1 해주는 (대댓글) 할 때 필요한가 ?
 
@@ -18,7 +18,7 @@ public class CommentCreateRequestDto {
     public CommentCreateRequestDto(Long useNo, Long boaNo, Long upper, String comment, Integer kids){
         this.useNo = useNo;
         this.boaNo = boaNo;
-        this.upper = upper;
+//        this.upper = upper;
         this.comment = comment;
     }
 
@@ -27,7 +27,7 @@ public class CommentCreateRequestDto {
         return Comments.builder()
                 .useNo(useNo)
                 .boaNo(boaNo)
-                .upper(upper)
+//                .upper(upper)
                 .comment(comment)
                 .build();
     }
