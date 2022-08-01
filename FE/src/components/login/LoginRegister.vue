@@ -1,12 +1,15 @@
 <template>
-  <div class="home">
-    <router-view/>
+  <div>
+      <b-button>Social Login</b-button>
   </div>
 </template>
 
-
 <script>
 export default {
-	name: 'HomeView',
+
 }
 </script>
+
+<style>
+
+</style>

@@ -102,7 +102,7 @@
   <br />
   <b-container>
     <b-row class="justify-content-md-center">
-      <b-card style="height: 15; max-width: 40rem; background-color: #f8f3f3">
+      <b-card style="max-width: 40rem; background-color: #f8f3f3">
         <b-container ref="form">
           <br />
           <b-row>
@@ -171,6 +171,10 @@
               </div>
             </b-col>
           </b-row>
+          <br/>
+          <b-row>
+            <login-register></login-register>
+          </b-row>
         </b-container>
       </b-card>
     </b-row>
@@ -181,7 +185,10 @@
 import {computed} from "vue";
 import {useStore} from "vuex";
 
+import LoginRegister from "./LoginRegister.vue";
+
 export default {
+  components:{LoginRegister},
   data() {
     return {
       fields: ["first_name", "last_name", "show_details"],
