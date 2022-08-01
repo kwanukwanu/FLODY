@@ -6,6 +6,7 @@ import com.ssafy.flody.dto.request.Boards.CommentCreateRequestDto;
 import com.ssafy.flody.dto.request.Boards.CommentUpdateRequestDto;
 import com.ssafy.flody.dto.request.Groups.*;
 import com.ssafy.flody.dto.request.Users.*;
+import com.ssafy.flody.service.users.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ public class ApiController {
     private static final String SUCCESS = "SUCCESS";
     private static final String FAIL = "FAIL";
     private static final String ERROR = "ERROR";
+
+    private final UsersService usersService;
 
     // TEST
     @GetMapping("/test")
@@ -41,7 +44,22 @@ public class ApiController {
 
     @PostMapping("/user")
     public ResponseEntity<String> UserAdd(@RequestBody UserCreateRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
+        String result;
+        HttpStatus status;
+
+        try {
+            if (usersService.addUser(requestDto) != 0L) {
+                result = SUCCESS;
+            } else {
+                result = FAIL;
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result = e.getMessage();
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
+        return new ResponseEntity<>(result, status);
     }
 
     @PutMapping("/user")
@@ -308,7 +326,7 @@ public class ApiController {
 //    }
 
 //    @PutMapping("/direct-message")
-//    public ResponseEntity<String> DMessageModify(@RequestBody DMessageUpateRequestDto requestDto) {
+//    public ResponseEntity<String> DMessageModify(@RequestBody DMessageUpdateRequestDto requestDto) {
 //        return getStringResponseEntity(requestDto);
 //    }
 
