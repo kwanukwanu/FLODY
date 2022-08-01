@@ -3,15 +3,29 @@
     <b-col>
       <!--타 이용자의 게시물일 시 이 div 안 보여야 함-->
       <div style="text-align: left; margin-left:7px;">
-        <b-button variant="link" style="padding: 0px 12px; color: #B99B9A; text-decoration: none;">수정</b-button>
-        <b-button variant="link" style="padding: 0px 12px; color: #B99B9A; text-decoration: none;">삭제</b-button>
+        <b-button variant="link"
+          style="padding: 0px 12px; color: black; text-decoration: none; background-color: #E3D6D6;">수정</b-button>
+        <b-button variant="link"
+          style="padding: 0px 12px; color: black; text-decoration: none; background-color: #E3D6D6; margin-left: 12px;">
+          삭제</b-button>
       </div>
     </b-col>
     <b-col>
       <div style="text-align: right; margin-right: 7px;">
-        <a style="padding: 0px 12px; color: #B99B9A; text-decoration: none;">이전글</a>
-        <a style="padding: 0px 12px; color: #B99B9A; text-decoration: none;">다음글</a>
-        <a style="padding: 0px 12px; color: #B99B9A; text-decoration: none;">목록</a>
+        <a
+          style="padding: 0px 12px; color: black; text-decoration: none; background-color: #E3D6D6; border-radius: 10%;"><svg
+            width="15" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.75 9.69 7.5 6.12l3.75 3.571" stroke="#444" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg> 이전글</a>
+        <a
+          style="padding: 0px 12px; color: black; text-decoration: none; background-color: #E3D6D6; margin-left: 12px; border-radius: 10%;"><svg
+            width="15" height="15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.75 5.344 7.5 8.906l3.75-3.562" stroke="#444" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg> 다음글</a>
+        <a
+          style="padding: 0px 12px; color: black; text-decoration: none; background-color: #E3D6D6; margin-left: 12px; border-radius: 10%;">목록</a>
       </div>
     </b-col>
   </b-row>
@@ -34,7 +48,7 @@
         <b-col>
           <div style="text-align:left;">
             <!-- 타 이용자의 게시글일 경우만 보여야 함 -->
-            <b-button variant="link"
+            <b-button size="sm" variant="link"
               style="color: white; background-color: #83A39A; text-decoration: none; font-weight: 100; border: 1px solid;">
               1:1 채팅</b-button>
           </div>
@@ -82,7 +96,8 @@
     <b-col>
       <b-row>
         <b-col cols="4">
-          <a href="" style="color:black; padding:0px 0px; text-align: left; font-weight: bold; text-decoration: none;">
+          <a href=""
+            style="color:black; padding:0px 0px; text-align: left; font-weight: bold; text-decoration: none; vertical-align: -webkit-baseline-middle;">
             Brown_Cat님의 게시글 더보기</a>
         </b-col>
       </b-row>
