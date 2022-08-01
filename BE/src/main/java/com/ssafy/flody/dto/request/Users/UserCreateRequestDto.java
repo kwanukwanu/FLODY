@@ -12,6 +12,7 @@ public class UserCreateRequestDto {
     private String id;
     private String password;
     private String profile;
+    private String name;
     private String nickname;
     private String address;
     private String phone;
@@ -19,11 +20,12 @@ public class UserCreateRequestDto {
 
     @Builder
     public UserCreateRequestDto(
-            String id, String password, String profile, String nickname,
+            String id, String password, String profile, String name, String nickname,
             String address, String phone, Boolean admin ){
                 this.id = id;
                 this.password = password;
                 this.profile = profile;
+                this.name = name;
                 this.nickname = nickname;
                 this.address = address;
                 this.phone = phone;
@@ -36,6 +38,7 @@ public class UserCreateRequestDto {
                         .id(id)
                         .password(password)
                         .profile(profile)
+                        .name(name)
                         .nickname(nickname)
                         .address(address)
                         .phone(phone)

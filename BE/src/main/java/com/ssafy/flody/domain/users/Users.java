@@ -19,7 +19,7 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long useNo;
 
-    @NotNull
+    @Column(unique = true, nullable = false)
     private String id;
 
     @NotNull

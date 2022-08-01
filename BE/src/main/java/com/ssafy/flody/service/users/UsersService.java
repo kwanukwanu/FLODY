@@ -6,7 +6,7 @@ import com.ssafy.flody.dto.response.Users.UserInfoResponseDto;
 import java.util.List;
 
 public interface UsersService {
-    public List<UserInfoResponseDto> findUsers(String keyword);
+    public List<UserInfoResponseDto> findUsers();
 
     public Long addUser(UserCreateRequestDto requestDto);
 }
