@@ -1,10 +1,6 @@
 <template>
   <div class="home">
-  <h1>Login View</h1>
-    <ul>
-    <li><router-link to="/main">로그인 메인</router-link></li>
-    <li><router-link to="/membership">회원가입</router-link></li>
-  </ul>
+
     <router-view/>
     <!--
     <svg width="284" height="68" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -168,10 +168,6 @@
                   style="color: #b99b9a; text-decoration: none"
                   >회원가입
                 </b-button>
-                <div>
-                  카운트 : {{ count }} <br />
-                  isLogin : {{ isLogin }}
-                </div>
               </div>
             </b-col>
           </b-row>
