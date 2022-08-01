@@ -13,19 +13,19 @@
     <b-col>
       <div style="text-align: right; margin-right: 7px;">
         <a
-          style="padding: 0px 12px; color: black; text-decoration: none; background-color: #E3D6D6; border-radius: 10%;"><svg
+          style="padding: 2px 12px; color: black; text-decoration: none; background-color: #E3D6D6; border-radius: 15%;"><svg
             width="15" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3.75 9.69 7.5 6.12l3.75 3.571" stroke="#444" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg> 이전글</a>
         <a
-          style="padding: 0px 12px; color: black; text-decoration: none; background-color: #E3D6D6; margin-left: 12px; border-radius: 10%;"><svg
+          style="padding: 2px 12px; color: black; text-decoration: none; background-color: #E3D6D6; margin-left: 12px; border-radius: 15%;"><svg
             width="15" height="15" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3.75 5.344 7.5 8.906l3.75-3.562" stroke="#444" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg> 다음글</a>
         <a
-          style="padding: 0px 12px; color: black; text-decoration: none; background-color: #E3D6D6; margin-left: 12px; border-radius: 10%;">목록</a>
+          style="padding: 2px 12px; color: black; text-decoration: none; background-color: #E3D6D6; margin-left: 12px; border-radius: 15%;">목록</a>
       </div>
     </b-col>
   </b-row>
