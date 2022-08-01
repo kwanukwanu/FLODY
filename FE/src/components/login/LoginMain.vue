@@ -235,6 +235,7 @@ export default {
 .logo {
   text-align: center;
   margin-right: 44px;
+  margin-top: 84px;
 }
 .button {
   text-align: center;
