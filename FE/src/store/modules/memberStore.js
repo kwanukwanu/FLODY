@@ -9,7 +9,11 @@ const memberStore = {
   state:() => ({
     isLogin: true, // 로그인 여부
     isLoginError: false, // 로그인 에러 확인
-    userInfo: 0,
+    userInfo: {
+      id: "ssafy",
+      password: "1234",
+      name: "김싸피",
+    },
   }),
   getters: {
     checkUserInfo: function (state) {

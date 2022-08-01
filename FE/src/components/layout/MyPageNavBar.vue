@@ -10,7 +10,7 @@
           <b-col cols="9">
           <b-row>
           <b-col>
-              <b-card-text style="margin-left:3px; font-weight: bold; font-size: large;">dfsdf</b-card-text>
+              <b-card-text style="margin-left:3px; font-weight: bold; font-size: large;">{{userInfo.name}}</b-card-text>
             </b-col>
           </b-row>
             <b-row>
@@ -89,7 +89,7 @@ console.dir(userInfo);
 export default {
   setup() {
     const store = useStore();
-    const userInfo = computed(() => store.state.memberStore);
+    const userInfo = computed(() => store.state.memberStore.userInfo);
 
     return { userInfo };
   }
