@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import "v-calendar/dist/style.css";
 
-// import 'firebase';
+// import firebase from "firebase";
 
 //   // Your web app's Firebase configuration
 //   const firebaseConfig = {
