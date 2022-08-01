@@ -1,6 +1,5 @@
 <template>
   <footer class="footer">
-    <br><br><br><br><br><br><br><br><br><br>
     <h6>
       © 2022 FLODY from SSAFY</h6>
     <br>

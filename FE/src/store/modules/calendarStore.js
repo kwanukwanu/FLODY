@@ -9,7 +9,7 @@ const calendarStore = {
         color: "red",
       },
       {
-        description: "Take Noah to basketball practice.",
+        description: "Take Noah to baseball practice.",
         isComplete: true,
         dates: { weekdays: 5 },
         color: "blue",

@@ -207,15 +207,19 @@ export default {
   setup() {
       const store = useStore();
       const isLogin = computed(()=>store.state.memberStore.isLogin);
-      return { isLogin };
+
+      return { store,isLogin };
   },
   methods: {
     async confirm() {
-      console.dir(this.isLogin);
+      this.store.dispatch("memberStore/userConfirm");
       if(this.isLogin)
-        this.$router.push("/study");
+      {
+        this.store.dispatch("memberStore/getUserInfo");
+        this.$router.push("/about");
+      }
       else
-        alert("로그인 실해");
+        alert("로그인 실패");
     },
     joinForm(){
       this.$router.push("/membership");

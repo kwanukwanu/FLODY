@@ -1,13 +1,13 @@
-import jwt_decode from "vue-jwt-decode";
+//import jwt_decode from "vue-jwt-decode";
 //import { login } from "@/api/member.js";
 //import { findById } from "../../api/member";
 
 // 회원가입 및 로그인을 수행하는 js파일
 
 const memberStore = {
-  namespaced: false,
+  namespaced: true,
   state:() => ({
-    isLogin: true, // 로그인 여부
+    isLogin: false, // 로그인 여부
     isLoginError: false, // 로그인 에러 확인
     userInfo: {
       id: "ssafy",
@@ -61,9 +61,9 @@ const memberStore = {
     },
 
     getUserInfo({ commit }, token) {
-      let decode_token = jwt_decode(token);
-      console.log(decode_token.userid);
-
+      //let decode_token = jwt_decode(token);
+      //console.log(decode_token.userid);
+      console.log(token)
       // axios 필요
       /*
       findById(
@@ -84,9 +84,9 @@ const memberStore = {
       */
 
       const data = {
-        id: "ssafy",
+        id: "ssafy4321",
         password: "1234",
-        name: "김싸피",
+        name: "최싸피",
       };
       commit("SET_USER_INFO", data);
     },
