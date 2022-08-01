@@ -1,34 +1,20 @@
 <template>
   <div id="app">
     <b-container>
-      <header-bar />
-      <b-row>
-        <b-col cols="3">
-          <my-page-nav-bar />
-          <group-nav-bar />
-        </b-col>
-        <b-col cols="9">
-          <router-view />
-        </b-col>
-      </b-row>
+        <router-view />
     </b-container>
     <footer-bar />
   </div>
 </template>
 
 <script>
-import HeaderBar from "@/components/layout/HeaderNavBar.vue";
+
 import FooterBar from "@/components/layout/FooterNavBar.vue";
-import MyPageNavBar from './components/layout/MyPageNavBar.vue';
-import GroupNavBar from './components/layout/GroupNavBar.vue';
 
 export default{
   name:"App",
   components:{
-    HeaderBar,
     FooterBar,
-    MyPageNavBar,
-    GroupNavBar,
   },
 }
 </script>

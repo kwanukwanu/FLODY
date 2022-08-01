@@ -1,4 +1,4 @@
-import jwt_decode from "vue-jwt-decode";
+//import jwt_decode from "vue-jwt-decode";
 //import { login } from "@/api/member.js";
 //import { findById } from "../../api/member";
 
@@ -6,11 +6,14 @@ import jwt_decode from "vue-jwt-decode";
 
 const memberStore = {
   namespaced: true,
-  state: () => ({
+  state:() => ({
     isLogin: false, // 로그인 여부
-
     isLoginError: false, // 로그인 에러 확인
-    userInfo: 0,
+    userInfo: {
+      id: "ssafy",
+      password: "1234",
+      name: "김싸피",
+    },
   }),
   getters: {
     checkUserInfo: function (state) {
@@ -58,9 +61,9 @@ const memberStore = {
     },
 
     getUserInfo({ commit }, token) {
-      let decode_token = jwt_decode(token);
-      console.log(decode_token.userid);
-
+      //let decode_token = jwt_decode(token);
+      //console.log(decode_token.userid);
+      console.log(token)
       // axios 필요
       /*
       findById(
@@ -81,9 +84,9 @@ const memberStore = {
       */
 
       const data = {
-        id: "ssafy",
+        id: "ssafy4321",
         password: "1234",
-        name: "김싸피",
+        name: "최싸피",
       };
       commit("SET_USER_INFO", data);
     },

@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="lg" type="light" variant="light">
+  <b-navbar toggleable="lg" type="light" variant="light" >
     <b-navbar-nav>
       <b-row>
         <b-col cols="5">
@@ -136,12 +136,20 @@
   </b-navbar>
 </template>
 <script>
+import {computed} from "vue";
+import {useStore} from "vuex";
+
 export default {
   methods: {
     gotoPage(link) {
       console.log(link);
       this.$router.push(link);
     },
+  },
+    setup() {
+      const store = useStore();
+      const isLogin = computed(()=>store.state.memberStore.isLogin);
+      return { isLogin };
   },
 };
 </script>

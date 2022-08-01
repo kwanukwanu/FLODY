@@ -102,7 +102,7 @@
   <br />
   <b-container>
     <b-row class="justify-content-md-center">
-      <b-card style="height: 15; max-width: 40rem; background-color: #f8f3f3">
+      <b-card style="max-width: 40rem; background-color: #f8f3f3">
         <b-container ref="form">
           <br />
           <b-row>
@@ -171,6 +171,10 @@
               </div>
             </b-col>
           </b-row>
+          <br/>
+          <b-row>
+            <login-register></login-register>
+          </b-row>
         </b-container>
       </b-card>
     </b-row>
@@ -178,12 +182,13 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import {computed} from "vue";
+import {useStore} from "vuex";
 
-const memberStore = "memberStore";
+import LoginRegister from "./LoginRegister.vue";
 
 export default {
-  name: "LoginMain",
+  components:{LoginRegister},
   data() {
     return {
       fields: ["first_name", "last_name", "show_details"],
@@ -207,31 +212,26 @@ export default {
     };
   },
   setup() {
-    return {};
-  },
-  computed: {
-    ...mapState(["count"]),
-    ...mapState(memberStore, ["isLogin", "isLoginError"]),
+      const store = useStore();
+      const isLogin = computed(()=>store.state.memberStore.isLogin);
+
+      return { store,isLogin };
   },
   methods: {
-    ...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
-    ...mapActions("addcount"),
     async confirm() {
-      console.log("click");
-      this.addcount(this.count);
-      // 로그인 정보 확인
-      await this.userConfirm(this.user);
-      //let token = sessionStorage.getItem("access-token");
-      console.log(this.isLogin);
-      if (this.isLogin) {
-        //await this.getUserInfo(token);
-        this.$router.push({ name: "study" });
-      } else {
-        alert("아이디 및 비밀번호가 일치하지 않습니다.");
+      this.store.dispatch("memberStore/userConfirm");
+      if(this.isLogin)
+      {
+        this.store.dispatch("memberStore/getUserInfo");
+        this.$router.push("/about");
       }
+      else
+        alert("로그인 실패");
+    },
+    joinForm(){
+      this.$router.push("/membership");
     },
     gotoPage(link) {
-      console.log(link);
       this.$router.push(link);
     },
   },
@@ -242,6 +242,7 @@ export default {
 .logo {
   text-align: center;
   margin-right: 44px;
+  margin-top: 84px;
 }
 .button {
   text-align: center;

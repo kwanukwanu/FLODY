@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+      <b-button>Social Login</b-button>
+  </div>
 </template>
 
 <script>
