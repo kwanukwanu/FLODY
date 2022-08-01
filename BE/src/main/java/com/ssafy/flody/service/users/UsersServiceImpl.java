@@ -16,7 +16,7 @@ import java.util.List;
 public class UsersServiceImpl implements UsersService{
     private final UsersRepository usersRepository;
     @Override
-    public List<UserInfoResponseDto> findUsers(String keyword) {
+    public List<UserInfoResponseDto> findUsers() {
         List<Users> entityList = usersRepository.findAll();
         List<UserInfoResponseDto> list = new ArrayList<>();
         for (Users user: entityList) {
@@ -26,7 +26,7 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    @Transactional
+    @Transactional()
     public Long addUser(UserCreateRequestDto requestDto) {
         return usersRepository.save(requestDto.toEntity()).getUseNo();
     }

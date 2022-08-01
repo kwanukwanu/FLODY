@@ -33,8 +33,24 @@ public class ApiController {
 
     // USER
     @GetMapping("/users")
-    public ResponseEntity<Map<String, Object>> UserList(@RequestParam(defaultValue = "default") String keyword) {
-        return getMapResponseEntity(keyword);
+    public ResponseEntity<Map<String, Object>> UserList() {
+        Map<String, Object> result = new HashMap<>();
+        HttpStatus status;
+
+        try {
+            if (!usersService.findUsers().isEmpty()) {
+                result.put("users", usersService.findUsers());
+                result.put("msg", SUCCESS);
+            } else {
+                result.put("msg", FAIL);
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result.put("msg", ERROR);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
+        return new ResponseEntity<>(result, status);
     }
 
     @GetMapping("/user")
