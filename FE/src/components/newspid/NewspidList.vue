@@ -1,4 +1,5 @@
 <template>
+<!-- 
   <b-card style="max-width: 70rem; background-color: #FBF1EE; margin-top: 12px;">
     <b-container ref="form">
       <b-row>
@@ -134,11 +135,24 @@
         </b-col>
       </b-row>
     </b-container>
-  </b-card>
+  </b-card> -->
+
+  <div>
+    <!-- <v-for="(item, index) in items" :key="index"></v-for> -->
+    <newspid-item></newspid-item>
+  </div>
+
 </template>
 
 <script>
+import NewspidItem from './items/NewspidItem.vue'
 export default {
+  data() {
+    return {
+      listnum:5,
+    }
+  },
+  components: { NewspidItem },
 
 }
 </script>

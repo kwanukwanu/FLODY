@@ -6,6 +6,7 @@
           <span style="margin-left:7px; font-size:large; color: #064635; text-align: left;">자유게시판 </span>
 
           <hr>
+          <board-list-item></board-list-item>
           <b-table fixed hover :items="items_popular" class="common">
           </b-table>
           <div style="text-align: right;">
@@ -18,15 +19,23 @@
     </b-card>
     <br>
     <div class="paging">
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">&lt; </b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">1</b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">2</b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">3</b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">4</b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">5</b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">6</b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">7</b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">&gt; </b-button>
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;" v-if="page>5" @click="movePage(-5)">&lt; </b-button>
+      <b-button variant="link" v-else></b-button>
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;" v-if="page>3" @click="movePage(-3)">{{page-3}}</b-button>
+      <b-button variant="link" v-else></b-button>
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;" v-if="page>2" @click="movePage(-2)">{{page-2}}</b-button>
+      <b-button variant="link" v-else></b-button>
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;" v-if="page>1" @click="movePage(-1)">{{page-1}}</b-button>
+      <b-button variant="link" v-else></b-button>
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;">{{page}}</b-button>
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;" v-if="page<max-1" @click="movePage(1)">{{page+1}}</b-button>
+      <b-button variant="link" v-else></b-button>
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;" v-if="page<max-2" @click="movePage(2)">{{page+2}}</b-button>
+      <b-button variant="link" v-else></b-button>
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;" v-if="page<max-3" @click="movePage(3)">{{page+3}}</b-button>
+      <b-button variant="link" v-else></b-button>
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100;" v-if="page<max-5" @click="movePage(5)">&gt; </b-button>
+      <b-button variant="link" v-else></b-button>
     </div>
   </b-container>
   <br><br>
@@ -81,7 +90,10 @@
 </template>
 
 <script>
+import BoardListItem from './Items/BoardListItem.vue';
+
 export default {
+  components: {BoardListItem},
   data() {
     return {
         items_popular: [
@@ -101,9 +113,19 @@ export default {
         { '번호': '89', '제목': '정보보안기사 꿀팁입니다', '글쓴이': 'kyojun', '날짜' : '22.07.21', '조회수': '2만'},
         { '번호': '88', '제목': '한능검 꿀팁 드려요', '글쓴이': 'aeri', '날짜' : '22.07.21', '조회수': '5,444'},
         { '번호': '87', '제목': '오픽 세 번 만의 AL 달성 후기', '글쓴이': 'jonghwan', '날짜' : '22.07.21', '조회수': '1,799'},
-      ]     
-  }
-  }
+      ],
+      page:1, 
+      max:10,    
+    }
+  },
+  methods: {
+    movePage(num)
+    {
+      console.log("click "+ num);
+      this.page = this.page+num;
+      console.log("page : "+this.page);
+    }
+  },
 }
 </script>
 
