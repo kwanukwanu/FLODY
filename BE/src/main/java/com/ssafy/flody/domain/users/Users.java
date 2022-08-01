@@ -20,7 +20,6 @@ public class Users {
     private Long useNo;
 
     @NotNull
-    @UniqueElements
     private String id;
 
     @NotNull

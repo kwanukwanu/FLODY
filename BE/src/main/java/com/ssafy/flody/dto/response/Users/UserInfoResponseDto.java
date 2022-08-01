@@ -4,7 +4,7 @@ import com.ssafy.flody.domain.users.Users;
 import lombok.Getter;
 
 @Getter
-public class UserMyPageResponseDto {
+public class UserInfoResponseDto {
     private Long useNo;
     private String id;
     private String password;
@@ -14,7 +14,7 @@ public class UserMyPageResponseDto {
     private String address;
     private String phone;
 
-    public UserMyPageResponseDto(Users entity){
+    public UserInfoResponseDto(Users entity){
         this.useNo = entity.getUseNo();
         this.id = entity.getId();
         this.password = entity.getPassword();
