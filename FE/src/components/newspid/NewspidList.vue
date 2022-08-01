@@ -1,9 +1,9 @@
 <template>
-  <b-card style="max-width: 70rem; background-color: #FBF1EE;">
+  <b-card style="max-width: 70rem; background-color: #FBF1EE; margin-top: 12px;">
     <b-container ref="form">
       <b-row>
         <b-col>
-          <b-img src="https://picsum.photos/600/300/?image=25" fluid alt="Responsive image"></b-img>
+          <b-img src="https://placekitten.com/300/300" fluid alt="Responsive image"></b-img>
         </b-col>
         <b-col style="background-color: #ffffff;">
           <b-row>

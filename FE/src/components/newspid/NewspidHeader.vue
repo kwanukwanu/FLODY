@@ -11,7 +11,7 @@
           <b-col cols="2" style="text-align: left; padding: 0px;">
             <div style="text-align: left; padding: 0px; font-weight: bold; font-size: 25px;">dfsdf</div>
           </b-col>
-          <b-col style="text-align: left; padding-left: 4px;">
+          <b-col cols="7" style="text-align: left; padding: 4px;">
             <b-button size="sm" variant="link"
               style="color: black; text-decoration: none; font-weight: 100; border: 1px solid;">프로필
               편집</b-button>
@@ -31,7 +31,7 @@
       </b-col>
     </b-row>
   </b-container>
-  <hr style="margin: 5px;" />
+  <!-- <hr style="margin: 5px;" /> -->
   <b-container>
     <div>다른사람 뉴스피드</div>
     <br>
@@ -44,7 +44,7 @@
           <b-col cols="2" style="text-align: left; padding: 0px;">
             <div style="text-align: left; padding: 0px; font-weight: bold; font-size: 25px;">Giri_Girl</div>
           </b-col>
-          <b-col cols="7" style="text-align: left; padding: 0px;">
+          <b-col cols="7" style="text-align: left; padding: 4px;">
             <b-button size="sm" variant="link"
               style="color: black; text-decoration: none; font-weight: 100; border: 1px solid;">메시지 보내기</b-button>
             <b-button size="sm" variant="link"
@@ -67,7 +67,7 @@
       </b-col>
     </b-row>
   </b-container>
-  <hr style="margin: 5px;" />
+  <!-- <hr style="margin: 5px;" /> -->
 </template>
 
 <script>
