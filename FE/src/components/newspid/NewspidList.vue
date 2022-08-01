@@ -1,20 +1,20 @@
 <template>  
   <div>
     <!-- <v-for="(item, index) in items" :key="index"></v-for> -->
-    <newspid-item></newspid-item>
+    <newspid-detail></newspid-detail>
   </div>
 
 </template>
 
 <script>
-import NewspidItem from './items/NewspidItem.vue'
+import NewspidDetail from './NewspidDetail.vue'
 export default {
   data() {
     return {
       listnum:5,
     }
   },
-  components: { NewspidItem },
+  components: { NewspidDetail },
 
 }
 </script>
