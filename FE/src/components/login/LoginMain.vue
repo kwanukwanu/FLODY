@@ -168,12 +168,6 @@
                   style="color: #b99b9a; text-decoration: none"
                   >회원가입
                 </b-button>
-                <div>
-                  <div>
-                    카운트 : {{ count }} <br /> 
-                    <!-- isLogin : {{isLogin}}<br/>-->
-                  </div>
-                </div>
               </div>
             </b-col>
           </b-row>
@@ -218,6 +212,13 @@ export default {
   methods: {
     async confirm() {
       console.dir(this.isLogin);
+      if(this.isLogin)
+        this.$router.push("/study");
+      else
+        alert("로그인 실해");
+    },
+    joinForm(){
+      this.$router.push("/membership");
     },
     gotoPage(link) {
       this.$router.push(link);
