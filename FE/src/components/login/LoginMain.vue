@@ -169,8 +169,10 @@
                   >회원가입
                 </b-button>
                 <div>
-                  카운트 : {{ count }} <br />
-                  isLogin : {{ isLogin }}
+                  <div>
+                    카운트 : {{ count }} <br /> 
+                    <!-- isLogin : {{isLogin}}<br/>-->
+                  </div>
                 </div>
               </div>
             </b-col>
@@ -182,12 +184,10 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-
-const memberStore = "memberStore";
+import {computed} from "vue";
+import {useStore} from "vuex";
 
 export default {
-  name: "LoginMain",
   data() {
     return {
       fields: ["first_name", "last_name", "show_details"],
@@ -211,31 +211,15 @@ export default {
     };
   },
   setup() {
-    return {};
-  },
-  computed: {
-    ...mapState(["count"]),
-    ...mapState(memberStore, ["isLogin", "isLoginError"]),
+      const store = useStore();
+      const isLogin = computed(()=>store.state.memberStore.isLogin);
+      return { isLogin };
   },
   methods: {
-    ...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
-    ...mapActions("addcount"),
     async confirm() {
-      console.log("click");
-      this.addcount(this.count);
-      // 로그인 정보 확인
-      await this.userConfirm(this.user);
-      //let token = sessionStorage.getItem("access-token");
-      console.log(this.isLogin);
-      if (this.isLogin) {
-        //await this.getUserInfo(token);
-        this.$router.push({ name: "study" });
-      } else {
-        alert("아이디 및 비밀번호가 일치하지 않습니다.");
-      }
+      console.dir(this.isLogin);
     },
     gotoPage(link) {
-      console.log(link);
       this.$router.push(link);
     },
   },

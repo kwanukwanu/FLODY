@@ -5,10 +5,9 @@ import jwt_decode from "vue-jwt-decode";
 // 회원가입 및 로그인을 수행하는 js파일
 
 const memberStore = {
-  namespaced: true,
-  state: () => ({
-    isLogin: false, // 로그인 여부
-
+  namespaced: false,
+  state:() => ({
+    isLogin: true, // 로그인 여부
     isLoginError: false, // 로그인 에러 확인
     userInfo: 0,
   }),

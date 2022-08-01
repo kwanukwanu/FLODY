@@ -21,4 +21,4 @@ const calendarStore = {
   actions: {},
 };
 
-export default boardStore;
+export default calendarStore;
