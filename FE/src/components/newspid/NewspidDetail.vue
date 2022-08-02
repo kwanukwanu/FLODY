@@ -1,6 +1,6 @@
 <template>
   <b-card style="max-width: 70rem; background-color: #FBF1EE; margin-top: 12px;">
-    <b-container ref="form">
+    <b-container ref="form" style="padding:0px 12px 0px 0px">
       <b-row>
         <b-col>
           <!-- fluid alt="Responsive image" -->
@@ -9,8 +9,10 @@
         </b-col>
         <b-col style="background-color: #ffffff;">
           <b-row>
-            <b-col cols="2" style="padding: 4px;"><div class="avatar">
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="40px"></b-avatar></div>
+            <b-col cols="2" style="padding: 4px;">
+              <div class="avatar">
+                <b-avatar variant="info" src="https://placekitten.com/300/300" size="50px"></b-avatar>
+              </div>
             </b-col>
             <b-col>
               <b-row>
@@ -24,7 +26,9 @@
           <hr style="margin: 5px;">
           <b-row>
             <b-col cols="2" style="padding: 4px;">
-              <div class="avatar"><b-avatar variant="info" src="https://placekitten.com/300/300" size="40px"></b-avatar></div>
+              <div class="avatar">
+                <b-avatar variant="info" src="https://placekitten.com/300/300" size="50px"></b-avatar>
+              </div>
             </b-col>
             <b-col>
               <b-row>
@@ -36,14 +40,16 @@
               <b-row>
                 <div style="text-align: left; padding: 0px; color: #255D4E">#영국 #런던 #스터디</div>
               </b-row>
-              <b-row>
+              <b-row style="margin-bottom: 5px;">
                 <div style="text-align: left; padding: 0px; color: gray; font-size: small;">15시간전</div>
               </b-row>
             </b-col>
           </b-row>
           <b-row>
-            <b-col cols="2" style="padding: 4px;"><div class="avatar">
-              <b-avatar variant="info" src="https://placekitten.com/300/301" size="40px"></b-avatar></div>
+            <b-col cols="2" style="padding: 4px;">
+              <div class="avatar">
+                <b-avatar variant="info" src="https://placekitten.com/300/900" size="50px"></b-avatar>
+              </div>
             </b-col>
             <b-col>
               <b-row>
@@ -57,7 +63,7 @@
               <b-row>
                 <div style="text-align: left; padding: 0px">ㅋㅋㅋㅋㅋㅋ 저도 영국</div>
               </b-row>
-              <b-row>
+              <b-row style="margin-bottom: 5px;">
                 <b-col cols="3" style="text-align: left; padding: 0px;">
                   <div style="text-align: left; padding: 0px; color: gray; font-size: small; display: inline;">14시간전
                   </div>
@@ -76,7 +82,9 @@
           </b-row>
           <b-row>
             <b-col cols="2" style="padding: 4px;">
-              <div class="avatar"><b-avatar variant="info" src="https://placekitten.com/300/200" size="40px"></b-avatar></div>
+              <div class="avatar">
+                <b-avatar variant="info" src="https://placekitten.com/300/200" size="50px"></b-avatar>
+              </div>
             </b-col>
             <b-col>
               <b-row>
@@ -90,7 +98,7 @@
               <b-row>
                 <div style="text-align: left; padding: 0px">와 너무 부럽</div>
               </b-row>
-              <b-row>
+              <b-row style="margin-bottom:5px;">
                 <b-col cols="3" style="text-align: left; padding: 0px;">
                   <div style="text-align: left; padding: 0px; color: gray; font-size: small; display: inline;">12시간전
                   </div>
@@ -107,7 +115,7 @@
               </b-row>
               <b-row>
                 <a
-                  style="text-align: left; padding: 0px; color: gray; font-size: small; display: inline; text-decoration: none; margin-bottom: 8px;">_____
+                  style="text-align: left; padding: 0px; color: gray; font-size: small; display: inline; text-decoration: none; margin-bottom: 5px;">_____
                   답글 보기(1개)</a>
               </b-row>
             </b-col>
@@ -148,17 +156,17 @@
         </b-col>
       </b-row>
       <b-row style="margin-top: 15px;">
-        <b-col>
-          <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <b-col cols="1">
+          <svg width="37" height="38" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
-              d="M8 14s1.5 2 4 2 4-2 4-2m-1-5h.01M9 9h.01M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10Zm-6.5-3a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Zm-6 0a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Z"
+              d="M12.333 22.167s2.313 3.166 6.167 3.166c3.854 0 6.167-3.166 6.167-3.166m-1.542-7.917h.015m-9.265 0h.015M33.917 19c0 8.744-6.903 15.833-15.417 15.833S3.083 27.745 3.083 19c0-8.745 6.903-15.833 15.417-15.833S33.917 10.255 33.917 19Zm-10.021-4.75a.781.781 0 0 1-.771.792.781.781 0 0 1-.77-.792c0-.437.344-.792.77-.792.426 0 .77.355.77.792Zm-9.25 0a.781.781 0 0 1-.771.792.781.781 0 0 1-.77-.792c0-.437.344-.792.77-.792.426 0 .77.355.77.792Z"
               stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </b-col>
         <b-col cols="10">
           <b-form-input placeholder="댓글 달기..." required style="border: none;"></b-form-input>
         </b-col>
-        <b-col>
+        <b-col cols="1">
           <div style="color: red; padding: 6px 0px; font-weight: bold;">게시</div>
         </b-col>
       </b-row>
