@@ -15,6 +15,10 @@
             <b-button size="sm" variant="link"
               style="color: black; text-decoration: none; font-weight: 100; border: 1px solid;">프로필
               편집</b-button>
+              <b-button size="sm" variant="link"
+              style="color: white; background-color: #83A39A; text-decoration: none; font-weight: 100; border: 1px solid; margin-left: 12px;" @click="gotoPage('/club')">
+              새 게시물 만들기</b-button>
+              <!--온클릭해서 게시글 작성 모달로 이동하도록-->
           </b-col>
         </b-row>
         <b-row>
@@ -31,7 +35,9 @@
       </b-col>
     </b-row>
   </b-container>
-  <!-- <hr style="margin: 5px;" /> -->
+  <br>
+  <hr style="margin: 5px;" />
+  <br>
   <b-container>
     <div>다른사람 뉴스피드</div>
     <br>

@@ -134,7 +134,11 @@
     </b-col>
     <b-col cols="1">
       <b-button style="color: #453535; background-color: #e1d3d2; border: none"
-        >검색</b-button
+        ><svg width="22" height="22"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="m19.25 19.25-3.988-3.988m2.155-5.179a7.333 7.333 0 1 1-14.667 0 7.333 7.333 0 0 1 14.667 0Z"
+              stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg></b-button
       >
     </b-col>
   </b-row>
