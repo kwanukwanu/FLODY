@@ -62,14 +62,13 @@ const routes = [
             path:'detail',
             name:'newspiddetail',
             component: ()=>import("@/components/newspid/items/NewspidItem"),
-          },
-          {
-            path:'item',
-            name:'newspiditem',
-            component: ()=>import("@/components/newspid/items/NewspidItem"),
-          }
-    
+          },    
         ]
+      },
+      {
+        path:'/settings',
+        name:'newspidsettings',
+        component: ()=>import("@/components/newspid/NewspidSettings"),
       },
       {
         path: '/search',
