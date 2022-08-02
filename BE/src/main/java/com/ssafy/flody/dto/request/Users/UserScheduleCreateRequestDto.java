@@ -17,7 +17,8 @@ public class UserScheduleCreateRequestDto {
     private Date endDate;
 
     @Builder
-    public UserScheduleCreateRequestDto(String title, String detail, Date startDate, Date endDate){
+    public UserScheduleCreateRequestDto(Long useNo, String title, String detail, Date startDate, Date endDate){
+//        this.useNo = useNo;
         this.title = title;
         this.detail = detail;
         this.startDate = startDate;
@@ -26,6 +27,7 @@ public class UserScheduleCreateRequestDto {
 
     public USchedules toEntity(){
         return USchedules.builder()
+                .useNo(useNo)
                 .title(title)
                 .detail(detail)
                 .startDate(startDate)

@@ -6,8 +6,8 @@ import com.ssafy.flody.dto.request.Users.UserCreateRequestDto;
 import com.ssafy.flody.dto.response.Users.UserInfoResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public Long addUser(UserCreateRequestDto requestDto) {
         return usersRepository.save(requestDto.toEntity()).getUseNo();
     }

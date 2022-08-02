@@ -22,7 +22,7 @@ public class USchedules {
     private Long usNo;
 
     @NotNull
-    @ManyToOne(targetEntity = Users.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "use_no")
     private Long useNo;
 
@@ -39,4 +39,12 @@ public class USchedules {
 
     @NotNull
     private Boolean done;
+
+    public void update(String title, String detail, Date startDate, Date endDate, Boolean done) {
+        this.title = title;
+        this.detail = detail;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.done = done;
+    }
 }

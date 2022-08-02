@@ -1,18 +1,21 @@
 package com.ssafy.flody.controller;
 
-import com.ssafy.flody.domain.users.Users;
 import com.ssafy.flody.dto.request.Boards.BoardCreateRequestDto;
 import com.ssafy.flody.dto.request.Boards.CommentCreateRequestDto;
 import com.ssafy.flody.dto.request.Boards.CommentUpdateRequestDto;
 import com.ssafy.flody.dto.request.Groups.*;
 import com.ssafy.flody.dto.request.Users.*;
+import com.ssafy.flody.dto.response.Users.UserScheduleDetailResponseDto;
+import com.ssafy.flody.dto.response.Users.UserScheduleListResponseDto;
 import com.ssafy.flody.service.users.UsersService;
+import com.ssafy.flody.service.users.schedule.UScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -24,6 +27,7 @@ public class ApiController {
     private static final String ERROR = "ERROR";
 
     private final UsersService usersService;
+    private final UScheduleService uScheduleService;
 
     // TEST
     @GetMapping("/test")
@@ -118,29 +122,109 @@ public class ApiController {
     }
 
     @GetMapping("/user/schedules")
-    public ResponseEntity<Map<String, Object>> UserScheduleList(@RequestParam Long id) {
+    public ResponseEntity<Map<String, Object>> UserScheduleList(@RequestParam Long useNo) {
         // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
-        return getMapResponseEntity(id);
+        Map<String, Object> result = new HashMap<>();
+        HttpStatus status;
+
+        try {
+            List<UserScheduleListResponseDto> responseDtoList = uScheduleService.findAllUserSchedule(useNo);
+            result.put("item", responseDtoList);
+            if (!responseDtoList.isEmpty()) {
+                result.put("msg", SUCCESS);
+            } else {
+                result.put("msg", FAIL);
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result.put("msg", ERROR);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
+        return new ResponseEntity<>(result, status);
     }
 
     @GetMapping("/user/schedule")
-    public ResponseEntity<Map<String, Object>> UserScheduleDetails(@RequestParam Long id) {
-        return getMapResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> UserScheduleDetails(@RequestParam Long usNo) {
+        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
+        Map<String, Object> result = new HashMap<>();
+        HttpStatus status;
+
+        try {
+            UserScheduleDetailResponseDto responseDto = uScheduleService.findUserSchedule(usNo);
+            try {
+                result.put("item", responseDto);
+                result.put("msg", SUCCESS);
+            } catch(Exception e1) {
+                result.put("msg", FAIL);
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e2) {
+            result.put("msg", ERROR);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
+        return new ResponseEntity<>(result, status);
     }
 
     @PostMapping("/user/schedule")
     public ResponseEntity<String> UserScheduleAdd(@RequestBody UserScheduleCreateRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
+        String result;
+        HttpStatus status;
+
+        try {
+            if (uScheduleService.addUserSchedule(requestDto) != 0L) {
+                result = SUCCESS;
+            } else {
+                result = FAIL;
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result = e.getMessage();
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
+        return new ResponseEntity<>(result, status);
     }
 
     @PutMapping("/user/schedule")
-    public ResponseEntity<String> UserScheduleModify(@RequestBody UserScheduleUpdateRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
+    public ResponseEntity<String> UserScheduleModify(@RequestParam Long usNo, @RequestBody UserScheduleUpdateRequestDto requestDto) {
+        String result;
+        HttpStatus status;
+
+        try {
+            if (uScheduleService.modifyUserSchedule(usNo, requestDto) != 0L) {
+                result = SUCCESS;
+            } else {
+                result = FAIL;
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result = e.getMessage();
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
+        return new ResponseEntity<>(result, status);
     }
 
     @DeleteMapping("/user/schedule")
     public ResponseEntity<String> UserScheduleRemove(@RequestParam Long id) {
-        return getStringResponseEntity(id);
+        String result;
+        HttpStatus status;
+
+        try {
+            if (uScheduleService.removeUserSchedule(id) != 0L) {
+                result = SUCCESS;
+            } else {
+                result = FAIL;
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result = e.getMessage();
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
+        return new ResponseEntity<>(result, status);
     }
 
     @GetMapping("/user/goals")
