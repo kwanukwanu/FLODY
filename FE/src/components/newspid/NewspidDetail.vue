@@ -1,5 +1,5 @@
 <template>
-  <b-card style="max-width: 70rem; background-color: #FBF1EE; margin-top: 12px;">
+  <b-card style="max-width: 70rem; background-color: #FBF1EE; margin-top: 27px;">
     <b-container ref="form" style="padding:0px 12px 0px 0px">
       <b-row>
         <b-col>
@@ -167,7 +167,7 @@
           <b-form-input placeholder="댓글 달기..." required style="border: none;"></b-form-input>
         </b-col>
         <b-col cols="1">
-          <div style="color: red; padding: 6px 0px; font-weight: bold;">게시</div>
+          <div style="color: #BC6464; padding: 6px 0px; font-weight: bold;">게시</div>
         </b-col>
       </b-row>
     </b-container>
