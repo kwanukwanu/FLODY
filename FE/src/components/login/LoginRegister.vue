@@ -3,6 +3,7 @@
     <h2 v-if="user">Signed In User : {{ user }}</h2>
     <div id="firebaseui-auth-container"></div>
     <div id="loader">Loading...</div>
+    <img src="@/assets/google_logo.png" @click="googleSignIn" style="height: 40px; width: 40px; cursor: pointer;"/>
     <br />
     <div v-if="isSignedIn">
       <button @click="handleSignedOut">로그아웃</button>
@@ -20,29 +21,8 @@ firebase.initializeApp(firebaseConfig);
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
 
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 const auth = getAuth();
-
-
-// import { useRoute } from 'vue-router';
-
-// import { useRouter } from 'vue-router' // import router
-// const email = ref('')
-// const password = ref('')
-// const router = useRouter() // get a reference to our vue router
-// const register = () => {
-//   firebase
-//     .auth() // get the auth api
-//     .createUserWithEmailAndPassword(email.value, password.value) // need .value because ref()
-//     .then((data) => {
-//       console.log('Successfully registered!');
-//       router.push('/feed') // redirect to the feed
-//     })
-//     .catch(error => {
-//       console.log(error.code)
-//       alert(error.message);
-//     });
-// }
 
 export default {
   setup() {
@@ -94,10 +74,24 @@ export default {
       });
     }
 
+    const googleSignIn = () => {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(getAuth(), provider)
+          .then((result) => {
+            console.log(result.user);
+            console.log('Signed in by user ' + result.user.displayName);
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+
+      };
+
     return {
       user,
       isSignedIn,
-      handleSignedOut
+      handleSignedOut,
+      googleSignIn
     }
   }
 }

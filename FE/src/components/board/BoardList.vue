@@ -3,14 +3,12 @@
     <b-card style="max-width: 70rem; border-color: #a48282; max-height: 120rem">
       <b-row>
         <b-col>
-          <span
-            style="
+          <span style="
               margin-left: 7px;
               font-size: large;
               color: #064635;
               text-align: left;
-            "
-            >자유게시판
+            ">자유게시판
           </span>
 
           <hr />
@@ -26,96 +24,45 @@
               </b-tr>
             </b-thead>
             <tbody>
-              <board-list-item
-                v-for="(item, index) in items_popular"
-                :key="(item.index = index)"
-                v-bind="item"
-              >
+              <board-list-item v-for="(item, index) in items_popular" :key="(item.index = index)" v-bind="item">
               </board-list-item>
             </tbody>
           </b-table-simple>
           <!-- <b-table fixed hover :items="items_popular" class="common"> </b-table> -->
           <div style="text-align: right">
-            <b-button
-              variant="link"
-              style="padding: 0px 12px; color: #b99b9a; text-decoration: none"
-              v-b-modal.modal-2
-            >
-              글쓰기</b-button
-            >
+            <b-button variant="link" style="padding: 0px 12px; color: #b99b9a; text-decoration: none" v-b-modal.modal-2>
+              글쓰기</b-button>
           </div>
         </b-col>
       </b-row>
     </b-card>
     <br />
     <div class="paging">
-      <b-button
-        variant="link"
-        style="color: black; text-decoration: none; font-weight: 100"
-        v-if="page > 5"
-        @click="movePage(-5)"
-        >&lt;
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page > 5"
+        @click="movePage(-5)">&lt;
       </b-button>
       <b-button variant="link" v-else></b-button>
-      <b-button
-        variant="link"
-        style="color: black; text-decoration: none; font-weight: 100"
-        v-if="page > 3"
-        @click="movePage(-3)"
-        >{{ page - 3 }}</b-button
-      >
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page > 3"
+        @click="movePage(-3)">{{ page - 3 }}</b-button>
       <b-button variant="link" v-else></b-button>
-      <b-button
-        variant="link"
-        style="color: black; text-decoration: none; font-weight: 100"
-        v-if="page > 2"
-        @click="movePage(-2)"
-        >{{ page - 2 }}</b-button
-      >
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page > 2"
+        @click="movePage(-2)">{{ page - 2 }}</b-button>
       <b-button variant="link" v-else></b-button>
-      <b-button
-        variant="link"
-        style="color: black; text-decoration: none; font-weight: 100"
-        v-if="page > 1"
-        @click="movePage(-1)"
-        >{{ page - 1 }}</b-button
-      >
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page > 1"
+        @click="movePage(-1)">{{ page - 1 }}</b-button>
       <b-button variant="link" v-else></b-button>
-      <b-button
-        variant="link"
-        style="color: black; text-decoration: none; font-weight: 100"
-        >{{ page }}</b-button
-      >
-      <b-button
-        variant="link"
-        style="color: black; text-decoration: none; font-weight: 100"
-        v-if="page < max - 1"
-        @click="movePage(1)"
-        >{{ page + 1 }}</b-button
-      >
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100">{{ page }}</b-button>
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page < max - 1"
+        @click="movePage(1)">{{ page + 1 }}</b-button>
       <b-button variant="link" v-else></b-button>
-      <b-button
-        variant="link"
-        style="color: black; text-decoration: none; font-weight: 100"
-        v-if="page < max - 2"
-        @click="movePage(2)"
-        >{{ page + 2 }}</b-button
-      >
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page < max - 2"
+        @click="movePage(2)">{{ page + 2 }}</b-button>
       <b-button variant="link" v-else></b-button>
-      <b-button
-        variant="link"
-        style="color: black; text-decoration: none; font-weight: 100"
-        v-if="page < max - 3"
-        @click="movePage(3)"
-        >{{ page + 3 }}</b-button
-      >
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page < max - 3"
+        @click="movePage(3)">{{ page + 3 }}</b-button>
       <b-button variant="link" v-else></b-button>
-      <b-button
-        variant="link"
-        style="color: black; text-decoration: none; font-weight: 100"
-        v-if="page < max - 5"
-        @click="movePage(5)"
-        >&gt;
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page < max - 5"
+        @click="movePage(5)">&gt;
       </b-button>
       <b-button variant="link" v-else></b-button>
     </div>
@@ -133,41 +80,21 @@
       <b-form-input placeholder="검색어를 입력해주세요"></b-form-input>
     </b-col>
     <b-col cols="1">
-      <b-button style="color: #453535; background-color: #e1d3d2; border: none"
-        ><svg
-          width="22"
-          height="22"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="m19.25 19.25-3.988-3.988m2.155-5.179a7.333 7.333 0 1 1-14.667 0 7.333 7.333 0 0 1 14.667 0Z"
-            stroke="#444"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          /></svg
-      ></b-button>
+      <b-button style="color: #453535; background-color: #e1d3d2; border: none"><svg width="22" height="22" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="m19.25 19.25-3.988-3.988m2.155-5.179a7.333 7.333 0 1 1-14.667 0 7.333 7.333 0 0 1 14.667 0Z"
+            stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg></b-button>
     </b-col>
   </b-row>
 
-  <b-modal
-    hide-footer
-    id="modal-2"
-    centered
-    title="새 게시물 만들기"
-    style="text-align: center"
-  >
+  <b-modal hide-footer id="modal-2" centered title="새 게시물 만들기" style="text-align: center">
     <b-card style="height: 29rem; max-width: 30rem; background-color: #f8f3f3">
       <b-container ref="form">
         <!-- <h2 style="text-align: center;">목표 등록</h2> -->
         <b-row style="margin-bottom: 10px">
           <b-col>
-            <b-form-input
-              placeholder="제목을 입력하세요"
-              required
-              style="border: none"
-            ></b-form-input>
+            <b-form-input placeholder="제목을 입력하세요" required style="border: none"></b-form-input>
           </b-col>
         </b-row>
         <b-row style="margin-bottom: 10px">
@@ -177,24 +104,12 @@
         </b-row>
         <b-row style="margin-bottom: 10px">
           <b-col>
-            <b-form-textarea
-              id="content"
-              placeholder="내용 입력..."
-              rows="10"
-              max-rows="15"
-              required
-              style="border: none"
-            >
+            <b-form-textarea id="content" placeholder="내용 입력..." rows="10" max-rows="15" required style="border: none">
             </b-form-textarea>
           </b-col>
         </b-row>
         <br />
-        <b-button
-          text
-          @click="submit"
-          style="color: #453535; background-color: #e1d3d2; border: none"
-          >게시</b-button
-        >
+        <b-button text @click="submit" style="color: #453535; background-color: #e1d3d2; border: none">게시</b-button>
       </b-container>
     </b-card>
   </b-modal>
