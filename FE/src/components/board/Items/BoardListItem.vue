@@ -25,7 +25,14 @@ export default {
       console.log(this.제목);
       this.$router.push({
         path: "/board/Detail",
-        params: { number: this.번호, title: this.제목, author: this.글쓴이 },
+        params: {
+          number: this.번호,
+          title: this.제목,
+          author: this.글쓴이,
+          date: this.날짜,
+          hits: this.조회수,
+          contents: "이것은 글의 내용입니다.",
+        },
       });
     },
   },
