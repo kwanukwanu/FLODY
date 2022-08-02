@@ -26,6 +26,7 @@ export default {
       this.$router.push({
         path: "/board/Detail",
         params: {
+          index: this.index,
           number: this.번호,
           title: this.제목,
           author: this.글쓴이,
