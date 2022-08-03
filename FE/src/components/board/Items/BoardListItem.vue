@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import {useStore} from "vuex";
+
 export default {
   props: {
     index: Number,
@@ -20,12 +22,14 @@ export default {
     조회수: Number,
     내용: String,
   },
+  setup(){
+    const store = useStore();
+    return {store};
+  },
   methods: {
     intoBoard() {
       console.log(this.제목);
-      this.$router.push({
-        path: "/board/Detail",
-        params: {
+      const board = {
           index: this.index,
           number: this.번호,
           title: this.제목,
@@ -33,7 +37,12 @@ export default {
           date: this.날짜,
           hits: this.조회수,
           contents: "이것은 글의 내용입니다.",
-        },
+      };
+      this.store.dispatch("boardStore/selectedBoard",board);
+      console.log("after::");
+      console.log(board);
+      this.$router.push({
+        path: "/board/Detail"
       });
     },
   },
