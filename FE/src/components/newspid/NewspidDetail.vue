@@ -8,16 +8,16 @@
             style="width: 100%; height: auto; max-width:700px; display:block; margin:0 auto;"></b-img>
         </b-col>
         <b-col style="background-color: #ffffff;">
-          <b-row>
+          <b-row rows="2">
             <b-col cols="2" style="padding: 4px;">
               <div class="avatar">
-                <b-avatar variant="info" src="https://placekitten.com/300/300" size="50px"></b-avatar>
+                <b-avatar variant="info" src="https://placekitten.com/300/300" size="35px"></b-avatar>
               </div>
             </b-col>
             <b-col cols="9">
               <b-row>
-                <div style="width: 90px; display: inline; padding: 4px 0px; text-align: left; font-weight: bold;">
-                  Brown_Cat</div>
+                <span style="width: 90px; display: inline; padding: 4px 0px; text-align: left; font-weight: bold; font-size: small;">
+                  Brown_Cat</span>
                 <b-button
                   style="color: black; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px;"
                   v-b-modal.modal-5>
@@ -27,7 +27,7 @@
                   style="color: blue; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px;">
                   • 팔로우</b-button> -->
               </b-row>
-              <b-row>런던</b-row>
+              <b-row style="font-size:small;">런던</b-row>
             </b-col>
             <b-col cols="1" style="padding: 0px 0px; margin-top: 16px;">
 
@@ -42,7 +42,7 @@
             </b-col>
           </b-row>
           <hr style="margin: 5px;">
-          <b-row>
+          <b-row rows="7">
             <b-col cols="2" style="padding: 4px;">
               <div class="avatar">
                 <b-avatar variant="info" src="https://placekitten.com/300/300" size="50px"></b-avatar>
@@ -63,7 +63,7 @@
               </b-row>
             </b-col>
           </b-row>
-          <b-row>
+          <b-row rows="3">
             <b-col cols="2" style="padding: 4px;">
               <div class="avatar">
                 <b-avatar variant="info" src="https://placekitten.com/300/900" size="50px"></b-avatar>
@@ -226,6 +226,11 @@
 
   <b-modal hide-footer hide-title hide-header centered id="modal-4" size="sm" style="text-align: center;">
     <b-container>
+      <!-- 본인 게시물이라면 신고 안 보이도록 해야 함 -->
+      <b-row @click="Delete" style="text-align:center; cursor: pointer; color: red; font-weight: 600;">
+        <div style="text-align:center;">신고</div>
+      </b-row>
+      <hr />
       <b-row @click="Delete" style="text-align:center; cursor: pointer; color: red; font-weight: 600;">
         <div style="text-align:center;">삭제</div>
       </b-row>
