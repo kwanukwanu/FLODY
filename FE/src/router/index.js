@@ -141,6 +141,11 @@ const routes = [
       },
     ]
   },
+  {
+    path: '/chat',
+    name: 'chatmain',
+    component: () => import("@/components/chat/ChatMain.vue"),
+  },
 ]
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

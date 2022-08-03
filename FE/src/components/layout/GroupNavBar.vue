@@ -92,7 +92,6 @@
       </b-row>
     </b-container>
   </b-card>
-
 </template>
 
 <script>
