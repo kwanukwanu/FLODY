@@ -7,6 +7,12 @@
     <li><router-link to="/group/chart">그룹 차트</router-link></li>    
   </ul>
   <router-view/>
+  <b-container>
+    <b-row>
+      <b-col></b-col>
+      <b-col></b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>

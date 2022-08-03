@@ -149,7 +149,7 @@ const routes = [
   {
     path: '/chat',
     name: 'chatmain',
-    component: () => import("@/components/chat/ChatMain.vue"),
+    component: () => import("@/views/ChatView.vue"),
   },
 ]
 const router = createRouter({
