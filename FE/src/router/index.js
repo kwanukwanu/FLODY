@@ -40,7 +40,12 @@ const routes = [
             path:'todo',
             name:'studytodo',
             component:()=>import("@/components/study/StudyTodo.vue"),
-          }
+          },
+          {
+            path:'flower',
+            name:'studyflower',
+            component:()=>import("@/components/study/StudyFlower.vue"),
+          },
         ]
       },
       {
