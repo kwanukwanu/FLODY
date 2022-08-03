@@ -146,8 +146,9 @@
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-          /></svg
-      ></b-button>
+        />
+        </svg>
+      </b-button>
     </b-col>
   </b-row>
 
