@@ -10,15 +10,6 @@
         >
         {{ text }}
         </chat-message>
-      <!-- <Message
-        v-for="{ id, text, userPhotoURL, userName, userId } in messages"
-        :key="id"
-        :name="userName"
-        :photo-url="userPhotoURL"
-        :sender="userId === user?.uid"
-      >
-        {{ text }}
-      </Message> -->
     </div>
   </div>
   <div ref="bottom" class="mt-20" />
