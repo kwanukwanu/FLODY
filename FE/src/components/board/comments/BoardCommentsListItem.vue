@@ -2,7 +2,7 @@
   <div style="margin-bottom: 10px">
     <b-row>
       <b-col cols="1" style="padding: 4px; text-align: right">
-        <b-avatar id="pics" variant="info" size="26px"></b-avatar>
+        <b-avatar :src="pics" variant="info" size="26px"></b-avatar>
       </b-col>
       <b-col>
         <b-row>
@@ -47,15 +47,16 @@
       </b-col>
     </b-row>
   </div>
-  <board-comments-list-item-child />
+  <!-- <board-comments-list-item-child /> -->
 
   <!-- axios 를 사용하면 가능해질 것! -->
-  <!-- <board-comments-list-item-child
+  <board-comments-list-item-child
     v-for="item in child"
     :key="item"
     v-bind="item"
-  ></board-comments-list-item-child> -->
+  ></board-comments-list-item-child>
 </template>
+
 
 <script>
 import BoardCommentsListItemChild from "./BoardCommentsListItemChild.vue";
@@ -64,6 +65,7 @@ export default {
   data() {
     return {
       children: null,
+      pics: "https://placekitten.com/300/250",
     };
   },
   props: {
@@ -72,14 +74,14 @@ export default {
     contents: String,
     date: String,
     time: String,
-    child: Object,
+    child: Array,
   },
   mounted() {
-    const pics = document.getElementById("pic");
-    pics.src = this.profile;
-    console.log(this.profile);
+    this.pics = this.profile;
+    console.log(this.child);
   },
 };
 </script>
+
 
 <style></style>

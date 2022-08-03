@@ -105,7 +105,7 @@
       margin-bottom: 10px;
     "
   >
-    {{ title }}
+    {{ selectedBoard.title }}
   </div>
   <b-row>
     <b-col cols="1" style="padding: 4px; text-align: right">
@@ -129,7 +129,7 @@
                 font-size: large;
               "
             >
-              Brown_Cat</a
+              {{selectedBoard.author}}</a
             >
           </div>
         </b-col>
@@ -197,7 +197,7 @@
     <br />
     <b-col>
       <div style="margin-left: 20px; margin-right: 20px">
-        {{ contents }}
+        {{ selectedBoard.contents }}
       </div>
     </b-col>
   </b-row>
@@ -225,7 +225,7 @@
               vertical-align: -webkit-baseline-middle;
             "
           >
-            {{ author }}님의 게시글 더보기</a
+            {{ selectedBoard.author }}님의 게시글 더보기</a
           >
         </b-col>
       </b-row>
@@ -309,11 +309,20 @@
 </template>
 
 <script>
+import {computed} from "vue";
+import {useStore} from "vuex";
+
 import BoardCommentsList from "@/components/board/comments/BoardCommentsList.vue";
 
 export default {
   components: {
     BoardCommentsList,
+  },
+  setup(){
+    const store = useStore();
+    const selectedBoard = computed(()=>store.state.boardStore.selectedBoard);
+
+    return {store, selectedBoard};
   },
   props: {
     index: Number,

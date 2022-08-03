@@ -10,6 +10,22 @@
         >
         {{ text }}
         </chat-message>
+        <!-- <chat-message 
+        v-for="{ message } in messages"
+        :key="message"
+        v-bind="message"
+        >
+        {{text }}
+        </chat-message> -->
+      <!-- <Message
+        v-for="{ id, text, userPhotoURL, userName, userId } in messages"
+        :key="id"
+        :name="userName"
+        :photo-url="userPhotoURL"
+        :sender="userId === user?.uid"
+      >
+        {{ text }}
+      </Message> -->
     </div>
   </div>
   <div ref="bottom" class="mt-20" />
@@ -50,6 +66,6 @@ export default {
       message.value = ''
     }
     return { user, isLogin, messages, bottom, message, send }
-  }
+  },
 }
 </script>
