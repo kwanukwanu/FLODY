@@ -14,13 +14,31 @@
                 <b-avatar variant="info" src="https://placekitten.com/300/300" size="50px"></b-avatar>
               </div>
             </b-col>
-            <b-col>
+            <b-col cols="9">
               <b-row>
                 <div style="width: 90px; display: inline; padding: 4px 0px; text-align: left; font-weight: bold;">
                   Brown_Cat</div>
-                <a style="color: blue; width: 75px; text-decoration: none; padding: 4px;">팔로우</a>
+                <b-button
+                  style="color: black; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px;"
+                  v-b-modal.modal-5>
+                  • 팔로잉</b-button>
+                <!--팔로우 안 한 상태라면 아래 코드-->
+                <!-- <b-button
+                  style="color: blue; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px;">
+                  • 팔로우</b-button> -->
               </b-row>
               <b-row>런던</b-row>
+            </b-col>
+            <b-col cols="1" style="padding: 0px 0px; margin-top: 16px;">
+
+              <b-button size="sm" variant="link" style="width: 40px; text-decoration: none;" v-b-modal.modal-4><svg
+                  width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM19 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM5 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                    stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </b-button>
+
             </b-col>
           </b-row>
           <hr style="margin: 5px;">
@@ -57,13 +75,15 @@
                   <div style="text-align: left; padding: 0px; font-weight: bold;">Oh_My_Boy</div>
                 </b-col>
                 <b-col cols="3" style="text-align: right; padding-left: 4px;">
-                  <a style="text-align: right; padding: 0px; font-weight: bold; text-decoration: none;">🤍❤️</a>
+                  <a style="text-align: right; padding: 0px; font-weight: bold; text-decoration: none;">🤍</a>
+                  <!--좋아요 눌렀다면 아래 코드-->
+                  <!-- <a style="text-align: right; padding: 0px; font-weight: bold; text-decoration: none;">❤️</a> -->
                 </b-col>
               </b-row>
               <b-row>
                 <div style="text-align: left; padding: 0px">ㅋㅋㅋㅋㅋㅋ 저도 영국</div>
               </b-row>
-              <b-row style="margin-bottom: 5px;">
+              <!-- <b-row style="margin-bottom: 5px;">
                 <b-col cols="3" style="text-align: left; padding: 0px;">
                   <div style="text-align: left; padding: 0px; color: gray; font-size: small; display: inline;">14시간전
                   </div>
@@ -76,6 +96,13 @@
                   <a
                     style="text-align: left; padding: 0px; color: gray; font-size: small; display: inline; text-decoration: none;">답글
                     달기</a>
+                </b-col>
+              </b-row> -->
+              <b-row>
+                <b-col style="padding:0px;">
+                  <span class="bottom_time_line">14시간&nbsp;&nbsp;&nbsp;</span>
+                  <span class="bottom_like_comment">좋아요 18개&nbsp;&nbsp;&nbsp;</span>
+                  <span class="bottom_like_comment">답글 달기</span>
                 </b-col>
               </b-row>
             </b-col>
@@ -92,13 +119,15 @@
                   <div style="text-align: left; padding: 0px; font-weight: bold;">girl_girls</div>
                 </b-col>
                 <b-col cols="3" style="text-align: right; padding-left: 4px;">
-                  <a style="text-align: right; padding: 0px; font-weight: bold; text-decoration: none;">🤍❤️</a>
+                  <a style="text-align: right; padding: 0px; font-weight: bold; text-decoration: none;">🤍</a>
+                  <!--좋아요 눌렀다면 아래 코드-->
+                  <!-- <a style="text-align: right; padding: 0px; font-weight: bold; text-decoration: none;">❤️</a> -->
                 </b-col>
               </b-row>
               <b-row>
                 <div style="text-align: left; padding: 0px">와 너무 부럽</div>
               </b-row>
-              <b-row style="margin-bottom:5px;">
+              <!-- <b-row style="margin-bottom:5px;">
                 <b-col cols="3" style="text-align: left; padding: 0px;">
                   <div style="text-align: left; padding: 0px; color: gray; font-size: small; display: inline;">12시간전
                   </div>
@@ -117,7 +146,24 @@
                 <a
                   style="text-align: left; padding: 0px; color: gray; font-size: small; display: inline; text-decoration: none; margin-bottom: 5px;">_____
                   답글 보기(1개)</a>
+              </b-row> -->
+
+              <b-row>
+                <b-col style="padding:0px;">
+                  <span class="bottom_time_line">14시간&nbsp;&nbsp;&nbsp;</span>
+                  <span class="bottom_like_comment">좋아요 18개&nbsp;&nbsp;&nbsp;</span>
+                  <span class="bottom_like_comment">답글 달기</span>
+                </b-col>
               </b-row>
+
+              <b-row>
+                <b-col style="padding:0px;">
+                  <span class="bottom_time_line">---&nbsp;&nbsp;&nbsp;</span>
+                  <span class="bottom_like_comment">답글 보기(1개)</span>
+                </b-col>
+              </b-row>
+
+
             </b-col>
           </b-row>
           <hr style="margin: 5px;">
@@ -151,7 +197,12 @@
             </b-col>
           </b-row>
           <b-row>
-            <b-col style="padding-right: 5px; text-align: left; margin-top : 7px; font-weight: bold;">좋아요 878개</b-col>
+            <b-col style="padding-right: 5px; text-align: left; font-weight: bold;">좋아요 878개</b-col>
+          </b-row>
+          <b-row>
+            <b-col style="color:gray; font-size: x-small;">
+              1일 전
+            </b-col>
           </b-row>
         </b-col>
       </b-row>
@@ -173,17 +224,84 @@
     </b-container>
   </b-card>
 
+  <b-modal hide-footer hide-title hide-header centered id="modal-4" size="sm" style="text-align: center;">
+    <b-container>
+      <b-row @click="Delete" style="text-align:center; cursor: pointer; color: red; font-weight: 600;">
+        <div style="text-align:center;">삭제</div>
+      </b-row>
+      <hr />
+      <b-row @click="Modify" style="cursor: pointer;">
+        <div style="text-align:center;">수정</div>
+      </b-row>
+      <hr />
+      <b-row @click="Cancel" style="text-align:center; cursor: pointer;">
+        <div style="text-align:center;">취소</div>
+      </b-row>
+    </b-container>
+  </b-modal>
+
+  <b-modal hide-footer hide-title hide-header centered id="modal-5" size="md" style="text-align: center;">
+    <b-container>
+      <b-row>
+        <b-col>
+          <div style="text-align:center;">
+            <b-avatar variant="info" src="https://placekitten.com/300/300" size="85px"></b-avatar>
+          </div>
+        </b-col>
+      </b-row>
+      <br>
+      <b-row>
+        <b-col style="margin-bottom:12px;">
+          @Brown_Cat님의 팔로우를 취소하시겠어요?
+        </b-col>
+      </b-row>
+      <hr />
+      <b-row @click="Modify" style="cursor: pointer; color: red; font-weight: bold;">
+        <div style="text-align:center;">팔로우 취소</div>
+      </b-row>
+      <hr />
+      <b-row @click="Cancel" style="text-align:center; cursor: pointer;">
+        <div style="text-align:center;">취소</div>
+      </b-row>
+    </b-container>
+  </b-modal>
 </template>
 
 <script>
 export default {
-
+  methods:{
+    Delete(){
+      console.log("삭제");
+    },
+    Modify(){
+      console.log("수정");
+    }, 
+    // 빠져나가는 함수 적용 필요
+    Cancel(){
+      console.log("취소");
+    }
+    
+  },
 }
+
 </script>
 
 <style>
+
+
 .avatar{
   margin-left: 5px;
   margin-top: 5px;
+}
+.bottom_time_line{
+  color: gray; 
+  font-size: small;
+  text-align: left;
+}
+.bottom_like_comment{
+  color: gray; 
+  font-size: small;
+  text-align: left;
+  font-weight: bold;
 }
 </style>
