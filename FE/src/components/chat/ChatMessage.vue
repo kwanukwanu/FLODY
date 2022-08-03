@@ -11,7 +11,7 @@
   </div> -->
   <b-container>
     <b-row>
-      <b-col v-if="itsMe" cols ="3">
+      <b-col v-if="sender" cols ="3">
       </b-col>
       <b-col cols = "9">
         <div class="message">
