@@ -8,6 +8,7 @@
     <div v-if="isSignedIn">
       <button @click="handleSignedOut">로그아웃</button>
     </div>
+    <router-link :to="{path:'/chat'}">채팅창</router-link>
   </div>
 </template>
 
