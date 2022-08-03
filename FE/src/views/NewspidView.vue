@@ -1,13 +1,13 @@
 <template>
   <newspid-header/>
-  <newspid-list/>
+  <newspid-detail/>
 </template>
 
 <script>
 import NewspidHeader from '@/components/newspid/NewspidHeader.vue'
-import NewspidList from '@/components/newspid/NewspidList.vue'
+import NewspidDetail from '@/components/newspid/NewspidDetail.vue'
 export default {
-  components: { NewspidHeader , NewspidList},
+  components: { NewspidHeader , NewspidDetail},
 
 }
 </script>
