@@ -13,8 +13,18 @@
               style="color: black; text-decoration: none; font-weight: 100; border: 1px solid; vertical-align:super;">
               메시지 보내기</b-button>
             <b-button size="sm" variant="link"
+              style="color: black; background-color: white; text-decoration: none; font-weight: 100; border: 1px solid; margin-left: 12px; vertical-align:super;" v-b-modal.modal-5>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M8 10.333H5c-.93 0-1.396 0-1.774.115a2.666 2.666 0 0 0-1.778 1.778c-.115.378-.115.844-.115 1.774m9.334-2L12 13.333l2.667-2.666M9.667 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>&nbsp;&nbsp;&nbsp;&nbsp;
+            </b-button>
+            <!--팔로우 하지 않은 상태라면 아래 코드-->
+            <!-- <b-button size="sm" variant="link"
               style="color: white; background-color: #83A39A; text-decoration: none; font-weight: 100; border: 1px solid; margin-left: 12px; vertical-align:super;">
-              팔로우</b-button>
+              팔로우</b-button> -->
 
           </b-col>
         </b-row>
