@@ -2,7 +2,7 @@
   <div style="margin-bottom: 10px">
     <b-row>
       <b-col cols="1" style="padding: 4px; text-align: right">
-        <b-avatar variant="info" size="26px"></b-avatar>
+        <b-avatar id="pics" variant="info" size="26px"></b-avatar>
       </b-col>
       <b-col>
         <b-row>
@@ -73,6 +73,11 @@ export default {
     date: String,
     time: String,
     child: Object,
+  },
+  mounted() {
+    const pics = document.getElementById("pic");
+    pics.src = this.profile;
+    console.log(this.profile);
   },
 };
 </script>

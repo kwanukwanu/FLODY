@@ -105,7 +105,7 @@
       margin-bottom: 10px;
     "
   >
-    오픽 공부하기 싫다ㅜㅜ
+    {{ title }}
   </div>
   <b-row>
     <b-col cols="1" style="padding: 4px; text-align: right">
@@ -225,7 +225,7 @@
               vertical-align: -webkit-baseline-middle;
             "
           >
-            {{ 글쓴이 }}님의 게시글 더보기</a
+            {{ author }}님의 게시글 더보기</a
           >
         </b-col>
       </b-row>
