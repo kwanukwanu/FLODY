@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import NavBar from "./NavBar.vue";
-import ChatBoard from "./ChatBoard.vue";
+import NavBar from "@/components/chat/NavBar.vue";
+import ChatBoard from "@/components/chat/ChatBoard.vue";
 
 export default {
     components: { NavBar, ChatBoard }

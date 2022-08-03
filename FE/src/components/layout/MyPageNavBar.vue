@@ -25,23 +25,11 @@
           </b-row>
         <hr>
 
-
-        <b-row>
-          <b-col cols="8">
-            <b-card-text class="test_name">정보처리기사</b-card-text>
-          </b-col>
-          <b-col cols="4">
-            <b-card-text class="howmuchleft" style="color:#BC6464; font-weight: bold;">D-3</b-card-text>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col cols="8">
-            <b-card-text class="test_name">OPIC</b-card-text>
-          </b-col>
-          <b-col cols="4">
-            <b-card-text class="howmuchleft" style="color:#BC6464; font-weight: bold;">D-6</b-card-text>
-          </b-col>
-        </b-row>
+        <my-page-items
+        v-for="plan in plans"
+        :key="plan"
+        v-bind="plan">
+        </my-page-items>
       </b-container>
     </b-card>
 
@@ -81,17 +69,33 @@
 <script>
 import { computed } from "vue";
 import { useStore } from "vuex";
+import MyPageItems from './items/MyPageItems.vue';
 
 const store = useStore();
 const userInfo = computed(() => store.state.memberStore);
 
 console.dir(userInfo);
 export default {
+  components: { MyPageItems },
   setup() {
     const store = useStore();
     const userInfo = computed(() => store.state.memberStore.userInfo);
 
     return { userInfo };
+  },
+  data(){
+    return{
+      plans:[
+        {
+          subject: "정보처리기사",
+          mod:10,
+        },
+        {
+          subject:"OPIC",
+          mod: 3,
+        }
+      ],
+    }
   }
 }
 </script>
