@@ -46,6 +46,11 @@ const routes = [
             name:'studyflower',
             component:()=>import("@/components/study/StudyFlower.vue"),
           },
+          {
+            path:'field',
+            name:'studyfield',
+            component:()=>import("@/components/study/StudyField.vue"),
+          },
         ]
       },
       {
