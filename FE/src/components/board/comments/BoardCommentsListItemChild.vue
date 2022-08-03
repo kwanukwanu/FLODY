@@ -2,25 +2,21 @@
   <div style="margin-bottom: 10px; margin-left: 45px">
     <b-row>
       <b-col cols="1" style="padding: 4px; text-align: right">
-        <b-avatar
-          variant="info"
-          src="https://placekitten.com/300/260"
-          size="26px"
-        ></b-avatar>
+        <b-avatar variant="info" :src="pics" size="26px"></b-avatar>
       </b-col>
       <b-col>
         <b-row>
           <b-col>
             <div style="text-align: left">
               <a style="padding: 0px; font-weight: bold; text-decoration: none">
-                Giri_boy</a
-              >
+                {{userId}}
+              </a>
             </div>
           </b-col>
         </b-row>
         <b-row>
           <b-col>
-            <div style="text-align: left; padding: 0px">화이팅ㅠㅠ</div>
+            <div style="text-align: left; padding: 0px">{{contents}}</div>
           </b-col>
           <b-col>
             <div style="text-align: right">
@@ -30,10 +26,10 @@
         </b-row>
         <b-row>
           <b-col cols="1">
-            <div style="color: #9f9f9f">22.07.11.</div>
+            <div style="color: #9f9f9f">{{date}}</div>
           </b-col>
           <b-col cols="1">
-            <div style="color: #9f9f9f">18:52</div>
+            <div style="color: #9f9f9f">{{time}}</div>
           </b-col>
           <b-col cols="2">
             <a
@@ -54,7 +50,27 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      pics: "https://placekitten.com/300/250",
+    };
+  },
+  props: {
+    profile: String,
+    userId: String,
+    contents: String,
+    date: String,
+    time: String,
+  },
+  mounted() {
+    this.pics = this.profile;
+    console.log(this.profile);
+    console.log(this.userId);
+    console.log(this.date);
+    console.log(this.time);
+  },
+};
 </script>
 
 <style></style>

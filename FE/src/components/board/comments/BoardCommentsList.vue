@@ -27,13 +27,13 @@ export default {
           contents: "화이팅ㅠㅠ",
           date: "22.07.11",
           time: "18:51",
-          child: {
-            profile: "https://placekitten.com/300/260",
+          child: [{
+            profile: "https://placekitten.com/300/270",
             userId: "Girl_boy",
             contents: "화이팅ㅠㅠ",
             date: "22.07.11",
             time: "18:52",
-          },
+          },]
         },
       ],
     };

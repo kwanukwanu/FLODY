@@ -2,15 +2,15 @@
   <div style="margin-bottom: 10px">
     <b-row>
       <b-col cols="1" style="padding: 4px; text-align: right">
-        <!-- <img  variant="info" style="width: 20px; height:20px"/> -->
+        <b-avatar :src="pics" variant="info" size="26px"></b-avatar>
       </b-col>
       <b-col>
         <b-row>
           <b-col>
             <div style="text-align: left">
               <a style="padding: 0px; font-weight: bold; text-decoration: none">
-                {{ userId }}
-              </a>
+                {{ userId }}</a
+              >
             </div>
           </b-col>
         </b-row>
@@ -32,7 +32,7 @@
             <div style="color: #9f9f9f">{{ time }}</div>
           </b-col>
           <b-col cols="2">
-            <a 
+            <a
               href=""
               style="
                 color: #9f9f9f;
@@ -47,13 +47,16 @@
       </b-col>
     </b-row>
   </div>
+  <!-- <board-comments-list-item-child /> -->
 
+  <!-- axios 를 사용하면 가능해질 것! -->
   <board-comments-list-item-child
-    v-for="childitem in child"
-    :key="childitem"
-    v-bind="childitem"
+    v-for="item in child"
+    :key="item"
+    v-bind="item"
   ></board-comments-list-item-child>
 </template>
+
 
 <script>
 import BoardCommentsListItemChild from "./BoardCommentsListItemChild.vue";
@@ -62,18 +65,23 @@ export default {
   data() {
     return {
       children: null,
+      pics: "https://placekitten.com/300/250",
     };
   },
   props: {
-    index: Number,
     profile: String,
     userId: String,
     contents: String,
     date: String,
     time: String,
-    child: Object,
+    child: Array,
+  },
+  mounted() {
+    this.pics = this.profile;
+    console.log(this.child);
   },
 };
 </script>
+
 
 <style></style>
