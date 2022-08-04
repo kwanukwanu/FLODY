@@ -28,6 +28,12 @@
             <newspid-item v-for="(item) in items" :key="item" v-bind="item">
             </newspid-item>
         </b-row>
+        <b-row>
+            <b-col style="padding:0px;">
+                <span class="bottom_time_line">---&nbsp;&nbsp;&nbsp;</span>
+                <span class="bottom_like_comment">답글 보기(1개)</span>
+            </b-col>
+        </b-row>
     </div>
 </template>
 
