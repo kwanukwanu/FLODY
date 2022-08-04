@@ -8,12 +8,13 @@
       <b-col>
         <b-row style="margin-bottom:10px;">
           <b-col style="text-align: left; padding: 0px;">
-            <span style="font-weight: 100; font-size: 25px; margin-right: 12px;">Giri_boy</span>
+            <span style="font-weight: 100; font-size: 25px; margin-right: 12px;">{{ profile.nickName }}</span>
             <b-button size="sm" variant="link"
               style="color: black; text-decoration: none; font-weight: 100; border: 1px solid; vertical-align:super;">
               메시지 보내기</b-button>
             <b-button size="sm" variant="link"
-              style="color: black; background-color: white; text-decoration: none; font-weight: 100; border: 1px solid; margin-left: 12px; vertical-align:super;" v-b-modal.modal-5>
+              style="color: black; background-color: white; text-decoration: none; font-weight: 100; border: 1px solid; margin-left: 12px; vertical-align:super;"
+              v-b-modal.modal-5>
               &nbsp;&nbsp;&nbsp;&nbsp;
               <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -30,20 +31,22 @@
         </b-row>
         <b-row style="margin-bottom:10px;">
           <b-col style="text-align: left; padding: 0;">
-            <span>게시글 </span><span
-              style="font-weight:bold;">44&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로워
-            </span><span style="font-weight:bold;">22&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로우 </span><span
-              style="font-weight:bold;">13</span>
+            <span>게시글 </span><span style="font-weight:bold;">{{ profile.board_num }}
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로워
+            </span><span style="font-weight:bold;">{{ profile.follower
+            }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로우 </span><span style="font-weight:bold;">{{
+    profile.follow
+}}</span>
           </b-col>
         </b-row>
         <b-row style="font-weight: bold;">
           <b-col style="text-align: left; padding: 0;">
-            <div>홍시영</div>
+            <div>{{ profile.name }}</div>
           </b-col>
         </b-row>
         <b-row>
           <b-col style="text-align: left; padding: 0;">
-            <div>비트 찍고 랩하지만 코딩도 잘 하는 기리보이입니다.</div>
+            <div>{{ profile.contents }}</div>
           </b-col>
         </b-row>
       </b-col>
@@ -61,8 +64,8 @@
       <b-col>
         <b-row style="margin-bottom:10px;">
           <b-col style="text-align: left; padding: 0px;">
-            <span style="font-weight: 100; font-size: 25px; margin-right: 12px;">hwangheechani</span>
-            <router-link :to="{name:'newspidsettings'}"><svg width="24" height="24" fill="none"
+            <span style="font-weight: 100; font-size: 25px; margin-right: 12px;">{{ profile.nickName }}</span>
+            <router-link :to="{ name: 'newspidsettings' }"><svg width="24" height="24" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" stroke="#444" stroke-width="2" stroke-linecap="round"
                   stroke-linejoin="round" />
@@ -86,19 +89,21 @@
         </b-row>
         <b-row style="margin-bottom:10px;">
           <b-col style="text-align: left; padding: 0;">
-            <span>게시글 </span><span style="font-weight:bold;">4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로워
-            </span><span style="font-weight:bold;">222&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로우 </span><span
-              style="font-weight:bold;">123</span>
+            <span>게시글 </span><span
+              style="font-weight:bold;">{{ profile.board_num }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로워
+            </span><span
+              style="font-weight:bold;">{{ profile.follower }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로우
+            </span><span style="font-weight:bold;">{{ profile.follow }}</span>
           </b-col>
         </b-row>
         <b-row style="font-weight: bold;">
           <b-col style="text-align: left; padding: 0;">
-            <div>황희찬</div>
+            <div>{{ profile.name }}</div>
           </b-col>
         </b-row>
         <b-row>
           <b-col cols="8" style="text-align: left; padding: 0;">
-            <div>축구 하는 코딩 보이 황희찬입니다.</div>
+            <div>{{ profile.contents }}</div>
           </b-col>
           <!-- <b-col cols="4">
             <div style="text-align:right;">
@@ -159,11 +164,17 @@
 </template>
 
 <script>
-export default {
+import { computed } from "vue";
+import { useStore } from "vuex";
 
+export default {
+  setup() {
+    const store = useStore();
+    const profile = computed(() => store.state.newspidStore.profile);
+    return { store, profile };
+  }
 }
 </script>
 
 <style>
-
 </style>
