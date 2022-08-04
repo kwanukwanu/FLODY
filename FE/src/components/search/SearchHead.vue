@@ -1,10 +1,10 @@
 <template>
-  <b-row style="margin-bottom: 10px">
-    <b-col>
-      <b-form-select style="border-color: #a48282"></b-form-select>
+  <b-row style="margin-bottom: 18px">
+    <b-col cols="2">
+      <b-form-select style="border-color: #a48282" v-model="selected" :options="options"></b-form-select>
     </b-col>
-    <b-col>
-      <b-form-select style="border-color: #a48282"></b-form-select>
+    <b-col cols="2">
+      <b-form-select style="border-color: #a48282" v-model="selected_2" :options="options_2"></b-form-select>
     </b-col>
     <b-col cols="6">
       <b-form-input
@@ -22,7 +22,24 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+      return {
+        selected: 'null',
+        options: [
+          { value: 'null', text: '대분류' },
+          { value: 'a', text: '정보통신' },
+          // { value: 'b', text: 'Selected Option' },
+        ],
+        selected_2: 'null',
+        options_2: [
+           { value: 'null', text: '중분류' },
+          { value: 'a', text: '정보기술' },
+          // { value: 'b', text: 'Selected Option' },
+        ]
+      }
+  }
+};
 </script>
 
 <style></style>

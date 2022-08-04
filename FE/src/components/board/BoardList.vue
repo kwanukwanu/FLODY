@@ -69,6 +69,11 @@
       </b-button>
       <b-button variant="link" v-else></b-button>
     </div>
+    <!-- <div class="overflow-auto">
+      <div>
+        <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" first-number></b-pagination>
+      </div>
+    </div> -->
   </b-container>
   <br /><br />
 
@@ -80,7 +85,7 @@
       </b-form-select>
     </b-col>
     <b-col cols="3">
-      <b-form-select  v-model="selected_2" :options="options_2" class="mb-3" value-field="item" text-field="name"
+      <b-form-select v-model="selected_2" :options="options_2" class="mb-3" value-field="item" text-field="name"
         disabled-field="notEnabled"></b-form-select>
     </b-col>
     <b-col cols="5">
@@ -107,8 +112,8 @@
         </b-row>
         <b-row style="margin-bottom: 10px">
           <b-col>
-            <b-form-select style="border: none" v-model="selected_3" :options="options_3" class="mb-3" value-field="item" text-field="name"
-        disabled-field="notEnabled"></b-form-select>
+            <b-form-select style="border: none" v-model="selected_3" :options="options_3" class="mb-3"
+              value-field="item" text-field="name" disabled-field="notEnabled"></b-form-select>
           </b-col>
         </b-row>
         <b-row style="margin-bottom: 10px">
@@ -274,6 +279,9 @@ export default {
       ],
       page: 1,
       max: 10,
+      // rows: 20,
+      //   perPage: 1,
+      //   currentPage: 1
     };
   },
   methods: {
@@ -294,5 +302,15 @@ export default {
 }
 .paging {
   text-align: center;
+  color:black;
 }
+/* .page-link{
+  color:black;
+}
+.active>.page-link{
+  background-color: #B1C5BF;
+}
+.justify-content-start {
+    justify-content: center!important;
+} */
 </style>
