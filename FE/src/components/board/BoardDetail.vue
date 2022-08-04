@@ -80,6 +80,7 @@
           </svg>
           다음글</a
         >
+        <router-link :to="{ name:'boardlist'}" style="text-decoration: none;">
         <a
           style="
             padding: 2px 12px;
@@ -91,14 +92,20 @@
             cursor: pointer;
           "
           >목록</a
-        >
+        ></router-link>
       </div>
     </b-col>
   </b-row>
   <br />
-  <a style="color: #064635; margin-left: 20px; font-size: large; cursor: pointer;"
+
+  <!-- <a @click="$router.back()" style="color: #064635; margin-left: 20px; font-size: large; cursor: pointer;"
+    >자유게시판 ></a
+  > -->
+  <router-link :to="{ name:'boardlist' }" style="text-decoration: none;">
+    <a style="color: #064635; margin-left: 20px; font-size: large; cursor: pointer;"
     >자유게시판 ></a
   >
+  </router-link>
   <br /><br />
   <div
     style="
