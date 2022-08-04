@@ -1,7 +1,10 @@
 <template>
   <h2>field</h2>
-  <div id="fi" @click="action_coords($event)">
+  <!-- <div id="fi" @click="action_coords($event)"> -->
+  <div id="fi">
+    <!-- <img id="flower" src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab;" @mousedown="mouseDown()"/> -->
     <img id="flower" src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab;" @mousedown="startDrag($event)"/>
+    <!-- <img id="flower" src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab;" :style="{left:xPosition, top:yPosition}"/> -->
   </div>
 </template>
 
@@ -16,7 +19,7 @@ export default {
     }
   },
   methods: {
-    startDrag(){
+    startDrag(event){
       /*
       드래그를 할때
       posX 에는 그림에대한 x 위치를,
@@ -61,6 +64,25 @@ export default {
       console.log("screenX: " + x3 + ", screenY: " + y3); 
     },
   },
+  setup() {
+    function mouseDown(e) {
+      console.log(e)
+      window.addEventListener('mousemove', mouseMove)
+      window.addEventListener('mouseup', mouseUp)
+    }
+
+    function mouseMove() {
+    }
+
+    function mouseUp(e) {
+        console.log(e)
+        window.removeEventListener('mousemove', mouseMove)
+        window.removeEventListener('mouseup', mouseUp)
+    }
+
+    return { mouseDown, mouseMove, mouseUp }
+
+  }
 }
 
 </script>
@@ -72,4 +94,5 @@ export default {
     width: 900px;
     height: 400px;
 }
+
 </style>
