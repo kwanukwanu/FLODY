@@ -1,7 +1,7 @@
 <template>
   <h2>field</h2>
   <div id="fi">
-    <img src="@/assets/flower.png" class="w-10" style="height: 100px; cursor: grab;" @mousedown="startDrag()"/>
+    <img src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab;" @mousedown="startDrag()"/>
   </div>
 </template>
 
