@@ -3,7 +3,7 @@ import 'firebase/compat/auth'
 import 'firebase/compat/firestore'
 import firebaseConfig from '@/firebaseConfig'
 
-import Filter from 'bad-words'
+// import Filter from 'bad-words'
 import { ref, onUnmounted, computed } from 'vue'
 
 firebase.initializeApp(firebaseConfig)
@@ -28,7 +28,7 @@ export function useAuth() {
 const firestore = firebase.firestore()
 const messagesCollection = firestore.collection('messages')
 const messagesQuery = messagesCollection.orderBy('createdAt', 'desc').limit(100)
-const filter = new Filter()
+// const filter = new Filter()
 
 export function useChat() {
   const messages = ref([])
@@ -47,7 +47,8 @@ export function useChat() {
       userName: displayName,
       userId: uid,
       userPhotoURL: photoURL,
-      text: filter.clean(text),
+      // text: filter.clean(text),
+      text: text,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     })
   }
