@@ -6,7 +6,7 @@
       </b-col>
       <b-col>
         <b-row>
-          <b-col>
+          <b-col cols="2">
             <div style="text-align: left">
               <a style="padding: 0px; font-weight: bold; text-decoration: none">
                 {{userId}}
@@ -20,7 +20,7 @@
           </b-col>
           <b-col>
             <div style="text-align: right">
-              <a>신고</a>
+              <a style="cursor:pointer" v-b-modal.modal-6>신고</a>
             </div>
           </b-col>
         </b-row>
@@ -32,16 +32,12 @@
             <div style="color: #9f9f9f">{{time}}</div>
           </b-col>
           <b-col cols="2">
-            <a
-              href=""
-              style="
+            <a href="" style="
                 color: #9f9f9f;
                 text-align: left;
                 font-weight: bold;
                 text-decoration: none;
-              "
-              >답글 쓰기</a
-            >
+              ">답글 쓰기</a>
           </b-col>
         </b-row>
       </b-col>

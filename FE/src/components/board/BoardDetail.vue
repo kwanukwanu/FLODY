@@ -36,6 +36,7 @@
             text-decoration: none;
             background-color: #e3d6d6;
             border-radius: 15%;
+            cursor: pointer;
           "
           ><svg
             width="15"
@@ -61,6 +62,7 @@
             background-color: #e3d6d6;
             margin-left: 12px;
             border-radius: 15%;
+            cursor: pointer;
           "
           ><svg
             width="15"
@@ -86,6 +88,7 @@
             background-color: #e3d6d6;
             margin-left: 12px;
             border-radius: 15%;
+            cursor: pointer;
           "
           >목록</a
         >
@@ -93,7 +96,7 @@
     </b-col>
   </b-row>
   <br />
-  <a style="color: #064635; margin-left: 20px; font-size: large"
+  <a style="color: #064635; margin-left: 20px; font-size: large; cursor: pointer;"
     >자유게시판 ></a
   >
   <br /><br />
@@ -256,7 +259,7 @@
     </b-col>
     <b-col>
       <div style="text-align: right">
-        <a>신고</a>
+        <a style="cursor:pointer" v-b-modal.modal-6>신고</a>
       </div>
     </b-col>
   </b-row>
