@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>ChatMain</h1>
+    <router-link to="/">home</router-link>
     <nav-bar></nav-bar>
     <chat-board></chat-board>
   </div>

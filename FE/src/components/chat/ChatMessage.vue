@@ -11,7 +11,7 @@
   </div> -->
   <b-container>
     <b-row>
-      <b-col v-if="sender" cols ="3">
+      <!-- <b-col v-if="sender" cols ="3">
       </b-col>
       <b-col cols = "9">
         <div class="message">
@@ -21,7 +21,30 @@
             <slot/>
           </div>
         </div>
+      </b-col> -->
+      <!-- <b-col v-if="sender" cols ="3">
       </b-col>
+      <b-col cols = "9"> -->
+        <div v-if="!sender" style="text-align: left;">
+          <div class="message">
+            <span>{{ name }}</span>
+            <div class="flex">
+              <chat-avatar class="mt-1" :src="photoUrl" />
+              <slot/>
+              <div>{{ date }}</div>
+            </div>
+          </div>
+        </div>
+        <div v-else  style="text-align: right;">
+          <div class="message">
+            <div class="flex">
+              <div>{{ date }}</div>
+              <slot/>
+              <chat-avatar class="mt-1" :src="photoUrl" />
+            </div>
+          </div>
+        </div>
+      <!-- </b-col> -->
     </b-row>
   </b-container>
 </template>
@@ -33,7 +56,8 @@ export default {
   props: {
     name: { type: String, default: '' },
     photoUrl: { type: String, default: '' },
-    sender: { type: Boolean, default: false }
+    sender: { type: Boolean, default: false },
+    date: {type: String, default: ''},
   },
   // props:{
   //   id: String, 
