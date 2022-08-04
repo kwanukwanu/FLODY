@@ -15,7 +15,7 @@ export default {
       items_popular: [
         {
           profile: "https://placekitten.com/300/250",
-          userId: "Girl_Girl",
+          userId: "Giri_Girl",
           contents: "화이팅이욥 ㅠㅠ",
           date: "22.07.11",
           time: "18:55",
@@ -23,13 +23,13 @@ export default {
         },
         {
           profile: "https://placekitten.com/300/260",
-          userId: "Girl_man",
+          userId: "Giri_man",
           contents: "화이팅ㅠㅠ",
           date: "22.07.11",
           time: "18:51",
           child: [{
             profile: "https://placekitten.com/300/270",
-            userId: "Girl_boy",
+            userId: "Giri_boy",
             contents: "화이팅ㅠㅠ",
             date: "22.07.11",
             time: "18:52",
