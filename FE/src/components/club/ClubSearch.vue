@@ -2,7 +2,7 @@
   <div>
     <b-card>
       <b-container>
-        <h5 style="text-align:left; font-weight: 600; color:#064635;">스터디 가입하기</h5>
+        <h5 style="text-align:left; font-weight: 600; color:#064635; margin-top: 8px;">스터디 가입하기</h5>
         <br>
         <b-row id="header">
           <b-col id="header_name" cols="2">
