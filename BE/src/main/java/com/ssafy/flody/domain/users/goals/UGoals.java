@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Getter
@@ -15,23 +15,18 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "u_goals")
+@Table(name = "U_Goals")
 public class UGoals {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ugNo;
-
-    @NotNull
-    @ManyToOne(targetEntity = Users.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "use_no")
-    private Long useNo;
-
-    @NotNull
+    private Users user;
+    @Column(nullable = false)
     private String name;
-
-    @NotNull
+    @CreatedDate
     private Date registDate;
-
-    @NotNull
+    @Column(nullable = false)
     private Date dueDate;
 }

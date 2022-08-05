@@ -1,7 +1,7 @@
 package com.ssafy.flody.service.boards;
 
-import com.ssafy.flody.dto.request.Boards.BoardCreateRequestDto;
+import com.ssafy.flody.dto.request.posts.PostCreateRequestDto;
 
 public interface BoardsService {
-    boolean addBoard(BoardCreateRequestDto boardCreateRequestDto);
+    boolean addBoard(PostCreateRequestDto boardCreateRequestDto);
 }

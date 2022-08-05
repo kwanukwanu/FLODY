@@ -1,5 +1,8 @@
 package com.ssafy.flody.domain.groups.members;
 
+import com.ssafy.flody.domain.groups.Groups;
+import com.ssafy.flody.domain.groups.roles.GRoles;
+import com.ssafy.flody.domain.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,7 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class GMembersId implements Serializable {
-    private Long useNo;
-    private Long groNo;
-    private Long grNo;
+    private Users user;
+    private Groups group;
+    private GRoles role;
 }

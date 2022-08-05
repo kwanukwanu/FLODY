@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Getter
@@ -15,29 +14,23 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "u_schedules")
+@Table(name = "U_Schedules")
 public class USchedules {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long usNo;
-
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "use_no")
-    private Long useNo;
-
-    @NotNull
+    private Users user;
+    @Column(nullable = false)
     private String title;
-
+    @Column
     private String detail;
-
-    @NotNull
+    @Column(nullable = false)
     private Date startDate;
-
-    @NotNull
+    @Column(nullable = false)
     private Date endDate;
-
-    @NotNull
+    @Column(nullable = false)
     private Boolean done;
 
     public void update(String title, String detail, Date startDate, Date endDate, Boolean done) {

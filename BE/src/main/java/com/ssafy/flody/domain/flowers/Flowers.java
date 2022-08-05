@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Builder
@@ -18,17 +17,13 @@ public class Flowers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long floNo;
-
-    @NotNull
-    @ManyToOne(targetEntity = FCategories.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = FCategories.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "fc_no")
-    private Long fcNo;
-
-    @NotNull
+    private FCategories fcNo;
+    @Column(nullable = false)
     private String name;
-
+    @Column
     private String content;
-
-    @NotNull
+    @Column(nullable = false)
     private String url;
 }

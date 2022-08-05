@@ -1,5 +1,7 @@
 package com.ssafy.flody.domain.comments.likes;
 
+import com.ssafy.flody.domain.comments.Comments;
+import com.ssafy.flody.domain.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,6 +14,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class CLikesId implements Serializable {
-    private Long comNo;
-    private Long useNo;
+    private Comments comment;
+    private Users user;
 }

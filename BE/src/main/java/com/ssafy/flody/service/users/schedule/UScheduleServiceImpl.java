@@ -1,11 +1,13 @@
 package com.ssafy.flody.service.users.schedule;
 
+import com.ssafy.flody.domain.users.Users;
+import com.ssafy.flody.domain.users.UsersRepository;
 import com.ssafy.flody.domain.users.schedules.USchedules;
 import com.ssafy.flody.domain.users.schedules.USchedulesRepository;
-import com.ssafy.flody.dto.request.Users.UserScheduleCreateRequestDto;
-import com.ssafy.flody.dto.request.Users.UserScheduleUpdateRequestDto;
-import com.ssafy.flody.dto.response.Users.UserScheduleDetailResponseDto;
-import com.ssafy.flody.dto.response.Users.UserScheduleListResponseDto;
+import com.ssafy.flody.dto.request.users.UserScheduleCreateRequestDto;
+import com.ssafy.flody.dto.request.users.UserScheduleUpdateRequestDto;
+import com.ssafy.flody.dto.response.users.UserScheduleDetailResponseDto;
+import com.ssafy.flody.dto.response.users.UserScheduleListResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UScheduleServiceImpl implements UScheduleService {
     private final USchedulesRepository userScheduleRepository;
+    private final UsersRepository usersRepository;
 
     @Transactional
     public List<UserScheduleListResponseDto> findAllUserSchedule(Long useNo) {
@@ -35,8 +38,10 @@ public class UScheduleServiceImpl implements UScheduleService {
     }
 
     @Transactional
-    public Long addUserSchedule(UserScheduleCreateRequestDto requestDto) {
-        return userScheduleRepository.save(requestDto.toEntity()).getUsNo();
+    public Long addUserSchedule(String email, UserScheduleCreateRequestDto requestDto) {
+        Users user = usersRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
+        return userScheduleRepository.save(requestDto.toEntity(user)).getUsNo();
     }
 
     @Transactional

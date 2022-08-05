@@ -13,15 +13,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@IdClass(FollowsId.class)
 public class Follows {
     @Id
-    @ManyToOne(targetEntity = Users.class)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long folNo;
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "follower")
-    private Long follower;
-
-    @Id
-    @ManyToOne(targetEntity = Users.class)
+    private Users follower;
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "following")
-    private Long following;
+    private Users following;
 }

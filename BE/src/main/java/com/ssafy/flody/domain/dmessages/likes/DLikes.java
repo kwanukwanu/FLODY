@@ -1,6 +1,6 @@
 package com.ssafy.flody.domain.dmessages.likes;
 
-import com.ssafy.flody.domain.dmessages.DMessages;
+import com.ssafy.flody.domain.dmessages.DirectMessages;
 import com.ssafy.flody.domain.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,18 +14,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "d_likes")
+@Table(name = "D_Likes")
 @IdClass(DLikesId.class)
 public class DLikes {
-
     @Id
-    @ManyToOne(targetEntity = DMessages.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = DirectMessages.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "dm_no")
-    private Long dmNo;
-
+    private DirectMessages directMessage;
     @Id
-    @ManyToOne(targetEntity = Users.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "use_no")
-    private Long useNo;
-
+    private Users user;
 }

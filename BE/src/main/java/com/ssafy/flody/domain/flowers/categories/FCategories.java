@@ -6,21 +6,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "f_categories")
+@Table(name = "F_categories")
 public class FCategories {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fcNo;
-
-    @NotNull
+    @Column(nullable = false)
     private String name;
-
+    @Column(nullable = false)
     private String period;
 }

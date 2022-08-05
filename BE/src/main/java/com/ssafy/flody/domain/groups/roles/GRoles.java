@@ -6,19 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "g_roles")
+@Table(name = "G_Roles")
 public class GRoles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long grNo;
-
-    @NotNull
+    @Column(nullable = false)
     private String name;
 }
