@@ -27,21 +27,45 @@
       <b-col cols = "9"> -->
         <div v-if="!sender" style="text-align: left;">
           <div class="message">
-            <span>{{ name }}</span>
-            <div class="flex">
-              <chat-avatar class="mt-1" :src="photoUrl" />
-              <slot/>
-              <div>{{ date }}</div>
-            </div>
+            <b-row>
+              <b-col cols="1">
+                <chat-avatar class="mt-1" :src="photoUrl" />
+              </b-col>
+              <b-col cols="11">
+                <b-row>
+                  <span style="font-size: 16px; font-weight: bold;">{{ name }}</span>
+                </b-row>
+                <b-row>
+                  <div style="font-size: 24px; background-color: #F1EBEB; border-radius: 0px 20px 20px 20px; max-width: 300px;">
+                    <slot />
+                  </div>
+                </b-row>
+                <b-row>
+                  <!-- <div>{{ date }}</div> -->
+                  <!-- <div style="font-size: 12px;">{{ dateTime }}</div> -->
+                </b-row>
+              </b-col>
+            </b-row>
           </div>
         </div>
         <div v-else  style="text-align: right;">
           <div class="message">
-            <div class="flex">
-              <div>{{ date }}</div>
-              <slot/>
-              <chat-avatar class="mt-1" :src="photoUrl" />
-            </div>
+            <b-row>
+              <b-col cols="11">
+                <b-row align-h="end">
+                  <div style="font-size: 24px; border-radius: 20px 20px 0px 20px; background-color: #f3f3f3; max-width: 300px; margin-top: 16px;">
+                    <slot />
+                  </div>
+                </b-row>
+                  <!-- <div>{{ date }}</div> -->
+                  <!-- <div style="font-size: 12px;">{{ dateTime }}</div> -->
+                <b-row>
+                </b-row>
+              </b-col>
+              <b-col cols="1">
+                <chat-avatar class="mt-1" :src="photoUrl" />
+              </b-col>
+            </b-row>
           </div>
         </div>
       <!-- </b-col> -->
@@ -57,8 +81,21 @@ export default {
     name: { type: String, default: '' },
     photoUrl: { type: String, default: '' },
     sender: { type: Boolean, default: false },
-    date: {type: String, default: ''},
+    date: {type: Date, default: ''},
   },
+  data() {
+    return {
+      dateTime: this.date,
+    }
+  },
+  // mounted() {
+  //   console.log(this.date);
+  //   this.dateTime = new Date(this.date.seconds * 1000).toLocaleString();
+  // },
+  // updated() {
+  //   console.log(this.date);
+  //   this.dateTime = new Date(this.date.seconds * 1000).toLocaleString();
+  // },
   // props:{
   //   id: String, 
   //   text: String,
