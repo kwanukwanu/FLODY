@@ -8,23 +8,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "c_likes")
+@Table(name = "C_Likes")
 @IdClass(CLikesId.class)
 public class CLikes {
     @Id
-    @ManyToOne(targetEntity = Comments.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Comments.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "com_no")
-    private Long comNo;
-
+    private Comments comment;
     @Id
-    @ManyToOne(targetEntity = Users.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "use_no")
-    private Long useNo;
+    private Users user;
 }

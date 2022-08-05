@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Builder
@@ -18,37 +16,31 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long useNo;
-
     @Column(unique = true, nullable = false)
-    private String id;
-
-    @NotNull
+    private String email;
+    @Column(nullable = false)
     private String password;
-
-    @NotNull
+    @Column(nullable = false)
     private String profile;
-
-    @NotNull
+    @Column(nullable = false)
     private String name;
-
-    @NotNull
+    @Column(nullable = false)
     private String nickname;
-
+    @Column
     private String address;
-
-    @NotNull
+    @Column(nullable = false)
     private String phone;
-
+    @Column(nullable = false)
     private Boolean admin;
 
-    public void update(String profile, String nickname, String address, String phone){
+    public void update(String profile, String nickname, String address, String phone) {
         this.profile = profile;
         this.nickname = nickname;
         this.address = address;
         this.phone = phone;
     }
 
-    public void changePassword(String password){
+    public void changePassword(String password) {
         this.password = password;
     }
 

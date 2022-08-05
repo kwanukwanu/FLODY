@@ -9,31 +9,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "g_members")
+@Table(name = "G_Members")
 @IdClass(GMembersId.class)
 public class GMembers {
     @Id
-    @NotNull
-    @ManyToOne(targetEntity = Users.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "use_no")
-    private Long useNo;
-
+    private Users user;
     @Id
-    @NotNull
-    @ManyToOne(targetEntity = Groups.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Groups.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "gro_no")
-    private Long groNo;
-
+    private Groups group;
     @Id
-    @NotNull
-    @ManyToOne(targetEntity = GRoles.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = GRoles.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "gr_no")
-    private Long grNo;
+    private GRoles role;
 }

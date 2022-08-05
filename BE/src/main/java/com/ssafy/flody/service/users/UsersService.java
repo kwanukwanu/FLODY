@@ -1,11 +1,11 @@
 package com.ssafy.flody.service.users;
 
 import com.ssafy.flody.domain.users.Users;
-import com.ssafy.flody.dto.request.Users.UserCreateRequestDto;
-import com.ssafy.flody.dto.request.Users.UserLoginRequestDto;
-import com.ssafy.flody.dto.request.Users.UserPasswordUpdateRequestDto;
-import com.ssafy.flody.dto.request.Users.UserUpdateRequestDto;
-import com.ssafy.flody.dto.response.Users.UserInfoResponseDto;
+import com.ssafy.flody.dto.request.users.UserCreateRequestDto;
+import com.ssafy.flody.dto.request.users.UserLoginRequestDto;
+import com.ssafy.flody.dto.request.users.UserPasswordUpdateRequestDto;
+import com.ssafy.flody.dto.request.users.UserUpdateRequestDto;
+import com.ssafy.flody.dto.response.users.UserInfoResponseDto;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 

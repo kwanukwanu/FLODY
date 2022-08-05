@@ -1,14 +1,14 @@
 package com.ssafy.flody.domain.comments;
 
-import com.ssafy.flody.domain.boards.Boards;
+import com.ssafy.flody.domain.posts.Posts;
 import com.ssafy.flody.domain.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -21,30 +21,23 @@ public class Comments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long comNo;
-
-    @NotNull
-    @ManyToOne(targetEntity = Users.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "use_no")
-    private Long useNo;
-
-    @NotNull
-    @ManyToOne(targetEntity = Boards.class)
-    @JoinColumn(name = "boa_no")
-    private Long boaNo;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "fk_comments_upper_comments_comno", referencedColumnName = "com_no")
-//    private Comments upper;
-
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent", cascade = CascadeType.ALL)
-//    private List<Comments> upper;
-
-    @NotNull
-    private String comment;
-
-    @NotNull
+    private Users user;
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Posts.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "pos_no")
+    private Posts post;
+    //    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Comments.class, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "comments_upper_comments_comno")
+//    private Comments upperParent;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "upperParent")
+//    private List<Comments> upperChildren;
+    @Column
+    private Long upper;
+    @Column(nullable = false)
+    private String content;
+    @CreatedDate
     private Date postDate;
-
-    @NotNull
+    @Column(nullable = false)
     private int kids;
 }

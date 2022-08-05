@@ -1,13 +1,13 @@
 package com.ssafy.flody.controller;
 
 import com.ssafy.flody.domain.users.Users;
-import com.ssafy.flody.dto.request.Boards.BoardCreateRequestDto;
-import com.ssafy.flody.dto.request.Boards.CommentCreateRequestDto;
-import com.ssafy.flody.dto.request.Boards.CommentUpdateRequestDto;
-import com.ssafy.flody.dto.request.Groups.*;
-import com.ssafy.flody.dto.request.Users.*;
-import com.ssafy.flody.dto.response.Users.UserScheduleDetailResponseDto;
-import com.ssafy.flody.dto.response.Users.UserScheduleListResponseDto;
+import com.ssafy.flody.dto.request.posts.PostCreateRequestDto;
+import com.ssafy.flody.dto.request.comments.CommentCreateRequestDto;
+import com.ssafy.flody.dto.request.comments.CommentUpdateRequestDto;
+import com.ssafy.flody.dto.request.groups.*;
+import com.ssafy.flody.dto.request.users.*;
+import com.ssafy.flody.dto.response.users.UserScheduleDetailResponseDto;
+import com.ssafy.flody.dto.response.users.UserScheduleListResponseDto;
 import com.ssafy.flody.service.users.UsersService;
 import com.ssafy.flody.service.users.schedule.UScheduleService;
 import lombok.RequiredArgsConstructor;
@@ -30,12 +30,6 @@ public class ApiController {
 
     private final UsersService usersService;
     private final UScheduleService uScheduleService;
-
-    // TEST
-    @GetMapping("/test")
-    public ResponseEntity<String> testController(@RequestParam String option) {
-        return getStringResponseEntity(option);
-    }
 
     // USER
     @GetMapping("/users")
@@ -246,9 +240,10 @@ public class ApiController {
     public ResponseEntity<String> UserScheduleAdd(@RequestBody UserScheduleCreateRequestDto requestDto) {
         String result;
         HttpStatus status;
+        String email = "testEmail";
 
         try {
-            if (uScheduleService.addUserSchedule(requestDto) != 0L) {
+            if (uScheduleService.addUserSchedule(email, requestDto) != 0L) {
                 result = SUCCESS;
             } else {
                 result = FAIL;
@@ -422,12 +417,12 @@ public class ApiController {
     }
 
     @PostMapping("/board")
-    public ResponseEntity<String> BoardAdd(@RequestBody BoardCreateRequestDto requestDto) {
+    public ResponseEntity<String> BoardAdd(@RequestBody PostCreateRequestDto requestDto) {
         return getStringResponseEntity(requestDto);
     }
 
     @PutMapping("/board")
-    public ResponseEntity<String> BoardModify(@RequestBody BoardCreateRequestDto requestDto) {
+    public ResponseEntity<String> BoardModify(@RequestBody PostCreateRequestDto requestDto) {
         return getStringResponseEntity(requestDto);
     }
 
