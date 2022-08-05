@@ -4,9 +4,11 @@ import com.ssafy.flody.domain.users.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 //유저 회원가입
 @Getter
+@Setter
 @NoArgsConstructor
 public class UserCreateRequestDto {
     private String id;

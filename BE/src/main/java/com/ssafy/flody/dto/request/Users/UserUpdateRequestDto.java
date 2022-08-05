@@ -9,23 +9,19 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class UserUpdateRequestDto {
-    private String password;
     private String profile;
     private String nickname;
     private String address;
     private String phone;
-    private Boolean admin;
 
     @Builder
     public UserUpdateRequestDto(
-            String password, String profile, String nickname,
-            String address, String phone, Boolean admin
+             String profile, String nickname,
+            String address, String phone
     ){
-        this.password = password;
         this.profile = profile;
         this.nickname = nickname;
         this.address = address;
         this.phone = phone;
-        this.admin = admin;
     }
 }

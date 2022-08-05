@@ -1,5 +1,6 @@
 package com.ssafy.flody.controller;
 
+import com.ssafy.flody.domain.users.Users;
 import com.ssafy.flody.dto.request.Boards.BoardCreateRequestDto;
 import com.ssafy.flody.dto.request.Boards.CommentCreateRequestDto;
 import com.ssafy.flody.dto.request.Boards.CommentUpdateRequestDto;
@@ -25,6 +26,7 @@ public class ApiController {
     private static final String SUCCESS = "SUCCESS";
     private static final String FAIL = "FAIL";
     private static final String ERROR = "ERROR";
+    private final  String HEADER_AUTH = "token";
 
     private final UsersService usersService;
     private final UScheduleService uScheduleService;
@@ -57,16 +59,27 @@ public class ApiController {
         return new ResponseEntity<>(result, status);
     }
 
+    // 유저 단일 조회
     @GetMapping("/user")
     public ResponseEntity<Map<String, Object>> UserDetails(@RequestParam Long id) {
-        return getMapResponseEntity(id);
+        HashMap<String, Object> result = new HashMap<>();
+
+        try {
+            result.put("user", usersService.findUser(id));
+            result.put("msg", SUCCESS);
+        } catch (Exception e) {
+            result.put("error", e.getMessage());
+            result.put("msg", FAIL);
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
+    //회원 가입
     @PostMapping("/user")
     public ResponseEntity<String> UserAdd(@RequestBody UserCreateRequestDto requestDto) {
         String result;
         HttpStatus status;
-
         try {
             if (usersService.addUser(requestDto) != 0L) {
                 result = SUCCESS;
@@ -82,20 +95,82 @@ public class ApiController {
         return new ResponseEntity<>(result, status);
     }
 
+    //Email 중복 체크
+    @GetMapping("/user/checkEmail")
+    public ResponseEntity<Map<String, Object>> UserEmailCheck(@RequestParam String email) {
+        HashMap<String, Object> result = new HashMap<>();
+        if (usersService.findUserEmail(email)){
+            result.put("msg", SUCCESS);
+        } else {
+            result.put("msg", FAIL);
+        }
+        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+    }
+
+    //회원 정보 수정
     @PutMapping("/user")
-    public ResponseEntity<String> UserModify(@RequestBody UserUpdateRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
+    public ResponseEntity<Map<String,Object>> UserModify(@RequestHeader(value = HEADER_AUTH) String token,@RequestBody UserUpdateRequestDto requestDto) {
+        HashMap<String, Object> result = new HashMap<>();
+        try {
+            result.put("update", usersService.modifyUser(token, requestDto));
+            result.put("msg", SUCCESS);
+        } catch (Exception e) {
+            result.put("error", e.getMessage());
+            result.put("msg", FAIL);
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
+    //회원 비밀번호 수정
+    @PutMapping("/user/password")
+    public ResponseEntity<Map<String,Object>> UserModify(@RequestHeader(value = HEADER_AUTH) String token,@RequestBody UserPasswordUpdateRequestDto requestDto) {
+        HashMap<String, Object> result = new HashMap<>();
+        try {
+            Users user = usersService.modifyUserPassword(token, requestDto);
+            if (user != null){
+                result.put("update", user);
+                result.put("msg", SUCCESS);
+            }else {
+                result.put("msg", FAIL);
+            }
+        } catch (Exception e) {
+            result.put("error", e.getMessage());
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+    }
+
+    //회원 탈퇴
     @DeleteMapping("/user")
-    public ResponseEntity<String> UserRemove(@RequestParam Long id) {
+    public ResponseEntity<Map<String,Object>> UserRemove(@RequestHeader(value = HEADER_AUTH) String token) {
         // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
-        return getStringResponseEntity(id);
+        HashMap<String, Object> result = new HashMap<>();
+
+        try {
+            result.put("delete user", usersService.removeUser(token));
+            //result.put("delete", "삭제에 성공했습니다.");
+            result.put("msg", SUCCESS);
+        } catch (Exception e){
+            result.put("error", e.getMessage());
+            result.put("msg", FAIL);
+        }
+        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
+    //로그인
     @PostMapping("/user/login")
-    public ResponseEntity<String> UserLogin(@RequestBody UserLoginRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
+    public ResponseEntity<Map<String, Object>> UserLogin(@RequestBody UserLoginRequestDto requestDto){
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            result.put("token", usersService.loginUser(requestDto));
+            result.put("msg",SUCCESS);
+        } catch (Exception e){
+            result.put("msg", FAIL);
+        }
+
+        return new ResponseEntity<>(result,HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/user/follows")

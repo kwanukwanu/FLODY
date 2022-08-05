@@ -40,4 +40,16 @@ public class Users {
     private String phone;
 
     private Boolean admin;
+
+    public void update(String profile, String nickname, String address, String phone){
+        this.profile = profile;
+        this.nickname = nickname;
+        this.address = address;
+        this.phone = phone;
+    }
+
+    public void changePassword(String password){
+        this.password = password;
+    }
+
 }
