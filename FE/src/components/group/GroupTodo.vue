@@ -1,10 +1,14 @@
 <template>
-  <h2>GroupTodo</h2>
+  <b-card>
+    <h6 style="font-weight:bold">Todo List</h6>
+  </b-card>
 </template>
 
 <script>
 export default {
-
+props: {
+    todos: []
+  },
 }
 </script>
 
