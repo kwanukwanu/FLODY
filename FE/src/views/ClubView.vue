@@ -1,5 +1,5 @@
 <template>
-  <h2> Study calandar</h2>
+  <router-view></router-view>
 </template>
 
 <script>
