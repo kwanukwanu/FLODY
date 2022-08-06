@@ -6,14 +6,10 @@
 
 const memberStore = {
   namespaced: true,
-  state:() => ({
+  state: () => ({
     isLogin: false, // 로그인 여부
     isLoginError: false, // 로그인 에러 확인
-    userInfo: {
-      id: "ssafy",
-      password: "1234",
-      name: "김싸피",
-    },
+    userInfo: null,
   }),
   getters: {
     checkUserInfo: function (state) {
@@ -63,7 +59,7 @@ const memberStore = {
     getUserInfo({ commit }, token) {
       //let decode_token = jwt_decode(token);
       //console.log(decode_token.userid);
-      console.log(token)
+      console.log(token);
       // axios 필요
       /*
       findById(
