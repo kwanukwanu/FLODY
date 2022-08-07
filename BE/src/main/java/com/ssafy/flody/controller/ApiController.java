@@ -1,15 +1,19 @@
 package com.ssafy.flody.controller;
 
-import com.ssafy.flody.domain.users.Users;
 import com.ssafy.flody.dto.request.posts.PostCreateRequestDto;
 import com.ssafy.flody.dto.request.comments.CommentCreateRequestDto;
 import com.ssafy.flody.dto.request.comments.CommentUpdateRequestDto;
 import com.ssafy.flody.dto.request.groups.*;
 import com.ssafy.flody.dto.request.users.*;
-import com.ssafy.flody.dto.response.users.UserScheduleDetailResponseDto;
+import com.ssafy.flody.dto.response.groups.GroupDetailResponseDto;
+import com.ssafy.flody.dto.response.users.UserGoalResponseDto;
 import com.ssafy.flody.dto.response.users.UserScheduleListResponseDto;
-import com.ssafy.flody.service.users.UsersService;
-import com.ssafy.flody.service.users.schedule.UScheduleService;
+import com.ssafy.flody.service.JWTService;
+import com.ssafy.flody.service.groups.GroupService;
+import com.ssafy.flody.service.groups.members.GroupMemberService;
+import com.ssafy.flody.service.users.UserService;
+import com.ssafy.flody.service.users.goals.UGoalService;
+import com.ssafy.flody.service.users.schedules.UScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,20 +30,23 @@ public class ApiController {
     private static final String SUCCESS = "SUCCESS";
     private static final String FAIL = "FAIL";
     private static final String ERROR = "ERROR";
-    private final  String HEADER_AUTH = "token";
+    private final String HEADER_AUTH = "token";
 
-    private final UsersService usersService;
+    private final JWTService jwtService;
+    private final UserService userService;
     private final UScheduleService uScheduleService;
+    private final UGoalService uGoalService;
+    private final GroupService groupService;
+    private final GroupMemberService groupMemberService;
 
     // USER
-    @GetMapping("/users")
+    @GetMapping("/users") // 모든 유저 리스트 출력 (필요한 기능이 생각나진 않음)
     public ResponseEntity<Map<String, Object>> UserList() {
         Map<String, Object> result = new HashMap<>();
         HttpStatus status;
-
         try {
-            if (!usersService.findUsers().isEmpty()) {
-                result.put("users", usersService.findUsers());
+            if (!userService.findUsers().isEmpty()) {
+                result.put("users", userService.findUsers());
                 result.put("msg", SUCCESS);
             } else {
                 result.put("msg", FAIL);
@@ -49,33 +56,43 @@ public class ApiController {
             result.put("msg", ERROR);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-
         return new ResponseEntity<>(result, status);
     }
 
-    // 유저 단일 조회
-    @GetMapping("/user")
-    public ResponseEntity<Map<String, Object>> UserDetails(@RequestParam Long id) {
+    // 유저 단일 조회 > 수정하면서 좀 잘못됬나? 확인 필요
+    @GetMapping("/user") // 단일 유저 정보 조회 (타 유저 정보는 다 개인정보니까 알 필요 없음. 즉, 내 정보만 조회할 수 있도록)
+    public ResponseEntity<Map<String, Object>> UserDetails(@RequestHeader(value = HEADER_AUTH) String token) {
         HashMap<String, Object> result = new HashMap<>();
-
         try {
-            result.put("user", usersService.findUser(id));
+            String email = jwtService.decodeToken(token);
+            result.put("item", userService.findUserById(email));
             result.put("msg", SUCCESS);
         } catch (Exception e) {
             result.put("error", e.getMessage());
             result.put("msg", FAIL);
         }
+        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+    }
 
+    @GetMapping("/user/checkEmail") // 회원가입 전에 email check
+    public ResponseEntity<Map<String, Object>> UserEmailCheck(@RequestParam String email) {
+        //Email 중복 체크
+        HashMap<String, Object> result = new HashMap<>();
+        if (userService.validateEmail(email)) {
+            result.put("msg", FAIL);
+        } else {
+            result.put("msg", SUCCESS);
+        }
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
     //회원 가입
-    @PostMapping("/user")
+    @PostMapping("/user") // 회원가입
     public ResponseEntity<String> UserAdd(@RequestBody UserCreateRequestDto requestDto) {
         String result;
         HttpStatus status;
         try {
-            if (usersService.addUser(requestDto) != 0L) {
+            if (userService.addUser(requestDto) != null) {
                 result = SUCCESS;
             } else {
                 result = FAIL;
@@ -85,47 +102,38 @@ public class ApiController {
             result = e.getMessage();
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-
         return new ResponseEntity<>(result, status);
     }
 
-    //Email 중복 체크
-    @GetMapping("/user/checkEmail")
-    public ResponseEntity<Map<String, Object>> UserEmailCheck(@RequestParam String email) {
+    //회원 정보 수정 > 이것도 수정하면서 잘못 건드렸나;;;
+    @PutMapping("/user") // 개인 정보 수정 > 내 정보만 수정 가능
+    public ResponseEntity<Map<String, Object>> UserModify(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody UserUpdateRequestDto requestDto) {
         HashMap<String, Object> result = new HashMap<>();
-        if (usersService.findUserEmail(email)){
-            result.put("msg", SUCCESS);
-        } else {
-            result.put("msg", FAIL);
-        }
-        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
-    }
-
-    //회원 정보 수정
-    @PutMapping("/user")
-    public ResponseEntity<Map<String,Object>> UserModify(@RequestHeader(value = HEADER_AUTH) String token,@RequestBody UserUpdateRequestDto requestDto) {
-        HashMap<String, Object> result = new HashMap<>();
+        HttpStatus status;
         try {
-            result.put("update", usersService.modifyUser(token, requestDto));
-            result.put("msg", SUCCESS);
+            String email = jwtService.decodeToken(token);
+            if (userService.modifyUser(email, requestDto) != null) {
+                result.put("msg", SUCCESS);
+            } else {
+                result.put("msg", FAIL);
+            }
+            status = HttpStatus.ACCEPTED;
         } catch (Exception e) {
             result.put("error", e.getMessage());
-            result.put("msg", FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-
-        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(result, status);
     }
 
     //회원 비밀번호 수정
-    @PutMapping("/user/password")
-    public ResponseEntity<Map<String,Object>> UserModify(@RequestHeader(value = HEADER_AUTH) String token,@RequestBody UserPasswordUpdateRequestDto requestDto) {
+    @PutMapping("/user/password") // 비밀번호 수정 > 내 비밀번호만 수정 가능
+    public ResponseEntity<Map<String, Object>> UserModify(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody UserPasswordUpdateRequestDto requestDto) {
         HashMap<String, Object> result = new HashMap<>();
         try {
-            Users user = usersService.modifyUserPassword(token, requestDto);
-            if (user != null){
-                result.put("update", user);
+            String email = jwtService.decodeToken(token);
+            if (userService.modifyUserPassword(email, requestDto) != null) {
                 result.put("msg", SUCCESS);
-            }else {
+            } else {
                 result.put("msg", FAIL);
             }
         } catch (Exception e) {
@@ -136,16 +144,13 @@ public class ApiController {
     }
 
     //회원 탈퇴
-    @DeleteMapping("/user")
-    public ResponseEntity<Map<String,Object>> UserRemove(@RequestHeader(value = HEADER_AUTH) String token) {
-        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
+    @DeleteMapping("/user") // 회원탈퇴도 내 계정만 탈퇴 가능
+    public ResponseEntity<Map<String, Object>> UserRemove(@RequestHeader(value = HEADER_AUTH) String token) {
         HashMap<String, Object> result = new HashMap<>();
-
         try {
-            result.put("delete user", usersService.removeUser(token));
-            //result.put("delete", "삭제에 성공했습니다.");
+            userService.removeUser(jwtService.decodeToken(token));
             result.put("msg", SUCCESS);
-        } catch (Exception e){
+        } catch (Exception e) {
             result.put("error", e.getMessage());
             result.put("msg", FAIL);
         }
@@ -154,22 +159,21 @@ public class ApiController {
 
     //로그인
     @PostMapping("/user/login")
-    public ResponseEntity<Map<String, Object>> UserLogin(@RequestBody UserLoginRequestDto requestDto){
+    public ResponseEntity<Map<String, Object>> UserLogin(@RequestBody UserLoginRequestDto requestDto) {
         Map<String, Object> result = new HashMap<>();
 
         try {
-            result.put("token", usersService.loginUser(requestDto));
-            result.put("msg",SUCCESS);
-        } catch (Exception e){
+            result.put("token", userService.loginUser(requestDto));
+            result.put("msg", SUCCESS);
+        } catch (Exception e) {
             result.put("msg", FAIL);
         }
 
-        return new ResponseEntity<>(result,HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/user/follows")
     public ResponseEntity<Map<String, Object>> UserFollowList(@RequestParam Long id) {
-        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
         return getMapResponseEntity(id);
     }
 
@@ -180,69 +184,52 @@ public class ApiController {
 
     @GetMapping("/user/likes")
     public ResponseEntity<Map<String, Object>> UserLikeList(@RequestParam Long id) {
-        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
         return getMapResponseEntity(id);
     }
 
     @GetMapping("/user/scraps")
     public ResponseEntity<Map<String, Object>> UserScrapList(@RequestParam Long id) {
-        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
         return getMapResponseEntity(id);
     }
 
-    @GetMapping("/user/schedules")
-    public ResponseEntity<Map<String, Object>> UserScheduleList(@RequestParam Long useNo) {
-        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
+    @GetMapping("/user/schedules") // 내 스케줄만 궁금하잖아
+    public ResponseEntity<Map<String, Object>> UserScheduleList(@RequestHeader(value = HEADER_AUTH) String token) {
         Map<String, Object> result = new HashMap<>();
         HttpStatus status;
-
         try {
-            List<UserScheduleListResponseDto> responseDtoList = uScheduleService.findAllUserSchedule(useNo);
+            String email = jwtService.decodeToken(token);
+            List<UserScheduleListResponseDto> responseDtoList = uScheduleService.findUserSchedules(email);
             result.put("item", responseDtoList);
-            if (!responseDtoList.isEmpty()) {
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
+            result.put("msg", SUCCESS);
             status = HttpStatus.ACCEPTED;
         } catch (Exception e) {
             result.put("msg", ERROR);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-
         return new ResponseEntity<>(result, status);
     }
 
-    @GetMapping("/user/schedule")
+    @GetMapping("/user/schedule") // 내 스케줄 하나, 근데 스케줄 Id가 어차피 주어짐
     public ResponseEntity<Map<String, Object>> UserScheduleDetails(@RequestParam Long usNo) {
-        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
         Map<String, Object> result = new HashMap<>();
         HttpStatus status;
-
         try {
-            UserScheduleDetailResponseDto responseDto = uScheduleService.findUserSchedule(usNo);
-            try {
-                result.put("item", responseDto);
-                result.put("msg", SUCCESS);
-            } catch(Exception e1) {
-                result.put("msg", FAIL);
-            }
+            result.put("item", uScheduleService.findUserSchedule(usNo));
+            result.put("msg", SUCCESS);
             status = HttpStatus.ACCEPTED;
-        } catch (Exception e2) {
+        } catch (Exception e) {
             result.put("msg", ERROR);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-
         return new ResponseEntity<>(result, status);
     }
 
     @PostMapping("/user/schedule")
-    public ResponseEntity<String> UserScheduleAdd(@RequestBody UserScheduleCreateRequestDto requestDto) {
+    public ResponseEntity<String> UserScheduleAdd(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody UserScheduleCreateRequestDto requestDto) {
         String result;
         HttpStatus status;
-        String email = "testEmail";
-
         try {
+            String email = jwtService.decodeToken(token);
             if (uScheduleService.addUserSchedule(email, requestDto) != 0L) {
                 result = SUCCESS;
             } else {
@@ -253,7 +240,6 @@ public class ApiController {
             result = e.getMessage();
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-
         return new ResponseEntity<>(result, status);
     }
 
@@ -261,7 +247,6 @@ public class ApiController {
     public ResponseEntity<String> UserScheduleModify(@RequestParam Long usNo, @RequestBody UserScheduleUpdateRequestDto requestDto) {
         String result;
         HttpStatus status;
-
         try {
             if (uScheduleService.modifyUserSchedule(usNo, requestDto) != 0L) {
                 result = SUCCESS;
@@ -273,17 +258,84 @@ public class ApiController {
             result = e.getMessage();
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-
         return new ResponseEntity<>(result, status);
     }
 
     @DeleteMapping("/user/schedule")
-    public ResponseEntity<String> UserScheduleRemove(@RequestParam Long id) {
+    public ResponseEntity<String> UserScheduleRemove(@RequestParam Long usNo) {
         String result;
         HttpStatus status;
-
         try {
-            if (uScheduleService.removeUserSchedule(id) != 0L) {
+            if (uScheduleService.removeUserSchedule(usNo) != 0L) {
+                result = SUCCESS;
+            } else {
+                result = FAIL;
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result = e.getMessage();
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
+    }
+
+    @GetMapping("/user/goals") // 내 목표 목록
+    public ResponseEntity<Map<String, Object>> UserGoalList(@RequestHeader(value = HEADER_AUTH) String token) {
+        Map<String, Object> result = new HashMap<>();
+        HttpStatus status;
+        try {
+            String email = jwtService.decodeToken(token);
+            List<UserGoalResponseDto> responseDtoList = uGoalService.findUserGoals(email);
+            result.put("item", responseDtoList);
+            result.put("msg", SUCCESS);
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result.put("msg", ERROR);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
+    }
+
+    @GetMapping("/user/goal")
+    public ResponseEntity<Map<String, Object>> UserGoalDetails(@RequestParam Long ugNo) {
+        Map<String, Object> result = new HashMap<>();
+        HttpStatus status;
+        try {
+            result.put("item", uGoalService.findUserGoal(ugNo));
+            result.put("msg", SUCCESS);
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result.put("msg", ERROR);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
+    }
+
+    @PostMapping("/user/goal")
+    public ResponseEntity<String> UserGoalAdd(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody UserGoalCreateRequestDto requestDto) {
+        String result;
+        HttpStatus status;
+        try {
+            String email = jwtService.decodeToken(token);
+            if (uGoalService.addUserGoal(email, requestDto) != 0L) {
+                result = SUCCESS;
+            } else {
+                result = FAIL;
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result = e.getMessage();
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
+    }
+
+    @PutMapping("/user/goal")
+    public ResponseEntity<String> UserGoalModify(@RequestParam Long ugNo, @RequestBody UserGoalUpdateRequestDto requestDto) {
+        String result;
+        HttpStatus status;
+        try {
+            if (uGoalService.modifyUserGoal(ugNo, requestDto) != 0L) {
                 result = SUCCESS;
             } else {
                 result = FAIL;
@@ -297,58 +349,211 @@ public class ApiController {
         return new ResponseEntity<>(result, status);
     }
 
-    @GetMapping("/user/goals")
-    public ResponseEntity<Map<String, Object>> UserGoalList(@RequestParam Long id) {
-        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
-        return getMapResponseEntity(id);
-    }
-
-    @GetMapping("/user/goal")
-    public ResponseEntity<Map<String, Object>> UserGoalDetails(@RequestParam Long id) {
-        return getMapResponseEntity(id);
-    }
-
-    @PostMapping("/user/goal")
-    public ResponseEntity<String> UserGoalAdd(@RequestBody UserGoalCreateRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
-    }
-
-    @PutMapping("/user/goal")
-    public ResponseEntity<String> UserGoalModify(@RequestBody UserGoalUpateRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
-    }
-
     @DeleteMapping("/user/goal")
-    public ResponseEntity<String> UserGoalRemove(@RequestParam Long id) {
-        return getStringResponseEntity(id);
+    public ResponseEntity<String> UserGoalRemove(@RequestParam Long ugNo) {
+        String result;
+        HttpStatus status;
+        try {
+            if (uGoalService.removeUserGoal(ugNo) != 0L) {
+                result = SUCCESS;
+            } else {
+                result = FAIL;
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result = e.getMessage();
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
     }
 
     // GROUP
     @GetMapping("/groups")
-    public ResponseEntity<Map<String, Object>> GroupList(@RequestParam(defaultValue = "default") String keyword) {
-        return getMapResponseEntity(keyword);
+    public ResponseEntity<Map<String, Object>> GroupList() {
+        Map<String, Object> result = new HashMap<>();
+        HttpStatus status;
+        try {
+            List<GroupDetailResponseDto> list = groupService.findGroups();
+            if (!list.isEmpty()) {
+                result.put("users", list);
+                result.put("msg", SUCCESS);
+            } else {
+                result.put("msg", FAIL);
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result.put("msg", ERROR);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
     }
 
     @GetMapping("/group")
-    public ResponseEntity<Map<String, Object>> GroupDetails(@RequestParam Long id) {
-        return getMapResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> GroupDetails(@RequestParam Long groNo) {
+        HashMap<String, Object> result = new HashMap<>();
+        try {
+            result.put("item", groupService.findGroupById(groNo));
+            result.put("msg", SUCCESS);
+        } catch (Exception e) {
+            result.put("error", e.getMessage());
+            result.put("msg", FAIL);
+        }
+        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/group")
     public ResponseEntity<String> GroupAdd(@RequestBody GroupCreateRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
+        String result;
+        HttpStatus status;
+        try {
+            if (groupService.addGroup(requestDto) != 0L) {
+                result = SUCCESS;
+            } else {
+                result = FAIL;
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result = e.getMessage();
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
     }
 
     @PutMapping("/group")
-    public ResponseEntity<String> GroupModify(@RequestBody GroupUpdateRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
+    public ResponseEntity<String> GroupModify(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam Long groNo, @RequestBody GroupUpdateRequestDto requestDto) {
+        String result;
+        HttpStatus status;
+        try {
+            String email = jwtService.decodeToken(token);
+            if (true) { //여기서 email로 groupMemberService.validateEditor 판별
+                if (groupService.modifyGroup(groNo, requestDto) != null) {
+                    result = SUCCESS;
+                } else {
+                    result = FAIL;
+                }
+            } else {
+                result = FAIL;
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result = ERROR;
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
     }
 
     @DeleteMapping("/group")
-    public ResponseEntity<String> GroupRemove(@RequestParam Long id) {
-        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
-        return getStringResponseEntity(id);
+    public ResponseEntity<String> GroupRemove(@RequestParam Long groNo) {
+        String result;
+        HttpStatus status;
+        try {
+            if (groupService.removeGroup(groNo) != 0L) {
+                result = SUCCESS;
+            } else {
+                result = FAIL;
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result = ERROR;
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
     }
+
+    /* <JJONG NOW>
+    // Get GroupMembers
+    @GetMapping("/group/{groNo}")
+    public ResponseEntity<Map<String, Object>> GroupMemberList(@PathVariable Long groNo) {
+        Map<String, Object> result = new HashMap<>();
+        HttpStatus status;
+        try {
+            List<GroupMemBerResponseDto> list = groupService.findGroups();
+            if (!list.isEmpty()) {
+                result.put("users", list);
+                result.put("msg", SUCCESS);
+            } else {
+                result.put("msg", FAIL);
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result.put("msg", ERROR);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
+    }
+    // Get GroupMember
+    @GetMapping("/group/{groNo}")
+    public ResponseEntity<Map<String, Object>> GroupMemberDetails() {
+        HashMap<String, Object> result = new HashMap<>();
+        try {
+            result.put("item", groupService.findGroupById(groNo));
+            result.put("msg", SUCCESS);
+        } catch (Exception e) {
+            result.put("error", e.getMessage());
+            result.put("msg", FAIL);
+        }
+        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+    }
+    // Post GroupMember
+    @PostMapping("/group/{groNo}")
+    public ResponseEntity<String> GroupMemberAdd() {
+        String result;
+        HttpStatus status;
+        try {
+            if (groupService.addGroup(requestDto) != 0L) {
+                result = SUCCESS;
+            } else {
+                result = FAIL;
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result = e.getMessage();
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
+    }
+    // Modify GroupMember
+    @PutMapping("/group/{groNo}")
+    public ResponseEntity<String> GroupMemberModify() {
+        String result;
+        HttpStatus status;
+        try {
+            String email = jwtService.decodeToken(token);
+            if (true) { //여기서 email로 groupMemberService.validateEditor 판별
+                if (groupService.modifyGroup(groNo, requestDto) != null) {
+                    result = SUCCESS;
+                } else {
+                    result = FAIL;
+                }
+            } else {
+                result = FAIL;
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result = ERROR;
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
+    }
+    // Delete GroupMember
+    @DeleteMapping("/group/{groNo}")
+    public ResponseEntity<String> GroupMemberRemove() {
+        String result;
+        HttpStatus status;
+        try {
+            if (groupService.removeGroup(groNo) != 0L) {
+                result = SUCCESS;
+            } else {
+                result = FAIL;
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result = ERROR;
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
+    }
+    */
 
     @GetMapping("/group/schedules")
     public ResponseEntity<Map<String, Object>> GroupScheduleList(@RequestParam Long id) {

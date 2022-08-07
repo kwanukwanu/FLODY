@@ -9,7 +9,6 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 public class UserScheduleUpdateRequestDto {
-    //private Long useNo;
     private String title;
     private String detail;
     private Date startDate;

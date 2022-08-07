@@ -1,6 +1,6 @@
 package com.ssafy.flody.config;
 
-import com.ssafy.flody.service.users.UsersService;
+import com.ssafy.flody.service.users.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -25,7 +25,7 @@ public class JwtTokenProvider {
     private long tokenValidTime = 30 * 60 * 1000L;
 
     @Lazy
-    private UsersService usersService;
+    private UserService usersService;
 
     @PostConstruct
     protected void init(){
@@ -47,7 +47,7 @@ public class JwtTokenProvider {
 
     //인증 정보 조회
     public Authentication getAuthentication(String token){ //response token
-        UserDetails userDetails = usersService.loadUserByUserid(this.getUserPk(token));
+        UserDetails userDetails = usersService.findUserForToken(this.getUserPk(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 

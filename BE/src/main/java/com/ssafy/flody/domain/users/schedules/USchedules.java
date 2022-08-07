@@ -20,7 +20,7 @@ public class USchedules {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long usNo;
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "use_no")
+    @JoinColumn(name = "use_email")
     private Users user;
     @Column(nullable = false)
     private String title;

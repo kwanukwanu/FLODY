@@ -19,7 +19,7 @@ import javax.persistence.*;
 public class PLikes {
     @Id
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "use_no")
+    @JoinColumn(name = "use_email")
     private Users user;
     @Id
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Posts.class, cascade = CascadeType.ALL)

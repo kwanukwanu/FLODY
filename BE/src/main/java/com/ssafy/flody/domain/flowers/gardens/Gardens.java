@@ -24,7 +24,7 @@ public class Gardens {
     @JoinColumn(name = "flo_no")
     private Flowers flower;
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "use_no")
+    @JoinColumn(name = "use_email")
     private Users user;
     @CreatedDate
     private Date startDate;

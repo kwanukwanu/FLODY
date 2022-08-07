@@ -21,7 +21,7 @@ public class UGoals {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ugNo;
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "use_no")
+    @JoinColumn(name = "use_email")
     private Users user;
     @Column(nullable = false)
     private String name;
@@ -29,4 +29,10 @@ public class UGoals {
     private Date registDate;
     @Column(nullable = false)
     private Date dueDate;
+
+    public void update(String name, Date registDate, Date dueDate) {
+        this.name = name;
+        this.registDate = registDate;
+        this.dueDate = dueDate;
+    }
 }
