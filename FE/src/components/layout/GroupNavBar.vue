@@ -171,6 +171,9 @@ export default {
       this.$router.push(link);
     },
   },
+  mounted(){
+    
+  }
 }
 </script>
 

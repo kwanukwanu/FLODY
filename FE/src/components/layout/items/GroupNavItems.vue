@@ -12,15 +12,18 @@
             </summary>
 
             <ul>
-                <group-items v-for="group in groups" :key="group" v-bind="group">
-                </group-items>
+                <group-items v-for="item in groups" :key="item" v-bind="item"></group-items>
             </ul>
         </details>
     </b-row>
 </template>
 
 <script>
+import GroupItems from "@/components/layout/items/GroupItems.vue";
 export default {
+    components:{
+        GroupItems,
+    },
     props: {
         name: String,
         groups: Array,
@@ -29,8 +32,8 @@ export default {
         return {
         }
     },
-    mounted() {
-        console.dir(this.groups);
+    mounted(){
+        console.log(this.groups);
     }
 }
 </script>
