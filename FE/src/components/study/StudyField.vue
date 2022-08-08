@@ -2,16 +2,26 @@
   <!-- <h2>field</h2> -->
   <div id="fi" style="margin-left:35px; margin-top: 30px;"> 
     <study-field-items
-    name="flower"
+    id="flower"
     v-for="(item,index) in flowers"
     :key="item.index = index"
     v-bind="item"
-    @mousedown="mouseDown(item,$event)"
-    @mouseup="mouseUp($event)"
     >
     </study-field-items>
     <!-- <img id="flower" src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab; position: relative; left: 0px; top: 0px;" @mousedown="startDrag($event)"/> -->
   </div>
+
+
+  <div id="outerContainer">
+    <div id="container">
+      <div id="item">
+
+      </div>
+    </div>
+  </div>
+
+
+
 </template>
 
 <script>
@@ -36,55 +46,43 @@ export default {
             posY:0,
           }
         },
-        {
-          pos:{
-            posX:10,
-            posY:10,
-          }
-        },
-        {
-          pos:{
-            posX:20,
-            posY:20,
-          }
-        }
       ],
     }
   },
   methods: {
-    startDrag(event){
-      /*
-      드래그를 할때
-      posX 에는 그림에대한 x 위치를,
-      posy 에는 그림에 대한 y 위치를 받아온다
-      */
+    // startDrag(event){
+    //   /*
+    //   드래그를 할때
+    //   posX 에는 그림에대한 x 위치를,
+    //   posy 에는 그림에 대한 y 위치를 받아온다
+    //   */
       
-      const bg = document.getElementById('fi');
-      const flower = document.getElementById('flower');
-      let coordBg = bg.getBoundingClientRect();
-      let coordFl = flower.getBoundingClientRect();
+    //   const bg = document.getElementById('fi');
+    //   const flower = document.getElementById('flower');
+    //   let coordBg = bg.getBoundingClientRect();
+    //   let coordFl = flower.getBoundingClientRect();
 
-      console.log(coordFl);
-      console.log((coordFl.top + (coordFl.height / 2)) - coordBg.top);
-      console.log((coordFl.left + (coordFl.width / 2)) - coordBg.left);
+    //   console.log(coordFl);
+    //   console.log((coordFl.top + (coordFl.height / 2)) - coordBg.top);
+    //   console.log((coordFl.left + (coordFl.width / 2)) - coordBg.left);
 
-      let x1 = event.clientX; 
-      let y1 = event.clientY; 
-      let x2 = event.offsetX; 
-      let y2 = event.offsetY; 
-      let x3 = event.screenX; 
-      let y3 = event.screenY; 
-      console.log("flower : clientX: " + x1 + ", clientY: " + y1);
-      console.log("flower : offsetX: " + x2 + ", offsetY: " + y2);
-      console.log("flower : screenX: " + x3 + ", screenY: " + y3); 
+    //   let x1 = event.clientX; 
+    //   let y1 = event.clientY; 
+    //   let x2 = event.offsetX; 
+    //   let y2 = event.offsetY; 
+    //   let x3 = event.screenX; 
+    //   let y3 = event.screenY; 
+    //   console.log("flower : clientX: " + x1 + ", clientY: " + y1);
+    //   console.log("flower : offsetX: " + x2 + ", offsetY: " + y2);
+    //   console.log("flower : screenX: " + x3 + ", screenY: " + y3); 
 
-      // posX = getLeft(obj) - e_obj.clientX;
-      // posY = getTop(obj) - e_obj.clientY;
+    //   // posX = getLeft(obj) - e_obj.clientX;
+    //   // posY = getTop(obj) - e_obj.clientY;
 
-      // document.onmousemove = moveDrag;
-      // document.onmouseup = stopDrag;
-      // if(e_obj.preventDefault)e_obj.preventDefault();
-    },
+    //   // document.onmousemove = moveDrag;
+    //   // document.onmouseup = stopDrag;
+    //   // if(e_obj.preventDefault)e_obj.preventDefault();
+    // },
   },
   setup() {
     function mouseDown(item,e) {
@@ -148,7 +146,8 @@ export default {
       window.removeEventListener('mousemove', mouseMove)
     }
 
-    return { mouseDown, mouseMove, mouseUp }
+
+    return { mouseDown, mouseMove, mouseUp, }
 
   },
   mounted() {
@@ -158,6 +157,79 @@ export default {
     // this.posX = ele.style.left;
     // this.posY = ele.style.top;
     // console.log("posx : " + this.posX + ", posY : " + this.posY)
+
+
+
+
+    var dragItem = document.querySelector("#flower");
+    var container = document.querySelector("#fi");
+
+    var active = false;
+    var currentX;
+    var currentY;
+    var initialX;
+    var initialY;
+    var xOffset = 0;
+    var yOffset = 0;
+
+    container.addEventListener("touchstart", dragStart, false);
+    container.addEventListener("touchend", dragEnd, false);
+    container.addEventListener("touchmove", drag, false);
+
+    container.addEventListener("mousedown", dragStart, false);
+    container.addEventListener("mouseup", dragEnd, false);
+    container.addEventListener("mousemove", drag, false);
+
+    function dragStart(e) {
+      if (e.type === "touchstart") {
+        initialX = e.touches[0].clientX - xOffset;
+        initialY = e.touches[0].clientY - yOffset;
+      } else {
+        initialX = e.clientX - xOffset;
+        initialY = e.clientY - yOffset;
+      }
+
+      if (e.target === dragItem) {
+        active = true;
+      }
+    }
+
+    function dragEnd() {
+      initialX = currentX;
+      initialY = currentY;
+
+      active = false;
+    }
+
+    function drag(e) {
+      if (active) {
+      
+        e.preventDefault();
+      
+        if (e.type === "touchmove") {
+          currentX = e.touches[0].clientX - initialX;
+          currentY = e.touches[0].clientY - initialY;
+        } else {
+          currentX = e.clientX - initialX;
+          currentY = e.clientY - initialY;
+        }
+
+        xOffset = currentX;
+        yOffset = currentY;
+
+        setTranslate(currentX, currentY, dragItem);
+      }
+    }
+
+    function setTranslate(xPos, yPos, el) {
+      el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+    }
+
+
+
+
+
+
   },
   updated() {
 
@@ -174,4 +246,35 @@ export default {
     height: 400px;
 }
 
+
+
+
+
+#container {
+      width: 100%;
+      height: 400px;
+      background-color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 7px;
+      touch-action: none;
+    }
+    #item {
+      width: 100px;
+      height: 100px;
+      background-color: rgb(245, 230, 99);
+      border: 10px solid rgba(136, 136, 136, .5);
+      border-radius: 50%;
+      touch-action: none;
+      user-select: none;
+    }
+    #item:active {
+      background-color: rgba(168, 218, 220, 1.00);
+    }
+    #item:hover {
+      cursor: pointer;
+      border-width: 20px;
+    }
 </style>
