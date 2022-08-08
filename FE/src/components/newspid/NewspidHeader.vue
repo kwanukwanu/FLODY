@@ -10,7 +10,7 @@
           <b-col style="text-align: left; padding: 0px;">
             <span style="font-weight: 100; font-size: 25px; margin-right: 12px;">{{ profile.nickName }}</span>
             <b-button size="sm" variant="link"
-              style="color: black; text-decoration: none; font-weight: 100; border: 1px solid; vertical-align:super;">
+              style="color: black; text-decoration: none; font-weight: 100; border: 1px solid; vertical-align:super;" v-b-modal.chatting2>
               메시지 보내기</b-button>
             <b-button size="sm" variant="link"
               style="color: black; background-color: white; text-decoration: none; font-weight: 100; border: 1px solid; margin-left: 12px; vertical-align:super;"
@@ -126,23 +126,77 @@
   <b-modal hide-footer id="modal-3" centered title="새 게시물 만들기" style="text-align: center">
     <newspid-header-modal-new-board></newspid-header-modal-new-board>
   </b-modal>
-  
+
+  <b-modal hide-footer title="채팅창" centered id="chatting2" size="lg" style="text-align: center;">
+    <div class="container-sm mt-20">
+    <div class="mx-5">
+      <chat-message v-for="{ id, text, userPhotoURL, userName, userId, createdAt } in messages" :key="id" :name="userName"
+        :photo-url="userPhotoURL" :sender="userId === user?.uid" :date="createdAt">
+        {{ text }}
+      </chat-message>
+    </div>
+  </div>
+  <div ref="bottom" class="mt-20" />
+  <div class="bottom">
+    <div>
+      <form v-if="isLogin" @submit.prevent="send">
+        <b-row style="margin-top: 15px;">
+          <b-col cols="1">
+            <div></div>
+          </b-col>
+          <b-col cols="9">
+            <b-form-input v-model="message" placeholder="Message..." required style="border-color: #A48282;">
+            </b-form-input>
+          </b-col>
+          <b-col cols="1">
+            <b-button size="sm" type="submit">
+              <span class="material-icons">send</span>
+            </b-button>
+          </b-col>
+        </b-row>
+      </form>
+    </div>
+  </div>
+  </b-modal>
 </template>
 
 <script>
-import { computed } from "vue";
-import { useStore } from "vuex";
+import {computed, ref, watch, nextTick} from "vue";
+import {useStore} from "vuex";
+import { useAuth, useChat } from '@/firebase'
+import ChatMessage from '@/components/chat/ChatMessage.vue'
 
 import NewspidHeaderModalNewBoard from "./modal/NewspidHeaderModalNewBoard.vue";
 
 export default {
   components:{
     NewspidHeaderModalNewBoard,
+    ChatMessage,
   },
   setup() {
     const store = useStore();
     const profile = computed(() => store.state.newspidStore.profile);
-    return { store, profile };
+
+    // 채팅부분
+    const { user, isLogin } = useAuth()
+    const { messages, sendMessage } = useChat()
+    const bottom = ref(null)
+    watch(
+      messages,
+      () => {
+        nextTick(() => {
+          bottom.value?.scrollIntoView({ behavior: 'smooth' })
+        })
+      },
+      { deep: true }
+    )
+    const message = ref('')
+    const send = () => {
+      sendMessage(message.value)
+      message.value = ''
+    }
+
+    return { store, profile, user, isLogin, messages, bottom, message, send };
   }
 }
 </script>

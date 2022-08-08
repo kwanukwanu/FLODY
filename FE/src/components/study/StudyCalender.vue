@@ -1,17 +1,10 @@
 <template>
-  <v-calendar
-    is-expanded
-    :attributes="attributes"
-    @dayclick="onDayClick"
-    @update:from-page="onUpdatePage"
-    @update:to-page="onUpdatePageTo"
-    @daymouseenter="onMouseEnter"
-    @daymouseleave="onMouseLeave"
-    @dayfocusin="onDayFocusIn"
-    @dayfocusout="onDayFocusOut"
-    @transition-start="onTransitionStart"
-    @transition-end="onTransitionEnd"
-  ></v-calendar>
+  <b-card style="max-width:25rem; border-color: #a48282;">
+    <v-calendar is-expanded :attributes="attributes" @dayclick="onDayClick" @update:from-page="onUpdatePage"
+      @update:to-page="onUpdatePageTo" @daymouseenter="onMouseEnter" @daymouseleave="onMouseLeave"
+      @dayfocusin="onDayFocusIn" @dayfocusout="onDayFocusOut" @transition-start="onTransitionStart"
+      @transition-end="onTransitionEnd"></v-calendar>
+  </b-card>
 </template>
 
 <script>
