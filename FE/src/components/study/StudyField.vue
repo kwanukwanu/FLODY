@@ -1,19 +1,54 @@
 <template>
   <h2>field</h2>
-  <div id="fi" >
-    <img id="flower" src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab; position: relative; left: 0px; top: 0px;" @mousedown="mouseDown()" @mousemove="mouseMove($event)" />
+  <div id="fi">
+    <study-field-items
+    name="flower"
+    v-for="(item,index) in flowers"
+    :key="item.index = index"
+    v-bind="item"
+    @mousedown="mouseDown(item,$event)"
+    @mouseup="mouseUp($event)"
+    >
+    </study-field-items>
     <!-- <img id="flower" src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab; position: relative; left: 0px; top: 0px;" @mousedown="startDrag($event)"/> -->
   </div>
 </template>
 
 <script>
+import StudyFieldItems from "@/components/study/items/StudyFieldItems.vue";
+
 export default {
+  components:{
+    StudyFieldItems,
+  },
   data(){
     return{
-        pos:{
+      flowerElements : null,
+      index:-1,
+      pos:{
+        posX:0,
+        posY:0,
+      },
+      flowers:[
+        {
+          pos:{
             posX:0,
             posY:0,
-      },
+          }
+        },
+        {
+          pos:{
+            posX:10,
+            posY:10,
+          }
+        },
+        {
+          pos:{
+            posX:20,
+            posY:20,
+          }
+        }
+      ],
     }
   },
   methods: {
@@ -52,39 +87,40 @@ export default {
     },
   },
   setup() {
-    function mouseDown() {
-      // window.addEventListener('mousemove', mouseMove)
+    function mouseDown(item,e) {
+      window.addEventListener('mousemove', mouseMove)
+      
+      // const bg = document.getElementById('fi');
+      // bg.addEventListener('mouseup', mouseUp)
+      // console.log(bg)
+      console.log(item.index);
+      this.index = item.index;
+      console.log("left : " + e.clientX + " top : " + e.clientY);
+    }
+
+    function mouseMove(e) {
+
+      console.log("0");
+      if(this.index==-1)
+      {
+        window.removeEventListener('mousemove', mouseMove)
+        return;
+      }
+
+      console.log("1");
       const bg = document.getElementById('fi');
-      bg.addEventListener('mouseup', mouseUp);
-      // bg.addEventListener('mouseup', (e) => {
-      //   console.log(e)
-      //   console.log("left : " + e.clientX + " top : " + e.clientY);
+      let coordBg = bg.getBoundingClientRect();
+      let coordFl = this.flowerElements[this.index].getBoundingClientRect();
 
-      //   const bg = document.getElementById('fi');
-      //   const flower = document.getElementById('flower');
-      //   let coordBg = bg.getBoundingClientRect();
-      //   let coordFl = flower.getBoundingClientRect();
+      console.log("2");
+      this.posX = e.clientX - coordBg.left - (coordFl.width / 2);
+      this.posY = e.clientY - coordBg.top - (coordFl.height / 2);
+      console.log("posx : " + this.posX + ", posY : " + this.posY);
 
-      //   this.posX = e.clientX - coordBg.left - (coordFl.width / 2);
-      //   this.posY = e.clientY - coordBg.top - (coordFl.height / 2);
-      //   console.log("posx : " + this.posX + ", posY : " + this.posY)
+      this.flowerElements[this.index].style.left = this.posX + "px";
+      this.flowerElements[this.index].style.top = this.posY + "px";
 
-      //   flower.style.left = this.posX + "px";
-      //   flower.style.top = this.posY + "px";
-      //   console.log(flower)
-      //   // console.log("flower    left : " + flower.style.left + " top : " + flower.style.top);
-
-      //   // window.removeEventListener('mousemove', mouseMove)
-      //   bg.removeEventListener('mouseup', mouseUp)
-      // });
-      console.log(bg)
-    }
-
-    function mouseMove() {
-      // console.log("left : " + e.clientX + " top : " + e.clientY);
-    }
-
-    function mouseUp(e) {
+      /*
         console.log(e)
         console.log("left : " + e.clientX + " top : " + e.clientY);
 
@@ -104,17 +140,24 @@ export default {
 
         // window.removeEventListener('mousemove', mouseMove)
         bg.removeEventListener('mouseup', mouseUp)
+        */
+    }
+
+    function mouseUp() {
+      this.index = -1;
+      window.removeEventListener('mousemove', mouseMove)
     }
 
     return { mouseDown, mouseMove, mouseUp }
 
   },
   mounted() {
-    const ele = document.getElementById('flower');
-    console.log(ele);
-    this.posX = ele.style.left;
-    this.posY = ele.style.top;
-    console.log("posx : " + this.posX + ", posY : " + this.posY)
+    this.flowerElements = document.getElementsByName('flower');
+    // const ele = document.getElementById('flower');
+    // console.log(ele);
+    // this.posX = ele.style.left;
+    // this.posY = ele.style.top;
+    // console.log("posx : " + this.posX + ", posY : " + this.posY)
   },
   updated() {
 
