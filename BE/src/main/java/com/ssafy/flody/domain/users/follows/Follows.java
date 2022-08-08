@@ -1,0 +1,26 @@
+package com.ssafy.flody.domain.users.follows;
+
+import com.ssafy.flody.domain.users.Users;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+public class Follows {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long folNo;
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "follower")
+    private Users follower;
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "following")
+    private Users following;
+}
