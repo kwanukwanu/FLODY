@@ -49,7 +49,8 @@ export function useChat() {
       userPhotoURL: photoURL,
       // text: filter.clean(text),
       text: text,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      targetId: "ssafy",
     })
   }
 
