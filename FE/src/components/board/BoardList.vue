@@ -8,14 +8,14 @@
               font-size: large;
               color: #064635;
               text-align: left;
-            ">자유게시판
+            ">{{boardListname}}
           </span>
 
           <hr />
           <b-table-simple responsive hover>
             <b-thead style="background-color: #f8f8ff">
               <b-tr>
-                <!-- <b-th>카테고리</b-th> -->
+                <b-th>카테고리</b-th>
                 <b-th>글번호</b-th>
                 <b-th>제목</b-th>
                 <b-th>작성자</b-th>
@@ -130,6 +130,9 @@
 </template>
 
 <script>
+import {computed} from "vue";
+import {useStore} from "vuex";
+
 import BoardListItem from "./Items/BoardListItem.vue";
 
 export default {
@@ -283,6 +286,16 @@ export default {
       //   perPage: 1,
       //   currentPage: 1
     };
+  },
+  setup(){
+    const store = useStore();
+    const boardListname = computed(()=>store.state.boardStore.boardListname);
+    
+    return {store, boardListname};
+  },
+  mounted(){
+    console.log("selected list : ")
+    console.log(this.boardListname);
   },
   methods: {
     movePage(num) {
