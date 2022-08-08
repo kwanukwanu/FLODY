@@ -353,7 +353,8 @@ export default {
   },
   methods:{
     getTargetId(name){
-      this.store.dispatch("",name);
+      console.log(name);
+      this.store.dispatch("chatStore/set_targetId",name);
     }
   }
 };

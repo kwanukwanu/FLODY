@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import NewspidDetailModalOption from "@/components/newspid/modal/items/NewspidDetailModalOption.vue";
-import NewspidDetailModalReport from "@/components/newspid/modal/items/NewspidDetailModalReport.vue";
-import NewspidDetailModalFollow from '@/components/newspid/modal/items/NewspidDetailModalFollow.vue';
+import NewspidDetailModalOption from "@/components/newspid/modal/items/detail/NewspidDetailModalOption.vue";
+import NewspidDetailModalReport from "@/components/newspid/modal/items/detail/NewspidDetailModalReport.vue";
+import NewspidDetailModalFollow from '@/components/newspid/modal/items/detail/NewspidDetailModalFollow.vue';
 export default {
     components:{
         NewspidDetailModalOption,
