@@ -1,10 +1,8 @@
 <template>
   <h2>field</h2>
-  <!-- <div id="fi" @click="action_coords($event)"> -->
-  <div id="fi">
-    <!-- <img id="flower" src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab;" @mousedown="mouseDown()"/> -->
-    <img id="flower" src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab;" @mousedown="startDrag($event)"/>
-    <!-- <img id="flower" src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab;" :style="{left:xPosition, top:yPosition}"/> -->
+  <div id="fi" >
+    <img id="flower" src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab; position: relative; left: 0px; top: 0px;" @mousedown="mouseDown()" @mousemove="mouseMove($event)" />
+    <!-- <img id="flower" src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab; position: relative; left: 0px; top: 0px;" @mousedown="startDrag($event)"/> -->
   </div>
 </template>
 
@@ -52,35 +50,52 @@ export default {
       // document.onmouseup = stopDrag;
       // if(e_obj.preventDefault)e_obj.preventDefault();
     },
-    action_coords(event) { 
-      let x1 = event.clientX; 
-      let y1 = event.clientY; 
-      let x2 = event.offsetX; 
-      let y2 = event.offsetY; 
-      let x3 = event.screenX; 
-      let y3 = event.screenY; 
-      console.log("clientX: " + x1 + ", clientY: " + y1);
-      console.log("offsetX: " + x2 + ", offsetY: " + y2);
-      console.log("screenX: " + x3 + ", screenY: " + y3); 
-    },
   },
   setup() {
-    function mouseDown(e) {
-      console.log(e)
-      window.addEventListener('mousemove', mouseMove)
-      window.addEventListener('mouseup', mouseUp)
+    function mouseDown() {
+      // window.addEventListener('mousemove', mouseMove)
+      const bg = document.getElementById('fi');
+      bg.addEventListener('mouseup', mouseUp)
+      console.log(bg)
     }
 
     function mouseMove() {
+      // console.log("left : " + e.clientX + " top : " + e.clientY);
     }
 
     function mouseUp(e) {
         console.log(e)
-        window.removeEventListener('mousemove', mouseMove)
-        window.removeEventListener('mouseup', mouseUp)
+        console.log("left : " + e.clientX + " top : " + e.clientY);
+
+        const bg = document.getElementById('fi');
+        const flower = document.getElementById('flower');
+        let coordBg = bg.getBoundingClientRect();
+        let coordFl = flower.getBoundingClientRect();
+
+        this.posX = e.clientX - coordBg.left - (coordFl.width / 2);
+        this.posY = e.clientY - coordBg.top - (coordFl.height / 2);
+        console.log("posx : " + this.posX + ", posY : " + this.posY)
+
+        flower.style.left = this.posX + "px";
+        flower.style.top = this.posY + "px";
+        console.log(flower)
+        // console.log("flower    left : " + flower.style.left + " top : " + flower.style.top);
+
+        // window.removeEventListener('mousemove', mouseMove)
+        bg.removeEventListener('mouseup', mouseUp)
     }
 
     return { mouseDown, mouseMove, mouseUp }
+
+  },
+  mounted() {
+    const ele = document.getElementById('flower');
+    console.log(ele);
+    this.posX = ele.style.left;
+    this.posY = ele.style.top;
+    console.log("posx : " + this.posX + ", posY : " + this.posY)
+  },
+  updated() {
 
   }
 }
