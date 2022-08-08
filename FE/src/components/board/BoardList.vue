@@ -289,8 +289,8 @@ export default {
   },
   setup(){
     const store = useStore();
-    const boardListname = computed(()=>store.state.boardStore.boardListname);
-    
+    const boardListname = computed(()=>store.state.boardStore.boardListName);
+
     return {store, boardListname};
   },
   mounted(){

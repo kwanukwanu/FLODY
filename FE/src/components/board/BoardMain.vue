@@ -29,7 +29,7 @@
 
       <b-col>
         <b-card style="max-width:35rem; border-color: #A48282; max-height: 22rem;">
-          <router-link :to="{name:'boardlist'}" style="text-decoration:none; color: inherit;">
+          <router-link :to="{name:'boardlist'}" style="text-decoration:none; color: inherit;" @click="gotoList('자유게시판')">
             <span
               style="margin-left:7px; font-size:large; color: #064635; text-align: left; cursor: pointer; text-decoration: none;">자유게시판
             </span>
@@ -52,7 +52,7 @@
 
       <b-col>
         <b-card style="max-width:35rem; border-color: #A48282; max-height: 22rem;">
-          <router-link :to="{name:'boardlist'}" style="text-decoration:none; color: inherit;">
+          <router-link :to="{name:'boardlist'}" style="text-decoration:none; color: inherit;" @click="gotoList('공부 꿀팁')">
             <span
               style="margin-left:7px; font-size:large; color: #064635; text-align: left; cursor: pointer; text-decoration: none;">공부
               꿀팁 </span>
@@ -77,7 +77,7 @@
     <b-card style="max-width:70rem; border-color: #A48282; max-height: 22rem;">
       <b-row>
         <b-col>
-          <router-link :to="{name:'boardlist'}" style="text-decoration:none; color: inherit;">
+          <router-link :to="{name:'boardlist'}" style="text-decoration:none; color: inherit;" @click="gotoList('합격 후기')">
             <span
               style="margin-left:7px; font-size:large; color: #064635; text-align: left; cursor: pointer; text-decoration: none;">합격
               후기 </span>
