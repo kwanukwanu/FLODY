@@ -39,10 +39,7 @@
           <!-- <h2 style="text-align: center;">목표 등록</h2> -->
           <b-row style="margin-bottom: 10px;">
             <b-col>
-              <b-form-select style="border: none;"></b-form-select>
-            </b-col>
-            <b-col>
-              <b-form-input placeholder="시험 이름" required style="border: none;"></b-form-input>
+              <b-form-input placeholder="시험 이름을 입력하세요." required style="border: none;"></b-form-input>
             </b-col>
           </b-row>
           <b-row style="margin-bottom: 10px;">

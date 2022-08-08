@@ -28,10 +28,10 @@
         <div v-if="!sender" style="text-align: left;">
           <div class="message">
             <b-row>
-              <b-col cols="1">
+              <b-col cols="2">
                 <chat-avatar class="mt-1" :src="photoUrl" />
               </b-col>
-              <b-col cols="11">
+              <b-col cols="10">
                 <b-row>
                   <span style="font-size: 16px; font-weight: bold;">{{ name }}</span>
                 </b-row>
@@ -51,7 +51,7 @@
         <div v-else  style="text-align: right;">
           <div class="message">
             <b-row>
-              <b-col cols="11">
+              <b-col cols="10">
                 <b-row align-h="end">
                   <div style="font-size: 24px; border-radius: 20px 20px 0px 20px; background-color: #f3f3f3; max-width: 300px; margin-top: 16px;">
                     <slot />
@@ -62,7 +62,7 @@
                 <b-row>
                 </b-row>
               </b-col>
-              <b-col cols="1">
+              <b-col cols="2">
                 <chat-avatar class="mt-1" :src="photoUrl" />
               </b-col>
             </b-row>

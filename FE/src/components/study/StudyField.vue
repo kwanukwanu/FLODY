@@ -55,7 +55,28 @@ export default {
     function mouseDown() {
       // window.addEventListener('mousemove', mouseMove)
       const bg = document.getElementById('fi');
-      bg.addEventListener('mouseup', mouseUp)
+      bg.addEventListener('mouseup', mouseUp);
+      // bg.addEventListener('mouseup', (e) => {
+      //   console.log(e)
+      //   console.log("left : " + e.clientX + " top : " + e.clientY);
+
+      //   const bg = document.getElementById('fi');
+      //   const flower = document.getElementById('flower');
+      //   let coordBg = bg.getBoundingClientRect();
+      //   let coordFl = flower.getBoundingClientRect();
+
+      //   this.posX = e.clientX - coordBg.left - (coordFl.width / 2);
+      //   this.posY = e.clientY - coordBg.top - (coordFl.height / 2);
+      //   console.log("posx : " + this.posX + ", posY : " + this.posY)
+
+      //   flower.style.left = this.posX + "px";
+      //   flower.style.top = this.posY + "px";
+      //   console.log(flower)
+      //   // console.log("flower    left : " + flower.style.left + " top : " + flower.style.top);
+
+      //   // window.removeEventListener('mousemove', mouseMove)
+      //   bg.removeEventListener('mouseup', mouseUp)
+      // });
       console.log(bg)
     }
 
