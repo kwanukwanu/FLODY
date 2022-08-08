@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class JWTServiceImpl implements JWTService{
-    private JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
 
     public String decodeToken(String token) throws Exception {
         return jwtTokenProvider.decodeToken(token);

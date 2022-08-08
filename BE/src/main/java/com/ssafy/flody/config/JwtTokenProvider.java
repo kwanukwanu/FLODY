@@ -22,7 +22,7 @@ import java.util.Date;
 public class JwtTokenProvider {
     private String SALT = "projectSSAFY";
 
-    private long tokenValidTime = 30 * 60 * 1000L;
+    private long tokenValidTime = 300 * 60 * 1000L;
 
     @Lazy
     private UserService usersService;
@@ -72,7 +72,7 @@ public class JwtTokenProvider {
     }
 
     //토큰에서 ID 가져오기
-    public String decodeToken(String jwtToken) throws Exception{
+    public String decodeToken(String jwtToken) throws Exception {
         Jws<Claims> claims = Jwts.parser().setSigningKey(SALT).parseClaimsJws(jwtToken);
         return claims.getBody().get("sub").toString();
     }

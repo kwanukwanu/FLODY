@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserInfoResponseDto findUserById(String email){;
+    public UserInfoResponseDto findUserById(String email) {
         return new UserInfoResponseDto(findUser(email));
     }
 
@@ -59,19 +59,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String modifyUser(String email, UserUpdateRequestDto requestDto) {
-        Users users = findUser(email);
-        users.update(
+    public String modifyUser(String email, UserUpdateRequestDto requestDto) throws Exception {
+        Users user = findUser(email);
+        user.update(
                 requestDto.getProfile(),
                 requestDto.getNickname(),
                 requestDto.getAddress(),
                 requestDto.getPhone()
         );
-        return usersRepository.save(users).getEmail();
+        return usersRepository.save(user).getEmail();
     }
 
     @Override
-    public String modifyUserPassword(String email, UserPasswordUpdateRequestDto requestDto) {
+    public String modifyUserPassword(String email, UserPasswordUpdateRequestDto requestDto) throws Exception {
         Users users = findUser(email);
         // 입력한 비밀번호와 입력으로 들어온 새로 요청된 비밀번호가 같고
         // 변경 비밀번호와 재검증 비밀번호가 같을 때 ==> 비밀번호 변경

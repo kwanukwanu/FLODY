@@ -20,9 +20,9 @@ public interface UserService {
     public Boolean validateEmail(String email);
     public String addUser(UserCreateRequestDto requestDto);
 
-    String modifyUser(String email, UserUpdateRequestDto requestDto);
+    String modifyUser(String email, UserUpdateRequestDto requestDto) throws Exception;
 
-    String modifyUserPassword(String email, UserPasswordUpdateRequestDto requestDto);
+    String modifyUserPassword(String email, UserPasswordUpdateRequestDto requestDto) throws Exception;
 
     public String removeUser(String email) throws Exception;
 

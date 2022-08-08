@@ -6,12 +6,14 @@ import com.ssafy.flody.dto.request.comments.CommentUpdateRequestDto;
 import com.ssafy.flody.dto.request.groups.*;
 import com.ssafy.flody.dto.request.users.*;
 import com.ssafy.flody.dto.response.groups.GroupDetailResponseDto;
+import com.ssafy.flody.dto.response.users.UserFollowResponseDto;
 import com.ssafy.flody.dto.response.users.UserGoalResponseDto;
 import com.ssafy.flody.dto.response.users.UserScheduleListResponseDto;
 import com.ssafy.flody.service.JWTService;
 import com.ssafy.flody.service.groups.GroupService;
 import com.ssafy.flody.service.groups.members.GroupMemberService;
 import com.ssafy.flody.service.users.UserService;
+import com.ssafy.flody.service.users.follows.UFollowService;
 import com.ssafy.flody.service.users.goals.UGoalService;
 import com.ssafy.flody.service.users.schedules.UScheduleService;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +36,7 @@ public class ApiController {
 
     private final JWTService jwtService;
     private final UserService userService;
+    private final UFollowService uFollowService;
     private final UScheduleService uScheduleService;
     private final UGoalService uGoalService;
     private final GroupService groupService;
@@ -46,7 +49,7 @@ public class ApiController {
         HttpStatus status;
         try {
             if (!userService.findUsers().isEmpty()) {
-                result.put("users", userService.findUsers());
+                result.put("item", userService.findUsers());
                 result.put("msg", SUCCESS);
             } else {
                 result.put("msg", FAIL);
@@ -61,10 +64,9 @@ public class ApiController {
 
     // 유저 단일 조회 > 수정하면서 좀 잘못됬나? 확인 필요
     @GetMapping("/user") // 단일 유저 정보 조회 (타 유저 정보는 다 개인정보니까 알 필요 없음. 즉, 내 정보만 조회할 수 있도록)
-    public ResponseEntity<Map<String, Object>> UserDetails(@RequestHeader(value = HEADER_AUTH) String token) {
+    public ResponseEntity<Map<String, Object>> UserDetails(@RequestParam String email) {
         HashMap<String, Object> result = new HashMap<>();
         try {
-            String email = jwtService.decodeToken(token);
             result.put("item", userService.findUserById(email));
             result.put("msg", SUCCESS);
         } catch (Exception e) {
@@ -173,13 +175,62 @@ public class ApiController {
     }
 
     @GetMapping("/user/follows")
-    public ResponseEntity<Map<String, Object>> UserFollowList(@RequestParam Long id) {
-        return getMapResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> UserFollowList(@RequestHeader(value = HEADER_AUTH) String token) {
+        Map<String, Object> result = new HashMap<>();
+        HttpStatus status;
+        try {
+            String email = jwtService.decodeToken(token);
+            List<UserFollowResponseDto> list = uFollowService.findUserFollows(email);
+            if (!list.isEmpty()) {
+                result.put("item", list);
+                result.put("msg", SUCCESS);
+            } else {
+                result.put("msg", FAIL);
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result.put("msg", ERROR);
+            result.put("errorMsg", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
     }
 
     @GetMapping("/user/follow")
-    public ResponseEntity<String> UserFollow(@RequestParam Long id) {
-        return getStringResponseEntity(id);
+    public ResponseEntity<String> UserFollow(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam String following) {
+        String result;
+        HttpStatus status;
+        try {
+            String follower = jwtService.decodeToken(token);
+            if (uFollowService.addUserFollow(follower, following) != null) {
+                result = SUCCESS;
+            } else {
+                result = FAIL;
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result = e.getMessage();
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
+    }
+
+    @GetMapping("/user/unfollow")
+    public ResponseEntity<String> UserUnfollow(@RequestParam Long folNo) {
+        String result;
+        HttpStatus status;
+        try {
+            if (uFollowService.removeUserFollow(folNo) != null) {
+                result = SUCCESS;
+            } else {
+                result = FAIL;
+            }
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result = e.getMessage();
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
     }
 
     @GetMapping("/user/likes")
