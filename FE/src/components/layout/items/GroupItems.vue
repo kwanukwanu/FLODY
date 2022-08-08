@@ -12,9 +12,6 @@ export default {
         id: String,
         src: String,
     },
-    mounted() {
-        console.log(this.id + " , " + this.src);
-    }
 }
 </script>
 

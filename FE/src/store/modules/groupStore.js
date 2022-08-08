@@ -21,9 +21,21 @@ const groupStore = {
       },
     ],
   },
-  getters: {},
-  mutations: {},
-  actions: {},
+  getters: {
+    getSelectGroup: function(state){
+      return state.selectGroups;
+    }
+  },
+  mutations: {
+    SET_SELECT_GROUP:(state, selectGroups)=>{
+      state.selectGroups = selectGroups;
+    }
+  },
+  actions: {
+    selectGroups({commit},group){
+      commit("SET_SELECT_GROUP",group);
+    }
+  },
 };
 
 export default groupStore;

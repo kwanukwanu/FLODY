@@ -107,7 +107,6 @@ import { useStore } from "vuex";
 export default {
   methods: {
     gotoPage(link) {
-      console.log(link);
       this.$router.push(link);
     },
   },

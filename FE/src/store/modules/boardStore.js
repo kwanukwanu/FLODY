@@ -13,22 +13,32 @@ const boardStore = {
       category:"자유",
     },
     boardNum: 0,
+    boardListName:"null",
   },
   getters: {
     getSelectedBoard: function(state){
       return state.selectedBoard;
+    },
+    getboardListName: function(state){
+      return state.boardListName;
     }
   },
   mutations: {
     SET_SELECTED_BOARD: (state, selectedBoard)=>{
       state.selectedBoard = selectedBoard;
     },
+    SET_BOARD_LIST_NAME: (state, boardListName)=>{
+      state.boardListName = boardListName;
+    }
   },
   actions: {
     selectedBoard({commit}, board){
       commit("SET_SELECTED_BOARD",board);
       console.log(board);
-    }
+    },
+    boardListName({commit}, boardListName){
+      commit("SET_BOARD_LIST_NAME",boardListName);
+    },
   },
 };
 
