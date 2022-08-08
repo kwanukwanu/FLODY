@@ -1,6 +1,6 @@
 <template>
-  <h2>field</h2>
-  <div id="fi">
+  <!-- <h2>field</h2> -->
+  <div id="fi" style="margin-left:35px; margin-top: 30px;"> 
     <study-field-items
     name="flower"
     v-for="(item,index) in flowers"
