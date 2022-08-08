@@ -7,8 +7,12 @@
           <b-card-text style="font-weight: bold; color: #786666">현재 스터디 목록</b-card-text>
         </b-col>
         <b-col cols="2">
-          <b-button class="plus_button" variant="link" style="color:brown; text-decoration: none; font-weight: 600;"
-            @click="gotoPage('/club')">+</b-button>
+          <b-button class="plus_button" variant="link" style="color:brown; text-decoration: none; font-weight: 600;" size="sm"
+            @click="gotoPage('/club')"><svg
+                    width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5v14m-7-7h14" stroke="#444" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></b-button>
         </b-col>
       </b-row>
       <hr style="margin: 5px;" />
