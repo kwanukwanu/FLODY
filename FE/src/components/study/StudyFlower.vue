@@ -17,7 +17,7 @@
           </b-progress>
         </div>
   </b-card>
-  <br /><br />
+  <br />
 </template>
 
 <script>

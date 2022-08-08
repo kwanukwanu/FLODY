@@ -11,14 +11,14 @@
     <!-- <img id="flower" src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab; position: relative; left: 0px; top: 0px;" @mousedown="startDrag($event)"/> -->
   </div>
 
-
+<!-- 
   <div id="outerContainer">
     <div id="container">
       <div id="item">
 
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 

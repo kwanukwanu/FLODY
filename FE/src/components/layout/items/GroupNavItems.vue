@@ -18,7 +18,7 @@
                     </svg></router-link>
             </summary>
 
-            <ul>
+            <ul style="list-style: none;">
                 <group-items v-for="item in groups" :key="item" v-bind="item"></group-items>
             </ul>
         </details>
