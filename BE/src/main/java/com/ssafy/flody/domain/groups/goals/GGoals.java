@@ -20,7 +20,7 @@ public class GGoals {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ggNo;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Groups.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Groups.class)
     @JoinColumn(name = "gro_no")
     private Groups group;
     @Column(nullable = false)

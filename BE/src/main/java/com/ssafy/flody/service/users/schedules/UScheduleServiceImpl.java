@@ -62,7 +62,9 @@ public class UScheduleServiceImpl implements UScheduleService {
 
     @Transactional
     public Long removeUserSchedule(Long usNo) {
-        userScheduleRepository.deleteById(usNo);
+        USchedules schedule = userScheduleRepository.findById(usNo)
+                        .orElseThrow(() -> new IllegalArgumentException("Schedule Not Found"));
+        userScheduleRepository.delete(schedule);
         return usNo;
     }
 

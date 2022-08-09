@@ -21,13 +21,13 @@ public class Posts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long posNo;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
     @JoinColumn(name = "use_email")
     private Users user;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Categories.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Categories.class)
     @JoinColumn(name = "cat_no")
     private Categories category;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Coverages.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Coverages.class)
     @JoinColumn(name = "cov_no")
     private Coverages coverage;
     @Column

@@ -20,7 +20,7 @@ public class UGoals {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ugNo;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
     @JoinColumn(name = "use_email")
     private Users user;
     @Column(nullable = false)
