@@ -6,9 +6,11 @@ import lombok.Getter;
 
 @Getter
 public class UserFollowResponseDto {
+    private Long folNo;
     private String following;
 
     public UserFollowResponseDto(Follows follow) {
+        this.folNo = follow.getFolNo();
         this.following = follow.getFollowing().getEmail();
     }
 }
