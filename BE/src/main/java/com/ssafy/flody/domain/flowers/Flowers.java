@@ -17,7 +17,7 @@ public class Flowers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long floNo;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = FCategories.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = FCategories.class)
     @JoinColumn(name = "fc_no")
     private FCategories fcNo;
     @Column(nullable = false)

@@ -39,8 +39,9 @@ public class UFollowServiceImpl implements UFollowService {
     }
 
     public Long removeUserFollow(Long folNo) {
-        followRepository.delete(followRepository.findById(folNo)
-                .orElseThrow(() -> new IllegalArgumentException("Follow Not Found")));
+        Follows follow = followRepository.findById(folNo)
+                .orElseThrow(() -> new IllegalArgumentException("Relation Not Found"));
+        followRepository.delete(follow);
         return folNo;
     }
 

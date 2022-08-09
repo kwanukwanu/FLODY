@@ -18,11 +18,11 @@ import javax.persistence.*;
 @IdClass(CLikesId.class)
 public class CLikes {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Comments.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Comments.class)
     @JoinColumn(name = "com_no")
     private Comments comment;
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
     @JoinColumn(name = "use_email")
     private Users user;
 }

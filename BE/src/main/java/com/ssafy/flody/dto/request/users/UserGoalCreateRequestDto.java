@@ -13,8 +13,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class UserGoalCreateRequestDto {
     private String name;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
+
     @Builder
     public UserGoalCreateRequestDto(String name, Date dueDate) {
         this.name = name;

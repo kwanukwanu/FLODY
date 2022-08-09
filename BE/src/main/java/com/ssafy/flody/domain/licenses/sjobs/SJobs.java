@@ -18,11 +18,11 @@ import javax.persistence.*;
 @IdClass(SJobsId.class)
 public class SJobs {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Departments.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Departments.class)
     @JoinColumn(name = "gep_no")
     private Departments department;
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Serieses.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Serieses.class)
     @JoinColumn(name = "ser_no")
     private Serieses series;
 }

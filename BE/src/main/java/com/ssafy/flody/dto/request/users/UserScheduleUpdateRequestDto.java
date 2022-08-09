@@ -3,6 +3,7 @@ package com.ssafy.flody.dto.request.users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -11,7 +12,9 @@ import java.util.Date;
 public class UserScheduleUpdateRequestDto {
     private String title;
     private String detail;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
     private Boolean done;
 

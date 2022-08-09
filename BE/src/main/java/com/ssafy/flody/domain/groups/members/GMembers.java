@@ -19,15 +19,15 @@ import javax.persistence.*;
 @IdClass(GMembersId.class)
 public class GMembers {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
     @JoinColumn(name = "use_email")
     private Users user;
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Groups.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Groups.class)
     @JoinColumn(name = "gro_no")
     private Groups group;
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = GRoles.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = GRoles.class)
     @JoinColumn(name = "gr_no")
     private GRoles role;
 }

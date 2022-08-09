@@ -20,10 +20,10 @@ public class Gardens {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long garNo;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Flowers.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Flowers.class)
     @JoinColumn(name = "flo_no")
     private Flowers flower;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
     @JoinColumn(name = "use_email")
     private Users user;
     @CreatedDate

@@ -17,11 +17,11 @@ import javax.persistence.*;
 @IdClass(ScrapsId.class)
 public class Scraps {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
     @JoinColumn(name = "use_email")
     private Users user;
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Posts.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Posts.class)
     @JoinColumn(name = "pos_no")
     private Posts post;
 }

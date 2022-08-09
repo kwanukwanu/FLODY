@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,12 +20,12 @@ public class GGoals {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ggNo;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Groups.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Groups.class)
     @JoinColumn(name = "gro_no")
     private Groups group;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
+    @CreatedDate
     private Date registDate;
     @Column(nullable = false)
     private Date dueDate;
