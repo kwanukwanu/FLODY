@@ -185,4 +185,12 @@ export default {
 .checkbox{
   accent-color: #E3D6D6;
 }
+li{
+  margin-bottom:15px;
+}
+input[type=checkbox]:checked + label.strikethrough{
+  text-decoration: line-through;
+  text-decoration-color:#BC6464;
+  color:#9F9F9F;
+}
 </style>
