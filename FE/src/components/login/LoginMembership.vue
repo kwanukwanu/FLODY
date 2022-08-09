@@ -84,19 +84,19 @@
           <br>
           <b-row>
             <b-col>
-              <b-form-input placeholder="이메일 주소" required style="border: none;"></b-form-input>
+              <b-form-input v-model="user.id" placeholder="이메일 주소" required style="border: none;"></b-form-input>
             </b-col>
           </b-row>
           <br>
           <b-row>
             <b-col>
-              <b-form-input placeholder="성명" style="border: none;"></b-form-input>
+              <b-form-input v-model="user.name" placeholder="성명" style="border: none;"></b-form-input>
             </b-col>
           </b-row>
           <br>
           <b-row>
             <b-col>
-              <b-form-input type="password" placeholder="비밀번호" style="border: none;"></b-form-input>
+              <b-form-input v-model="user.pw" type="password" placeholder="비밀번호" style="border: none;"></b-form-input>
             </b-col>
           </b-row>
           <br>
@@ -108,7 +108,7 @@
           <br>
           <b-row>
             <b-col>
-              <b-form-input placeholder="휴대폰 번호" style="border: none;"></b-form-input>
+              <b-form-input v-model="user.pn" placeholder="휴대폰 번호" style="border: none;"></b-form-input>
             </b-col>
           </b-row>
           <br>
@@ -130,6 +130,16 @@
 
 <script>
 export default {
+  data() {
+    return {
+      user: {
+        id: null,
+        name: null,
+        pw: null,
+        pn: null,
+      }
+    }
+  },
   methods: {
     submit() {
 
