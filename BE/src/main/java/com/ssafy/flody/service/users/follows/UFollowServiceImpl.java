@@ -13,6 +13,7 @@ import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -23,7 +24,7 @@ public class UFollowServiceImpl implements UFollowService {
     private final FollowsRepository followRepository;
     public List<UserFollowResponseDto> findUserFollows(String email) throws Exception {
         Users follower = findUser(email);
-        List<Follows> entityList = (List<Follows>) followRepository.findByFollower(follower)
+        List<Follows> entityList = followRepository.findByFollower(follower).map(Collections::singletonList)
                 .orElseThrow(() -> new IllegalArgumentException("Follower Not Found"));
         List<UserFollowResponseDto> list = new ArrayList<>();
         for (Follows follows : entityList) {
