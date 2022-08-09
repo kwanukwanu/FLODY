@@ -1,6 +1,7 @@
 <template>
   <!-- <h2>field</h2> -->
-  <div id="fi" style="margin-left:35px; margin-top: 30px;"> 
+  <b-card style="width:60rem; border-color: #a48282; margin-top:30px; margin-left: 7px;">
+  <div id="fi" > 
     <study-field-items
     id="flower"
     v-for="(item,index) in flowers"
@@ -10,7 +11,7 @@
     </study-field-items>
     <!-- <img id="flower" src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab; position: relative; left: 0px; top: 0px;" @mousedown="startDrag($event)"/> -->
   </div>
-
+</b-card>
 <!-- 
   <div id="outerContainer">
     <div id="container">
@@ -245,9 +246,6 @@ export default {
     width: 900px;
     height: 400px;
 }
-
-
-
 
 
 #container {
