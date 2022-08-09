@@ -22,4 +22,8 @@ public class Groups {
     private String name;
     @CreatedDate
     private Date foundDate;
+
+    public void update(String name) {
+        this.name = name;
+    }
 }

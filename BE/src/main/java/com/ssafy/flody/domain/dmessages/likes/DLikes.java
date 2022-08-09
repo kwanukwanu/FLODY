@@ -23,6 +23,6 @@ public class DLikes {
     private DirectMessages directMessage;
     @Id
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "use_no")
+    @JoinColumn(name = "use_email")
     private Users user;
 }

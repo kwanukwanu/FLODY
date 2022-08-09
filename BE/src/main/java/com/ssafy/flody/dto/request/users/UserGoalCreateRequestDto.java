@@ -5,6 +5,7 @@ import com.ssafy.flody.domain.users.goals.UGoals;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -15,7 +16,7 @@ public class UserGoalCreateRequestDto {
 
     private Date dueDate;
     @Builder
-    public UserGoalCreateRequestDto(String name, Date dueDate ){
+    public UserGoalCreateRequestDto(String name, Date dueDate) {
         this.name = name;
         this.dueDate = dueDate;
     }

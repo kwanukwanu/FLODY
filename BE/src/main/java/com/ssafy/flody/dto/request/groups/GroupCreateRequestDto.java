@@ -12,7 +12,7 @@ public class GroupCreateRequestDto {
     private String name;
 
     @Builder
-    public GroupCreateRequestDto(String name){
+    public GroupCreateRequestDto(String name) {
         this.name = name;
     }
 

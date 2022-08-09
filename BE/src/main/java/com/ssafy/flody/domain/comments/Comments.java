@@ -22,7 +22,7 @@ public class Comments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long comNo;
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "use_no")
+    @JoinColumn(name = "use_email")
     private Users user;
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Posts.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "pos_no")

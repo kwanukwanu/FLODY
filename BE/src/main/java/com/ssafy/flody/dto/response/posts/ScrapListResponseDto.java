@@ -1,4 +1,4 @@
-package com.ssafy.flody.controller.posts;
+package com.ssafy.flody.dto.response.posts;
 
 import com.ssafy.flody.domain.posts.scraps.Scraps;
 import lombok.Getter;
