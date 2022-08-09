@@ -71,12 +71,12 @@ h7 div {
                0 10px 10px rgba(0, 0, 0, .4); */
 }
 
-h1 div:nth-child(2) { animation-delay: .1s; }
+/* h1 div:nth-child(2) { animation-delay: .1s; }
 h1 div:nth-child(3) { animation-delay: .2s; }
 h1 div:nth-child(4) { animation-delay: .3s; }
 h1 div:nth-child(5) { animation-delay: .4s; }
 h1 div:nth-child(6) { animation-delay: .5s; }
-h1 div:nth-child(7) { animation-delay: .6s; }
+h1 div:nth-child(7) { animation-delay: .6s; } */
 
 @keyframes bounce {
   100% {
