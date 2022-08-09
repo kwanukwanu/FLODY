@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -25,7 +26,7 @@ public class UGoalServiceImpl implements UGoalService {
     @Transactional
     public List<UserGoalResponseDto> findUserGoals(String email) throws Exception{
         Users user = findUser(email);
-        List<UGoals> entityList = (List<UGoals>) userGoalRepository.findByUser(user)
+        List<UGoals> entityList = userGoalRepository.findByUser(user).map(Collections::singletonList)
                 .orElseThrow(() -> new NotFoundException("Goal Not Found"));
         List<UserGoalResponseDto> list = new ArrayList<>();
         for (UGoals uGoals : entityList) {

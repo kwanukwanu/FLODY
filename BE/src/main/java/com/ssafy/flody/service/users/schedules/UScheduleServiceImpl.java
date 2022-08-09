@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -26,7 +27,7 @@ public class UScheduleServiceImpl implements UScheduleService {
     @Transactional
     public List<UserScheduleListResponseDto> findUserSchedules(String email) throws Exception {
         Users user = findUser(email);
-        List<USchedules> entityList = (List<USchedules>) userScheduleRepository.findByUser(user)
+        List<USchedules> entityList = userScheduleRepository.findByUser(user).map(Collections::singletonList)
                 .orElseThrow(() -> new NotFoundException("Schedule Not Found"));
         List<UserScheduleListResponseDto> list = new ArrayList<>();
         for (USchedules uSchedules : entityList) {
@@ -61,8 +62,7 @@ public class UScheduleServiceImpl implements UScheduleService {
 
     @Transactional
     public Long removeUserSchedule(Long usNo) {
-        userScheduleRepository.delete(userScheduleRepository.findById(usNo)
-                .orElseThrow(() -> new IllegalArgumentException("Schedule Not Found")));
+        userScheduleRepository.deleteById(usNo);
         return usNo;
     }
 

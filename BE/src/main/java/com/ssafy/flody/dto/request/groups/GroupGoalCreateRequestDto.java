@@ -5,6 +5,7 @@ import com.ssafy.flody.domain.groups.goals.GGoals;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -12,12 +13,11 @@ import java.util.Date;
 @NoArgsConstructor
 public class GroupGoalCreateRequestDto {
     private String name;
-    private Date registDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
     @Builder
-    public GroupGoalCreateRequestDto(String name, Date registDate, Date dueDate){
+    public GroupGoalCreateRequestDto(String name, Date dueDate){
         this.name = name;
-        this.registDate = registDate;
         this.dueDate = dueDate;
     }
 
@@ -26,7 +26,6 @@ public class GroupGoalCreateRequestDto {
         return GGoals.builder()
                 .group(group)
                 .name(name)
-                .registDate(registDate)
                 .dueDate(dueDate)
                 .build();
     }

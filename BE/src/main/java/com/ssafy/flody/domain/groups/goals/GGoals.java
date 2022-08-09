@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,7 +25,7 @@ public class GGoals {
     private Groups group;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
+    @CreatedDate
     private Date registDate;
     @Column(nullable = false)
     private Date dueDate;
