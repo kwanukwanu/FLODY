@@ -5,6 +5,7 @@ import firebaseConfig from '@/firebaseConfig'
 
 // import Filter from 'bad-words'
 import { ref, onUnmounted, computed } from 'vue'
+import {useStore} from "vuex";
 
 firebase.initializeApp(firebaseConfig)
 
@@ -38,7 +39,8 @@ export function useChat() {
       .reverse()
   })
   onUnmounted(unsubscribe)
-
+  
+  const store = useStore();
   const { user, isLogin } = useAuth()
   const sendMessage = text => {
     if (!isLogin.value) return
@@ -50,8 +52,10 @@ export function useChat() {
       // text: filter.clean(text),
       text: text,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      targetId: "ssafy",
+      // targetId: "ssafy",
+      targetId: store.state.chatStore.targetId,
     })
+    console.log(store.state.chatStore.targetId);
   }
 
   return { messages, sendMessage }
