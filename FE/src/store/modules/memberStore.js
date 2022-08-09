@@ -1,6 +1,6 @@
-//import jwt_decode from "vue-jwt-decode";
-//import { login } from "@/api/member.js";
-//import { findById } from "../../api/member";
+import jwt_decode from "vue-jwt-decode";
+import { login } from "@/api/member.js";
+import { findById } from "../../api/member";
 
 // 회원가입 및 로그인을 수행하는 js파일
 
@@ -30,38 +30,34 @@ const memberStore = {
   },
   actions: {
     async userConfirm({ commit }, user) {
-      //멤버 로그인에서 여기로
-
-      console.log("userConfirm : " + user);
-
       // axios 작업
-      // await login(
-      //   user,
-      //   (response) => {
-      //     if (response.data.message == "success") {
-      //       let token = response.data["access-token"];
-      //       commit("SET_IS_LOGIN", true);
-      //       commit("SET_IS_LOGIN_ERROR", false);
-      //       sessionStorage.setItem("access-token", token);
-      //     } else {
-      //       commit("SET_IS_LOGIN", false);
-      //       commit("SET_IS_LOGIN_ERROR", true);
-      //     }
-      //   },
-      //   () => { },
-      // );
+      await login(
+        user,
+        (response) => {
+          if (response.data.message == "success") {
+            console.log("로그인 성공");
+            let token = response.data["access-token"];
+            commit("SET_IS_LOGIN", true);
+            commit("SET_IS_LOGIN_ERROR", false);
+            sessionStorage.setItem("access-token", token);
+          } else {
+            console.log("로그인 실패");
+            commit("SET_IS_LOGIN", false);
+            commit("SET_IS_LOGIN_ERROR", true);
+          }
+        },
+        () => {},
+      );
 
       // 현재는 로그인이 되도록 설정
-      commit("SET_IS_LOGIN", true);
-      commit("SET_IS_LOGIN_ERROR", false);
+      // commit("SET_IS_LOGIN", true);
+      // commit("SET_IS_LOGIN_ERROR", false);
     },
 
     getUserInfo({ commit }, token) {
-      //let decode_token = jwt_decode(token);
-      //console.log(decode_token.userid);
-      console.log(token);
+      let decode_token = jwt_decode(token);
+      console.log(decode_token.userid);
       // axios 필요
-      /*
       findById(
         decode_token.userid,
         (response) => {
@@ -77,14 +73,13 @@ const memberStore = {
           console.log(error);
         },
       );
-      */
 
-      const data = {
-        id: "ssafy4321",
-        password: "1234",
-        name: "최싸피",
-      };
-      commit("SET_USER_INFO", data);
+      // const data = {
+      //   id: "ssafy4321",
+      //   password: "1234",
+      //   name: "최싸피",
+      // };
+      // commit("SET_USER_INFO", data);
     },
   },
 };
