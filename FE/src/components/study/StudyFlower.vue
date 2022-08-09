@@ -9,7 +9,7 @@
   <b-card style="max-width:70rem; border-color: #a48282;">
     <b-row>
       <b-col cols="6" style="text-align:center">
-        <img src="@/assets/flower6_1.png" class="w-25" style="height: 240px; width: 200px;" />
+        <img src="@/assets/flower7_1.png" class="w-25" style="height: 240px; width: 200px;" />
         <b-progress max='50' class="w-25" style="margin-top: 20px; margin-left: 170px; margin-bottom: 20px;">
           <b-progress-bar variant="success" value="30"></b-progress-bar>
         </b-progress>
