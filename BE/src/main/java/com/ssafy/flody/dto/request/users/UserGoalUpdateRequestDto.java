@@ -12,14 +12,11 @@ import java.util.Date;
 public class UserGoalUpdateRequestDto {
     private String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date registDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
 
     @Builder
-    public UserGoalUpdateRequestDto(String name, Date registDate, Date dueDate){
+    public UserGoalUpdateRequestDto(String name, Date dueDate){
         this.name = name;
-        this.registDate = registDate;
         this.dueDate = dueDate;
     }
 }

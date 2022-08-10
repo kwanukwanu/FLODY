@@ -47,7 +47,6 @@ public class UGoalServiceImpl implements UGoalService {
         UGoals uGoals = userGoalRepository.findById(ugNo)
                 .orElseThrow(() -> new IllegalArgumentException("Schedule Not Found"));
         uGoals.update(requestDto.getName(),
-                requestDto.getRegistDate(),
                 requestDto.getDueDate()
         );
         return userGoalRepository.save(uGoals).getUgNo();

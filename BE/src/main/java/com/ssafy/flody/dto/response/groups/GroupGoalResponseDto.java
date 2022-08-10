@@ -8,11 +8,13 @@ import java.util.Date;
 //List-Detail 모두 동일
 @Getter
 public class GroupGoalResponseDto {
+    private Long ggNo;
     private String name;
     private Date registDate;
     private Date dueDate;
 
     public GroupGoalResponseDto(GGoals entity){
+        this.ggNo = entity.getGgNo();
         this.name = entity.getName();
         this.registDate = entity.getRegistDate();
         this.dueDate = entity.getDueDate();
