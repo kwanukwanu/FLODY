@@ -106,7 +106,7 @@
           <b-row>
             <b-col>
               <div class="button_2">
-                <b-button @click="joinForm" variant="link" style="
+                <b-button @click="gotoPage('/membership')" variant="link" style="
                     color: #b99b9a;
                     text-decoration: none;
                     font-weight: 100;
@@ -115,13 +115,13 @@
             </b-col>
             <b-col>
               <div class="button_2">
-                <b-button @click="joinForm" variant="link" style="color: #b99b9a; text-decoration: none">비밀번호 찾기
+                <b-button @click="gotoPage('/membership')" variant="link" style="color: #b99b9a; text-decoration: none">비밀번호 찾기
                 </b-button>
               </div>
             </b-col>
             <b-col>
               <div class="button_2">
-                <b-button @click="joinForm" variant="link" style="color: #b99b9a; text-decoration: none">회원가입
+                <b-button @click="gotoPage('/membership')" variant="link" style="color: #b99b9a; text-decoration: none">회원가입
                 </b-button>
               </div>
             </b-col>
@@ -151,23 +151,6 @@ export default {
         email: null,
         password: null,
       },
-      items: [
-        {
-          isActive: true,
-          age: 40,
-          first_name: "Dickerson",
-          last_name: "Macdonald",
-        },
-        { isActive: false, age: 21, first_name: "Larsen", last_name: "Shaw" },
-        {
-          isActive: false,
-          age: 89,
-          first_name: "Geneva",
-          last_name: "Wilson",
-          _showDetails: true,
-        },
-        { isActive: true, age: 38, first_name: "Jami", last_name: "Carney" },
-      ],
     };
   },
   setup() {
@@ -188,13 +171,13 @@ export default {
       else
         alert("아이디나 비밀번호가 일치하지 않습니다.");
     },
-    joinForm() {
-      this.$router.push("/membership");
-    },
     gotoPage(link) {
       this.$router.push(link);
     },
   },
+  mounted(){
+    console.log(this.isLogin);
+  }
 };
 </script>
 
