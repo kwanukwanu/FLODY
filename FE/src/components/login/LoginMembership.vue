@@ -84,7 +84,12 @@
           <br>
           <b-row>
             <b-col>
-              <b-form-input v-model="user.id" placeholder="이메일 주소" required style="border: none;"></b-form-input>
+              <b-form-input 
+              v-model="user.email" 
+              placeholder="이메일 주소" 
+              required style="border: none;"
+              @keyup="emailChecking()">
+              </b-form-input>
             </b-col>
           </b-row>
           <br>
@@ -96,19 +101,33 @@
           <br>
           <b-row>
             <b-col>
-              <b-form-input v-model="user.pw" type="password" placeholder="비밀번호" style="border: none;"></b-form-input>
+              <b-form-input 
+              v-model="user.password" 
+              type="password" 
+              placeholder="비밀번호" 
+              style="border: none;"
+              @keyup="pwChecking"></b-form-input>
             </b-col>
           </b-row>
           <br>
           <b-row>
             <b-col>
-              <b-form-input type="password" placeholder="비밀번호 확인" style="border: none;"></b-form-input>
+              <b-form-input 
+              type="password" 
+              placeholder="비밀번호 확인" 
+              style="border: none;"
+              ></b-form-input>
             </b-col>
           </b-row>
           <br>
           <b-row>
             <b-col>
-              <b-form-input v-model="user.pn" placeholder="휴대폰 번호" style="border: none;"></b-form-input>
+              <b-form-input 
+              v-model="user.phone"
+              placeholder="휴대폰 번호" 
+              style="border: none;"
+              @keyup="getMask(user.phone)">
+              </b-form-input>
             </b-col>
           </b-row>
           <br>
@@ -129,20 +148,148 @@
 </template>
 
 <script>
+import {registMember} from '@/api/member.js';
+
 export default {
   data() {
     return {
       user: {
-        id: null,
+        email: null,
+        password: null,
+        profile: null,
         name: null,
-        pw: null,
-        pn: null,
-      }
+        nickname: null,
+        address: null,
+        phone: null,
+        admin: null
+      },
+      isduplicate: true,
+      isUserid: false,
+      idcheck: false,
+      emailcheck: false,
+      namecheck: false,
+      phonecheck: false,
+      pwcheck: false,
     }
   },
   methods: {
     submit() {
+      console.log("registMember 실행");
+      this.registMember();
+      console.log("registMember 종료");
+    },
 
+    idChecking() {
+      if (!this.isduplicate) this.isduplicate = true;
+      if (this.user.email.length > 4) {
+        console.log("아이디 체크");
+        this.idcheck = true;
+      } else {
+        this.idcheck = false;
+      }
+    },
+
+    pwChecking() {
+      if (this.user.password.length > 7) {
+        this.pwcheck = true;
+      } else {
+        this.pwcheck = false;
+      }
+    },
+
+    emailCheck() {
+      var re =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      this.emailcheck = re.test(this.user.email);
+      console.log(this.emailcheck);
+    },
+
+    emailChecking() {
+      this.emailCheck();
+      this.idChecking();
+    },
+
+    getMask(phoneNumber) {
+      if (!phoneNumber) return phoneNumber;
+      phoneNumber = phoneNumber.replace(/[^0-9]/g, "");
+      console.log(phoneNumber);
+      let res = "";
+      if (phoneNumber.length < 3) {
+        res = phoneNumber;
+      } else {
+        if (phoneNumber.substr(0, 2) == "02") {
+          if (phoneNumber.length <= 5) {
+            //02-123-5678
+            res = phoneNumber.substr(0, 2) + "-" + phoneNumber.substr(2, 3);
+          } else if (phoneNumber.length > 5 && phoneNumber.length <= 9) {
+            //02-123-5678
+            res =
+              phoneNumber.substr(0, 2) +
+              "-" +
+              phoneNumber.substr(2, 3) +
+              "-" +
+              phoneNumber.substr(5);
+          } else if (phoneNumber.length > 9) {
+            //02-1234-5678
+            res =
+              phoneNumber.substr(0, 2) +
+              "-" +
+              phoneNumber.substr(2, 4) +
+              "-" +
+              phoneNumber.substr(6);
+          }
+        } else {
+          if (phoneNumber.length < 8) {
+            res = phoneNumber;
+          } else if (phoneNumber.length == 8) {
+            res = phoneNumber.substr(0, 4) + "-" + phoneNumber.substr(4);
+          } else if (phoneNumber.length == 9) {
+            res =
+              phoneNumber.substr(0, 3) +
+              "-" +
+              phoneNumber.substr(3, 3) +
+              "-" +
+              phoneNumber.substr(6);
+          } else if (phoneNumber.length == 10) {
+            res =
+              phoneNumber.substr(0, 3) +
+              "-" +
+              phoneNumber.substr(3, 3) +
+              "-" +
+              phoneNumber.substr(6);
+          } else if (phoneNumber.length > 10) {
+            //010-1234-5678
+            res =
+              phoneNumber.substr(0, 3) +
+              "-" +
+              phoneNumber.substr(3, 4) +
+              "-" +
+              phoneNumber.substr(7);
+          }
+        }
+      }
+      if (this.user.phone.length > 11) {
+        this.phonecheck = true;
+      }
+      this.user.phone = res;
+    },
+
+    registMember(){
+      registMember(
+        this.user,
+        ({ data }) => {
+          let msg = "등록 처리시 문제가 발생했습니다.";
+          if (data === "SUCCESS") {
+            msg = "등록이 완료되었습니다.";
+          }
+          alert(msg);
+          this.moveList();
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
     },
     back() {
       this.$router.push("/");
