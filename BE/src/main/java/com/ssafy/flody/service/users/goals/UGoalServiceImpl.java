@@ -20,11 +20,11 @@ import java.util.List;
 @RequiredArgsConstructor
 @SuppressWarnings("unchecked") // type unchecked error 발생하는거 안보여줌. 좋은 방법은 아님.
 public class UGoalServiceImpl implements UGoalService {
-    private UGoalsRepository userGoalRepository;
-    private UsersRepository userRepository;
+    private final UGoalsRepository userGoalRepository;
+    private final UsersRepository userRepository;
 
     @Transactional
-    public List<UserGoalResponseDto> findUserGoals(String email) throws Exception{
+    public List<UserGoalResponseDto> findUserGoals(String email) throws Exception {
         Users user = findUser(email);
         List<UGoals> entityList = userGoalRepository.findByUser(user).map(Collections::singletonList)
                 .orElseThrow(() -> new NotFoundException("Goal Not Found"));
