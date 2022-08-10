@@ -7,10 +7,10 @@ import { getUserInfo } from "../../api/member";
 const memberStore = {
   namespaced: true,
   state: () => ({
-    isLogin: false, // 로그인 여부
+    isLogin: true, // 로그인 여부
     isLoginError: null, // 로그인 에러 확인
     userInfo: {
-      name:'ssafy',
+      name:"ssafy",
     },
   }),
   getters: {
@@ -80,6 +80,11 @@ const memberStore = {
         },
       );
     },
+    setLogout({commit}){
+      commit("SET_USER_INFO",null);
+      commit("SET_IS_LOGIN",false);
+      sessionStorage.removeItem("access-token"); //로그 아웃하면 액세스 토큰을 지워라
+    }
   },
 };
 

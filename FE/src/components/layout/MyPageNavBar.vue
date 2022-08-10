@@ -18,7 +18,10 @@
                 <b-button variant="link" style="padding: 0px 0px; color: #B99B9A; text-decoration: none; text-align: left;" v-b-modal.modal-1>목표 등록</b-button>
               </b-col>
               <b-col cols="6">
-                <b-button variant="link" style="padding: 0px 0px; color: #B99B9A; text-decoration: none; text-align: right;">LOGOUT</b-button>
+                <b-button 
+                variant="link" 
+                style="padding: 0px 0px; color: #B99B9A; text-decoration: none; text-align: right;"
+                @click="logout()">LOGOUT</b-button>
               </b-col>
             </b-row>
             </b-col>
@@ -78,7 +81,7 @@ export default {
     const store = useStore();
     const userInfo = computed(() => store.state.memberStore.userInfo);
 
-    return { userInfo };
+    return { store, userInfo };
   },
   data(){
     return{
@@ -93,7 +96,15 @@ export default {
         }
       ],
     }
-  }
+  },
+  methods: {
+    logout(){
+      console.log("logout");
+      this.store.dispatch("memberStore/setLogout");
+      if (this.$route.path != "/") 
+        this.$router.push({ name: "home" });
+    },
+  },
 }
 </script>
 

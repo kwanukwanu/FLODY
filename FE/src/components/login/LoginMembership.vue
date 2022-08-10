@@ -156,12 +156,12 @@ export default {
       user: {
         email: null,
         password: null,
-        profile: null,
+        profile: "default01.png",
         name: null,
-        nickname: null,
-        address: null,
+        nickname: "닉네임",
+        address: "대전 유성구",
         phone: null,
-        admin: null
+        admin: 'false',
       },
       isduplicate: true,
       isUserid: false,
