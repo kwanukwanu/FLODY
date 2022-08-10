@@ -35,15 +35,21 @@ const memberStore = {
         user,
         (response) => {
           if (response.data.message == "success") {
-            console.log("로그인 성공");
-            let token = response.data["access-token"];
-            commit("SET_IS_LOGIN", true);
-            commit("SET_IS_LOGIN_ERROR", false);
-            sessionStorage.setItem("access-token", token);
+            console.log("응답 성공");
+            if(response.data["msg"]==true)
+            {
+              let token = response.data["access-token"];
+              commit("SET_IS_LOGIN", true);
+              commit("SET_IS_LOGIN_ERROR", false);
+              sessionStorage.setItem("access-token", token);
+            }
+            else{
+              console.log("로그인 실패");
+              commit("SET_IS_LOGIN", false);
+              commit("SET_IS_LOGIN_ERROR", true);
+            }
           } else {
-            console.log("로그인 실패");
-            commit("SET_IS_LOGIN", false);
-            commit("SET_IS_LOGIN_ERROR", true);
+            console.log("응답 실패");
           }
         },
         () => {},

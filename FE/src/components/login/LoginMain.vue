@@ -182,7 +182,7 @@ export default {
       this.store.dispatch("memberStore/userConfirm", this.user);
       if (this.isLogin) {
         console.log("로그인 성공, 유저 정보를 받아옵니다.");
-        this.store.dispatch("memberStore/getUserInfo"); // 정보를 받아서 vuex의 user에 저장한다.
+        this.store.dispatch("memberStore/getUserInfo",this.user.email); // 정보를 받아서 vuex의 user에 저장한다.
         this.$router.push("/about"); // 라우터 페이지 이동
       }
       else
