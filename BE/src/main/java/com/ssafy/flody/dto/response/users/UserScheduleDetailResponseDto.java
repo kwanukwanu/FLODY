@@ -1,7 +1,9 @@
 package com.ssafy.flody.dto.response.users;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ssafy.flody.domain.users.schedules.USchedules;
 import lombok.Getter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -9,7 +11,11 @@ import java.util.Date;
 public class UserScheduleDetailResponseDto {
     private String title;
     private String detail;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
     private Boolean done;
 

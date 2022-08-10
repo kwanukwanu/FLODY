@@ -256,6 +256,7 @@ public class ApiController {
             status = HttpStatus.ACCEPTED;
         } catch (Exception e) {
             result.put("msg", ERROR);
+            e.printStackTrace();
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(result, status);

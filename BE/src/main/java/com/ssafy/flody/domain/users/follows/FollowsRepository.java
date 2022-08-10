@@ -3,8 +3,8 @@ package com.ssafy.flody.domain.users.follows;
 import com.ssafy.flody.domain.users.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface FollowsRepository extends JpaRepository<Follows, Long> {
-    Optional<Follows> findByFollower(Users follower);
+    List<Follows> findAllByFollower(Users follower);
 }
