@@ -1,6 +1,5 @@
 package com.ssafy.flody.dto.request.users;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ssafy.flody.domain.users.Users;
 import com.ssafy.flody.domain.users.schedules.USchedules;
 import lombok.Builder;
