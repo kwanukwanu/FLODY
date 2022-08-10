@@ -4,7 +4,7 @@
       <b-row>
         <b-col>
           <!-- fluid alt="Responsive image" -->
-          <b-img src="https://placekitten.com/300/"
+          <b-img src="https://placekitten.com/400/"
             style="width: 100%; height: auto; max-width:700px; display:block; margin:0 auto;"></b-img>
         </b-col>
         <b-col style="background-color: #ffffff;">

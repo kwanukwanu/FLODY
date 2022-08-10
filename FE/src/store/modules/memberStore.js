@@ -9,7 +9,9 @@ const memberStore = {
   state: () => ({
     isLogin: false, // 로그인 여부
     isLoginError: null, // 로그인 에러 확인
-    userInfo: null,
+    userInfo: {
+      name:'ssafy',
+    },
   }),
   getters: {
     checkUserInfo: function (state) {

@@ -1,26 +1,26 @@
 <template>
-    <div style="height:297px;">
+    <div class="scroll" style="height:297px; overflow-y: scroll;">
         <b-row>
-            <b-col cols="2" style="padding: 4px;">
+            <b-col cols="2" style="padding: 0px;">
                 <div class="avatar">
-                    <b-avatar variant="info" src="https://placekitten.com/300/300" size="50px"></b-avatar>
+                    <b-avatar variant="info" src="https://placekitten.com/300/300" size="32px"></b-avatar>
                 </div>
             </b-col>
             <b-col>
                 <b-row>
-                    <div style="text-align: left; padding: 0px; font-weight: bold;">Brown_Cat</div>
+                    <span
+                        style="text-align: left; padding: 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight:500; font-size: 14px; width:92%"><a>Brown_Cat</a>
+                        오늘도 나는 공부를 놓지 않는다. 내 자신에 취한다.</span>
                 </b-row>
                 <b-row>
-                    <div style="text-align: left; padding: 0px;">공부를 놓지 않는다. 취한다.</div>
-                </b-row>
-                <b-row>
-                    <b-col>
+                    <span
+                        style="text-align: left; padding: 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; width:92%">
                         <a v-for="tag in tags" :key="tag" style="text-align: left; padding: 0px; color: #255D4E">
                             #{{ tag }}</a>
-                    </b-col>
+                    </span>
                 </b-row>
-                <b-row style="margin-bottom: 5px;">
-                    <div style="text-align: left; padding: 0px; color: gray; font-size: small;">15시간전</div>
+                <b-row style="margin-bottom: 10px;">
+                    <time style="text-align: left; padding: 0px; color: gray; font-size: 12px;">15시간전</time>
                 </b-row>
             </b-col>
         </b-row>
@@ -28,11 +28,9 @@
             <newspid-item v-for="(item) in items" :key="item" v-bind="item">
             </newspid-item>
         </b-row>
-        <b-row>
-            <b-col style="padding:0px;">
-                <span class="bottom_time_line">---&nbsp;&nbsp;&nbsp;</span>
-                <span class="bottom_like_comment">답글 보기(1개)</span>
-            </b-col>
+        <b-row
+            style="padding:0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin-left: 55px;">
+            <span style="font-size: 12px;" class="bottom_time_line">---답글 보기(1개)</span>
         </b-row>
     </div>
 </template>
@@ -63,4 +61,17 @@ export default {
 </script>
 
 <style>
+
+.avatar{
+    text-align: center;
+}
+.scroll{
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+ .scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+   
+}
 </style>
