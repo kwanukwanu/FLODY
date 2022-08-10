@@ -32,20 +32,29 @@ export default {
       flowers:[
         {
           pos:{
+            active:false,
             posX:0,
             posY:0,
+            xOffset:0,
+            yOffset:0,
           }
         },
         {
           pos:{
+            active:false,
             posX:0,
             posY:0,
+            xOffset:0,
+            yOffset:0,
           }
         },
         {
           pos:{
+            active:false,
             posX:0,
             posY:0,
+            xOffset:0,
+            yOffset:0,
           }
         },
       ],
@@ -120,55 +129,66 @@ export default {
   mounted() {
     var dragItem = document.querySelectorAll("#flower");
     console.log(dragItem);
+    console.log("----------------");
+    console.log(this.flowers[0].pos.posX)
     var container = document.querySelector("#fi");
+    var flowers = this.flowers;
 
-    var active = [false, false, false];
+    // var active = false;
     var currentX;
     var currentY;
-    var initialX;
-    var initialY;
-    var xOffset = 0;
-    var yOffset = 0;
-
-    container.addEventListener("touchstart", dragStart, false);
-    container.addEventListener("touchend", dragEnd, false);
-    container.addEventListener("touchmove", drag, false);
+    // var initialX;
+    // var initialY;
+    // var xOffset = 0;
+    // var yOffset = 0;
 
     container.addEventListener("mousedown", dragStart, false);
     container.addEventListener("mouseup", dragEnd, false);
     container.addEventListener("mousemove", drag, false);
 
-    function dragStart(e) {
-      if (e.type === "touchstart") {
-        initialX = e.touches[0].clientX - xOffset;
-        initialY = e.touches[0].clientY - yOffset;
-      } else {
-        console.log("--------------------")
-        initialX = e.clientX - xOffset;
-        initialY = e.clientY - yOffset;
-        console.log("initialX : " + initialX + ", initialY : " + initialY);
-      }
 
-      // if (e.target === dragItem[0] || e.target === dragItem[1]) {
+    function dragStart(e) {
+      console.log(e.target.__vueParentComponent.props.index);
+      console.log(e.clientY);
+      console.log(e);
+      // console.log(flowers[e.target.__vueParentComponent.props.index].pos.posX)
+      for(var i = 0; i < dragItem.length; i++) {
+        if(e.target === dragItem[i]) {
+          console.log(dragItem[i])
+          flowers[i].pos.active = true;
+
+          flowers[i].pos.posX = e.pageX - flowers[i].pos.xOffset;
+          flowers[i].pos.posY = e.pageY - flowers[i].pos.yOffset;
+          console.log(i + "번째 꽃의 X : " + flowers[i].pos.posX + ", Y : " + flowers[i].pos.posY);
+        }
+      }
+      // if (e.type === "touchstart") {
+      //   initialX = e.touches[0].clientX - xOffset;
+      //   initialY = e.touches[0].clientY - yOffset;
+      // } else {
+      //   console.log("--------------------")
+      //   initialX = e.clientX - xOffset;
+      //   initialY = e.clientY - yOffset;
+      //   console.log("initialX : " + initialX + ", initialY : " + initialY);
+      // }
+
+      // if (e.target === dragItem) {
       //   console.log("--------------------")
       //   console.log(e.target)
       //   active = true;
       // }
-      for(var i = 0; i < dragItem.length; i++) {
-        if(e.target === dragItem[i]) {
-          active[i] = true;
-        }
-      }
     }
 
     function dragEnd() {
-      initialX = currentX;
-      initialY = currentY;
+      // initialX = currentX;
+      // initialY = currentY;
 
       // active = false;
       for(var i = 0; i < dragItem.length; i++) {
-        if(active[i]) {
-          active[i] = false;
+        if(flowers[i].pos.active) {
+          flowers[i].pos.posX = currentX;
+          flowers[i].pos.posY = currentY;
+          flowers[i].pos.active = false;
         }
       }
     }
@@ -192,26 +212,31 @@ export default {
       //   setTranslate(currentX, currentY, dragItem[0]);
       // }
       for(var i = 0; i < dragItem.length; i++) {
-        if(active[i]) {
-          e.preventDefault();
-      
-        if (e.type === "touchmove") {
-          currentX = e.touches[0].clientX - initialX;
-          currentY = e.touches[0].clientY - initialY;
-        } else {
-          currentX = e.clientX - initialX;
-          currentY = e.clientY - initialY;
-        }
+        if(flowers[i].pos.active) {
+        e.preventDefault();
+        currentX = e.pageX - flowers[i].pos.posX;
+        currentY = e.pageY - flowers[i].pos.posY;
 
-        xOffset = currentX;
-        yOffset = currentY;
+        flowers[i].pos.xOffset = currentX;
+        flowers[i].pos.yOffset = currentY;
 
-        setTranslate(currentX, currentY, dragItem[i]);
+        setTranslate(currentX, currentY, dragItem[i], i);
         }
       }
     }
 
     function setTranslate(xPos, yPos, el) {
+      // if(xPos < 0) {
+      //   xPos = 0;
+      // } else if(xPos > 900) {
+      //   xPos = 900;
+      // }
+
+      // if(yPos < 0) {
+      //   yPos = 0;
+      // } else if(yPos > 400) {
+      //   yPos = 400;
+      // }
       el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
     }
 

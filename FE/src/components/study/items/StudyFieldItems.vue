@@ -7,7 +7,10 @@
 
 <script>
 export default {
-
+  props:{
+    index:Number,
+    pos:Object,
+  }
 }
 </script>
 

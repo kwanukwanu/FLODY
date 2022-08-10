@@ -1,6 +1,6 @@
-import jwt_decode from "vue-jwt-decode";
+//import jwt_decode from "vue-jwt-decode";
 import { login } from "@/api/member.js";
-import { findById } from "../../api/member";
+import { getUserInfo } from "../../api/member";
 
 // 회원가입 및 로그인을 수행하는 js파일
 
@@ -33,15 +33,14 @@ const memberStore = {
   actions: {
     async userConfirm({ commit }, user) {
       // axios 작업
-      await login(
+      login(
         user,
         (response) => {
-          console.log("message : "+ response.data.message);
-          if (response.data.message == "success") {
-            console.log("응답 성공");
-            console.log(response.data);
-            if(response.data["msg"]==true)
+          console.log("message : "+ response);
+          console.log(response);
+            if(response.data.msg=="SUCCESS")
             {
+              console.log("로그인 성공");
               let token = response.data["access-token"];
               commit("SET_IS_LOGIN", true);
               commit("SET_IS_LOGIN_ERROR", false);
@@ -52,20 +51,19 @@ const memberStore = {
               commit("SET_IS_LOGIN", false);
               commit("SET_IS_LOGIN_ERROR", false);
             }
-          } else {
-            console.log("응답 실패");
-          }
+
         },
         () => {},
       );
     },
 
     getUserInfo({ commit }, token) {
-      let decode_token = jwt_decode(token);
-      console.log(decode_token.userid);
+      //let decode_token = jwt_decode(token);
+      console.log(token);
       // axios 필요
-      findById(
-        decode_token.userid,
+      getUserInfo(
+        //decode_token.userid,
+        token,
         (response) => {
           console.log("여기까지는 온다");
           console.log(response.data.message);

@@ -86,13 +86,13 @@
           <br />
           <b-row>
             <b-col>
-              <b-form-input v-model="user.email" placeholder="이메일 주소" required style="border: none"></b-form-input>
+              <b-form-input v-model="user.email" placeholder="이메일 주소" required style="border: none" ></b-form-input>
             </b-col>
           </b-row>
           <br />
           <b-row>
             <b-col>
-              <b-form-input v-model="user.password" placeholder="비밀번호" style="border: none"></b-form-input>
+              <b-form-input v-model="user.password" placeholder="비밀번호" style="border: none" ></b-form-input>
             </b-col>
             <br />
             <br />
@@ -148,8 +148,8 @@ export default {
     return {
       fields: ["first_name", "last_name", "show_details"],
       user: {
-        email: null,
-        password: null,
+        email: "ssafy@ssafy.com",
+        password: "1234567",
       },
     };
   },
