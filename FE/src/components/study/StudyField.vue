@@ -12,17 +12,6 @@
     <!-- <img id="flower" src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab; position: relative; left: 0px; top: 0px;" @mousedown="startDrag($event)"/> -->
   </div>
 </b-card>
-<!-- 
-  <div id="outerContainer">
-    <div id="container">
-      <div id="item">
-
-      </div>
-    </div>
-  </div> -->
-
-
-
 </template>
 
 <script>
@@ -61,41 +50,6 @@ export default {
         },
       ],
     }
-  },
-  methods: {
-    // startDrag(event){
-    //   /*
-    //   드래그를 할때
-    //   posX 에는 그림에대한 x 위치를,
-    //   posy 에는 그림에 대한 y 위치를 받아온다
-    //   */
-      
-    //   const bg = document.getElementById('fi');
-    //   const flower = document.getElementById('flower');
-    //   let coordBg = bg.getBoundingClientRect();
-    //   let coordFl = flower.getBoundingClientRect();
-
-    //   console.log(coordFl);
-    //   console.log((coordFl.top + (coordFl.height / 2)) - coordBg.top);
-    //   console.log((coordFl.left + (coordFl.width / 2)) - coordBg.left);
-
-    //   let x1 = event.clientX; 
-    //   let y1 = event.clientY; 
-    //   let x2 = event.offsetX; 
-    //   let y2 = event.offsetY; 
-    //   let x3 = event.screenX; 
-    //   let y3 = event.screenY; 
-    //   console.log("flower : clientX: " + x1 + ", clientY: " + y1);
-    //   console.log("flower : offsetX: " + x2 + ", offsetY: " + y2);
-    //   console.log("flower : screenX: " + x3 + ", screenY: " + y3); 
-
-    //   // posX = getLeft(obj) - e_obj.clientX;
-    //   // posY = getTop(obj) - e_obj.clientY;
-
-    //   // document.onmousemove = moveDrag;
-    //   // document.onmouseup = stopDrag;
-    //   // if(e_obj.preventDefault)e_obj.preventDefault();
-    // },
   },
   setup() {
     function mouseDown(item,e) {
@@ -164,20 +118,11 @@ export default {
 
   },
   mounted() {
-    this.flowerElements = document.getElementsByName('flower');
-    // const ele = document.getElementById('flower');
-    // console.log(ele);
-    // this.posX = ele.style.left;
-    // this.posY = ele.style.top;
-    // console.log("posx : " + this.posX + ", posY : " + this.posY)
-
-
-
-
-    var dragItem = document.querySelector("#flower");
+    var dragItem = document.querySelectorAll("#flower");
+    console.log(dragItem);
     var container = document.querySelector("#fi");
 
-    var active = false;
+    var active = [false, false, false];
     var currentX;
     var currentY;
     var initialX;
@@ -198,12 +143,21 @@ export default {
         initialX = e.touches[0].clientX - xOffset;
         initialY = e.touches[0].clientY - yOffset;
       } else {
+        console.log("--------------------")
         initialX = e.clientX - xOffset;
         initialY = e.clientY - yOffset;
+        console.log("initialX : " + initialX + ", initialY : " + initialY);
       }
 
-      if (e.target === dragItem) {
-        active = true;
+      // if (e.target === dragItem[0] || e.target === dragItem[1]) {
+      //   console.log("--------------------")
+      //   console.log(e.target)
+      //   active = true;
+      // }
+      for(var i = 0; i < dragItem.length; i++) {
+        if(e.target === dragItem[i]) {
+          active[i] = true;
+        }
       }
     }
 
@@ -211,13 +165,35 @@ export default {
       initialX = currentX;
       initialY = currentY;
 
-      active = false;
+      // active = false;
+      for(var i = 0; i < dragItem.length; i++) {
+        if(active[i]) {
+          active[i] = false;
+        }
+      }
     }
 
     function drag(e) {
-      if (active) {
+      // if (active) {
       
-        e.preventDefault();
+      //   e.preventDefault();
+      
+      //   if (e.type === "touchmove") {
+      //     currentX = e.touches[0].clientX - initialX;
+      //     currentY = e.touches[0].clientY - initialY;
+      //   } else {
+      //     currentX = e.clientX - initialX;
+      //     currentY = e.clientY - initialY;
+      //   }
+
+      //   xOffset = currentX;
+      //   yOffset = currentY;
+
+      //   setTranslate(currentX, currentY, dragItem[0]);
+      // }
+      for(var i = 0; i < dragItem.length; i++) {
+        if(active[i]) {
+          e.preventDefault();
       
         if (e.type === "touchmove") {
           currentX = e.touches[0].clientX - initialX;
@@ -230,18 +206,14 @@ export default {
         xOffset = currentX;
         yOffset = currentY;
 
-        setTranslate(currentX, currentY, dragItem);
+        setTranslate(currentX, currentY, dragItem[i]);
+        }
       }
     }
 
     function setTranslate(xPos, yPos, el) {
       el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
     }
-
-
-
-
-
 
   },
   updated() {
