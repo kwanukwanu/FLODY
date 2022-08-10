@@ -142,7 +142,8 @@ export default {
   setup() {
     const store = useStore();
     const profile = computed(() => store.state.newspidStore.profile);
-    return { store, profile };
+    const userInfo = computed(() => store.state.memberStroe.userInfo);
+    return { store, profile,userInfo };
   },
   methods:{
     getTargetId(targetId){

@@ -19,7 +19,8 @@ async function findById(success, fail) {
 // 회원정보 받아오기
 async function getUserInfo(userid, success, fail) {
   console.log("getUserInfo");
-  await api.get(`/user/${userid}`).then(success).catch(fail);
+  console.log("id : "+userid);
+  await api.get(`/user?email=${userid}`).then(success).catch(fail);
 }
 
 // 중복확인

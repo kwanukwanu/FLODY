@@ -7,11 +7,9 @@ import { getUserInfo } from "../../api/member";
 const memberStore = {
   namespaced: true,
   state: () => ({
-    isLogin: true, // 로그인 여부
+    isLogin: false, // 로그인 여부
     isLoginError: null, // 로그인 에러 확인
-    userInfo: {
-      name:"ssafy",
-    },
+    userInfo: null,
   }),
   getters: {
     checkUserInfo: function (state) {
