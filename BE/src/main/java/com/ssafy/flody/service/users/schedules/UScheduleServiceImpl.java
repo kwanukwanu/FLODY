@@ -27,8 +27,7 @@ public class UScheduleServiceImpl implements UScheduleService {
     @Transactional
     public List<UserScheduleListResponseDto> findUserSchedules(String email) throws Exception {
         Users user = findUser(email);
-        List<USchedules> entityList = userScheduleRepository.findByUser(user).map(Collections::singletonList)
-                .orElseThrow(() -> new NotFoundException("Schedule Not Found"));
+        List<USchedules> entityList = userScheduleRepository.findAllByUser(user);
         List<UserScheduleListResponseDto> list = new ArrayList<>();
         for (USchedules uSchedules : entityList) {
             list.add(new UserScheduleListResponseDto(uSchedules));
@@ -57,7 +56,7 @@ public class UScheduleServiceImpl implements UScheduleService {
                 requestDto.getEndDate(),
                 requestDto.getDone()
         );
-        return usNo;
+        return userScheduleRepository.save(uSchedules).getUsNo();
     }
 
     @Transactional

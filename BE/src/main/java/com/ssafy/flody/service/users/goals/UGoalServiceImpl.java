@@ -26,8 +26,7 @@ public class UGoalServiceImpl implements UGoalService {
     @Transactional
     public List<UserGoalResponseDto> findUserGoals(String email) throws Exception {
         Users user = findUser(email);
-        List<UGoals> entityList = userGoalRepository.findByUser(user).map(Collections::singletonList)
-                .orElseThrow(() -> new NotFoundException("Goal Not Found"));
+        List<UGoals> entityList = userGoalRepository.findAllByUser(user);
         List<UserGoalResponseDto> list = new ArrayList<>();
         for (UGoals uGoals : entityList) {
             list.add(new UserGoalResponseDto(uGoals));
@@ -51,7 +50,7 @@ public class UGoalServiceImpl implements UGoalService {
                 requestDto.getRegistDate(),
                 requestDto.getDueDate()
         );
-        return ugNo;
+        return userGoalRepository.save(uGoals).getUgNo();
     };
 
     public Long removeUserGoal(Long ugNo) {

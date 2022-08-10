@@ -24,8 +24,7 @@ public class UFollowServiceImpl implements UFollowService {
     private final FollowsRepository followRepository;
     public List<UserFollowResponseDto> findUserFollows(String email) throws Exception {
         Users follower = findUser(email);
-        List<Follows> entityList = followRepository.findByFollower(follower).map(Collections::singletonList)
-                .orElseThrow(() -> new IllegalArgumentException("Follower Not Found"));
+        List<Follows> entityList = followRepository.findAllByFollower(follower);
         List<UserFollowResponseDto> list = new ArrayList<>();
         for (Follows follows : entityList) {
             list.add(new UserFollowResponseDto(follows));
