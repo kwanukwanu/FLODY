@@ -368,11 +368,13 @@ public class ApiController {
         HttpStatus status;
         try {
             String email = jwtService.decodeToken(token);
-            if (uGoalService.addUserGoal(email, requestDto) != 0L) {
-                result = SUCCESS;
-            } else {
-                result = FAIL;
-            }
+            uGoalService.addUserGoal(email, requestDto);
+            result = SUCCESS;
+//            if (uGoalService.addUserGoal(email, requestDto) != 0L) {
+//                result = SUCCESS;
+//            } else {
+//                result = FAIL;
+//            }
             status = HttpStatus.ACCEPTED;
         } catch (Exception e) {
             result = e.getMessage();

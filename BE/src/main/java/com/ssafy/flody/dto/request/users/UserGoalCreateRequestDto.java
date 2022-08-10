@@ -14,18 +14,22 @@ import java.util.Date;
 public class UserGoalCreateRequestDto {
     private String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date registDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
 
     @Builder
-    public UserGoalCreateRequestDto(String name, Date dueDate) {
+    public UserGoalCreateRequestDto(String name, Date registDate, Date dueDate) {
         this.name = name;
+        this.registDate = registDate;
         this.dueDate = dueDate;
     }
 
-    public UGoals toEntity(Users user){
+    public UGoals toEntity(Users user) {
         return UGoals.builder()
                 .user(user)
                 .name(name)
+                .registDate(registDate)
                 .dueDate(dueDate)
                 .build();
     }
