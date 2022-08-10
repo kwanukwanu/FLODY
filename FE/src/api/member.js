@@ -5,7 +5,7 @@ const api = apiInstance();
 // 로그인 (수정 완)
 async function login(user, success, fail) {
   console.log("로그인 시도");
-  console.log(user);
+  console.log("user : "+ user);
   await api
     .post(`/user/login`, JSON.stringify(user))
     .then(success)

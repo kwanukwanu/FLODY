@@ -47,6 +47,18 @@ export default {
             posY:0,
           }
         },
+        {
+          pos:{
+            posX:0,
+            posY:0,
+          }
+        },
+        {
+          pos:{
+            posX:0,
+            posY:0,
+          }
+        },
       ],
     }
   },
