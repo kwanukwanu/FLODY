@@ -162,14 +162,19 @@ export default {
   methods: {
     async confirm() {
       console.log("confirm 수행");
-      this.store.dispatch("memberStore/userConfirm", this.user);
+      await this.store.dispatch("memberStore/userConfirm", this.user);
+      console.log("isLogin 확인");
       if (this.isLogin) {
         console.log("로그인 성공, 유저 정보를 받아옵니다.");
-        this.store.dispatch("memberStore/getUserInfo",this.user.email); // 정보를 받아서 vuex의 user에 저장한다.
+        await this.store.dispatch("memberStore/getUserInfo",this.user.email); // 정보를 받아서 vuex의 user에 저장한다.
         this.$router.push("/about"); // 라우터 페이지 이동
       }
       else
+      {
+        console.log("로그인 실패");
         alert("아이디나 비밀번호가 일치하지 않습니다.");
+      }
+      console.log("confirm 종료");
     },
     gotoPage(link) {
       this.$router.push(link);

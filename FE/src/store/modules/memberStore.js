@@ -33,7 +33,8 @@ const memberStore = {
   actions: {
     async userConfirm({ commit }, user) {
       // axios 작업
-      login(
+      console.log("login 시작");
+      await login(
         user,
         (response) => {
           console.log("message : "+ response);
@@ -55,6 +56,7 @@ const memberStore = {
         },
         () => {},
       );
+      console.log("login 끝");
     },
 
     getUserInfo({ commit }, token) {
@@ -66,9 +68,9 @@ const memberStore = {
         token,
         (response) => {
           console.log("여기까지는 온다");
-          console.log(response.data.message);
-          if (response.data.message === "success") {
-            commit("SET_USER_INFO", response.data.userInfo);
+          console.log(response.data.msg);
+          if (response.data.msg === "SUCCESS") {
+            commit("SET_USER_INFO", response.data.item);
           } else {
             console.log("유저 정보 없음!!");
           }

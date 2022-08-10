@@ -275,8 +275,8 @@ export default {
       this.user.phone = res;
     },
 
-    registMember(){
-      registMember(
+    async registMember(){
+      await registMember(
         this.user,
         ({ data }) => {
           let msg = "등록 처리시 문제가 발생했습니다.";
