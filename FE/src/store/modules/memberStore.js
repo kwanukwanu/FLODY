@@ -36,6 +36,7 @@ const memberStore = {
         (response) => {
           if (response.data.message == "success") {
             console.log("응답 성공");
+            console.log(response.data);
             if(response.data["msg"]==true)
             {
               let token = response.data["access-token"];
