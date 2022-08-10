@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Getter
 public class UserScheduleListResponseDto {
-    //private Long useNo;
+    private Long usNo;
     private String title;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
@@ -18,6 +18,7 @@ public class UserScheduleListResponseDto {
     private Boolean done;
 
     public UserScheduleListResponseDto(USchedules entity){
+        this.usNo = entity.getUsNo();
         this.title = entity.getTitle();
         this.startDate = entity.getStartDate();
         this.endDate = entity.getEndDate();

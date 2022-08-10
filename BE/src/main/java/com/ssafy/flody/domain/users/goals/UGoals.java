@@ -30,9 +30,8 @@ public class UGoals {
     @Column(nullable = false)
     private Date dueDate;
 
-    public void update(String name, Date registDate, Date dueDate) {
+    public void update(String name, Date dueDate) {
         this.name = name;
-        this.registDate = registDate;
         this.dueDate = dueDate;
     }
 }

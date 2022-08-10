@@ -13,12 +13,12 @@ import lombok.Setter;
 public class UserCreateRequestDto {
     private String email;
     private String password;
-    private String profile;
+    private String profile = "basic profile.jpg";
     private String name;
-    private String nickname;
+    private String nickname = "익명";
     private String address;
     private String phone;
-    private Boolean admin;
+    private Boolean admin = false;
 
     @Builder
     public UserCreateRequestDto(

@@ -9,6 +9,7 @@ import java.util.Date;
 
 @Getter
 public class UserScheduleDetailResponseDto {
+    private Long usNo;
     private String title;
     private String detail;
 
@@ -20,6 +21,7 @@ public class UserScheduleDetailResponseDto {
     private Boolean done;
 
     public UserScheduleDetailResponseDto(USchedules entity){
+        this.usNo = entity.getUsNo();
         this.title = entity.getTitle();
         this.detail = entity.getDetail();
         this.startDate = entity.getStartDate();

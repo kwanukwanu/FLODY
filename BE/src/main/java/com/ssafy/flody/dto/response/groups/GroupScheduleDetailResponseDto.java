@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Getter
 public class GroupScheduleDetailResponseDto {
+    private Long gsNo;
     private String title;
     private String detail;
     private Date startDate;
@@ -14,6 +15,7 @@ public class GroupScheduleDetailResponseDto {
     private Boolean done;
 
     public GroupScheduleDetailResponseDto(GSchedules entity){
+        this.gsNo = entity.getGsNo();
         this.title = entity.getTitle();
         this.detail = entity.getDetail();
         this.startDate = entity.getStartDate();

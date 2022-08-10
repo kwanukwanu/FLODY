@@ -9,6 +9,7 @@ import java.util.Date;
 
 @Getter
 public class UserGoalResponseDto {
+    private Long ugNo;
     private String title;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -18,6 +19,7 @@ public class UserGoalResponseDto {
     private Date dueDate;
 
     public UserGoalResponseDto(UGoals entity){
+        this.ugNo = entity.getUgNo();
         this.title = entity.getName();
         this.registDate = entity.getRegistDate();
         this.dueDate = entity.getDueDate();

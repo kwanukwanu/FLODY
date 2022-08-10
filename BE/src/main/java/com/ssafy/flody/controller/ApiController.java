@@ -458,59 +458,54 @@ public class ApiController {
     }
 
     @PostMapping("/group")
-    public ResponseEntity<String> GroupAdd(@RequestBody GroupCreateRequestDto requestDto) {
-        String result;
+    public ResponseEntity<Map<String, Object>> GroupAdd(@RequestBody GroupCreateRequestDto requestDto) {
+        HashMap<String, Object> result = new HashMap<>();
         HttpStatus status;
         try {
-            if (groupService.addGroup(requestDto) != 0L) {
-                result = SUCCESS;
+            Long groNo = groupService.addGroup(requestDto);
+            // groupMemberService.addMember(email, "OWNER");
+            if (groNo != 0L) {
+                result.put("item", groNo);
+                result.put("msg", SUCCESS);
             } else {
-                result = FAIL;
+                result.put("msg", FAIL);
             }
             status = HttpStatus.ACCEPTED;
         } catch (Exception e) {
-            result = e.getMessage();
+            result.put("error", e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(result, status);
     }
 
     @PutMapping("/group")
-    public ResponseEntity<String> GroupModify(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam Long groNo, @RequestBody GroupUpdateRequestDto requestDto) {
-        String result;
+    public ResponseEntity<Map<String, Object>> GroupModify(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam Long groNo, @RequestBody GroupUpdateRequestDto requestDto) {
+        HashMap<String, Object> result = new HashMap<>();
         HttpStatus status;
         try {
             String email = jwtService.decodeToken(token);
-            if (true) { //여기서 email로 groupMemberService.validateEditor 판별
-                if (groupService.modifyGroup(groNo, requestDto) != null) {
-                    result = SUCCESS;
-                } else {
-                    result = FAIL;
-                }
-            } else {
-                result = FAIL;
-            }
+            // groupMemberService.isValid(email, groNo);
+            groupService.modifyGroup(groNo, requestDto);
+            result.put("msg", SUCCESS);
             status = HttpStatus.ACCEPTED;
         } catch (Exception e) {
-            result = ERROR;
+            result.put("msg", FAIL);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(result, status);
     }
 
     @DeleteMapping("/group")
-    public ResponseEntity<String> GroupRemove(@RequestParam Long groNo) {
-        String result;
+    public ResponseEntity<Map<String, Object>> GroupRemove(@RequestParam Long groNo) {
+        HashMap<String, Object> result = new HashMap<>();
         HttpStatus status;
         try {
-            if (groupService.removeGroup(groNo) != 0L) {
-                result = SUCCESS;
-            } else {
-                result = FAIL;
-            }
+            // groupMemberService.isValid(email, groNo);
+            groupService.removeGroup(groNo);
+            result.put("msg", SUCCESS);
             status = HttpStatus.ACCEPTED;
         } catch (Exception e) {
-            result = ERROR;
+            result.put("msg", FAIL);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(result, status);

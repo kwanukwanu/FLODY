@@ -14,7 +14,7 @@ import java.util.Date;
 public class UserGoalCreateRequestDto {
     private String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date registDate;
+    private Date registDate = new Date(System.currentTimeMillis());
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
 
