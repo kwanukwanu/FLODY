@@ -8,7 +8,7 @@ const memberStore = {
   namespaced: true,
   state: () => ({
     isLogin: false, // 로그인 여부
-    isLoginError: false, // 로그인 에러 확인
+    isLoginError: null, // 로그인 에러 확인
     userInfo: null,
   }),
   getters: {
@@ -34,6 +34,7 @@ const memberStore = {
       await login(
         user,
         (response) => {
+          console.log("message : "+ response.data.message);
           if (response.data.message == "success") {
             console.log("응답 성공");
             console.log(response.data);
@@ -47,7 +48,7 @@ const memberStore = {
             else{
               console.log("로그인 실패");
               commit("SET_IS_LOGIN", false);
-              commit("SET_IS_LOGIN_ERROR", true);
+              commit("SET_IS_LOGIN_ERROR", false);
             }
           } else {
             console.log("응답 실패");
@@ -55,10 +56,6 @@ const memberStore = {
         },
         () => {},
       );
-
-      // 현재는 로그인이 되도록 설정
-      // commit("SET_IS_LOGIN", true);
-      // commit("SET_IS_LOGIN_ERROR", false);
     },
 
     getUserInfo({ commit }, token) {
@@ -80,13 +77,6 @@ const memberStore = {
           console.log(error);
         },
       );
-
-      // const data = {
-      //   id: "ssafy4321",
-      //   password: "1234",
-      //   name: "최싸피",
-      // };
-      // commit("SET_USER_INFO", data);
     },
   },
 };
