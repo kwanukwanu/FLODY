@@ -11,5 +11,7 @@ import chatStore from "@/store/modules/chatStore.js";
 
 export default createStore({
   modules: { memberStore, groupStore, calendarStore, boardStore, newspidStore, chatStore },
-  plugins: [createdPersistedState()],
+  plugins: [createdPersistedState({
+    storage: sessionStorage,
+  })],
 });

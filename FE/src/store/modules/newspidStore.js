@@ -2,6 +2,7 @@ const newspidStore = {
   namespaced: true,
   state: {
     isMyBoard: false,
+    clickNickname: " ",
     selectedPid: {
       index: 0,
       number: 0,
@@ -13,7 +14,7 @@ const newspidStore = {
       category: "자유",
     },
     profile: {
-      nickName: "Giri_boy",
+      nickName: "ssafy3",
       board_num: 44,
       follower: 22,
       follow: 13,
@@ -76,6 +77,9 @@ const newspidStore = {
     SET_COMMENTS: (state, comments) => {
       state.comments = comments;
     },
+    SET_CLICK_NICKNAME: (state, clickNickname) => {
+      state.clickNickname = clickNickname;
+    }
   },
   actions: {
     selectedBoard({ commit }, board) {
@@ -87,6 +91,9 @@ const newspidStore = {
     },
     setcomments({ commit }, comments) {
       commit("SET_COMMENTS", comments);
+    },
+    setClickNickname({ commit }, clickNickname) {
+      commit("SET_CLICK_NICKNAME", clickNickname);
     },
   },
 };

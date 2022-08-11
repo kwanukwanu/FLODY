@@ -8,7 +8,7 @@
     <b-row>
       <span
         style="display: inline; padding: 0px; text-align: left; font-weight: 500; font-size: 14px; margin-top:5px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; width:70%">
-        <a>adrianycc</a>
+        <a @click="getClickNickname(profile.nickName)">adrianycc</a>
         <b-button
           style="color: black; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 14px;"
           v-b-modal.modal-5>
@@ -33,8 +33,28 @@
 </template>
 
 <script>
-export default {
+import {computed} from "vue";
+import {useStore} from "vuex";
 
+export default {
+  setup() {
+    const store = useStore();
+    const profile = computed(() => store.state.newspidStore.profile);
+    const userInfo = computed(() => store.state.memberStore.userInfo);
+    const clickNickname = computed(() => store.state.newspidStore.clickNickname);
+    return { store, profile,userInfo, clickNickname };
+  },
+  methods: {
+    getClickNickname(clickNickname) {
+      console.log(clickNickname);
+      console.log(this.profile.nickName);
+      console.log(this.userInfo.nickname);
+      this.store.dispatch("newspidStore/setClickNickname", clickNickname);
+    }
+  },
+  mounted() {
+    console.log("누구의 프로필 : "+this.clickNickname);
+  }
 }
 </script>
 

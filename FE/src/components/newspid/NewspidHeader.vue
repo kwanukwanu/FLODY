@@ -1,5 +1,6 @@
 <template>
-  <b-container>
+  <div v-if="clickNickname == ' '"></div>
+  <b-container v-else-if="clickNickname != userInfo.nickname">
     <br>
     <b-row style="margin-bottom:27px">
       <b-col cols="3" style="padding: 0px; text-align: center;">
@@ -8,7 +9,7 @@
       <b-col>
         <b-row style="margin-bottom:10px;">
           <b-col style="text-align: left; padding: 0px;">
-            <span style="font-weight: 100; font-size: 25px; margin-right: 12px;">{{ profile.nickName }}</span>
+            <span style="font-weight: 100; font-size: 25px; margin-right: 12px;" @click="getClickNickname(profile.nickName)">{{ profile.nickName }}</span>
             <b-button size="sm" variant="link"
               style="color: black; text-decoration: none; font-weight: 100; border: 1px solid; vertical-align:super;"
               v-b-modal.chatting2
@@ -54,9 +55,9 @@
       </b-col>
     </b-row>
   </b-container>
-  <hr>
+  <!-- <hr> -->
 
-  <b-container>
+  <b-container v-else-if="clickNickname == userInfo.nickname">
     <br>
     <!-- <b-row align-v="center"> -->
     <b-row style="margin-bottom:27px">
@@ -142,14 +143,22 @@ export default {
   setup() {
     const store = useStore();
     const profile = computed(() => store.state.newspidStore.profile);
-    const userInfo = computed(() => store.state.memberStroe.userInfo);
-    return { store, profile,userInfo };
+    const userInfo = computed(() => store.state.memberStore.userInfo);
+    const clickNickname = computed(() => store.state.newspidStore.clickNickname);
+    return { store, profile,userInfo, clickNickname };
   },
   methods:{
     getTargetId(targetId){
       console.log(targetId);
       this.store.dispatch("chatStore/set_targetId",targetId);
+    },
+    getClickNickname(clickNickname) {
+      console.log(clickNickname);
+      this.store.dispatch("newspidStore/setClickNickname", clickNickname);
     }
+  },
+  mounted() {
+    console.log("누구의 프로필 : "+this.clickNickname);
   }
 }
 </script>
