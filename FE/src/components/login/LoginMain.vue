@@ -86,13 +86,13 @@
           <br />
           <b-row>
             <b-col>
-              <b-form-input v-model="user.email" placeholder="이메일 주소" required style="border: none" ></b-form-input>
+              <b-form-input v-model="user.email" placeholder="이메일 주소" required style="border: none"></b-form-input>
             </b-col>
           </b-row>
           <br />
           <b-row>
             <b-col>
-              <b-form-input v-model="user.password" placeholder="비밀번호" style="border: none" ></b-form-input>
+              <b-form-input v-model="user.password" placeholder="비밀번호" style="border: none"></b-form-input>
             </b-col>
             <br />
             <br />
@@ -106,22 +106,21 @@
           <b-row>
             <b-col>
               <div class="button_2">
-                <b-button @click="gotoPage('/membership')" variant="link" style="
-                    color: #b99b9a;
-                    text-decoration: none;
-                    font-weight: 100;
+                <b-button v-b-modal.find variant="link" @click="findID()" style="color: #b99b9a; text-decoration: none; font-weight: 100;
                   ">아이디 찾기</b-button>
               </div>
             </b-col>
             <b-col>
               <div class="button_2">
-                <b-button @click="gotoPage('/membership')" variant="link" style="color: #b99b9a; text-decoration: none">비밀번호 찾기
+                <b-button v-b-modal.find variant="link" @click="findPW()" style="color: #b99b9a; text-decoration: none">
+                  비밀번호 찾기
                 </b-button>
               </div>
             </b-col>
             <b-col>
               <div class="button_2">
-                <b-button @click="gotoPage('/membership')" variant="link" style="color: #b99b9a; text-decoration: none">회원가입
+                <b-button @click="gotoPage('/membership')" variant="link" style="color: #b99b9a; text-decoration: none">
+                  회원가입
                 </b-button>
               </div>
             </b-col>
@@ -133,6 +132,9 @@
         </b-container>
       </b-card>
     </b-row>
+    <b-modal hide-footer title="아이디/비밀번호 찾기" centered id="find" size="lg" style="text-align: center;">
+      <login-modal-find />
+    </b-modal>
   </b-container>
 </template>
 
@@ -141,9 +143,10 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 
 import LoginRegister from "./LoginRegister.vue";
+import LoginModalFind from "./modal/LoginModalFind.vue";
 
 export default {
-  components: { LoginRegister },
+  components: { LoginRegister, LoginModalFind },
   data() {
     return {
       fields: ["first_name", "last_name", "show_details"],
@@ -151,6 +154,8 @@ export default {
         email: "ssafy@ssafy.com",
         password: "1234567",
       },
+      idfind: false,
+      pwfind: false,
     };
   },
   setup() {
@@ -166,11 +171,10 @@ export default {
       console.log("isLogin 확인");
       if (this.isLogin) {
         console.log("로그인 성공, 유저 정보를 받아옵니다.");
-        await this.store.dispatch("memberStore/getUserInfo",this.user.email); // 정보를 받아서 vuex의 user에 저장한다.
+        await this.store.dispatch("memberStore/getUserInfo", this.user.email); // 정보를 받아서 vuex의 user에 저장한다.
         this.$router.push("/about"); // 라우터 페이지 이동
       }
-      else
-      {
+      else {
         console.log("로그인 실패");
         alert("아이디나 비밀번호가 일치하지 않습니다.");
       }
@@ -179,8 +183,16 @@ export default {
     gotoPage(link) {
       this.$router.push(link);
     },
+    findID() {
+      this.idfind = true;
+      this.pwfind = false;
+    },
+    findPW() {
+      this.pwfind = true;
+      this.idfind = false;
+    }
   },
-  mounted(){
+  mounted() {
     console.log(this.isLogin);
   }
 };

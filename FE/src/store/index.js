@@ -10,8 +10,17 @@ import newspidStore from "@/store/modules/newspidStore.js";
 import chatStore from "@/store/modules/chatStore.js";
 
 export default createStore({
-  modules: { memberStore, groupStore, calendarStore, boardStore, newspidStore, chatStore },
-  plugins: [createdPersistedState({
-    storage: sessionStorage,
-  })],
+  modules: {
+    memberStore,
+    groupStore,
+    calendarStore,
+    boardStore,
+    newspidStore,
+    chatStore,
+  },
+  plugins: [
+    createdPersistedState({
+      storage: sessionStorage,
+    }),
+  ],
 });

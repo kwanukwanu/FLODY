@@ -8,95 +8,17 @@
   </ul> -->
   <router-view />
   <b-container>
-    <b-row>
-      <b-col>
-        <b-row>
-          <h4 style="font-weight:bold">정처기 뿌셔</h4>
-        </b-row>
-        <b-row>
-          <h5>(정보처리기사)</h5>
-        </b-row>
-      </b-col>
-      <b-col>
-        <h1 style="color:red; font-weight:600; text-align: right;">D-3</h1>
-      </b-col>
-    </b-row>
+    <group-header></group-header>
 
     <br>
     <b-row>
       <b-col>
         <b-card style="max-width:25rem; border-color: #a48282;">
-          <v-calendar is-expanded :attributes="attributes" @dayclick="onDayClick" @update:from-page="onUpdatePage"
-            @update:to-page="onUpdatePageTo" @daymouseenter="onMouseEnter" @daymouseleave="onMouseLeave"
-            @dayfocusin="onDayFocusIn" @dayfocusout="onDayFocusOut" @transition-start="onTransitionStart"
-            @transition-end="onTransitionEnd"></v-calendar>
+          <group-calendar></group-calendar>
         </b-card>
       </b-col>
       <b-col>
-        <b-card style="border-color: #a48282; max-width: 35rem; height:304px; overflow-y: scroll;">
-          <b-row>
-            <b-col cols="10">
-              <span
-                style="text-align:left; font-weight:bold; font-size: large; vertical-align:-webkit-baseline-middle;">Todo
-                List</span>
-            </b-col>
-            <b-col cols="2">
-              <span style="text-align:right;">
-                <b-button size="sm" style="background-color:white; border-color:white;" v-b-modal.modal-8><svg
-                    width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 5v14m-7-7h14" stroke="#444" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round" />
-                  </svg></b-button>
-              </span>
-            </b-col>
-          </b-row>
-          <hr />
-          <ul style="list-style-type :none;">
-            <li>
-              <div class="checkbox">
-                <input type="checkbox" name="packersOff" id="packers" value="1" />
-                <label for="packers" class="strikethrough">&nbsp;네트워크 뽀사기</label>
-              </div>
-            </li>
-            <li>
-              <div class="checkbox">
-                <input type="checkbox" name="packersOff" id="packers_2" value="2" />
-                <label for="packers_2" class="strikethrough">&nbsp;보안 유형 정복</label>
-              </div>
-            </li>
-            <li>
-              <div class="checkbox">
-                <input type="checkbox" name="packersOff" id="packers_3" value="3" />
-                <label for="packers_3" class="strikethrough">&nbsp;21년 2회차 실기 풀이</label>
-              </div>
-            </li>
-            <li>
-              <div class="checkbox">
-                <input type="checkbox" name="packersOff" id="packers_4" value="4" />
-                <label for="packers_4" class="strikethrough">&nbsp;java 뽀사기</label>
-              </div>
-            </li>
-            <li>
-              <div class="checkbox">
-                <input type="checkbox" name="packersOff" id="packers_5" value="5" />
-                <label for="packers_5" class="strikethrough">&nbsp;python 유형 정복</label>
-              </div>
-            </li>
-            <li>
-              <div class="checkbox">
-                <input type="checkbox" name="packersOff" id="packers_6" value="6" />
-                <label for="packers_6" class="strikethrough">&nbsp;22년 2회차 실기 풀이</label>
-              </div>
-            </li>
-            <li>
-              <div class="checkbox">
-                <input type="checkbox" name="packersOff" id="packers_7" value="7" />
-                <label for="packers_7" class="strikethrough">&nbsp;3차 스터디 회의</label>
-              </div>
-            </li>
-
-          </ul>
-        </b-card>
+        <group-todo></group-todo>
       </b-col>
     </b-row>
   </b-container>
@@ -213,9 +135,19 @@
 </template>
 
 <script>
-import {computed} from "vue";
-import {useStore} from "vuex";
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+import GroupHeader from "@/components/group/GroupHeader.vue";
+import GroupCalendar from "@/components/group/GroupCalandar.vue";
+import GroupTodo from "@/components/group/GroupTodo.vue";
+
 export default {
+  components: {
+    GroupHeader,
+    GroupCalendar,
+    GroupTodo,
+  },
   data() {
     //todo : description(할 일), isComplete(완료여부), dates(날짜), color(색상표시)
 
@@ -226,63 +158,16 @@ export default {
     return {
       incId: this.todos.length,
       days: [],
-      prodArr: [] 
+      prodArr: []
     };
   },
   setup() {
-      const store = useStore();
-      const todos = computed(()=>store.state.calendarStore.todos);
+    const store = useStore();
+    const todos = computed(() => store.state.calendarStore.todos);
 
-      return { store,todos };
+    return { store, todos };
   },
   methods: {
-    // 참고 : https://vcalendar.io/examples/datepickers.html
-    onDayClick(day) {
-      console.log("click");
-      console.log(day);
-      console.log(day.id);
-      const idx = this.days.findIndex((d) => d.id === day.id);
-      if (idx >= 0) {
-        this.days.splice(idx, 1);
-      } else {
-        this.days.push({
-          id: day.id,
-          date: day.date,
-        });
-      }
-    },
-    onUpdatePage(data) {
-      //console.log("update:from-page");
-      console.log(data);
-    },
-    onUpdatePageTo(data) {
-      //console.log("update:to-page");
-      console.log(data);
-    },
-    onMouseEnter(data) {
-      //console.log("mouseEnter");
-      console.log(data);
-    },
-    onMouseLeave(data) {
-      //console.log("mouseLeave");
-      console.log(data);
-    },
-    onDayFocusIn(data) {
-      //console.log("focusIn");
-      console.log(data);
-    },
-    onDayFocusOut(data) {
-      //console.log("focusOut");
-      console.log(data);
-    },
-    onTransitionStart(data) {
-      //console.log("transitionStart");
-      console.log(data);
-    },
-    onTransitionEnd(data) {
-      //console.log("transitionEnd");
-      console.log(data);
-    },
   },
   computed: {
     dates() {
@@ -325,15 +210,17 @@ export default {
 </script>
 
 <style>
-li{
-  margin-bottom:15px;
+li {
+  margin-bottom: 15px;
 }
-input[type=checkbox]:checked + label.strikethrough{
+
+input[type=checkbox]:checked+label.strikethrough {
   text-decoration: line-through;
-  text-decoration-color:#BC6464;
-  color:#9F9F9F;
+  text-decoration-color: #BC6464;
+  color: #9F9F9F;
 }
-.checkbox{
+
+.checkbox {
   accent-color: #E3D6D6;
 }
 </style>

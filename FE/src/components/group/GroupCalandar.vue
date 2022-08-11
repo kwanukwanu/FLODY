@@ -1,22 +1,12 @@
 <template>
-    <v-calendar
-    is-expanded
-    :attributes="attributes"
-    @dayclick="onDayClick"
-    @update:from-page="onUpdatePage"
-    @update:to-page="onUpdatePageTo"
-    @daymouseenter="onMouseEnter"
-    @daymouseleave="onMouseLeave"
-    @dayfocusin="onDayFocusIn"
-    @dayfocusout="onDayFocusOut"
-    @transition-start="onTransitionStart"
-    @transition-end="onTransitionEnd"
-  ></v-calendar>
+  <v-calendar is-expanded :attributes="attributes" @dayclick="onDayClick" @update:from-page="onUpdatePage"
+    @update:to-page="onUpdatePageTo" @dayfocusin="onDayFocusIn" @dayfocusout="onDayFocusOut"
+    @transition-start="onTransitionStart" @transition-end="onTransitionEnd"></v-calendar>
 </template>
 
 <script>
-import {computed} from "vue";
-import {useStore} from "vuex";
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
   data() {
     //todo : description(할 일), isComplete(완료여부), dates(날짜), color(색상표시)
@@ -31,10 +21,10 @@ export default {
     };
   },
   setup() {
-      const store = useStore();
-      const todos = computed(()=>store.state.calendarStore.todos);
+    const store = useStore();
+    const todos = computed(() => store.state.groupStore.todos);
 
-      return { store,todos };
+    return { store, todos };
   },
   methods: {
     // 참고 : https://vcalendar.io/examples/datepickers.html
@@ -125,5 +115,4 @@ export default {
 </script>
 
 <style>
-
 </style>
