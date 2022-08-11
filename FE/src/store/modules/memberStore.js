@@ -7,9 +7,11 @@ import { getUserInfo } from "../../api/member";
 const memberStore = {
   namespaced: true,
   state: () => ({
-    isLogin: false, // 로그인 여부
+    isLogin: true, // 로그인 여부
     isLoginError: null, // 로그인 에러 확인
-    userInfo: null,
+    userInfo: {
+      name: "ssafy_test",
+    },
   }),
   getters: {
     checkUserInfo: function (state) {
@@ -35,22 +37,19 @@ const memberStore = {
       await login(
         user,
         (response) => {
-          console.log("message : "+ response);
+          console.log("message : " + response);
           console.log(response);
-            if(response.data.msg=="SUCCESS")
-            {
-              console.log("로그인 성공");
-              let token = response.data["access-token"];
-              commit("SET_IS_LOGIN", true);
-              commit("SET_IS_LOGIN_ERROR", false);
-              sessionStorage.setItem("access-token", token);
-            }
-            else{
-              console.log("로그인 실패");
-              commit("SET_IS_LOGIN", false);
-              commit("SET_IS_LOGIN_ERROR", false);
-            }
-
+          if (response.data.msg == "SUCCESS") {
+            console.log("로그인 성공");
+            let token = response.data["access-token"];
+            commit("SET_IS_LOGIN", true);
+            commit("SET_IS_LOGIN_ERROR", false);
+            sessionStorage.setItem("access-token", token);
+          } else {
+            console.log("로그인 실패");
+            commit("SET_IS_LOGIN", false);
+            commit("SET_IS_LOGIN_ERROR", false);
+          }
         },
         () => {},
       );
@@ -68,7 +67,7 @@ const memberStore = {
           console.log("여기까지는 온다");
           console.log(response.data.msg);
           if (response.data.msg === "SUCCESS") {
-            console.log("확인")
+            console.log("확인");
             commit("SET_USER_INFO", response.data.item);
           } else {
             console.log("유저 정보 없음!!");
@@ -79,11 +78,11 @@ const memberStore = {
         },
       );
     },
-    setLogout({commit}){
-      commit("SET_USER_INFO"," ");
-      commit("SET_IS_LOGIN",false);
+    setLogout({ commit }) {
+      commit("SET_USER_INFO", " ");
+      commit("SET_IS_LOGIN", false);
       sessionStorage.removeItem("access-token"); //로그 아웃하면 액세스 토큰을 지워라
-    }
+    },
   },
 };
 
