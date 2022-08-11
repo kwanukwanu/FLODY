@@ -68,6 +68,7 @@ const memberStore = {
           console.log("여기까지는 온다");
           console.log(response.data.msg);
           if (response.data.msg === "SUCCESS") {
+            console.log("확인")
             commit("SET_USER_INFO", response.data.item);
           } else {
             console.log("유저 정보 없음!!");
@@ -79,7 +80,7 @@ const memberStore = {
       );
     },
     setLogout({commit}){
-      commit("SET_USER_INFO",null);
+      commit("SET_USER_INFO"," ");
       commit("SET_IS_LOGIN",false);
       sessionStorage.removeItem("access-token"); //로그 아웃하면 액세스 토큰을 지워라
     }
