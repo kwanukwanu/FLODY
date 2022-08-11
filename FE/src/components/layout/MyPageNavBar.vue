@@ -10,7 +10,7 @@
           <b-col cols="9">
           <b-row>
           <b-col>
-              <b-card-text style="margin-left:3px; font-weight: bold; font-size: large;">{{userInfo.name}}</b-card-text>
+              <b-card-text style="margin-left:3px; font-weight: bold; font-size: large;" @click="getClickNickname(userInfo.nickname)">{{userInfo.name}}</b-card-text>
             </b-col>
           </b-row>
             <b-row>
@@ -79,9 +79,11 @@ export default {
   components: { MyPageItems },
   setup() {
     const store = useStore();
+    const profile = computed(() => store.state.newspidStore.profile);
     const userInfo = computed(() => store.state.memberStore.userInfo);
+    const clickNickname = computed(() => store.state.newspidStore.clickNickname);
 
-    return { store, userInfo };
+    return { store, userInfo, profile, clickNickname };
   },
   data(){
     return{
@@ -104,6 +106,10 @@ export default {
       if (this.$route.path != "/") 
         this.$router.push({ name: "home" });
     },
+    getClickNickname(clickNickname) {
+      console.log(clickNickname);
+      this.store.dispatch("newspidStore/setClickNickname", clickNickname);
+    }
   },
 }
 </script>
