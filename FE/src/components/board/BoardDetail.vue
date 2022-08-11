@@ -363,10 +363,10 @@
           </b-col>
         </b-row>
         <b-row style="margin-bottom: 10px">
-          <b-col>
+          <b-col data-bs-dismiss="modal" aria-label="Close">
             <b-button text @click="submit" style="color: #453535; background-color: #e1d3d2; border: none">취소</b-button>
           </b-col>
-          <b-col>
+          <b-col data-bs-dismiss="modal" aria-label="Close">
             <b-button text @click="submit" style="color: #453535; background-color: #e1d3d2; border: none">삭제</b-button>
           </b-col>
         </b-row>

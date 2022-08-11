@@ -184,10 +184,17 @@
               style="border: none;"></b-form-input>
           </b-col>
           <b-col id="study_lookup_button_space" style="padding: 0; margin-left: 6px;">
-            <div style="text-align:center"><b-button size="sm" id="study_lookup-button" text style="color: #453535; background-color: #E1D3D2; border: none; vertical-align:-webkit-baseline-middle;">추가
-            </b-button></div>
+            <div style="text-align:center">
+              <b-button size="sm" id="study_lookup-button" text style="color: #453535; background-color: #E1D3D2; border: none; 
+              vertical-align:-webkit-baseline-middle;" @click="personInsert()">
+              추가
+              </b-button>
+            </div>
           </b-col>
         </b-row>
+        <div id="personField">
+
+        </div>
         <!-- <b-row id="study_hold_line" style="margin-bottom: 5px; text-align: left;">
           <div id="study_hold_title" style="font-weight: bold;">스터디원 리스트</div>
         </b-row>
@@ -256,6 +263,13 @@ export default{
       console.log(link);
       this.$router.push(link);
     },
+    personInsert() {
+      let study_lookup_input = document.getElementById('study_lookup_input');
+      let field = document.getElementById('personField');
+      console.log(study_lookup_input.value);
+      console.log(field);
+      field.innerHTML += `<div>${study_lookup_input.value}</div>`
+    }
   },
 }
 </script>
