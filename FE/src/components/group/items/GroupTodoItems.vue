@@ -15,6 +15,11 @@ export default {
         description: String,
         isComplete: Boolean,
     },
+    data() {
+        return {
+
+        }
+    },
     mounted() {
         // console.log(this.index + " , " + this.description);
     },

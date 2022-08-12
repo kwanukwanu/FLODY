@@ -32,7 +32,7 @@ const groupStore = {
       {
         dates: { years: 2022, months: 8, days: 11 },
         description: "보안 유형 정복",
-        isComplete: false,
+        isComplete: true,
       },
       {
         dates: { years: 2022, months: 8, days: 11 },
@@ -42,7 +42,7 @@ const groupStore = {
       {
         dates: { years: 2022, months: 8, days: 11 },
         description: "java 뽀사기",
-        isComplete: false,
+        isComplete: true,
       },
       {
         dates: { years: 2022, months: 8, days: 11 },
