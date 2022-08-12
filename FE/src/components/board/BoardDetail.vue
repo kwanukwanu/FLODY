@@ -321,7 +321,7 @@
     </b-row>
   </div>
 
-  <b-modal hide-footer title="채팅창" centered id="chatting" size="md" style="text-align: center;">
+  <b-modal hide-header hide-footer title="채팅창" centered id="chatting" size="lg" style="text-align: center;">
     <board-modal-chat/>
   </b-modal>
 

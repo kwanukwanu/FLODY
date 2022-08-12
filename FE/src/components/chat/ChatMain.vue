@@ -1,15 +1,15 @@
 <template>
-  <div style="text-align:left; margin-top:6px;">
+  <div style="text-align:left;">
     <b-row>
       <b-col cols="1" style="text-align:right;;">
         <!-- <chat-avatar class="mt-1" :src="photoUrl" /> -->
         <b-avatar size="27px" src="https://placekitten.com/300/300" style="padding:0px 0px"></b-avatar>
       </b-col>
-      <b-col cols="8" style="font-weight:bold; font-size: 17.5px; text-align: left; padding:0px 0px">
+      <b-col cols="8" style="font-weight:bold; font-size: 17.5px; text-align: left; padding:0px 0px;">
         김정수
       </b-col>
       <b-col cols="3" style="text-align:right;">
-        <b-button @click="Cancel" size="sm" style="color: #A48282; background-color:white; border-color: white;"
+        <b-button @click="Cancel" size="sm" style="color: #A48282; background-color:white; border-color: white; padding: 0px 8px"
           data-bs-dismiss="modal" aria-label="Close"><svg width="24" height="24" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path d="M18 6 6 18M6 6l12 12" stroke="#444" stroke-width="2" stroke-linecap="round"
@@ -17,9 +17,9 @@
           </svg></b-button>
       </b-col>
     </b-row>
-    <hr>
+    <hr style="margin: 5px">
   </div>
-  <div class="container-sm mt-20" style="height:450px; overflow-y: scroll;">
+  <div id="chatField" class="container-sm mt-20" style="height:450px; overflow-y: scroll;">
     <div class="mx-5" style="font-size: 14px;">
       <chat-message v-for="{ id, text, userPhotoURL, userName, userId, createdAt } in messages" :key="id"
         :name="userName" :photo-url="userPhotoURL" :sender="userId === user?.uid" :date="createdAt">
@@ -92,4 +92,18 @@ export default {
 </script>
 
 <style>
+#chatField::-webkit-scrollbar {
+  width: 6px;
+}
+#chatField::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+#chatField::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: gray;
+}
+#chatField::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
 </style>
