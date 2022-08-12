@@ -1,15 +1,20 @@
 <template>
-  <div style="text-align:left">
+  <div style="text-align:left; margin-top:6px;">
     <b-row>
-      <b-col cols="1">
-
-      </b-col>
-      <b-col cols="1" style="text-align:right">
+      <b-col cols="1" style="text-align:right;;">
         <!-- <chat-avatar class="mt-1" :src="photoUrl" /> -->
-        <b-avatar size="24px" src="https://placekitten.com/300/300" style="padding:0px 0px"></b-avatar>
+        <b-avatar size="27px" src="https://placekitten.com/300/300" style="padding:0px 0px"></b-avatar>
       </b-col>
-      <b-col cols="9" style="font-weight:bold; text-align: left; padding:0px 0px">
+      <b-col cols="8" style="font-weight:bold; font-size: 17.5px; text-align: left; padding:0px 0px">
         김정수
+      </b-col>
+      <b-col cols="3" style="text-align:right;">
+        <b-button @click="Cancel" size="sm" style="color: #A48282; background-color:white; border-color: white;"
+          data-bs-dismiss="modal" aria-label="Close"><svg width="24" height="24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6 6 18M6 6l12 12" stroke="#444" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg></b-button>
       </b-col>
     </b-row>
     <hr>

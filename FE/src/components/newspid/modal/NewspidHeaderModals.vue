@@ -3,7 +3,7 @@
         <newspid-header-modal-new-board></newspid-header-modal-new-board>
     </b-modal>
 
-    <b-modal hide-footer title="채팅창" centered id="chatting2" size="lg" style="text-align: center;">
+    <b-modal hide-header hide-footer title="채팅창" centered id="chatting2" size="lg" style="text-align: center;">
         <newspid-header-modal-chat></newspid-header-modal-chat>
     </b-modal>
 
