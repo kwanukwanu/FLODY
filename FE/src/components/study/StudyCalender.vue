@@ -1,15 +1,14 @@
 <template>
   <b-card style="max-width:35rem; border-color: #a48282;">
     <v-calendar is-expanded :attributes="attributes" @dayclick="onDayClick" @update:from-page="onUpdatePage"
-      @update:to-page="onUpdatePageTo" @daymouseenter="onMouseEnter" @daymouseleave="onMouseLeave"
-      @dayfocusin="onDayFocusIn" @dayfocusout="onDayFocusOut" @transition-start="onTransitionStart"
-      @transition-end="onTransitionEnd"></v-calendar>
+      @update:to-page="onUpdatePageTo" @dayfocusin="onDayFocusIn" @dayfocusout="onDayFocusOut"
+      @transition-start="onTransitionStart" @transition-end="onTransitionEnd"></v-calendar>
   </b-card>
 </template>
 
 <script>
-import {computed} from "vue";
-import {useStore} from "vuex";
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
   data() {
     //todo : description(할 일), isComplete(완료여부), dates(날짜), color(색상표시)
@@ -24,10 +23,10 @@ export default {
     };
   },
   setup() {
-      const store = useStore();
-      const todos = computed(()=>store.state.calendarStore.todos);
-
-      return { store,todos };
+    const store = useStore();
+    const todos = computed(() => store.state.calendarStore.todos);
+    const todo_list = computed(() => store.state.calendarStore.todo_list);
+    return { store, todos, todo_list };
   },
   methods: {
     // 참고 : https://vcalendar.io/examples/datepickers.html
@@ -85,18 +84,32 @@ export default {
     // 날짜별 속성을 지정하려면 여기서
     attributes() {
       return [
-        // todos data를 Attribute에 저장
+        // 현재날짜 확인
+        {
+          key: 'today',
+          highlight: {
+            fillMode: 'outline',
+            color: 'green',
+          },
+          dates: new Date(),
+        },
+
+        // todo가 존재하는 곳 dot로 찍기
         ...this.todos.map((todo) => ({
           dates: todo.dates,
           dot: {
             color: todo.color,
             class: todo.isComplete ? "opacity-75" : "",
           },
+        })),
+
+        // popover 생성
+        ...this.todo_list.map((item) => ({
+          dates: item.dates,
           popover: {
-            label: todo.description,
-            visibility: "focus",
-          },
-          customData: todo,
+            label: item.description,
+            visibility: 'focus',
+          }
         })),
 
         // range 지정
@@ -117,4 +130,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>
