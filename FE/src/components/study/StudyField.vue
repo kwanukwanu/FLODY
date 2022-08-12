@@ -148,9 +148,9 @@ export default {
 
 
     function dragStart(e) {
-      console.log(e.target.__vueParentComponent.props.index);
-      console.log(e.clientY);
-      console.log(e);
+      // console.log(e.target.__vueParentComponent.props.index);
+      // console.log(e.clientY);
+      // console.log(e);
       // console.log(flowers[e.target.__vueParentComponent.props.index].pos.posX)
       for(var i = 0; i < dragItem.length; i++) {
         if(e.target === dragItem[i]) {
