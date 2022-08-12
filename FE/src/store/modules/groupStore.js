@@ -91,9 +91,9 @@ const groupStore = {
         (response) => {
           console.log("message : " + response);
           console.log(response);
-          if (response.data.msg == "SUCCESS") {
+          if (response.msg == "SUCCESS") {
             console.log("리스트 받아오기 성공");
-            commit("SET_TODO_LIST", response.data.list);
+            commit("SET_TODO_LIST", response.item.list);
           } else {
             console.log("받아오기 실패");
           }
