@@ -2,10 +2,10 @@
     <b-row>
         <b-col>
             <b-row>
-                <h4 style="font-weight:bold">정처기 뿌셔</h4>
+                <h4 style="font-weight:bold">{{ selectGroup.name }}</h4>
             </b-row>
             <b-row>
-                <h5>(정보처리기사)</h5>
+                <h5>({{ selectGroup.goal }})</h5>
             </b-row>
         </b-col>
         <b-col>
@@ -15,8 +15,14 @@
 </template>
 
 <script>
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
-
+    setup() {
+        const store = useStore();
+        const selectGroup = computed(() => store.state.groupStore.selectGroups);
+        return { store, selectGroup };
+    }
 }
 </script>
 

@@ -10,8 +10,8 @@
                             stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </b-button> -->
-                <router-link :to="{ name: 'group', params:{ name:'name' } }"><svg id="move" width="18" height="18" fill="none"
-                        xmlns="http://www.w3.org/2000/svg" style="margin-left:8px; margin-bottom:4px">
+                <router-link :to="{ name: 'group', params: { name: 'name' } }"><svg id="move" width="18" height="18"
+                        fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left:8px; margin-bottom:4px">
                         <path
                             d="m9 12 3-3m0 0L9 6m3 3H6m-.15 6.75h6.3c1.26 0 1.89 0 2.371-.245.424-.216.768-.56.984-.984.245-.48.245-1.11.245-2.371v-6.3c0-1.26 0-1.89-.245-2.371a2.25 2.25 0 0 0-.984-.984c-.48-.245-1.11-.245-2.371-.245h-6.3c-1.26 0-1.89 0-2.371.245a2.25 2.25 0 0 0-.984.984c-.245.48-.245 1.11-.245 2.371v6.3c0 1.26 0 1.89.245 2.371.216.424.56.768.984.984.48.245 1.11.245 2.371.245Z"
                             stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -26,31 +26,36 @@
 </template>
 
 <script>
-import {useStore} from "vuex";
+import { useStore } from "vuex";
 
 import GroupItems from "@/components/layout/items/GroupItems.vue";
 export default {
-    components:{
+    components: {
         GroupItems,
     },
     props: {
         name: String,
+        goal: String,
+        date: Date,
         groups: Array,
     },
     data() {
         return {
         }
     },
-    setup(){
+    setup() {
         const store = useStore();
-        return {store};
+        return { store };
     },
     methods: {
         gotoPage(link) {
             const data = {
-                name : this.name,
+                name: this.name,
+                goal: this.goal,
+                date: this.date,
             };
-            this.store.dispatch("groupStore/selectGroups",data);
+            console.log(data);
+            this.store.dispatch("groupStore/selectGroups", data);
             this.$router.push(link);
         },
     },
