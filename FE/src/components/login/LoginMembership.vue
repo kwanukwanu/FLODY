@@ -140,13 +140,13 @@ export default {
   data() {
     return {
       user: {
-        email: null,
-        password: null,
+        email: "ssafy@ssafy.com",
+        password: "1234567",
         profile: "default01.png",
-        name: null,
+        name: "김싸피",
         nickname: "닉네임",
         address: "대전 유성구",
-        phone: null,
+        phone: "010-1111-2222",
         admin: 'false',
       },
       isduplicate: true,
@@ -264,7 +264,7 @@ export default {
     async registMember() {
       await registMember(
         this.user,
-        (data) => {
+        ({ data }) => {
           let msg = "등록 처리시 문제가 발생했습니다.";
           console.log(data);
           if (data.data === "SUCCESS") {
