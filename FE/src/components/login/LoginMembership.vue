@@ -159,9 +159,9 @@ export default {
     }
   },
   methods: {
-    submit() {
+    async submit() {
       console.log("registMember 실행");
-      this.registMember();
+      await this.registMember();
       console.log("registMember 종료");
     },
 
@@ -267,7 +267,7 @@ export default {
         ({ data }) => {
           let msg = "등록 처리시 문제가 발생했습니다.";
           console.log(data);
-          if (data.data === "SUCCESS") {
+          if (data === "SUCCESS") {
             msg = "등록이 완료되었습니다.";
           }
           alert(msg);
