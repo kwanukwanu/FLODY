@@ -15,13 +15,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "S_jobs")
-@IdClass(SJobsId.class)
 public class SJobs {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long sjNo;
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Departments.class)
-    @JoinColumn(name = "gep_no")
+    @JoinColumn(name = "dep_no")
     private Departments department;
-    @Id
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Serieses.class)
     @JoinColumn(name = "ser_no")
     private Serieses series;

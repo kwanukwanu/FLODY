@@ -19,7 +19,6 @@ public class GroupCreateRequestDto {
     @Builder
     public GroupCreateRequestDto(String name, Date foundDate) {
         this.name = name;
-        System.out.println(foundDate);
         this.foundDate = foundDate;
     }
 
