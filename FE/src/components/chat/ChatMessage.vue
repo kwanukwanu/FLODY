@@ -37,7 +37,7 @@
                   <span style="font-size: 16px; font-weight: bold;">{{ name }}</span>
                 </b-row> -->
                 <b-row>
-                  <div style="font-size: 16px;  background-color: #E6EDEB; border-radius: 20px 20px 0px 20px; max-width: 300px; margin-top:16px; width:fit-content;  font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+                  <div style="font-size: 16px;  background-color: #E6EDEB; border-radius: 0px 20px 20px 20px; max-width: 300px; margin-top:16px; width:fit-content;  font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
                     <slot />
                   </div>
                 </b-row>
