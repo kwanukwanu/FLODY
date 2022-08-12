@@ -27,85 +27,46 @@
     <b-card style="min-height: 12rem; max-width: 30rem; background-color: #f8f3f3">
       <b-container ref="form">
         <!-- <h2 style="text-align: center;">목표 등록</h2> -->
-        <b-row style="margin-bottom: 20px">
-          <b-col cols="11">
-            <b-form-input placeholder="내용 입력..." required style="border: none"></b-form-input>
-          </b-col>
-          <b-col cols="1">
-            <span style="vertical-align: middle;">
-              <b-button size="sm" style="border:none; background:none; padding: 0px 0px">
-                <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 6.667v6.666M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z"
-                    stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </b-button>
-            </span>
-          </b-col>
-        </b-row>
+        <b-table-simple>
+          <tbody id="mytest">
+            <tr style="margin-bottom: 20px">
+              <td cols="11" style="text-align:left; font-weight: 600;">
+                &nbsp;&nbsp;Todo 추가
+              </td>
+              <td cols="1">
+                <span id="add" style="vertical-align: middle;">
+                  <b-button size="sm" style="border:none; background:none; padding: 0px 0px" @click="addRow()">
+                    <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:red;">
+                      <path
+                        d="M10 6.667v6.666M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z"
+                        stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </b-button>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+          
 
-        <b-row style="margin-bottom: 20px">
-          <b-col cols="11">
-            <b-form-input placeholder="내용 입력..." required style="border: none"></b-form-input>
-          </b-col>
-          <b-col cols="1">
-            <span style="vertical-align: middle;">
-              <b-button size="sm" style="border:none; background:none; padding: 0px 0px">
-                <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 6.667v6.666M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z"
-                    stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </b-button>
-            </span>
-          </b-col>
-        </b-row>
+          <tbody id="mytest_2">
+            <tr style="margin-bottom: 20px">
+              <td cols="11">
+                <b-form-input id="holder" placeholder="내용 입력..." required style="border: none"></b-form-input>
+              </td>
+              <td cols="1">
+                <span id="delete" style="vertical-align: middle;">
+                  <b-button size="sm" style="border:none; background:none; padding: 0px 0px" @click="deleteRow()">
+                    <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z" stroke="#444"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </b-button>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </b-table-simple>
 
-        <b-row style="margin-bottom: 20px">
-          <b-col cols="11">
-            <b-form-input placeholder="내용 입력..." required style="border: none"></b-form-input>
-          </b-col>
-          <b-col cols="1">
-            <span style="vertical-align: middle;">
-              <b-button size="sm" style="border:none; background:none; padding: 0px 0px">
-                <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 6.667v6.666M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z"
-                    stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </b-button>
-            </span>
-          </b-col>
-        </b-row>
-
-        <b-row style="margin-bottom: 20px">
-          <b-col cols="11">
-            <b-form-input placeholder="내용 입력..." required style="border: none"></b-form-input>
-          </b-col>
-          <b-col cols="1">
-            <span style="vertical-align: middle;">
-              <b-button size="sm" style="border:none; background:none; padding: 0px 0px">
-                <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 6.667v6.666M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z"
-                    stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </b-button>
-            </span>
-          </b-col>
-        </b-row>
-
-        <b-row style="margin-bottom: 20px">
-          <b-col cols="11">
-            <b-form-input placeholder="내용 입력..." required style="border: none"></b-form-input>
-          </b-col>
-          <b-col cols="1">
-            <span style="vertical-align: middle;">
-              <b-button size="sm" style="border:none; background:none; padding: 0px 0px">
-                <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 6.667v6.666M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z"
-                    stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </b-button>
-            </span>
-          </b-col>
-        </b-row>
         <!-- <b-row style="margin-bottom: 20px">
           <b-col cols="2">
             <span style="vertical-align:middle; font-weight: bold;">시작</span>
@@ -168,6 +129,59 @@ export default {
     return { store, todos };
   },
   methods: {
+    addRow() {
+    var tbody = document.getElementById('mytest_2');
+    var row = tbody.insertRow(tbody.rows.length); // 하단에 추가
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell1.innerHTML = document.getElementById('holder').outerHTML;
+    cell2.innerHTML = document.getElementById('delete').outerHTML;
+    },
+
+    deleteRow() {
+    var tbody = document.getElementById('mytest_2');
+    tbody.deleteRow(this.row);
+
+      //   let field=document.getElementById('mytest');
+      //   const text = document.getElementById('add');
+      //   text.innerHTML =`
+      //   <b-table-simple>
+      //   <tbody id="mytest_2">
+      //       <tr style="margin-bottom: 20px">
+      //         <td cols="11">
+      //           <b-form-input id="holder" placeholder="내용 입력..." required style="border: none"></b-form-input>
+      //         </td>
+      //         <td cols="1">
+      //           <span id="delete" style="vertical-align: middle;">
+      //             <b-button size="sm" style="border:none; background:none; padding: 0px 0px" @click="deleteRow()">
+      //               <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      //                 <path d="M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z" stroke="#444"
+      //                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      //               </svg>
+      //             </b-button>
+      //           </span>
+      //         </td>
+      //       </tr>
+      //     </tbody>
+      //     </b-table-simple>          
+      //     `;
+
+      //   const deleteButton = document.getElementById('delete');
+      //   deleteButton.innerHTML=`
+      //               <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      //                 <path d="M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z" stroke="#444"
+      //                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      //               </svg>          
+      //                         `;
+
+        
+      //   field.appendChild(text)
+
+      //   deleteButton.addEventListener('click', (event) => {
+      //       field.removeChild(event.currentTarget.parentNode)
+      //   })
+      // }
+    },
   },
   computed: {
     dates() {
