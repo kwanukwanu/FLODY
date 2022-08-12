@@ -10,6 +10,13 @@
   <b-container>
     <group-header></group-header>
 
+    <!--
+    전체 todos를 가져온다.
+    기본 날짜를 현재 날짜로 정한다
+    해당 날짜에 해당하는 todolist를 받아온다
+    todolist를 체크할때마다 해당 list의 complete 값을 변경해준다 (axios 변경)
+    todolist의 success 개수를 체크해 최대값이 되면 
+    -->
     <br>
     <b-row>
       <b-col>
@@ -184,40 +191,6 @@ export default {
     },
   },
   computed: {
-    dates() {
-      return this.days.map((day) => day.date);
-    },
-    // 날짜별 속성을 지정하려면 여기서
-    attributes() {
-      return [
-        // todos data를 Attribute에 저장
-        ...this.todos.map((todo) => ({
-          dates: todo.dates,
-          dot: {
-            color: todo.color,
-            class: todo.isComplete ? "opacity-75" : "",
-          },
-          popover: {
-            label: todo.description,
-            visibility: "focus",
-          },
-          customData: todo,
-        })),
-
-        // range 지정
-        {
-          // 범위만큼 색 칠하기
-          highlight: {
-            start: { fillMode: "light" }, // 연한색으로 칠하기
-            base: { fillMode: "light" },
-            end: { fillMode: "light" },
-          },
-          // 범위 지정
-          // '월'은 0부터 11까지(원하는 월 -1로 설정)
-          dates: { start: new Date(2022, 6, 14), end: new Date(2022, 6, 18) },
-        },
-      ];
-    },
   },
 
 };

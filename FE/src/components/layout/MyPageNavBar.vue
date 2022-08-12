@@ -1,58 +1,58 @@
 <template>
-    <b-card style="max-width: 20rem; background-color: #F8F3F3;" class="p-0">
-      <b-container>
-        <b-row>
-          <b-col cols="3">
-            <div class="pic">
-            <b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar> </div>
-          </b-col>
-         
-          <b-col cols="9">
+  <b-card style="max-width: 20rem; background-color: #F8F3F3;" class="p-0">
+    <b-container>
+      <b-row>
+        <b-col cols="3">
+          <div class="pic">
+            <b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar>
+          </div>
+        </b-col>
+
+        <b-col cols="9">
           <b-row>
+            <b-col>
+              <b-card-text style="margin-left:3px; font-weight: bold; font-size: large;"
+                @click="getClickNickname(userInfo.nickname)">{{ userInfo.name }}</b-card-text>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col cols="6">
+              <b-button variant="link"
+                style="padding: 0px 0px; color: #B99B9A; text-decoration: none; text-align: left;" v-b-modal.modal-1>목표
+                등록</b-button>
+            </b-col>
+            <b-col cols="6">
+              <b-button variant="link"
+                style="padding: 0px 0px; color: #B99B9A; text-decoration: none; text-align: right;" @click="logout()">
+                LOGOUT</b-button>
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
+      <hr>
+
+      <my-page-items v-for="plan in plans" :key="plan" v-bind="plan">
+      </my-page-items>
+    </b-container>
+  </b-card>
+
+  <b-modal hide-footer id="modal-1" centered title="목표 등록" style="text-align: center;">
+    <b-card style="height: 15; max-width: 40rem; background-color: #F8F3F3;">
+      <b-container ref="form">
+        <!-- <h2 style="text-align: center;">목표 등록</h2> -->
+        <b-row style="margin-bottom: 10px;">
           <b-col>
-              <b-card-text style="margin-left:3px; font-weight: bold; font-size: large;" @click="getClickNickname(userInfo.nickname)">{{userInfo.name}}</b-card-text>
-            </b-col>
-          </b-row>
-            <b-row>
-              <b-col cols="6">
-                <b-button variant="link" style="padding: 0px 0px; color: #B99B9A; text-decoration: none; text-align: left;" v-b-modal.modal-1>목표 등록</b-button>
-              </b-col>
-              <b-col cols="6">
-                <b-button 
-                variant="link" 
-                style="padding: 0px 0px; color: #B99B9A; text-decoration: none; text-align: right;"
-                @click="logout()">LOGOUT</b-button>
-              </b-col>
-            </b-row>
-            </b-col>
-          </b-row>
-        <hr>
-
-        <my-page-items
-        v-for="plan in plans"
-        :key="plan"
-        v-bind="plan">
-        </my-page-items>
-      </b-container>
-    </b-card>
-
-     <b-modal hide-footer id="modal-1" centered title="목표 등록" style="text-align: center;">
-      <b-card style="height: 15; max-width: 40rem; background-color: #F8F3F3;">
-        <b-container ref="form">
-          <!-- <h2 style="text-align: center;">목표 등록</h2> -->
-          <b-row style="margin-bottom: 10px;">
-            <b-col>
-              <b-form-input placeholder="시험 이름을 입력하세요." required style="border: none;"></b-form-input>
-            </b-col>
-          </b-row>
-          <b-row style="margin-bottom: 10px;">
-            <b-col>
-              <b-form-input type="date" placeholder="날짜 선택" style="border: none;"></b-form-input>
-            </b-col>
-          </b-row>
-          <br>
-          <b-button text @click="submit" style="color: #453535; background-color: #E1D3D2; border: none">등록</b-button>
-          <!-- <template #modal-footer="{ cancel, ok }">
+            <b-form-input placeholder="시험 이름을 입력하세요." required style="border: none;"></b-form-input>
+          </b-col>
+        </b-row>
+        <b-row style="margin-bottom: 10px;">
+          <b-col>
+            <b-form-input v-model="d_day" type="date" placeholder="날짜 선택" style="border: none;"></b-form-input>
+          </b-col>
+        </b-row>
+        <br>
+        <b-button text @click="addPlans()" style="color: #453535; background-color: #E1D3D2; border: none">등록</b-button>
+        <!-- <template #modal-footer="{ cancel, ok }">
             <b-button size="sm" variant="danger" @click="cancel()">
               취소
             </b-button>
@@ -60,9 +60,9 @@
               등록
             </b-button>
           </template> -->
-          </b-container>
-      </b-card>
-    </b-modal>
+      </b-container>
+    </b-card>
+  </b-modal>
 
 </template>
 
@@ -85,43 +85,55 @@ export default {
 
     return { store, userInfo, profile, clickNickname };
   },
-  data(){
-    return{
-      plans:[
+  data() {
+    return {
+      d_day: null,
+      plans: [
         {
           subject: "정보처리기사",
-          mod:10,
+          mod: 10,
         },
         {
-          subject:"OPIC",
+          subject: "OPIC",
           mod: 3,
         }
       ],
     }
   },
   methods: {
-    logout(){
+    logout() {
       console.log("logout");
       this.store.dispatch("memberStore/setLogout");
-      if (this.$route.path != "/") 
+      if (this.$route.path != "/")
         this.$router.push({ name: "home" });
     },
     getClickNickname(clickNickname) {
       console.log(clickNickname);
       this.store.dispatch("newspidStore/setClickNickname", clickNickname);
-    }
+    },
+    addPlans() {
+      console.log(this.d_day);
+    },
+    getPlans() {
+      // 여기서 axios를 통해 목표를 받아온다.
+    },
   },
+  mounted() {
+    this.getPlans();
+  }
 }
 </script>
 
 <style>
-.test_name{
+.test_name {
   text-align: right;
 }
+
 .howmuchleft {
   text-align: left;
 }
-.pic{
+
+.pic {
   margin-top: 6px;
 }
 </style>
