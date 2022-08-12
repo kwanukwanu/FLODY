@@ -48,8 +48,7 @@ export default {
     // 빠져나가는 함수 적용 필요
     Cancel(){
       console.log("취소");
-    }
-    
+    },
   },
 }
 

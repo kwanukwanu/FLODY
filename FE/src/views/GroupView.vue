@@ -34,7 +34,7 @@
     <b-card style="min-height: 12rem; max-width: 30rem; background-color: #f8f3f3">
       <b-container ref="form">
         <!-- <h2 style="text-align: center;">목표 등록</h2> -->
-        <b-table-simple>
+        <!-- <b-table-simple>
           <tbody id="mytest">
             <tr style="margin-bottom: 20px">
               <td cols="11" style="text-align:left; font-weight: 600;">
@@ -72,32 +72,32 @@
               </td>
             </tr>
           </tbody>
-        </b-table-simple>
+        </b-table-simple> -->
+        <b-row style="margin-bottom: 10px;">
+          <b-col cols="10" style="padding: 0; margin-left: 10px;">
+            <b-form-input id="todo_content" aria-placeholder="할 일..." required
+              style="border: none;"></b-form-input>
+          </b-col>
+          <b-col id="study_lookup_button_space" style="padding: 0; margin-left: 6px;">
+            <div style="text-align:center">
+              <b-button size="sm" id="study_lookup-button" text style="color: #453535; background-color: #E1D3D2; border: none; 
+              vertical-align:-webkit-baseline-middle;" @click="todosInsert()">
+              <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:red;">
+                      <path
+                        d="M10 6.667v6.666M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z"
+                        stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+              </b-button>
+            </div>
+          </b-col>
+        </b-row>
+        <div id="todosField" style="height:50px; overflow-y: scroll;">
 
-        <!-- <b-row style="margin-bottom: 20px">
-          <b-col cols="2">
-            <span style="vertical-align:middle; font-weight: bold;">시작</span>
-          </b-col>
-          <b-col cols="4">
-            <input type="time" value="xxx" min="yyy" max="zzz">
-          </b-col>
-          <b-col cols="2">
-            <span style="vertical-align:middle; font-weight: bold;">종료</span>
-          </b-col>
-          <b-col cols="4">
-            <input type="time" value="xxx" min="yyy" max="zzz">
-          </b-col>
-        </b-row> -->
-        <!-- <b-row>
-          <b-col>
-            <b-form-textarea id="content" placeholder="내용 입력..." rows="7" max-rows="15" required style="border: none">
-            </b-form-textarea>
-          </b-col>
-        </b-row> -->
+        </div>
+        
         <br />
         <b-button text @click="submit" style="color: #453535; background-color: #e1d3d2; border: none">등록</b-button>
       </b-container>
-      <br />
     </b-card>
   </b-modal>
 </template>
@@ -136,58 +136,90 @@ export default {
     return { store, todos };
   },
   methods: {
-    addRow() {
-    var tbody = document.getElementById('mytest_2');
-    var row = tbody.insertRow(tbody.rows.length); // 하단에 추가
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    cell1.innerHTML = document.getElementById('holder').outerHTML;
-    cell2.innerHTML = document.getElementById('delete').outerHTML;
-    },
+    // addRow() {
+    // var tbody = document.getElementById('mytest_2');
+    // var row = tbody.insertRow(tbody.rows.length); // 하단에 추가
+    // var cell1 = row.insertCell(0);
+    // var cell2 = row.insertCell(1);
+    // cell1.innerHTML = document.getElementById('holder').outerHTML;
+    // cell2.innerHTML = document.getElementById('delete').outerHTML;
+    // },
 
-    deleteRow() {
-    var tbody = document.getElementById('mytest_2');
-    tbody.deleteRow(this.row);
+    // deleteRow() {
+    // var tbody = document.getElementById('mytest_2');
+    // tbody.deleteRow(this.row);
 
-      //   let field=document.getElementById('mytest');
-      //   const text = document.getElementById('add');
-      //   text.innerHTML =`
-      //   <b-table-simple>
-      //   <tbody id="mytest_2">
-      //       <tr style="margin-bottom: 20px">
-      //         <td cols="11">
-      //           <b-form-input id="holder" placeholder="내용 입력..." required style="border: none"></b-form-input>
-      //         </td>
-      //         <td cols="1">
-      //           <span id="delete" style="vertical-align: middle;">
-      //             <b-button size="sm" style="border:none; background:none; padding: 0px 0px" @click="deleteRow()">
-      //               <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      //                 <path d="M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z" stroke="#444"
-      //                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-      //               </svg>
-      //             </b-button>
-      //           </span>
-      //         </td>
-      //       </tr>
-      //     </tbody>
-      //     </b-table-simple>          
-      //     `;
+    //   //   let field=document.getElementById('mytest');
+    //   //   const text = document.getElementById('add');
+    //   //   text.innerHTML =`
+    //   //   <b-table-simple>
+    //   //   <tbody id="mytest_2">
+    //   //       <tr style="margin-bottom: 20px">
+    //   //         <td cols="11">
+    //   //           <b-form-input id="holder" placeholder="내용 입력..." required style="border: none"></b-form-input>
+    //   //         </td>
+    //   //         <td cols="1">
+    //   //           <span id="delete" style="vertical-align: middle;">
+    //   //             <b-button size="sm" style="border:none; background:none; padding: 0px 0px" @click="deleteRow()">
+    //   //               <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    //   //                 <path d="M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z" stroke="#444"
+    //   //                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    //   //               </svg>
+    //   //             </b-button>
+    //   //           </span>
+    //   //         </td>
+    //   //       </tr>
+    //   //     </tbody>
+    //   //     </b-table-simple>          
+    //   //     `;
 
-      //   const deleteButton = document.getElementById('delete');
-      //   deleteButton.innerHTML=`
-      //               <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      //                 <path d="M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z" stroke="#444"
-      //                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-      //               </svg>          
-      //                         `;
+    //   //   const deleteButton = document.getElementById('delete');
+    //   //   deleteButton.innerHTML=`
+    //   //               <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    //   //                 <path d="M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z" stroke="#444"
+    //   //                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    //   //               </svg>          
+    //   //                         `;
 
         
-      //   field.appendChild(text)
+    //   //   field.appendChild(text)
 
-      //   deleteButton.addEventListener('click', (event) => {
-      //       field.removeChild(event.currentTarget.parentNode)
-      //   })
-      // }
+    //   //   deleteButton.addEventListener('click', (event) => {
+    //   //       field.removeChild(event.currentTarget.parentNode)
+    //   //   })
+    //   // }
+    // },
+    todosInsert() {
+      let todo_content = document.getElementById('todo_content');
+      let todos_field = document.getElementById('todosField');
+      console.log(todo_content.value);
+      console.log(todos_field);
+      if(todo_content.value !== '') {
+        const item = document.createElement('div')
+        // text
+        const text = document.createElement('span');
+        // 제거하기 버튼
+        const deleteButton = document.createElement('a');
+                                // <span id="delete" class="material-icons" style="vertical-align: sub; cursor: pointer;">delete</span>
+        deleteButton.innerHTML=`
+                                <svg id="delete" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: sub; cursor: pointer;">
+                                  <path d="M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z" stroke="#444"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                              `;
+
+        text.textContent = todo_content.value
+        todo_content.value=''
+    
+        item.appendChild(text)
+        item.appendChild(deleteButton)
+        todos_field.appendChild(item)
+
+        deleteButton.addEventListener('click', (event) => {
+            todos_field.removeChild(event.currentTarget.parentNode)
+        })
+        todo_content.value =''
+      }
     },
   },
   computed: {
@@ -209,5 +241,20 @@ input[type=checkbox]:checked+label.strikethrough {
 
 .checkbox {
   accent-color: #E3D6D6;
+}
+
+#todosField::-webkit-scrollbar {
+  width: 6px;
+}
+#todosField::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+#todosField::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: gray;
+}
+#todosField::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
 }
 </style>
