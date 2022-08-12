@@ -14,7 +14,7 @@
     </b-row>
     <hr>
   </div>
-  <div class="container-sm mt-20">
+  <div class="container-sm mt-20" style="height:450px; overflow-y: scroll;">
     <div class="mx-5" style="font-size: 14px;">
       <chat-message v-for="{ id, text, userPhotoURL, userName, userId, createdAt } in messages" :key="id"
         :name="userName" :photo-url="userPhotoURL" :sender="userId === user?.uid" :date="createdAt">
