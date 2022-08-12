@@ -33,7 +33,7 @@
     </b-row>
     <b-row
       style="padding:0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin-left: 55px;">
-      <span style="font-size: 12px;" class="bottom_time_line">---답글 보기(1개)</span>
+      <span style="font-size: 12px;" class="bottom_time_line">--- &nbsp;&nbsp;답글 보기(1개)</span>
     </b-row>
   </div>
 </template>

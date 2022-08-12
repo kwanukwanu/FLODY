@@ -128,7 +128,7 @@
 
         <b-row style="margin-bottom: 10px;">
           <b-col cols="10" style="padding: 0; margin-left: 10px;">
-            <b-form-input id="todo_content" aria-placeholder="할 일..." required
+            <b-form-input id="todo_content" placeholder="내용 입력..." aria-placeholder="할 일..." required
               style="border: none;"></b-form-input>
           </b-col>
           <b-col id="study_lookup_button_space" style="padding: 0; margin-left: 6px;">

@@ -192,7 +192,7 @@
             </div>
           </b-col>
         </b-row>
-        <div id="personField" style="height:100px; overflow-y: scroll;">
+        <div id="personField" style="height:50px; overflow-y: scroll;">
 
         </div>
         <!-- <b-row id="study_hold_line" style="margin-bottom: 5px; text-align: left;">
