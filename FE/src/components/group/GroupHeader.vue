@@ -22,6 +22,10 @@ export default {
         const store = useStore();
         const selectGroup = computed(() => store.state.groupStore.selectGroups);
         return { store, selectGroup };
+    },
+    mounted() {
+        console.log("sel Group : ");
+        console.log(this.selectGroup);
     }
 }
 </script>

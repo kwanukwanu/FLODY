@@ -1,7 +1,7 @@
 <template>
     <li>
         <div class="checkbox">
-            <input type="checkbox" name="packersOff" :id="index" />
+            <input type="checkbox" name="packersOff" :id="index" :checked="isComplete" />
             <label :for="index" class="strikethrough">{{ description }}</label>
         </div>
     </li>
@@ -16,7 +16,7 @@ export default {
         isComplete: Boolean,
     },
     mounted() {
-        console.log(this.index + " , " + this.description);
+        // console.log(this.index + " , " + this.description);
     }
 }
 </script>

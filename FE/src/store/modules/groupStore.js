@@ -21,32 +21,6 @@ const groupStore = {
         isComplete: false,
         color: "red",
         nums: 0,
-        list: [
-          {
-            description: "네트워크 뽀사기",
-            isComplete: false,
-          },
-          {
-            description: "보안 유형 정복",
-            isComplete: false,
-          },
-          {
-            description: "21년 2회차 실기풀이",
-            isComplete: false,
-          },
-          {
-            description: "java 뽀사기",
-            isComplete: false,
-          },
-          {
-            description: "22년 2회차 실기풀이",
-            isComplete: false,
-          },
-          {
-            description: "3차 스터디 회의",
-            isComplete: false,
-          },
-        ],
       },
     ],
     todo_list: [
