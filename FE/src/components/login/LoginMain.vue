@@ -92,7 +92,8 @@
           <br />
           <b-row>
             <b-col>
-              <b-form-input v-model="user.password" placeholder="비밀번호" style="border: none"></b-form-input>
+              <b-form-input v-model="user.password" placeholder="비밀번호" type="password" style="border: none">
+              </b-form-input>
             </b-col>
             <br />
             <br />

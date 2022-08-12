@@ -84,11 +84,8 @@
           <br>
           <b-row>
             <b-col>
-              <b-form-input 
-              v-model="user.email" 
-              placeholder="이메일 주소" 
-              required style="border: none;"
-              @keyup="emailChecking()">
+              <b-form-input v-model="user.email" placeholder="이메일 주소" required style="border: none;"
+                @keyup="emailChecking()">
               </b-form-input>
             </b-col>
           </b-row>
@@ -101,32 +98,21 @@
           <br>
           <b-row>
             <b-col>
-              <b-form-input 
-              v-model="user.password" 
-              type="password" 
-              placeholder="비밀번호" 
-              style="border: none;"
-              @keyup="pwChecking"></b-form-input>
+              <b-form-input v-model="user.password" type="password" placeholder="비밀번호" style="border: none;"
+                @keyup="pwChecking"></b-form-input>
             </b-col>
           </b-row>
           <br>
           <b-row>
             <b-col>
-              <b-form-input 
-              type="password" 
-              placeholder="비밀번호 확인" 
-              style="border: none;"
-              ></b-form-input>
+              <b-form-input type="password" placeholder="비밀번호 확인" style="border: none;"></b-form-input>
             </b-col>
           </b-row>
           <br>
           <b-row>
             <b-col>
-              <b-form-input 
-              v-model="user.phone"
-              placeholder="휴대폰 번호" 
-              style="border: none;"
-              @keyup="getMask(user.phone)">
+              <b-form-input v-model="user.phone" placeholder="휴대폰 번호" style="border: none;"
+                @keyup="getMask(user.phone)">
               </b-form-input>
             </b-col>
           </b-row>
@@ -148,7 +134,7 @@
 </template>
 
 <script>
-import {registMember} from '@/api/member.js';
+import { registMember } from '@/api/member.js';
 
 export default {
   data() {
@@ -275,7 +261,7 @@ export default {
       this.user.phone = res;
     },
 
-    async registMember(){
+    async registMember() {
       await registMember(
         this.user,
         ({ data }) => {
@@ -284,7 +270,7 @@ export default {
             msg = "등록이 완료되었습니다.";
           }
           alert(msg);
-          this.moveList();
+          this.$router.push("/");
         },
         (error) => {
           console.log(error);
