@@ -160,7 +160,7 @@
   </div>
 
   <b-modal id="study_create" hide-footer centered title="스터디 생성" style="text-align:center;">
-    <b-card id="modal_card" style="height: 22rem; max-width: 40rem; background-color: #F8F3F3;">
+    <b-card id="modal_card" style="height: 24rem; max-width: 40rem; background-color: #F8F3F3;">
       <b-container id="modal_container" ref="form">
         <!-- <b-row id="study_name_line" style="margin-bottom: 10px;">
           <b-col id="study_name_title_space" cols="3" style="padding: 0">
@@ -192,7 +192,7 @@
             </div>
           </b-col>
         </b-row>
-        <div id="personField">
+        <div id="personField" style="height:50px; overflow-y: scroll;">
 
         </div>
         <!-- <b-row id="study_hold_line" style="margin-bottom: 5px; text-align: left;">
@@ -206,7 +206,7 @@
         <!-- <b-row id="study_letter_line" style="margin-bottom: 5px; text-align: left;">
           <div id="study_letter_title" style="font-weight: bold;">스터디 소개글</div>
         </b-row> -->
-        <b-row id="study_letter_line2" style="margin-bottom: 35px; margin-top: 20px;">
+        <b-row id="study_letter_line2" style="margin-bottom: 20px; margin-top: 20px;">
           <b-col id="study_letter_input_space">
             <b-form-textarea id="study_letter_input" v-model="textEx1" placeholder="스터디 소개글을 입력하세요." rows="3"
               max-rows="6" style="border: none">
@@ -268,8 +268,29 @@ export default{
       let field = document.getElementById('personField');
       console.log(study_lookup_input.value);
       console.log(field);
-      field.innerHTML += `<div>${study_lookup_input.value}</div>`
-    }
+      if(study_lookup_input.value !== '') {
+        const item = document.createElement('div')
+        // text
+        const text = document.createElement('span');
+        // 제거하기 버튼
+        const deleteButton = document.createElement('a');
+        deleteButton.innerHTML=`
+                                <span id="delete" class="material-icons" style="vertical-align: sub; cursor: pointer;">delete</span>
+                              `;
+
+        text.textContent = study_lookup_input.value
+        study_lookup_input.value=''
+    
+        item.appendChild(text)
+        item.appendChild(deleteButton)
+        field.appendChild(item)
+
+        deleteButton.addEventListener('click', (event) => {
+            field.removeChild(event.currentTarget.parentNode)
+        })
+        study_lookup_input.value =''
+      }
+    },
   },
 }
 </script>
@@ -388,5 +409,20 @@ dl, ol, ul {
 }
 .person{
   margin-bottom: 5px;
+}
+
+#personField::-webkit-scrollbar {
+  width: 6px;
+}
+#personField::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+#personField::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: gray;
+}
+#personField::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
 }
 </style>
