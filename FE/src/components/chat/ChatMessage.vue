@@ -9,6 +9,7 @@
       </div>
     </div>
   </div> -->
+
   <b-container>
     <b-row>
       <!-- <b-col v-if="sender" cols ="3">
@@ -28,15 +29,15 @@
         <div v-if="!sender" style="text-align: left;">
           <div class="message">
             <b-row>
-              <b-col cols="2">
-                <chat-avatar class="mt-1" :src="photoUrl" />
+              <b-col cols="1">
+                <chat-avatar class="mt-1" :src="photoUrl"/>
               </b-col>
-              <b-col cols="10">
-                <b-row>
+              <b-col cols="5">
+                <!-- <b-row>
                   <span style="font-size: 16px; font-weight: bold;">{{ name }}</span>
-                </b-row>
+                </b-row> -->
                 <b-row>
-                  <div style="font-size: 24px; background-color: #F1EBEB; border-radius: 0px 20px 20px 20px; max-width: 300px;">
+                  <div style="font-size: 16px;  background-color: #E6EDEB; border-radius: 20px 20px 0px 20px; max-width: 300px; margin-top:16px; width:fit-content;  font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
                     <slot />
                   </div>
                 </b-row>
@@ -51,9 +52,9 @@
         <div v-else  style="text-align: right;">
           <div class="message">
             <b-row>
-              <b-col cols="10">
+              <b-col>
                 <b-row align-h="end">
-                  <div style="font-size: 24px; border-radius: 20px 20px 0px 20px; background-color: #f3f3f3; max-width: 300px; margin-top: 16px;">
+                  <div style="font-size: 16px; border-radius: 20px 20px 0px 20px; background-color: #F1EBEB; max-width: 300px; margin-top: 16px; width:fit-content;  font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
                     <slot />
                   </div>
                 </b-row>
@@ -62,9 +63,9 @@
                 <b-row>
                 </b-row>
               </b-col>
-              <b-col cols="2">
+              <!-- <b-col cols="2">
                 <chat-avatar class="mt-1" :src="photoUrl" />
-              </b-col>
+              </b-col> -->
             </b-row>
           </div>
         </div>

@@ -160,7 +160,7 @@
   </div>
 
   <b-modal id="study_create" hide-footer centered title="스터디 생성" style="text-align:center;">
-    <b-card id="modal_card" style="height: 24rem; max-width: 40rem; background-color: #F8F3F3;">
+    <b-card id="modal_card" style="height: 27rem; max-width: 40rem; background-color: #F8F3F3;">
       <b-container id="modal_container" ref="form">
         <!-- <b-row id="study_name_line" style="margin-bottom: 10px;">
           <b-col id="study_name_title_space" cols="3" style="padding: 0">
@@ -192,7 +192,7 @@
             </div>
           </b-col>
         </b-row>
-        <div id="personField" style="height:50px; overflow-y: scroll;">
+        <div id="personField" style="height:100px; overflow-y: scroll;">
 
         </div>
         <!-- <b-row id="study_hold_line" style="margin-bottom: 5px; text-align: left;">
