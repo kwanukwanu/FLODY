@@ -42,8 +42,8 @@ public class GroupServiceImpl implements GroupService {
     };
 
     @Transactional
-    public Long modifyGroup(Long groNo, GroupUpdateRequestDto requestDto) {
-        Groups group = findGroup(groNo);
+    public Long modifyGroup(GroupUpdateRequestDto requestDto) {
+        Groups group = findGroup(requestDto.getGroNo());
         group.update(
                 requestDto.getName()
         );

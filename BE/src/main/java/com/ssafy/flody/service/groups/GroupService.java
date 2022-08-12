@@ -10,6 +10,6 @@ public interface GroupService {
     public List<GroupDetailResponseDto> findGroups();
     public GroupDetailResponseDto findGroupById(Long groNo);
     public Long addGroup(GroupCreateRequestDto requestDto);
-    public Long modifyGroup(Long groNo, GroupUpdateRequestDto requestDto);
+    public Long modifyGroup(GroupUpdateRequestDto requestDto);
     public Long removeGroup(Long groNo);
 }

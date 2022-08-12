@@ -7,5 +7,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class GroupMemberDetailResponseDto {
+    Long gmNo;
+    String email;
+    String role;
 
+    public GroupMemberDetailResponseDto(GMembers member) {
+        this.gmNo = member.getGmNo();
+        this.email = member.getUser().getEmail();
+        this.role = member.getRole().getName();
+    }
 }

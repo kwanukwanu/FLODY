@@ -7,10 +7,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class GroupUpdateRequestDto {
+    private Long groNo;
     private String name;
 
     @Builder
-    public GroupUpdateRequestDto(String name){
+    public GroupUpdateRequestDto(Long groNo, String name){
+        this.groNo = groNo;
         this.name = name;
     }
 }
