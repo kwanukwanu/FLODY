@@ -170,7 +170,7 @@
                 <b-row class="realname">최재현</b-row>
               </b-col>
               <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" data-bs-dismiss="modal" aria-label="Close" v-b-modal.modal-13>삭제
+                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" v-b-modal.modal-13>삭제
                 </b-button>
               </b-col>
             </b-row>
@@ -190,7 +190,7 @@
                 <b-row class="realname">신영제</b-row>
               </b-col>
               <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" data-bs-dismiss="modal" aria-label="Close" v-b-modal.modal-13>삭제
+                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" v-b-modal.modal-13>삭제
                 </b-button>
               </b-col>
             </b-row>
@@ -209,8 +209,8 @@
                 </b-row>
                 <b-row class="realname">양한빈</b-row>
               </b-col>
-              <b-col cols="3" style="text-align:right">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" data-bs-dismiss="modal" aria-label="Close" v-b-modal.modal-13>삭제
+              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
+                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" v-b-modal.modal-13>삭제
                 </b-button>
               </b-col>
             </b-row>
@@ -229,8 +229,8 @@
                 </b-row>
                 <b-row class="realname">박지성</b-row>
               </b-col>
-              <b-col cols="3" style="text-align:right">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" data-bs-dismiss="modal" aria-label="Close" v-b-modal.modal-13>삭제
+              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
+                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" v-b-modal.modal-13>삭제
                 </b-button>
               </b-col>
             </b-row>
@@ -249,8 +249,8 @@
                 </b-row>
                 <b-row class="realname">날강두</b-row>
               </b-col>
-              <b-col cols="3" style="text-align:right">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" data-bs-dismiss="modal" aria-label="Close" v-b-modal.modal-13>삭제
+              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
+                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" v-b-modal.modal-13>삭제
                 </b-button>
               </b-col>
             </b-row>
@@ -269,8 +269,8 @@
                 </b-row>
                 <b-row class="realname">김덕배</b-row>
               </b-col>
-              <b-col cols="3" style="text-align:right">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" data-bs-dismiss="modal" aria-label="Close" v-b-modal.modal-13>삭제
+              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
+                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" v-b-modal.modal-13>삭제
                 </b-button>
               </b-col>
             </b-row>
@@ -290,7 +290,7 @@
                 <b-row class="realname">김미희</b-row>
               </b-col>
               <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" data-bs-dismiss="modal" aria-label="Close" v-b-modal.modal-13>삭제
+                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" v-b-modal.modal-13>삭제
                 </b-button>
               </b-col>
             </b-row>
@@ -367,9 +367,9 @@
                 <b-row class="nickname">keeper_yang </b-row>
                 <b-row class="realname">양한빈</b-row>
               </b-col>
-              <b-col cols="3" style="text-align:right">
+              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
                 <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;"
-                data-bs-dismiss="modal" aria-label="Close" v-b-modal.modal-12>팔로잉
+          v-b-modal.modal-12>팔로잉
                 </b-button>
               </b-col>
             </b-row>
@@ -385,9 +385,9 @@
                 <b-row class="nickname">puppy_jisung </b-row>
                 <b-row class="realname">박지성</b-row>
               </b-col>
-              <b-col cols="3" style="text-align:right">
+              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
                 <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;"
-                data-bs-dismiss="modal" aria-label="Close" v-b-modal.modal-12>팔로잉
+        v-b-modal.modal-12>팔로잉
                 </b-button>
               </b-col>
             </b-row>
@@ -403,9 +403,9 @@
                 <b-row class="nickname">nalgangdo </b-row>
                 <b-row class="realname">날강두</b-row>
               </b-col>
-              <b-col cols="3" style="text-align:right">
+              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
                 <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;"
-                data-bs-dismiss="modal" aria-label="Close" v-b-modal.modal-12>팔로잉
+              v-b-modal.modal-12>팔로잉
                 </b-button>
               </b-col>
             </b-row>
@@ -423,7 +423,7 @@
               </b-col>
               <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
                 <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;"
-                data-bs-dismiss="modal" aria-label="Close" v-b-modal.modal-12>팔로잉
+          v-b-modal.modal-12>팔로잉
                 </b-button>
               </b-col>
             </b-row>
@@ -439,9 +439,9 @@
                 <b-row class="nickname">kimmich </b-row>
                 <b-row class="realname">김미희</b-row>
               </b-col>
-              <b-col cols="3" style="text-align:right">
+              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
                 <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;"
-                data-bs-dismiss="modal" aria-label="Close" v-b-modal.modal-12>팔로잉
+                v-b-modal.modal-12>팔로잉
                 </b-button>
               </b-col>
             </b-row>

@@ -19,6 +19,22 @@
     -->
     <br>
     <b-row>
+      <b-card class="wrap-vertical" style="width:58rem; height:15rem; border-color:#a48282; margin-bottom:70px; margin-left: 11px;">
+      <b-row>
+        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
+        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
+        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
+        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
+        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
+        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
+        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
+        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
+        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
+        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
+      </b-row>
+      </b-card>
+    </b-row>
+    <b-row>
       <b-col>
         <b-card style="max-width:25rem; border-color: #a48282;">
           <group-calendar></group-calendar>
@@ -256,5 +272,14 @@ input[type=checkbox]:checked+label.strikethrough {
 #todosField::-webkit-scrollbar-button {
   width: 0;
   height: 0;
+}
+
+.wrap-vertical{
+  padding: 20px;
+  color: #112031;
+  border: 1px solid #000;
+   /* 가로 스크롤 */
+  overflow: auto;
+  white-space: nowrap;
 }
 </style>
