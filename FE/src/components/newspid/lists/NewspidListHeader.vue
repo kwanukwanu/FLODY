@@ -1,14 +1,14 @@
 <template>
   <b-col cols="2" style="padding: 4px;">
     <div class="avatar">
-      <b-avatar variant="info" src="https://placekitten.com/300/300" size="32px"></b-avatar>
+      <b-avatar variant="info" :src="profile" size="32px"></b-avatar>
     </div>
   </b-col>
   <b-col cols="9">
     <b-row>
       <span
         style="display: inline; padding: 0px; text-align: left; font-weight: 500; font-size: 14px; margin-top:5px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; width:70%">
-        <a @click="getClickNickname(profile.nickName)">adrianycc</a>
+        <a @click="getClickNickname(author)">{{ author }}</a>
         <b-button
           style="color: black; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 14px;"
           v-b-modal.modal-5>
@@ -33,16 +33,25 @@
 </template>
 
 <script>
-import {computed} from "vue";
-import {useStore} from "vuex";
+import { computed } from "vue";
+import { useStore } from "vuex";
 
 export default {
+  props: {
+    author: String,
+    profile: String,
+    contents: String,
+    tags: Array,
+    creativetimes: Date,
+    favor: Number,
+    comments: Array,
+  },
   setup() {
     const store = useStore();
-    const profile = computed(() => store.state.newspidStore.profile);
+    //const profile = computed(() => store.state.newspidStore.profile);
     const userInfo = computed(() => store.state.memberStore.userInfo);
     const clickNickname = computed(() => store.state.newspidStore.clickNickname);
-    return { store, profile,userInfo, clickNickname };
+    return { store, userInfo, clickNickname };
   },
   methods: {
     getClickNickname(clickNickname) {
@@ -53,11 +62,10 @@ export default {
     }
   },
   mounted() {
-    console.log("누구의 프로필 : "+this.clickNickname);
+    console.log("누구의 프로필 : " + this.clickNickname);
   }
 }
 </script>
 
 <style>
-
 </style>

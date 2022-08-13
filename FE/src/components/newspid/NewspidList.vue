@@ -2,12 +2,12 @@
   <div>
     <!-- header -->
     <b-row rows="2">
-      <newspid-list-header></newspid-list-header>
+      <newspid-list-header v-bind="$props"></newspid-list-header>
     </b-row>
     <hr style="margin: 5px;">
     <!-- body -->
     <b-row rows="8">
-      <newspid-list-body></newspid-list-body>
+      <newspid-list-body v-bind="$props"></newspid-list-body>
     </b-row>
     <hr style="margin: 5px;">
     <!-- footer -->
@@ -24,19 +24,32 @@ import NewspidListBody from "@/components/newspid/lists/NewspidListBody.vue";
 import NewspidListFooter from "@/components/newspid/lists/NewspidListFooter.vue";
 
 export default {
-  components:{ 
-    NewspidListHeader, 
-    NewspidListBody, 
-    NewspidListFooter},
+  props: {
+    author: String,
+    profile: String,
+    contents: String,
+    tags: Array,
+    creativetimes: Date,
+    favor: Number,
+    comments: Array,
+  },
+  components: {
+    NewspidListHeader,
+    NewspidListBody,
+    NewspidListFooter
+  },
   data() {
     return {
-      listnum:5,
+      listnum: 5,
     }
   },
+  mounted() {
+    console.log("NewspidList")
+    console.log(this.author);
+  }
 
 }
 </script>
 
 <style>
-
 </style>

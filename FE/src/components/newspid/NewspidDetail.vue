@@ -4,11 +4,11 @@
       <b-row>
         <b-col>
           <!-- fluid alt="Responsive image" -->
-          <b-img src="https://placekitten.com/400/"
-            style="width: 100%; height: auto; max-width:700px; display:block; margin:0 auto;"></b-img>
+          <b-img :src="picture" style="width: 100%; height: auto; max-width:700px; display:block; margin:0 auto;">
+          </b-img>
         </b-col>
         <b-col style="background-color: #ffffff;">
-          <newspid-list></newspid-list>
+          <newspid-list v-bind="$props"></newspid-list>
         </b-col>
       </b-row>
       <b-row style="margin-top: 15px;">
@@ -29,7 +29,7 @@
     </b-container>
   </b-card>
   <newspid-detail-modals></newspid-detail-modals>
-  
+
 </template>
 
 <script>
@@ -37,16 +37,26 @@ import NewspidList from "@/components/newspid/NewspidList.vue";
 import NewspidDetailModals from "@/components/newspid/modal/NewspidDetailModals.vue";
 
 export default {
-  components:{ NewspidList, NewspidDetailModals},
-  methods:{
-    Delete(){
+  components: { NewspidList, NewspidDetailModals },
+  props: {
+    author: String,
+    profile: String,
+    contents: String,
+    tags: Array,
+    creativetimes: Date,
+    picture: String,
+    favor: Number,
+    comments: Array,
+  },
+  methods: {
+    Delete() {
       console.log("삭제");
     },
-    Modify(){
+    Modify() {
       console.log("수정");
-    }, 
+    },
     // 빠져나가는 함수 적용 필요
-    Cancel(){
+    Cancel() {
       console.log("취소");
     },
   },
@@ -55,19 +65,19 @@ export default {
 </script>
 
 <style>
-
-
-.avatar{
+.avatar {
   margin-left: 5px;
   margin-top: 5px;
 }
-.bottom_time_line{
-  color: gray; 
+
+.bottom_time_line {
+  color: gray;
   font-size: small;
   text-align: left;
 }
-.bottom_like_comment{
-  color: gray; 
+
+.bottom_like_comment {
+  color: gray;
   font-size: small;
   text-align: left;
   font-weight: bold;
