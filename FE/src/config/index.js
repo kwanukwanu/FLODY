@@ -2,3 +2,4 @@
 const API_BASE_URL = "http://i7b101.p.ssafy.io:8081/api";
 
 export { API_BASE_URL };
+    
