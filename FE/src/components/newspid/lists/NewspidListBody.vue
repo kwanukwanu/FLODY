@@ -46,19 +46,21 @@ import { useStore } from "vuex";
 
 export default {
   props: {
-    author: String,
-    profile: String,
-    contents: String,
-    tags: Array,
-    creativetimes: Date,
-    favor: Number,
-    comments: Array,
+    pidNo: Number,          // 뉴스피드 번호
+    author: String,         // 뉴스피드 작성자
+    profile: String,        // 작성자 사진
+    contents: String,       // 작성 내용 
+    tags: Array,            // 태그
+    creativetimes: Date,    // 작성 날짜
+    picture: String,        // 사진
+    favor: Number,          // 좋아요 개수
   },
   components: {
     NewspidItem,
   },
   data() {
     return {
+      comments: null,
       //tags: ["영국", "런던", "스터디"],
       //Myname: "Brown_Cat",
     }
@@ -78,7 +80,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.author);
+    this.comments = this.store.dispatch("newspidStore/setcomments", this.pidNo);
   }
 }
 </script>
