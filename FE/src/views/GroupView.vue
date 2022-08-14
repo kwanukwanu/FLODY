@@ -19,19 +19,79 @@
     -->
     <br>
     <b-row>
-      <b-card class="wrap-vertical" style="width:58rem; height:15rem; border-color:#a48282; margin-bottom:70px; margin-left: 11px;">
-      <b-row>
-        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
-        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
-        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
-        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
-        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
-        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
-        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
-        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
-        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
-        <b-card style="width:10rem; height:12rem; margin-bottom: 15px; margin-right: 15px;"></b-card>
-      </b-row>
+      <b-card class="wrap-vertical">
+
+        <!-- <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
+        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
+        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
+        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
+        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
+        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
+        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
+        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
+        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
+        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
+         -->
+
+        <div id="tab">
+          <ul>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br/>chlwogus_
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />mirikwon_
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />hilooboys_
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />dogandcat_
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />maratangboy
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />wearef5
+            </li>
+                        <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />chlwogus_
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />mirikwon_
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />hilooboys_
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />dogandcat_
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />maratangboy
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />wearef5
+            </li>
+                        <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />chlwogus_
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />mirikwon_
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />hilooboys_
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />dogandcat_
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />maratangboy
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />wearef5
+            </li>
+            
+          </ul>
+        </div>
       </b-card>
     </b-row>
     <b-row>
@@ -98,11 +158,10 @@
             <div style="text-align:center">
               <b-button size="sm" id="study_lookup-button" text style="color: #453535; background-color: #E1D3D2; border: none; 
               vertical-align:-webkit-baseline-middle;" @click="todosInsert()">
-              <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:red;">
-                      <path
-                        d="M10 6.667v6.666M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z"
-                        stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+                <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:red;">
+                  <path d="M10 6.667v6.666M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z"
+                    stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
               </b-button>
             </div>
           </b-col>
@@ -110,7 +169,7 @@
         <div id="todosField" style="height:50px; overflow-y: scroll;">
 
         </div>
-        
+
         <br />
         <b-button text @click="submit" style="color: #453535; background-color: #e1d3d2; border: none">등록</b-button>
       </b-container>
@@ -275,11 +334,24 @@ input[type=checkbox]:checked+label.strikethrough {
 }
 
 .wrap-vertical{
-  padding: 20px;
-  color: #112031;
-  border: 1px solid #000;
-   /* 가로 스크롤 */
-  overflow: auto;
-  white-space: nowrap;
+  width:58rem; 
+  border-color:#a48282; 
+  margin-bottom:70px; 
+  margin-left: 11px; 
+  height: 10rem;
+}
+ul{
+  list-style:none;
+}
+#tab ul{
+  white-space:nowrap; 
+  overflow-x: scroll; 
+  text-align:center;
+}
+#tab ul li{
+  display:inline-block;
+  margin-right: 25px;
+  font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
 }
 </style>
