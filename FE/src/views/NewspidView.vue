@@ -16,6 +16,9 @@ export default {
     const newspids = computed(() => store.state.newspidStore.newspids);
 
     return { store, newspids };
+  },
+  mounted() {
+    //this.store.dispatch("newspidStore/setClickNickname", false);
   }
 }
 </script>

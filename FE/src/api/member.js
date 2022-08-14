@@ -4,10 +4,7 @@ const api = apiInstance();
 // 로그인 (수정 완)
 async function login(user, success, fail) {
   console.log(user);
-  await api
-    .post(`/user/login`, JSON.stringify(user))
-    .then(success)
-    .catch(fail);
+  await api.post(`/user/login`, JSON.stringify(user)).then(success).catch(fail);
 }
 
 // 유저 목록 받아오기
@@ -19,7 +16,7 @@ async function findById(success, fail) {
 // 회원정보 받아오기
 async function getUserInfo(userid, success, fail) {
   console.log("getUserInfo");
-  console.log("id : "+userid);
+  console.log("id : " + userid);
   await api.get(`/user?email=${userid}`).then(success).catch(fail);
 }
 
@@ -47,7 +44,26 @@ async function userDelete(userid, success, fail) {
   api.delete(`/user/${userid}`).then(success).catch(fail);
 }
 
-// 로그아웃은 필요 없음
-// function logout(success, fail)
+// 팔로우
+async function userfollow(token, userid, success, fail) {
+  console.log(token);
+  api.get(`/user/follow?following=${userid}`).then(success).catch(fail);
+}
 
-export { login, findById, userIdDuplicated, getUserInfo, modifyMember, registMember, userDelete };
+// 언팔로우
+async function userunfollow(token, folNo, success, fail) {
+  console.log(token);
+  api.get(`/user/unfollow?folNo=${folNo}`).then(success).catch(fail);
+}
+
+export {
+  login,
+  findById,
+  userIdDuplicated,
+  getUserInfo,
+  modifyMember,
+  registMember,
+  userDelete,
+  userfollow,
+  userunfollow,
+};

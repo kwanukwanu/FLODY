@@ -2,7 +2,7 @@ const newspidStore = {
   namespaced: true,
   state: {
     isMyBoard: false,
-    clickNickname: " ",
+    clickNickname: false,
     selectedPid: {},
     newspids: [
       {
@@ -94,6 +94,7 @@ const newspidStore = {
     ],
     profile: {
       nickName: "ssafy3",
+      profile: "png0",
       board_num: 44,
       follower: 22,
       follow: 13,

@@ -8,7 +8,7 @@
     <b-row>
       <span
         style="display: inline; padding: 0px; text-align: left; font-weight: 500; font-size: 14px; margin-top:5px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; width:70%">
-        <a @click="getClickNickname(author)">{{ author }}</a>
+        <a @click="getClickNickname(author, profile)">{{ author }}</a>
         <b-button
           style="color: black; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 14px;"
           v-b-modal.modal-5>
@@ -54,11 +54,21 @@ export default {
     return { store, userInfo, clickNickname };
   },
   methods: {
-    getClickNickname(clickNickname) {
+    getClickNickname(clickNickname, profile) {
       console.log(clickNickname);
       console.log(this.profile.nickName);
       console.log(this.userInfo.nickname);
-      this.store.dispatch("newspidStore/setClickNickname", clickNickname);
+      this.store.dispatch("newspidStore/setClickNickname", true);
+      const data = {
+        nickName: clickNickname,
+        profile: profile,
+        board_num: 44,
+        follower: 22,
+        follow: 13,
+        name: "홍시영",
+        contents: "비트 찍고 랩하지만 코딩도 잘 하는 기리보이입니다.",
+      }
+      this.store.dispatch("newspidStore/setprofile", data);
     }
   },
   mounted() {

@@ -165,16 +165,13 @@ export default {
         { item: 'B', name: '공부 꿀팁' },
         { item: 'C', name: '합격 후기' }
       ],
-
-
-      items_popular: null,
     };
   },
   setup() {
     const store = useStore();
     const boardListname = computed(() => store.state.boardStore.boardListName);
-
-    return { store, boardListname };
+    const items_popular = computed(() => store.state.boardStore.boardList);
+    return { store, boardListname, items_popular };
   },
   mounted() {
     console.log("selected list : ");

@@ -38,10 +38,10 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <a style="cursor:pointer" v-b-modal.modal-10><span>팔로워
               </span><span style="font-weight:bold;">{{ profile.follower
-                }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+              }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
             <a style="cursor:pointer" v-b-modal.modal-11><span>팔로우 </span><span style="font-weight:bold;">{{
                 profile.follow
-                }}</span></a>
+            }}</span></a>
           </b-col>
         </b-row>
         <b-row style="font-weight: bold;">
@@ -96,9 +96,9 @@
           <b-col style="text-align: left; padding: 0;">
             <span>게시글 </span><a style="cursor:pointer" v-b-modal.modal-10><span style="font-weight:bold;">{{
                 profile.board_num
-                }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로워
+            }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로워
               </span><span style="font-weight:bold;">{{ profile.follower
-                }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a><a style="cursor:pointer" v-b-modal.modal-11><span
+              }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a><a style="cursor:pointer" v-b-modal.modal-11><span
                 style="font-weight:bold;"></span><span>팔로우
               </span><span style="font-weight:bold;">{{ profile.follow }}</span></a>
           </b-col>
@@ -129,390 +129,17 @@
     </b-row>
   </b-container>
   <hr>
-
   <newspid-header-modals></newspid-header-modals>
-
-  <b-modal hide-footer id="modal-10" centered title="팔로워" style="text-align: center;">
-    <b-container fluid="sm">
-      <b-list-group style="overflow-y: scroll; height:240px">
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/202" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">super_girl <b-button
-                    style="color: #0095F6; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 12px;">
-                    • 팔로우</b-button>
-                </b-row>
-                <b-row class="realname">김미료</b-row>
-              </b-col>
-              <!-- 팔로우 누르면 버튼 사라지고, 팔로우됨 -->
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" v-b-modal.modal-13 >삭제
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/203" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">bat_man <b-button
-                    style="color: #0095F6; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 12px;">
-                    • 팔로우</b-button>
-                </b-row>
-                <b-row class="realname">최재현</b-row>
-              </b-col>
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" v-b-modal.modal-13>삭제
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/204" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">pussycat <b-button
-                    style="color: #0095F6; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 12px;">
-                    • 팔로우</b-button>
-                </b-row>
-                <b-row class="realname">신영제</b-row>
-              </b-col>
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" v-b-modal.modal-13>삭제
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/205" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">keeper_yang <b-button
-                    style="color: #0095F6; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 12px;">
-                    • 팔로우</b-button>
-                </b-row>
-                <b-row class="realname">양한빈</b-row>
-              </b-col>
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" v-b-modal.modal-13>삭제
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/206" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">puppy_jisung <b-button
-                    style="color: #0095F6; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 12px;">
-                    • 팔로우</b-button>
-                </b-row>
-                <b-row class="realname">박지성</b-row>
-              </b-col>
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" v-b-modal.modal-13>삭제
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/207" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">nalgangdo <b-button
-                    style="color: #0095F6; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 12px;">
-                    • 팔로우</b-button>
-                </b-row>
-                <b-row class="realname">날강두</b-row>
-              </b-col>
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" v-b-modal.modal-13>삭제
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/208" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">kevin_d <b-button
-                    style="color: #0095F6; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 12px;">
-                    • 팔로우</b-button>
-                </b-row>
-                <b-row class="realname">김덕배</b-row>
-              </b-col>
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" v-b-modal.modal-13>삭제
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">kimmich <b-button
-                    style="color: #0095F6; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 12px;">
-                    • 팔로우</b-button>
-                </b-row>
-                <b-row class="realname">김미희</b-row>
-              </b-col>
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;" v-b-modal.modal-13>삭제
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-      </b-list-group>
-    </b-container>
-  </b-modal>
-
-  <b-modal hide-footer id="modal-11" centered title="팔로우" style="text-align: center;">
-    <b-container fluid="sm">
-      <b-list-group style="overflow-y: scroll; height:240px">
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/202" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">super_girl</b-row>
-                <b-row class="realname">김미료</b-row>
-              </b-col>
-              <!-- 팔로잉 누르면 모달 생성 -->
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;"
-                 v-b-modal.modal-12>팔로잉</b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/203" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">bat_man </b-row>
-                <b-row class="realname">최재현</b-row>
-              </b-col>
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;"
-                 v-b-modal.modal-12>팔로잉
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/204" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">pussycat </b-row>
-                <b-row class="realname">신영제</b-row>
-              </b-col>
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;"
-                 v-b-modal.modal-12>팔로잉
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/205" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">keeper_yang </b-row>
-                <b-row class="realname">양한빈</b-row>
-              </b-col>
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;"
-          v-b-modal.modal-12>팔로잉
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/206" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">puppy_jisung </b-row>
-                <b-row class="realname">박지성</b-row>
-              </b-col>
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;"
-        v-b-modal.modal-12>팔로잉
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/207" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">nalgangdo </b-row>
-                <b-row class="realname">날강두</b-row>
-              </b-col>
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;"
-              v-b-modal.modal-12>팔로잉
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/208" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">kevin_d </b-row>
-                <b-row class="realname">김덕배</b-row>
-              </b-col>
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;"
-          v-b-modal.modal-12>팔로잉
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-        <b-list-group-item>
-          <div class="person">
-            <b-row>
-              <b-col cols="2">
-                <b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar>
-              </b-col>
-              <b-col cols="7">
-                <b-row class="nickname">kimmich </b-row>
-                <b-row class="realname">김미희</b-row>
-              </b-col>
-              <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">
-                <b-button size="sm" style="color:black; background-color:white; font-size: 14px; padding:5px 9px;"
-                v-b-modal.modal-12>팔로잉
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-list-group-item>
-      </b-list-group>
-    </b-container>
-  </b-modal>
-
-  <b-modal hide-footer hide-title hide-header no-stacking centered id="modal-12" size="md" style="text-align: center;">
-    <b-container>
-      <b-row>
-        <b-col>
-          <div style="text-align:center;">
-            <b-avatar variant="info" src="https://placekitten.com/300/300" size="85px"></b-avatar>
-          </div>
-        </b-col>
-      </b-row>
-      <br>
-      <b-row>
-        <b-col style="margin-bottom:12px;">
-          leave @super_girl?
-        </b-col>
-      </b-row>
-      <hr />
-      <b-row style="cursor: pointer; color: red; font-weight: bold;">
-        <div style="text-align:center;">팔로우 취소</div>
-      </b-row>
-      <hr />
-      <b-row @click="Cancel" style="text-align:center; cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">
-        <div style="text-align:center;">취소</div>
-      </b-row>
-    </b-container>
-  </b-modal>
-
-  <b-modal hide-footer hide-title hide-header no-stacking centered id="modal-13" style="text-align: center;">
-    <b-container>
-      <b-row>
-        <b-col>
-          <div style="text-align:center;">
-            <b-avatar variant="info" src="https://placekitten.com/300/300" size="85px"></b-avatar>
-          </div>
-        </b-col>
-      </b-row>
-      <br>
-      <b-row>
-        <b-col style="margin-bottom:12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
-          <div style="font-size: 22px; margin-bottom: 8px;">팔로워를 삭제하시겠어요?</div>
-          <span style="font-size: 14px; color: #8E8E8E;">super_girl님은 회원님의 팔로워 리스트에서 삭제된<br>사실을 알 수 없습니다</span>
-        </b-col>
-      </b-row>
-      <hr />
-      <b-row style="cursor: pointer; color: red; font-weight: bold;">
-        <div style="text-align:center;">팔로우 취소</div>
-      </b-row>
-      <hr />
-      <b-row @click="Cancel" style="text-align:center; cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">
-        <div style="text-align:center;">취소</div>
-      </b-row>
-    </b-container>
-  </b-modal>
 </template>
 
 <script>
-import {computed} from "vue";
-import {useStore} from "vuex";
+import { computed } from "vue";
+import { useStore } from "vuex";
 
 import NewspidHeaderModals from "./modal/NewspidHeaderModals.vue";
 
 export default {
-  components:{
+  components: {
     NewspidHeaderModals,
   },
   setup() {
@@ -520,12 +147,12 @@ export default {
     const profile = computed(() => store.state.newspidStore.profile);
     const userInfo = computed(() => store.state.memberStore.userInfo);
     const clickNickname = computed(() => store.state.newspidStore.clickNickname);
-    return { store, profile,userInfo, clickNickname };
+    return { store, profile, userInfo, clickNickname };
   },
-  methods:{
-    getTargetId(targetId){
+  methods: {
+    getTargetId(targetId) {
       console.log(targetId);
-      this.store.dispatch("chatStore/set_targetId",targetId);
+      this.store.dispatch("chatStore/set_targetId", targetId);
     },
     getClickNickname(clickNickname) {
       console.log(clickNickname);
@@ -533,24 +160,25 @@ export default {
     }
   },
   mounted() {
-    console.log("누구의 프로필 : "+this.clickNickname);
+    console.log("누구의 프로필 : " + this.clickNickname);
   }
 }
 </script>
 
 <style>
-.person{
+.person {
   text-align: left;
 }
-.nickname{
-  font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+.nickname {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
 }
-.realname{
-    font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color:#8E8E8E;
-}
 
+.realname {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #8E8E8E;
+}
 </style>
