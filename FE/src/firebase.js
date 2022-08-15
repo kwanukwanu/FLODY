@@ -5,6 +5,7 @@ import firebaseConfig from '@/firebaseConfig'
 
 // import Filter from 'bad-words'
 import { ref, onUnmounted, computed } from 'vue'
+import {useStore} from "vuex";
 
 firebase.initializeApp(firebaseConfig)
 
@@ -38,18 +39,26 @@ export function useChat() {
       .reverse()
   })
   onUnmounted(unsubscribe)
-
-  const { user, isLogin } = useAuth()
+  
+  const store = useStore();
+  // const { user, isLogin } = useAuth()
   const sendMessage = text => {
-    if (!isLogin.value) return
-    const { photoURL, uid, displayName } = user.value
+    // if (!isLogin.value) return
+    // const { photoURL, uid, displayName } = user.value
+    console.log(store.state.memberStore.nickname)
+    console.log(store.state.chatStore.targetId);
     messagesCollection.add({
-      userName: displayName,
-      userId: uid,
-      userPhotoURL: photoURL,
+      // userName: displayName,
+      userName: store.state.memberStore.userInfo.nickname,
+      // userId: uid,
+      userId: store.state.memberStore.userInfo.email,
+      // userPhotoURL: photoURL,
+      userPhotoURL: store.state.memberStore.userInfo.profile,
       // text: filter.clean(text),
       text: text,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      // targetId: "ssafy",
+      targetId: store.state.chatStore.targetId,
     })
   }
 

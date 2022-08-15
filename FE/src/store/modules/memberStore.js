@@ -1,6 +1,6 @@
 //import jwt_decode from "vue-jwt-decode";
-//import { login } from "@/api/member.js";
-//import { findById } from "../../api/member";
+import { login } from "@/api/member.js";
+import { getUserInfo } from "../../api/member";
 
 // 회원가입 및 로그인을 수행하는 js파일
 
@@ -8,7 +8,7 @@ const memberStore = {
   namespaced: true,
   state: () => ({
     isLogin: false, // 로그인 여부
-    isLoginError: false, // 로그인 에러 확인
+    isLoginError: null, // 로그인 에러 확인
     userInfo: null,
   }),
   getters: {
@@ -30,45 +30,44 @@ const memberStore = {
   },
   actions: {
     async userConfirm({ commit }, user) {
-      //멤버 로그인에서 여기로
-
-      console.log("userConfirm : " + user);
-
       // axios 작업
-      // await login(
-      //   user,
-      //   (response) => {
-      //     if (response.data.message == "success") {
-      //       let token = response.data["access-token"];
-      //       commit("SET_IS_LOGIN", true);
-      //       commit("SET_IS_LOGIN_ERROR", false);
-      //       sessionStorage.setItem("access-token", token);
-      //     } else {
-      //       commit("SET_IS_LOGIN", false);
-      //       commit("SET_IS_LOGIN_ERROR", true);
-      //     }
-      //   },
-      //   () => { },
-      // );
-
-      // 현재는 로그인이 되도록 설정
-      commit("SET_IS_LOGIN", true);
-      commit("SET_IS_LOGIN_ERROR", false);
+      console.log("login 시작");
+      await login(
+        user,
+        (response) => {
+          console.log("message : " + response);
+          console.log(response);
+          if (response.data.msg == "SUCCESS") {
+            console.log("로그인 성공");
+            let token = response.data["access-token"];
+            commit("SET_IS_LOGIN", true);
+            commit("SET_IS_LOGIN_ERROR", false);
+            sessionStorage.setItem("access-token", token);
+          } else {
+            console.log("로그인 실패");
+            commit("SET_IS_LOGIN", false);
+            commit("SET_IS_LOGIN_ERROR", false);
+          }
+        },
+        () => {},
+      );
+      console.log("login 끝");
     },
 
     getUserInfo({ commit }, token) {
       //let decode_token = jwt_decode(token);
-      //console.log(decode_token.userid);
       console.log(token);
       // axios 필요
-      /*
-      findById(
-        decode_token.userid,
+      getUserInfo(
+        //decode_token.userid,
+        token,
         (response) => {
           console.log("여기까지는 온다");
-          console.log(response.data.message);
-          if (response.data.message === "success") {
-            commit("SET_USER_INFO", response.data.userInfo);
+          console.log(response.data.msg);
+          if (response.data.msg === "SUCCESS") {
+            console.log("확인");
+            console.log(response.data.item);
+            commit("SET_USER_INFO", response.data.item);
           } else {
             console.log("유저 정보 없음!!");
           }
@@ -77,14 +76,11 @@ const memberStore = {
           console.log(error);
         },
       );
-      */
-
-      const data = {
-        id: "ssafy4321",
-        password: "1234",
-        name: "최싸피",
-      };
-      commit("SET_USER_INFO", data);
+    },
+    setLogout({ commit }) {
+      commit("SET_USER_INFO", " ");
+      commit("SET_IS_LOGIN", false);
+      sessionStorage.removeItem("access-token"); //로그 아웃하면 액세스 토큰을 지워라
     },
   },
 };

@@ -11,6 +11,7 @@
             text-decoration: none;
             background-color: #e3d6d6;
           "
+          v-b-modal.boardUpdate
           >수정</b-button
         >
         <b-button
@@ -22,6 +23,7 @@
             background-color: #e3d6d6;
             margin-left: 12px;
           "
+          v-b-modal.boardDelete
         >
           삭제</b-button
         >
@@ -156,6 +158,8 @@
                 font-weight: 100;
                 border: 1px solid;
               "
+              v-b-modal.chatting
+              @click="getTargetId(selectedBoard.author)"
             >
               1:1 채팅</b-button
             >
@@ -316,6 +320,59 @@
       </b-col>
     </b-row>
   </div>
+
+  <b-modal hide-header hide-footer title="채팅창" centered id="chatting" size="lg" style="text-align: center;">
+    <board-modal-chat/>
+  </b-modal>
+
+  <b-modal hide-footer id="boardUpdate" centered title="게시글 수정" style="text-align: center">
+    <b-card style="height: 29rem; max-width: 30rem; background-color: #f8f3f3">
+      <b-container ref="form">
+        <b-row style="margin-bottom: 10px">
+          <b-col>
+            <b-form-input style="border: none" placeholder="제목을 입력하세요" 
+            v-model="selectedBoard.title">
+            </b-form-input>
+          </b-col>
+        </b-row>
+        <b-row style="margin-bottom: 10px">
+          <b-col>
+            <b-form-select style="border: none" v-model="selected_3" :options="options_3" class="mb-3"
+              value-field="item" text-field="name" disabled-field="notEnabled"></b-form-select>
+          </b-col>
+        </b-row>
+        <b-row style="margin-bottom: 10px">
+          <b-col>
+            <b-form-textarea id="content" placeholder="내용 입력..." rows="10" max-rows="15" required style="border: none" 
+            v-model="selectedBoard.contents">
+            </b-form-textarea>
+          </b-col>
+        </b-row>
+        <br />
+        <b-button text @click="submit" style="color: #453535; background-color: #e1d3d2; border: none">수정</b-button>
+      </b-container>
+    </b-card>
+  </b-modal>
+
+  <b-modal hide-footer id="boardDelete" centered title="게시글 삭제" size="sm" style="text-align: center">
+    <b-card style="max-width: 30rem; background-color: #f8f3f3">
+      <b-container ref="form">
+        <b-row style="margin-bottom: 10px">
+          <b-col>
+            <div>정말 삭제 하시겠습니까?</div>
+          </b-col>
+        </b-row>
+        <b-row style="margin-bottom: 10px">
+          <b-col data-bs-dismiss="modal" aria-label="Close">
+            <b-button text @click="submit" style="color: #453535; background-color: #e1d3d2; border: none">취소</b-button>
+          </b-col>
+          <b-col data-bs-dismiss="modal" aria-label="Close">
+            <b-button text @click="submit" style="color: #453535; background-color: #e1d3d2; border: none">삭제</b-button>
+          </b-col>
+        </b-row>
+      </b-container>
+    </b-card>
+  </b-modal>
 </template>
 
 <script>
@@ -323,16 +380,18 @@ import {computed} from "vue";
 import {useStore} from "vuex";
 
 import BoardCommentsList from "@/components/board/comments/BoardCommentsList.vue";
+import BoardModalChat from "@/components/board/modal/BoardModalChat.vue";
 
 export default {
   components: {
     BoardCommentsList,
+    BoardModalChat,
   },
   setup(){
     const store = useStore();
     const selectedBoard = computed(()=>store.state.boardStore.selectedBoard);
 
-    return {store, selectedBoard};
+    return {store, selectedBoard,};
   },
   props: {
     index: Number,
@@ -343,6 +402,12 @@ export default {
     hits: Number,
     contents: String,
   },
+  methods:{
+    getTargetId(name){
+      console.log(name);
+      this.store.dispatch("chatStore/set_targetId",name);
+    }
+  }
 };
 </script>
 

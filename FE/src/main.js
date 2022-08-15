@@ -12,5 +12,4 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import "v-calendar/dist/style.css";
 
 const app = createApp(App);
-
 app.use(store).use(router).use(BootstrapVue3).use(calendar).mount('#app');

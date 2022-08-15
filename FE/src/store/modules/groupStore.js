@@ -1,29 +1,107 @@
+import { get_todo_list } from "@/api/group";
+
 const groupStore = {
   namespaced: true,
   state: {
     isMyGroup: false,
     selectGroups: {
       name: "none",
+      goal: "none",
+      date: null,
     },
     groupNum: 0,
+    selectedDate: {
+      year: 2022,
+      months: 8,
+      days: 11,
+    },
     todos: [
       {
-        description: "mike's birthdays.",
+        dates: { years: 2022, months: 8, days: 11 },
         isComplete: false,
-        dates: { months: 7, days: 18 },
         color: "red",
+        nums: 0,
+      },
+    ],
+    todo_list: [
+      {
+        dates: { years: 2022, months: 8, days: 11 },
+        description: "네트워크 뽀사기",
+        isComplete: false,
       },
       {
-        description: "computer science study.",
+        dates: { years: 2022, months: 8, days: 11 },
+        description: "보안 유형 정복",
         isComplete: true,
-        dates: { weekdays: 6 },
-        color: "blue",
+      },
+      {
+        dates: { years: 2022, months: 8, days: 11 },
+        description: "21년 2회차 실기풀이",
+        isComplete: false,
+      },
+      {
+        dates: { years: 2022, months: 8, days: 11 },
+        description: "java 뽀사기",
+        isComplete: true,
+      },
+      {
+        dates: { years: 2022, months: 8, days: 11 },
+        description: "22년 2회차 실기풀이",
+        isComplete: false,
+      },
+      {
+        dates: { years: 2022, months: 8, days: 11 },
+        description: "3차 스터디 회의",
+        isComplete: false,
       },
     ],
   },
-  getters: {},
-  mutations: {},
-  actions: {},
+  getters: {
+    getSelectGroup: function (state) {
+      return state.selectGroups;
+    },
+  },
+  mutations: {
+    SET_SELECT_GROUP: (state, selectGroups) => {
+      state.selectGroups = selectGroups;
+    },
+    SET_TODOS: (state, todos) => {
+      state.todos = todos;
+    },
+    SET_SELECTED_DATE: (state, selectedDate) => {
+      state.selectedDate = selectedDate;
+    },
+    SET_TODO_LIST: (state, todo_list) => {
+      state.todo_list = todo_list;
+    },
+  },
+  actions: {
+    selectGroups({ commit }, group) {
+      commit("SET_SELECT_GROUP", group);
+    },
+    set_todos({ commit }, todos) {
+      commit("SET_TODOS", todos);
+    },
+    set_selectedDate({ commit }, selectedDate) {
+      commit("SET_SELECTED_DATE", selectedDate);
+    },
+    async set_todo_list({ commit }, date) {
+      await get_todo_list(
+        date,
+        (response) => {
+          console.log("message : " + response);
+          console.log(response);
+          if (response.msg == "SUCCESS") {
+            console.log("리스트 받아오기 성공");
+            commit("SET_TODO_LIST", response.item.list);
+          } else {
+            console.log("받아오기 실패");
+          }
+        },
+        () => {},
+      );
+    },
+  },
 };
 
 export default groupStore;

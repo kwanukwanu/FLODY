@@ -7,8 +7,20 @@ import groupStore from "@/store/modules/groupStore.js";
 import calendarStore from "@/store/modules/calendarStore.js";
 import boardStore from "@/store/modules/boardStore.js";
 import newspidStore from "@/store/modules/newspidStore.js";
+import chatStore from "@/store/modules/chatStore.js";
 
 export default createStore({
-  modules: { memberStore, groupStore, calendarStore, boardStore, newspidStore },
-  plugins: [createdPersistedState()],
+  modules: {
+    memberStore,
+    groupStore,
+    calendarStore,
+    boardStore,
+    newspidStore,
+    chatStore,
+  },
+  plugins: [
+    createdPersistedState({
+      storage: sessionStorage,
+    }),
+  ],
 });

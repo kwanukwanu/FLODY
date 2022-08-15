@@ -79,7 +79,7 @@
               <h6 id="study_people_title">스터디원 목록</h6>
             </b-row>
             <b-row>
-              <b-card class="study_intro_content" style="height:150px; overflow-y: scroll;">
+              <b-card class="study_intro_content_2" style="height:150px; overflow-y: scroll;">
                 <b-container fluid="sm">
                   <div style="text-align:left">
                     <!-- <ul id="study_people_group">
@@ -160,7 +160,7 @@
   </div>
 
   <b-modal id="study_create" hide-footer centered title="스터디 생성" style="text-align:center;">
-    <b-card id="modal_card" style="height: 22rem; max-width: 40rem; background-color: #F8F3F3;">
+    <b-card id="modal_card" style="height: 27rem; max-width: 40rem; background-color: #F8F3F3;">
       <b-container id="modal_container" ref="form">
         <!-- <b-row id="study_name_line" style="margin-bottom: 10px;">
           <b-col id="study_name_title_space" cols="3" style="padding: 0">
@@ -180,14 +180,21 @@
         </b-row>
         <b-row id="study_lookup_line2" style="margin-bottom: 10px;">
           <b-col id="study_lookup_input_space" cols="10" style="padding: 0; margin-left: 10px;">
-            <b-form-input id="study_lookup_input" aria-placeholder="추가하고자 하는 스터디원의 아이디 입력" required
+            <b-form-input placeholder="아이디를 입력하세요." id="study_lookup_input" aria-placeholder="추가하고자 하는 스터디원의 아이디 입력" required
               style="border: none;"></b-form-input>
           </b-col>
           <b-col id="study_lookup_button_space" style="padding: 0; margin-left: 6px;">
-            <div style="text-align:center"><b-button size="sm" id="study_lookup-button" text style="color: #453535; background-color: #E1D3D2; border: none; vertical-align:-webkit-baseline-middle;">추가
-            </b-button></div>
+            <div style="text-align:center">
+              <b-button size="sm" id="study_lookup-button" text style="color: #453535; background-color: #E1D3D2; border: none; 
+              vertical-align:-webkit-baseline-middle;" @click="personInsert()">
+              추가
+              </b-button>
+            </div>
           </b-col>
         </b-row>
+        <div id="personField" style="height:50px; overflow-y: scroll;">
+
+        </div>
         <!-- <b-row id="study_hold_line" style="margin-bottom: 5px; text-align: left;">
           <div id="study_hold_title" style="font-weight: bold;">스터디원 리스트</div>
         </b-row>
@@ -199,7 +206,7 @@
         <!-- <b-row id="study_letter_line" style="margin-bottom: 5px; text-align: left;">
           <div id="study_letter_title" style="font-weight: bold;">스터디 소개글</div>
         </b-row> -->
-        <b-row id="study_letter_line2" style="margin-bottom: 35px; margin-top: 20px;">
+        <b-row id="study_letter_line2" style="margin-bottom: 20px; margin-top: 20px;">
           <b-col id="study_letter_input_space">
             <b-form-textarea id="study_letter_input" v-model="textEx1" placeholder="스터디 소개글을 입력하세요." rows="3"
               max-rows="6" style="border: none">
@@ -256,6 +263,34 @@ export default{
       console.log(link);
       this.$router.push(link);
     },
+    personInsert() {
+      let study_lookup_input = document.getElementById('study_lookup_input');
+      let field = document.getElementById('personField');
+      console.log(study_lookup_input.value);
+      console.log(field);
+      if(study_lookup_input.value !== '') {
+        const item = document.createElement('div')
+        // text
+        const text = document.createElement('span');
+        // 제거하기 버튼
+        const deleteButton = document.createElement('a');
+        deleteButton.innerHTML=`
+                                <span id="delete" class="material-icons" style="vertical-align: sub; cursor: pointer;">delete</span>
+                              `;
+
+        text.textContent = study_lookup_input.value
+        study_lookup_input.value=''
+    
+        item.appendChild(text)
+        item.appendChild(deleteButton)
+        field.appendChild(item)
+
+        deleteButton.addEventListener('click', (event) => {
+            field.removeChild(event.currentTarget.parentNode)
+        })
+        study_lookup_input.value =''
+      }
+    },
   },
 }
 </script>
@@ -303,7 +338,23 @@ hr {
   border: 1px solid; 
   border-color: #A48282; 
   border-radius: 7px;
+    -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+
 }
+.study_intro_content::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera*/
+}
+.study_intro_content_2 {
+  border: 1px solid; 
+  border-color: #A48282; 
+  border-radius: 7px;
+}
+
+
 
 #study_info > #study_people > #study_people_line > #study_people_title {
   text-align: left; 
@@ -374,5 +425,46 @@ dl, ol, ul {
 }
 .person{
   margin-bottom: 5px;
+}
+
+#personField::-webkit-scrollbar {
+  width: 6px;
+}
+#personField::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+#personField::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: gray;
+}
+#personField::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+.scroll {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera*/
+}
+
+.study_intro_content_2::-webkit-scrollbar {
+  width:10px;
+}
+.study_intro_content_2::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.study_intro_content_2::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #E4DADA;
+}
+.study_intro_content_2::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
 }
 </style>
