@@ -15,6 +15,7 @@ import com.ssafy.flody.dto.response.users.UserFollowResponseDto;
 import com.ssafy.flody.dto.response.users.UserGoalResponseDto;
 import com.ssafy.flody.dto.response.users.UserScheduleListResponseDto;
 import com.ssafy.flody.service.JWTService;
+import com.ssafy.flody.service.comments.CommentService;
 import com.ssafy.flody.service.groups.GroupService;
 import com.ssafy.flody.service.groups.members.GroupMemberService;
 import com.ssafy.flody.service.posts.PostService;
@@ -49,6 +50,7 @@ public class ApiController {
     private final GroupService groupService;
     private final GroupMemberService groupMemberService;
     private final PostService postService;
+    private final CommentService commentService;
 
     // USER
     @GetMapping("/users")
@@ -405,30 +407,31 @@ public class ApiController {
         return getStringResponseEntity(id);
     }
 
+    // COMMENT
     @GetMapping("/comments")
     public ResponseEntity<Map<String, Object>> CommentList(@RequestParam Long posNo) {
-        return getResponseEntity();
+        return getResponseEntity(commentService.findComments(posNo));
     }
 
-    // COMMENT
-    @GetMapping("/comment")
-    public ResponseEntity<Map<String, Object>> CommentDetails(@RequestParam Long id) {
-        return getMapResponseEntity(id);
-    }
+    // 댓글은 단일조회할 일이 없다는 판단
+//    @GetMapping("/comment")
+//    public ResponseEntity<Map<String, Object>> CommentDetails(@RequestParam Long id) {
+//        return getMapResponseEntity(id);
+//    }
 
     @PostMapping("/comment")
-    public ResponseEntity<String> CommentAdd(@RequestBody CommentCreateRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
+    public ResponseEntity<Map<String, Object>> CommentAdd(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody CommentCreateRequestDto requestDto) throws Exception {
+        return getResponseEntity(commentService.addComment(jwtService.decodeToken(token), requestDto));
     }
 
     @PutMapping("/comment")
-    public ResponseEntity<String> CommentModify(@RequestBody CommentUpdateRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
+    public ResponseEntity<Map<String, Object>> CommentModify(@RequestBody CommentUpdateRequestDto requestDto) {
+        return getResponseEntity(commentService.modifyComment(requestDto));
     }
 
     @DeleteMapping("/comment")
-    public ResponseEntity<String> CommentRemove(@RequestParam Long id) {
-        return getStringResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> CommentRemove(@RequestParam Long comNo) {
+        return getResponseEntity(commentService.removeComment(comNo));
     }
 
     @GetMapping("/comment/like")

@@ -6,19 +6,24 @@ import com.ssafy.flody.domain.users.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
+
+import java.util.Calendar;
+import java.util.Date;
 
 @Getter
 @NoArgsConstructor
 public class CommentUpdateRequestDto {
-    private Long upper;
-    private String comment;
-    private Integer kids;
+    private Long comNo;
+    private String content;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date postDate = findToday();
 
-    @Builder
-    public CommentUpdateRequestDto(Long upper, String comment, Integer kids
-    ){
-        this.upper = upper;
-        this.comment = comment;
-        this.kids = kids;
+    private Date findToday() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date(System.currentTimeMillis()));
+        cal.add(Calendar.DATE, 1);
+        return cal.getTime();
     }
 }

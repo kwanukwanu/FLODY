@@ -81,9 +81,7 @@ public class GroupMemberServiceImpl implements GroupMemberService {
 
     public Long removeAllMembers(Long groNo) throws Exception {
         List<GMembers> members = groupMemberRepository.findAllByGroup(findGroup(groNo));
-        for (GMembers member : members) {
-            groupMemberRepository.delete(member);
-        }
+        groupMemberRepository.deleteAll(members);
         return groNo;
     }
 
