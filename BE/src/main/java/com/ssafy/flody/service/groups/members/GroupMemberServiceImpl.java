@@ -10,7 +10,9 @@ import com.ssafy.flody.domain.users.Users;
 import com.ssafy.flody.domain.users.UsersRepository;
 import com.ssafy.flody.dto.request.groups.GroupMemberCreateRequestDto;
 import com.ssafy.flody.dto.request.groups.GroupMemberUpdateRequestDto;
+import com.ssafy.flody.dto.response.groups.GroupDetailResponseDto;
 import com.ssafy.flody.dto.response.groups.GroupMemberDetailResponseDto;
+import com.ssafy.flody.dto.response.groups.MyGroupMemberListResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -83,6 +85,14 @@ public class GroupMemberServiceImpl implements GroupMemberService {
             groupMemberRepository.delete(member);
         }
         return groNo;
+    }
+
+    public List<MyGroupMemberListResponseDto> findMyGroupMembers(List<Groups> group) {
+        List<MyGroupMemberListResponseDto> list = new ArrayList<>();
+        for(Groups gr: group) {
+            list.add(new MyGroupMemberListResponseDto(gr, findMembers(gr.getGroNo())));
+        }
+        return list;
     }
 
     public Boolean isValid(String email, Long groNo) {

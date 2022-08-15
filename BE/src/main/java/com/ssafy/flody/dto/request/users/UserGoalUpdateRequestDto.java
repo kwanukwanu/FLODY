@@ -4,19 +4,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 import java.util.Date;
 
 @Getter
 @NoArgsConstructor
 public class UserGoalUpdateRequestDto {
+    @Nullable
     private String name;
+    @Nullable
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
-
-    @Builder
-    public UserGoalUpdateRequestDto(String name, Date dueDate){
-        this.name = name;
-        this.dueDate = dueDate;
-    }
 }

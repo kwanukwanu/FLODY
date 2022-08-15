@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @Getter
@@ -14,16 +15,9 @@ import java.util.Date;
 public class UserGoalCreateRequestDto {
     private String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date registDate = new Date(System.currentTimeMillis());
+    private Date registDate = findToday();
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
-
-    @Builder
-    public UserGoalCreateRequestDto(String name, Date registDate, Date dueDate) {
-        this.name = name;
-        this.registDate = registDate;
-        this.dueDate = dueDate;
-    }
 
     public UGoals toEntity(Users user) {
         return UGoals.builder()
@@ -32,5 +26,12 @@ public class UserGoalCreateRequestDto {
                 .registDate(registDate)
                 .dueDate(dueDate)
                 .build();
+    }
+
+    private Date findToday() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date(System.currentTimeMillis()));
+        cal.add(Calendar.DATE, 1);
+        return cal.getTime();
     }
 }
