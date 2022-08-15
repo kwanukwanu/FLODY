@@ -79,7 +79,7 @@
               <h6 id="study_people_title">스터디원 목록</h6>
             </b-row>
             <b-row>
-              <b-card class="study_intro_content" style="height:150px; overflow-y: scroll;">
+              <b-card class="study_intro_content_2" style="height:150px; overflow-y: scroll;">
                 <b-container fluid="sm">
                   <div style="text-align:left">
                     <!-- <ul id="study_people_group">
@@ -180,7 +180,7 @@
         </b-row>
         <b-row id="study_lookup_line2" style="margin-bottom: 10px;">
           <b-col id="study_lookup_input_space" cols="10" style="padding: 0; margin-left: 10px;">
-            <b-form-input id="study_lookup_input" aria-placeholder="추가하고자 하는 스터디원의 아이디 입력" required
+            <b-form-input placeholder="아이디를 입력하세요." id="study_lookup_input" aria-placeholder="추가하고자 하는 스터디원의 아이디 입력" required
               style="border: none;"></b-form-input>
           </b-col>
           <b-col id="study_lookup_button_space" style="padding: 0; margin-left: 6px;">
@@ -338,7 +338,23 @@ hr {
   border: 1px solid; 
   border-color: #A48282; 
   border-radius: 7px;
+    -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+
 }
+.study_intro_content::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera*/
+}
+.study_intro_content_2 {
+  border: 1px solid; 
+  border-color: #A48282; 
+  border-radius: 7px;
+}
+
+
 
 #study_info > #study_people > #study_people_line > #study_people_title {
   text-align: left; 
@@ -422,6 +438,32 @@ dl, ol, ul {
   background-color: gray;
 }
 #personField::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+.scroll {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera*/
+}
+
+.study_intro_content_2::-webkit-scrollbar {
+  width:10px;
+}
+.study_intro_content_2::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.study_intro_content_2::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #E4DADA;
+}
+.study_intro_content_2::-webkit-scrollbar-button {
   width: 0;
   height: 0;
 }
