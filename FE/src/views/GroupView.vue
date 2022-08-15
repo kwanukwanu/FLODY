@@ -354,4 +354,18 @@ ul{
   font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   font-size: 14px;
 }
+#tab ul::-webkit-scrollbar {
+  height:10px;
+}
+#tab ul::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+#tab ul::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #E4DADA;
+}
+#tab ul::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
 </style>
