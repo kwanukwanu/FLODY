@@ -1,10 +1,10 @@
 <template>
-  <div v-if="clickNickname == ' '"></div>
-  <b-container v-else-if="clickNickname != userInfo.nickname">
+  <!-- <div v-if="clickNickname == ' '"></div> -->
+  <b-container v-if="profile.nickName != userInfo.nickname">
     <br>
     <b-row style="margin-bottom:27px">
       <b-col cols="3" style="padding: 0px; text-align: center;">
-        <b-avatar variant="info" src="https://placekitten.com/300/200" size="145px"></b-avatar>
+        <b-avatar variant="info" :src="profile.profile" size="145px"></b-avatar>
       </b-col>
       <b-col>
         <b-row style="margin-bottom:10px;">
@@ -59,12 +59,12 @@
   </b-container>
   <!-- <hr> -->
 
-  <b-container v-else-if="clickNickname == userInfo.nickname">
+  <b-container v-else-if="profile.nickName == userInfo.nickname">
     <br>
     <!-- <b-row align-v="center"> -->
     <b-row style="margin-bottom:27px">
       <b-col cols="3" style="padding: 0px; text-align: center;">
-        <b-avatar variant="info" src="https://placekitten.com/300/300" size="145px"></b-avatar>
+        <b-avatar variant="info" :src="profile.profile" size="145px"></b-avatar>
       </b-col>
       <b-col>
         <b-row style="margin-bottom:10px;">
@@ -94,10 +94,11 @@
         </b-row>
         <b-row style="margin-bottom:10px;">
           <b-col style="text-align: left; padding: 0;">
-            <span>게시글 </span><a style="cursor:pointer" v-b-modal.modal-10><span style="font-weight:bold;">{{
-                profile.board_num
-            }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로워
-              </span><span style="font-weight:bold;">{{ profile.follower
+            <span>게시글 </span><a style="cursor:pointer" v-b-modal.modal-10>
+              <span style="font-weight:bold;">{{ profile.board_num
+              }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로워
+              </span><span style="font-weight:bold;">{{
+                  profile.follower
               }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a><a style="cursor:pointer" v-b-modal.modal-11><span
                 style="font-weight:bold;"></span><span>팔로우
               </span><span style="font-weight:bold;">{{ profile.follow }}</span></a>

@@ -12,7 +12,7 @@
     <hr style="margin: 5px;">
     <!-- footer -->
     <b-row rows="2">
-      <newspid-list-footer></newspid-list-footer>
+      <newspid-list-footer v-bind="$props"></newspid-list-footer>
     </b-row>
   </div>
 
@@ -30,7 +30,7 @@ export default {
     profile: String,        // 작성자 사진
     contents: String,       // 작성 내용 
     tags: Array,            // 태그
-    creativetimes: Date,    // 작성 날짜
+    creativetimes: Object,    // 작성 날짜
     picture: String,        // 사진
     favor: Number,          // 좋아요 개수
   },

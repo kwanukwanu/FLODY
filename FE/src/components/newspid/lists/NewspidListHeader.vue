@@ -42,7 +42,7 @@ export default {
     profile: String,
     contents: String,
     tags: Array,
-    creativetimes: Date,
+    creativetimes: Object,
     favor: Number,
     comments: Array,
   },
@@ -58,10 +58,10 @@ export default {
       console.log(clickNickname);
       console.log(this.profile.nickName);
       console.log(this.userInfo.nickname);
-      this.store.dispatch("newspidStore/setClickNickname", true);
+      // 이러한 데이터 적용은 차후 axios로 변경할 예정
       const data = {
-        nickName: clickNickname,
-        profile: profile,
+        nickName: clickNickname,  // 닉네임 적용
+        profile: profile,         // 사진 변경
         board_num: 44,
         follower: 22,
         follow: 13,

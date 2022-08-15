@@ -34,18 +34,45 @@
     <b-row>
         <b-col
             style="padding-right: 5px; text-align: left; font-weight: bold; font-size: 14px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin-left: 10px;">
-            좋아요 878개</b-col>
+            좋아요 {{ favor }}개</b-col>
     </b-row>
     <b-row>
         <b-col style="color:gray; font-size: 10px; margin-left: 10px;">
-            1일 전
+            {{ setTimes }}
         </b-col>
     </b-row>
 </template>
 
 <script>
 export default {
+    props: {
+        pidNo: Number,          // 뉴스피드 번호
+        creativetimes: Object,    // 작성 날짜
+        favor: Number,          // 좋아요 개수
+    },
+    computed: {
+        setTimes() {
+            const now = new Date();
+            const year = this.creativetimes.year;
+            const month = this.creativetimes.month;
+            const date = this.creativetimes.date;
+            const hour = this.creativetimes.hour;
+            const min = this.creativetimes.min;
 
+            console.log("year : " + year);
+            if (now.getFullYear() - year > 0)
+                return (now.getFullYear() - year) + "년 전";
+            else if (now.getMonth() - month > 0) // year = 0 이므로
+                return (now.getMonth() - month) + "개월 전";
+            else if (now.getDate() - date > 0)
+                return (now.getDate() - date) + "일 전";
+            else if (now.getHours() - hour > 0)
+                return (now.getHours() - hour) + "시간 전";
+            else if (now.getMinutes() - min > 0)
+                return (now.getMinutes() - min) + "분 전";
+            else return "방금 전";
+        }
+    }
 }
 </script>
 

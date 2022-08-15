@@ -1,7 +1,7 @@
 //import jwt_decode from "vue-jwt-decode";
 import { login } from "@/api/member.js";
 import { getUserInfo } from "../../api/member";
-
+import { get_goal_one } from "@/api/goal.js";
 // 회원가입 및 로그인을 수행하는 js파일
 
 const memberStore = {
@@ -10,6 +10,16 @@ const memberStore = {
     isLogin: false, // 로그인 여부
     isLoginError: null, // 로그인 에러 확인
     userInfo: null,
+    goals: [
+      {
+        subject: "정보처리기사",
+        mod: 10,
+      },
+      {
+        subject: "OPIC",
+        mod: 3,
+      },
+    ],
   }),
   getters: {
     checkUserInfo: function (state) {
@@ -26,6 +36,9 @@ const memberStore = {
     SET_USER_INFO: (state, userInfo) => {
       state.isLogin = true;
       state.userInfo = userInfo;
+    },
+    SET_GOALS: (state, goals) => {
+      state.goals = goals;
     },
   },
   actions: {
@@ -81,6 +94,25 @@ const memberStore = {
       commit("SET_USER_INFO", " ");
       commit("SET_IS_LOGIN", false);
       sessionStorage.removeItem("access-token"); //로그 아웃하면 액세스 토큰을 지워라
+    },
+    setgoals({ commit }, userId) {
+      console.log(userId);
+      get_goal_one(
+        userId,
+        (response) => {
+          console.log("응답 확인");
+          if (response.msg === "SUCCESS") {
+            console.log("목표 저장");
+            commit("SET_GOALS", response);
+          } else {
+            console.log("응답 실패!");
+          }
+        },
+        (error) => {
+          console.log("응답 실패!");
+          console.log(error);
+        },
+      );
     },
   },
 };
