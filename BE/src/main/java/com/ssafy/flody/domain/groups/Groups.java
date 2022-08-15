@@ -21,7 +21,7 @@ public class Groups {
     private Long groNo;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     private Date foundDate;
 
     public void update(String name) {

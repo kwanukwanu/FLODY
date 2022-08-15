@@ -4,27 +4,23 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 import java.util.Date;
 
 @Getter
 @NoArgsConstructor
 public class UserScheduleUpdateRequestDto {
+    @Nullable
     private String title;
+    @Nullable
     private String detail;
+    @Nullable
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
+    @Nullable
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
+    @Nullable
     private Boolean done;
-
-    @Builder
-    public UserScheduleUpdateRequestDto(String title, String detail, Date startDate, Date endDate, Boolean done) {
-        this.title = title;
-        this.detail = detail;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.done = done;
-    }
-
 }

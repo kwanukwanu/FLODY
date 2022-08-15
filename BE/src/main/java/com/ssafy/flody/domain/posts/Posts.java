@@ -40,6 +40,15 @@ public class Posts {
     private int likeCnt;
     @Column(nullable = false)
     private int commentCnt;
-    @CreatedDate
+    @Column(nullable = false, updatable = false)
     private Date postDate;
+
+    public void update(String title, String content, String hashtag) {
+        if(title != null)
+            this.title = title;
+        if(content != null)
+            this.content = content;
+        if(hashtag != null)
+            this.hashtag = hashtag;
+    }
 }

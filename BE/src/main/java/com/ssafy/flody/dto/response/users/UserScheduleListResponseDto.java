@@ -5,6 +5,7 @@ import com.ssafy.flody.domain.users.schedules.USchedules;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @Getter
@@ -18,10 +19,15 @@ public class UserScheduleListResponseDto {
     private Boolean done;
 
     public UserScheduleListResponseDto(USchedules entity){
+        Calendar cal = Calendar.getInstance();
         this.usNo = entity.getUsNo();
         this.title = entity.getTitle();
-        this.startDate = entity.getStartDate();
-        this.endDate = entity.getEndDate();
+        cal.setTime(entity.getStartDate());
+        cal.add(Calendar.DATE, 1);
+        this.startDate = cal.getTime();
+        cal.setTime(entity.getEndDate());
+        cal.add(Calendar.DATE, 1);
+        this.endDate = cal.getTime();
         this.done = entity.getDone();
     }
 }

@@ -5,6 +5,7 @@ import com.ssafy.flody.domain.users.schedules.USchedules;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @Getter
@@ -24,8 +25,13 @@ public class UserScheduleDetailResponseDto {
         this.usNo = entity.getUsNo();
         this.title = entity.getTitle();
         this.detail = entity.getDetail();
-        this.startDate = entity.getStartDate();
-        this.endDate = entity.getEndDate();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(entity.getStartDate());
+        cal.add(Calendar.DATE, 1);
+        this.startDate = cal.getTime();
+        cal.setTime(entity.getEndDate());
+        cal.add(Calendar.DATE, 1);
+        this.endDate = cal.getTime();
         this.done = entity.getDone();
     }
 

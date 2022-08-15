@@ -1,18 +1,23 @@
 package com.ssafy.flody.controller;
 
+import com.ssafy.flody.domain.groups.Groups;
 import com.ssafy.flody.dto.request.posts.PostCreateRequestDto;
 import com.ssafy.flody.dto.request.comments.CommentCreateRequestDto;
 import com.ssafy.flody.dto.request.comments.CommentUpdateRequestDto;
 import com.ssafy.flody.dto.request.groups.*;
+import com.ssafy.flody.dto.request.posts.PostUpdateRequestDto;
 import com.ssafy.flody.dto.request.users.*;
 import com.ssafy.flody.dto.response.groups.GroupDetailResponseDto;
 import com.ssafy.flody.dto.response.groups.GroupMemberDetailResponseDto;
+import com.ssafy.flody.dto.response.groups.MyGroupMemberListResponseDto;
+import com.ssafy.flody.dto.response.posts.PostDetailResponseDto;
 import com.ssafy.flody.dto.response.users.UserFollowResponseDto;
 import com.ssafy.flody.dto.response.users.UserGoalResponseDto;
 import com.ssafy.flody.dto.response.users.UserScheduleListResponseDto;
 import com.ssafy.flody.service.JWTService;
 import com.ssafy.flody.service.groups.GroupService;
 import com.ssafy.flody.service.groups.members.GroupMemberService;
+import com.ssafy.flody.service.posts.PostService;
 import com.ssafy.flody.service.users.UserService;
 import com.ssafy.flody.service.users.follows.UFollowService;
 import com.ssafy.flody.service.users.goals.UGoalService;
@@ -43,42 +48,21 @@ public class ApiController {
     private final UGoalService uGoalService;
     private final GroupService groupService;
     private final GroupMemberService groupMemberService;
+    private final PostService postService;
 
     // USER
-    @GetMapping("/users") // 모든 유저 리스트 출력 (필요한 기능이 생각나진 않음)
+    @GetMapping("/users")
     public ResponseEntity<Map<String, Object>> UserList() {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            if (!userService.findUsers().isEmpty()) {
-                result.put("item", userService.findUsers());
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", ERROR);
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+        return getResponseEntity(userService.findUsers());
     }
 
-    // 유저 단일 조회 > 수정하면서 좀 잘못됬나? 확인 필요
-    @GetMapping("/user") // 단일 유저 정보 조회 (타 유저 정보는 다 개인정보니까 알 필요 없음. 즉, 내 정보만 조회할 수 있도록)
+    // 유저 단일 조회
+    @GetMapping("/user")
     public ResponseEntity<Map<String, Object>> UserDetails(@RequestParam String email) {
-        HashMap<String, Object> result = new HashMap<>();
-        try {
-            result.put("item", userService.findUserById(email));
-            result.put("msg", SUCCESS);
-        } catch (Exception e) {
-            result.put("error", e.getMessage());
-            result.put("msg", FAIL);
-        }
-        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+        return getResponseEntity(userService.findUserById(email));
     }
 
-    @GetMapping("/user/checkEmail") // 회원가입 전에 email check
+    @GetMapping("/user/checkEmail")
     public ResponseEntity<Map<String, Object>> UserEmailCheck(@RequestParam String email) {
         //Email 중복 체크
         HashMap<String, Object> result = new HashMap<>();
@@ -91,147 +75,55 @@ public class ApiController {
     }
 
     //회원 가입
-    @PostMapping("/user") // 회원가입
+    @PostMapping("/user")
     public ResponseEntity<Map<String, Object>> UserAdd(@RequestBody UserCreateRequestDto requestDto) {
-        HashMap<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            if (userService.addUser(requestDto) != null) {
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", e.getMessage());
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+        return getResponseEntity(userService.addUser(requestDto));
     }
 
-    //회원 정보 수정 > 이것도 수정하면서 잘못 건드렸나;;;
-    @PutMapping("/user") // 개인 정보 수정 > 내 정보만 수정 가능
-    public ResponseEntity<Map<String, Object>> UserModify(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody UserUpdateRequestDto requestDto) {
-        HashMap<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            String email = jwtService.decodeToken(token);
-            if (userService.modifyUser(email, requestDto) != null) {
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", e.getMessage());
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+    //회원 정보 수정
+    @PutMapping("/user")
+    public ResponseEntity<Map<String, Object>> UserModify(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody UserUpdateRequestDto requestDto) throws Exception {
+        return getResponseEntity(userService.modifyUser(jwtService.decodeToken(token), requestDto));
     }
 
     //회원 비밀번호 수정
-    @PutMapping("/user/password") // 비밀번호 수정 > 내 비밀번호만 수정 가능
-    public ResponseEntity<Map<String, Object>> UserModify(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody UserPasswordUpdateRequestDto requestDto) {
-        HashMap<String, Object> result = new HashMap<>();
-        try {
-            String email = jwtService.decodeToken(token);
-            if (userService.modifyUserPassword(email, requestDto) != null) {
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
-        } catch (Exception e) {
-            result.put("msg", e.getMessage());
-        }
-
-        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+    @PutMapping("/user/password")
+    public ResponseEntity<Map<String, Object>> UserModify(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody UserPasswordUpdateRequestDto requestDto) throws Exception{
+        return getResponseEntity(userService.modifyUserPassword(jwtService.decodeToken(token), requestDto));
     }
 
     //회원 탈퇴
     @DeleteMapping("/user") // 회원탈퇴도 내 계정만 탈퇴 가능
-    public ResponseEntity<Map<String, Object>> UserRemove(@RequestHeader(value = HEADER_AUTH) String token) {
-        HashMap<String, Object> result = new HashMap<>();
-        try {
-            userService.removeUser(jwtService.decodeToken(token));
-            result.put("msg", SUCCESS);
-        } catch (Exception e) {
-            result.put("error", e.getMessage());
-            result.put("msg", FAIL);
-        }
-        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+    public ResponseEntity<Map<String, Object>> UserRemove(@RequestHeader(value = HEADER_AUTH) String token) throws Exception {
+        return getResponseEntity(userService.removeUser(jwtService.decodeToken(token)));
     }
 
     //로그인
     @PostMapping("/user/login")
     public ResponseEntity<Map<String, Object>> UserLogin(@RequestBody UserLoginRequestDto requestDto) {
         Map<String, Object> result = new HashMap<>();
-
         try {
             result.put("token", userService.loginUser(requestDto));
             result.put("msg", SUCCESS);
         } catch (Exception e) {
             result.put("msg", FAIL);
         }
-
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/user/follows")
-    public ResponseEntity<Map<String, Object>> UserFollowList(@RequestHeader(value = HEADER_AUTH) String token) {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            String email = jwtService.decodeToken(token);
-            List<UserFollowResponseDto> list = uFollowService.findUserFollows(email);
-            if (!list.isEmpty()) {
-                result.put("item", list);
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", e.getMessage());
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+    public ResponseEntity<Map<String, Object>> UserFollowList(@RequestHeader(value = HEADER_AUTH) String token) throws Exception {
+        return getResponseEntity(uFollowService.findUserFollows(jwtService.decodeToken(token)));
     }
 
     @GetMapping("/user/follow")
-    public ResponseEntity<Map<String, Object>> UserFollow(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam String following) {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            String follower = jwtService.decodeToken(token);
-            if (uFollowService.addUserFollow(follower, following) != null) {
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", e.getMessage());
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+    public ResponseEntity<Map<String, Object>> UserFollow(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam String following) throws Exception {
+        return getResponseEntity(uFollowService.addUserFollow(jwtService.decodeToken(token), following));
     }
 
     @GetMapping("/user/unfollow")
     public ResponseEntity<Map<String, Object>> UserUnfollow(@RequestParam Long folNo) {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            if (uFollowService.removeUserFollow(folNo) != null) {
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", e.getMessage());
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+        return getResponseEntity(uFollowService.removeUserFollow(folNo));
     }
 
     @GetMapping("/user/likes")
@@ -245,216 +137,64 @@ public class ApiController {
     }
 
     @GetMapping("/user/schedules") // 내 스케줄만 궁금하잖아
-    public ResponseEntity<Map<String, Object>> UserScheduleList(@RequestHeader(value = HEADER_AUTH) String token) {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            String email = jwtService.decodeToken(token);
-            List<UserScheduleListResponseDto> responseDtoList = uScheduleService.findUserSchedules(email);
-            result.put("item", responseDtoList);
-            result.put("msg", SUCCESS);
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", ERROR);
-            e.printStackTrace();
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+    public ResponseEntity<Map<String, Object>> UserScheduleList(@RequestHeader(value = HEADER_AUTH) String token) throws Exception {
+        return getResponseEntity(uScheduleService.findUserSchedules(jwtService.decodeToken(token)));
     }
 
     @GetMapping("/user/schedule") // 내 스케줄 하나, 근데 스케줄 Id가 어차피 주어짐
     public ResponseEntity<Map<String, Object>> UserScheduleDetails(@RequestParam Long usNo) {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            result.put("item", uScheduleService.findUserSchedule(usNo));
-            result.put("msg", SUCCESS);
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", ERROR);
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+        return getResponseEntity(uScheduleService.findUserSchedule(usNo));
     }
 
     @PostMapping("/user/schedule")
-    public ResponseEntity<Map<String, Object>> UserScheduleAdd(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody UserScheduleCreateRequestDto requestDto) {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            String email = jwtService.decodeToken(token);
-            if (uScheduleService.addUserSchedule(email, requestDto) != 0L) {
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", e.getMessage());
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+    public ResponseEntity<Map<String, Object>> UserScheduleAdd(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody UserScheduleCreateRequestDto requestDto) throws Exception {
+        return getResponseEntity(uScheduleService.addUserSchedule(jwtService.decodeToken(token), requestDto));
     }
 
     @PutMapping("/user/schedule")
     public ResponseEntity<Map<String, Object>> UserScheduleModify(@RequestParam Long usNo, @RequestBody UserScheduleUpdateRequestDto requestDto) {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            if (uScheduleService.modifyUserSchedule(usNo, requestDto) != 0L) {
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", e.getMessage());
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+        return getResponseEntity(uScheduleService.modifyUserSchedule(usNo, requestDto));
     }
 
     @DeleteMapping("/user/schedule")
     public ResponseEntity<Map<String, Object>> UserScheduleRemove(@RequestParam Long usNo) {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            if (uScheduleService.removeUserSchedule(usNo) != 0L) {
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", e.getMessage());
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+        return getResponseEntity(uScheduleService.removeUserSchedule(usNo));
     }
 
     @GetMapping("/user/goals") // 내 목표 목록
-    public ResponseEntity<Map<String, Object>> UserGoalList(@RequestHeader(value = HEADER_AUTH) String token) {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            String email = jwtService.decodeToken(token);
-            List<UserGoalResponseDto> responseDtoList = uGoalService.findUserGoals(email);
-            result.put("item", responseDtoList);
-            result.put("msg", SUCCESS);
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", ERROR);
-            e.printStackTrace();
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+    public ResponseEntity<Map<String, Object>> UserGoalList(@RequestHeader(value = HEADER_AUTH) String token) throws Exception {
+        return getResponseEntity(uGoalService.findUserGoals(jwtService.decodeToken(token)));
     }
 
     @GetMapping("/user/goal")
     public ResponseEntity<Map<String, Object>> UserGoalDetails(@RequestParam Long ugNo) {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            result.put("item", uGoalService.findUserGoal(ugNo));
-            result.put("msg", SUCCESS);
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", ERROR);
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+        return getResponseEntity(uGoalService.findUserGoal(ugNo));
     }
 
     @PostMapping("/user/goal")
-    public ResponseEntity<Map<String, Object>> UserGoalAdd(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody UserGoalCreateRequestDto requestDto) {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            String email = jwtService.decodeToken(token);
-            uGoalService.addUserGoal(email, requestDto);
-            result.put("msg", SUCCESS);
-//            if (uGoalService.addUserGoal(email, requestDto) != 0L) {
-//                result = SUCCESS;
-//            } else {
-//                result = FAIL;
-//            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", e.getMessage());
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+    public ResponseEntity<Map<String, Object>> UserGoalAdd(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody UserGoalCreateRequestDto requestDto) throws Exception {
+        return getResponseEntity(uGoalService.addUserGoal(jwtService.decodeToken(token), requestDto));
     }
 
     @PutMapping("/user/goal")
     public ResponseEntity<Map<String, Object>> UserGoalModify(@RequestParam Long ugNo, @RequestBody UserGoalUpdateRequestDto requestDto) {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            if (uGoalService.modifyUserGoal(ugNo, requestDto) != 0L) {
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", e.getMessage());
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-
-        return new ResponseEntity<>(result, status);
+        return getResponseEntity(uGoalService.modifyUserGoal(ugNo, requestDto));
     }
 
     @DeleteMapping("/user/goal")
     public ResponseEntity<Map<String, Object>> UserGoalRemove(@RequestParam Long ugNo) {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            if (uGoalService.removeUserGoal(ugNo) != 0L) {
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", e.getMessage());
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+        return getResponseEntity(uGoalService.removeUserGoal(ugNo));
     }
 
     // GROUP
     @GetMapping("/groups")
     public ResponseEntity<Map<String, Object>> GroupList() {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            List<GroupDetailResponseDto> list = groupService.findGroups();
-            if (!list.isEmpty()) {
-                result.put("users", list);
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", ERROR);
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+        return getResponseEntity(groupService.findGroups());
     }
 
     @GetMapping("/group")
     public ResponseEntity<Map<String, Object>> GroupDetails(@RequestParam Long groNo) {
-        HashMap<String, Object> result = new HashMap<>();
-        try {
-            result.put("item", groupService.findGroupById(groNo));
-            result.put("msg", SUCCESS);
-        } catch (Exception e) {
-            result.put("error", e.getMessage());
-            result.put("msg", FAIL);
-        }
-        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+        return getResponseEntity(groupService.findGroupById(groNo));
     }
 
     @PostMapping("/group")
@@ -489,6 +229,7 @@ public class ApiController {
             status = HttpStatus.ACCEPTED;
         } catch (Exception e) {
             result.put("msg", FAIL);
+            result.put("item", e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(result, status);
@@ -515,19 +256,16 @@ public class ApiController {
         return new ResponseEntity<>(result, status);
     }
 
-    // Get GroupMembers
-    @GetMapping("/group/members")
-    public ResponseEntity<Map<String, Object>> GroupMemberList(@RequestParam Long groNo) {
+    @GetMapping("/group/mygroups")
+    public ResponseEntity<Map<String, Object>> MyGroupAndMemberList(@RequestHeader(value = HEADER_AUTH) String token) {
         Map<String, Object> result = new HashMap<>();
         HttpStatus status;
         try {
-            List<GroupMemberDetailResponseDto> list = groupMemberService.findMembers(groNo);
-            if (!list.isEmpty()) {
-                result.put("users", list);
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
+            String email = jwtService.decodeToken(token);
+            List<Groups> myGroups = groupService.findMyGroups(email);
+            List<MyGroupMemberListResponseDto> list = groupMemberService.findMyGroupMembers(myGroups);
+            result.put("item", list);
+            result.put("msg", SUCCESS);
             status = HttpStatus.ACCEPTED;
         } catch (Exception e) {
             result.put("msg", ERROR);
@@ -536,72 +274,41 @@ public class ApiController {
         return new ResponseEntity<>(result, status);
     }
 
+    @GetMapping("/group/search")
+    public ResponseEntity<Map<String, Object>> GroupSearchList(@RequestParam String keyword) throws Exception {
+        return getResponseEntity(groupService.findGroupsByName(keyword));
+    }
+
+    // Get GroupMembers
+    @GetMapping("/group/members")
+    public ResponseEntity<Map<String, Object>> GroupMemberList(@RequestParam Long groNo) {
+        return getResponseEntity(groupMemberService.findMembers(groNo));
+    }
+
     // Get GroupMember
     @GetMapping("/group/member")
     public ResponseEntity<Map<String, Object>> GroupMemberDetails(@RequestParam Long gmNo) {
-        HashMap<String, Object> result = new HashMap<>();
-        try {
-            result.put("item", groupMemberService.findMember(gmNo));
-            result.put("msg", SUCCESS);
-        } catch (Exception e) {
-            result.put("error", e.getMessage());
-            result.put("msg", FAIL);
-        }
-        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+        return getResponseEntity(groupMemberService.findMember(gmNo));
+        // 아마도 gmNo > groNo & email로 바꿀듯?
     }
 
     // Post GroupMember
     @PostMapping("/group/member")
-    public ResponseEntity<Map<String, Object>> GroupMemberAdd(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody GroupMemberCreateRequestDto requestDto) {
-        HashMap<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            String email = jwtService.decodeToken(token);
-            if (groupMemberService.addMember(email, requestDto) != null) {
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("msg", FAIL);
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", e.getMessage());
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+    public ResponseEntity<Map<String, Object>> GroupMemberAdd(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody GroupMemberCreateRequestDto requestDto) throws Exception {
+        return getResponseEntity(groupMemberService.addMember(jwtService.decodeToken(token), requestDto));
     }
 
     // Modify GroupMember
     @PutMapping("/group/member")
-    public ResponseEntity<Map<String, Object>> GroupMemberModify(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody GroupMemberUpdateRequestDto requestDto) {
-        HashMap<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            String email = jwtService.decodeToken(token);
-            groupMemberService.modifyMember(email, requestDto);
-            result.put("msg", SUCCESS);
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", e.getMessage());
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+    public ResponseEntity<Map<String, Object>> GroupMemberModify(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody GroupMemberUpdateRequestDto requestDto) throws Exception {
+        return getResponseEntity(groupMemberService.modifyMember(jwtService.decodeToken(token), requestDto));
+        // 이것도 차라리 gmNo > groNo & email로 바꾸는게 어떨까
     }
 
     // Delete GroupMember
     @DeleteMapping("/group/member")
-    public ResponseEntity<Map<String, Object>> GroupMemberRemove(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam Long gmNo) {
-        HashMap<String, Object> result = new HashMap<>();
-        HttpStatus status;
-        try {
-            String email = jwtService.decodeToken(token);
-            groupMemberService.removeMember(email, gmNo);
-            result.put("msg", SUCCESS);
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("msg", e.getMessage());
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, status);
+    public ResponseEntity<Map<String, Object>> GroupMemberRemove(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam Long gmNo) throws Exception {
+        return getResponseEntity(groupMemberService.removeMember(jwtService.decodeToken(token), gmNo));
     }
 
     @GetMapping("/group/schedules")
@@ -658,51 +365,49 @@ public class ApiController {
     }
 
     // Board
-    @GetMapping("/boards")
-    public ResponseEntity<Map<String, Object>> BoardList(@RequestParam String category) {
-        // 개인 피드는 여기에 RequestParam 걸어서 option처럼 주는게 어떨까 싶습니다.
-        // 추가로 정렬도 RequestParam으로 주면 좋을 것 같습니다.
-        return getMapResponseEntity(category);
+    @GetMapping("/posts")
+    public ResponseEntity<Map<String, Object>> PostList(@RequestParam String category) {
+        return getResponseEntity(postService.findPosts(category));
     }
 
-    @GetMapping("/board")
-    public ResponseEntity<Map<String, Object>> BoardDetails(@RequestParam Long id) {
-        return getMapResponseEntity(id);
+    @GetMapping("/post")
+    public ResponseEntity<Map<String, Object>> PostDetails(@RequestParam Long posNo) {
+        return getResponseEntity(postService.findPostById(posNo));
     }
 
-    @PostMapping("/board")
-    public ResponseEntity<String> BoardAdd(@RequestBody PostCreateRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
+    @PostMapping("/post")
+    public ResponseEntity<Map<String, Object>> PostAdd(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody PostCreateRequestDto requestDto) throws Exception {
+        return getResponseEntity(postService.addPost(jwtService.decodeToken(token), requestDto));
     }
 
-    @PutMapping("/board")
-    public ResponseEntity<String> BoardModify(@RequestBody PostCreateRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
+    @PutMapping("/post")
+    public ResponseEntity<Map<String, Object>> PostModify(@RequestBody PostUpdateRequestDto requestDto) {
+        return getResponseEntity(postService.modifyPost(requestDto));
     }
 
-    @DeleteMapping("/board")
-    public ResponseEntity<String> BoardRemove(@RequestParam Long id) {
+    @DeleteMapping("/post")
+    public ResponseEntity<Map<String, Object>> PostRemove(@RequestParam Long posNo) {
+        return getResponseEntity(postService.removePost(posNo));
+    }
+
+    @GetMapping("/post/like")
+    public ResponseEntity<String> PostLike(@RequestParam Long id) {
         return getStringResponseEntity(id);
     }
 
-    @GetMapping("/board/like")
-    public ResponseEntity<String> BoardLike(@RequestParam Long id) {
+    @GetMapping("/post/scrap")
+    public ResponseEntity<String> PostScrap(@RequestParam Long id) {
         return getStringResponseEntity(id);
     }
 
-    @GetMapping("/board/scrap")
-    public ResponseEntity<String> BoardScrap(@RequestParam Long id) {
-        return getStringResponseEntity(id);
-    }
-
-    @GetMapping("/board/report")
-    public ResponseEntity<String> BoardReport(@RequestParam Long id) {
+    @GetMapping("/post/report")
+    public ResponseEntity<String> PostReport(@RequestParam Long id) {
         return getStringResponseEntity(id);
     }
 
     @GetMapping("/comments")
-    public ResponseEntity<Map<String, Object>> CommentList(@RequestParam Long id) {
-        return getMapResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> CommentList(@RequestParam Long posNo) {
+        return getResponseEntity();
     }
 
     // COMMENT
@@ -818,6 +523,21 @@ public class ApiController {
 
 
     // COMMON METHODS
+    public ResponseEntity<Map<String, Object>> getResponseEntity(Object obj) {
+        Map<String, Object> result = new HashMap<>();
+        HttpStatus status;
+        try {
+            result.put("item", obj);
+            result.put("msg", SUCCESS);
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            result.put("item", e.getMessage());
+            result.put("msg", FAIL);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, status);
+    }
+
     public ResponseEntity<Map<String, Object>> getMapResponseEntity(Object obj) {
         Map<String, Object> result = new HashMap<>();
         HttpStatus status;

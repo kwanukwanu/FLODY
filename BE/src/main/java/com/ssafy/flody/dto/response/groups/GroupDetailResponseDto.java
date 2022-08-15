@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ssafy.flody.domain.groups.Groups;
 import lombok.Getter;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @Getter
@@ -16,6 +17,9 @@ public class GroupDetailResponseDto {
     public GroupDetailResponseDto(Groups entity){
         this.groNo = entity.getGroNo();
         this.name = entity.getName();
-        this.foundDate = entity.getFoundDate();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(entity.getFoundDate());
+        cal.add(Calendar.DATE, 1);
+        this.foundDate = cal.getTime();
     }
 }

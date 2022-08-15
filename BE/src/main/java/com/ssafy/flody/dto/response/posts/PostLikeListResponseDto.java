@@ -4,8 +4,8 @@ import com.ssafy.flody.domain.posts.likes.PLikes;
 import lombok.Getter;
 
 @Getter
-public class BoardLikeListResponseDto {
+public class PostLikeListResponseDto {
 
-    public BoardLikeListResponseDto(PLikes entity){
+    public PostLikeListResponseDto(PLikes entity){
     }
 }

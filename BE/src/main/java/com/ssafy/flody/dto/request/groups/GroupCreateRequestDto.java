@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Calendar;
 import java.util.Date;
 
 //스터디 구성원(many to many table)에서 진행? 뭐가 맞는지 모르겠습니당
@@ -14,7 +15,7 @@ import java.util.Date;
 public class GroupCreateRequestDto {
     private String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date foundDate = new Date(System.currentTimeMillis());
+    private Date foundDate = findToday();
 
     @Builder
     public GroupCreateRequestDto(String name, Date foundDate) {
@@ -28,5 +29,10 @@ public class GroupCreateRequestDto {
                 .foundDate(foundDate)
                 .build();
     }
-
+    private Date findToday() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date(System.currentTimeMillis()));
+        cal.add(Calendar.DATE, 1);
+        return cal.getTime();
+    }
 }
