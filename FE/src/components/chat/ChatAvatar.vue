@@ -4,6 +4,6 @@
 
 <script>
 export default {
-  props: { src: { type: String, default: '' } }
+  props: { src: { type: String, default: '' } },
 }
 </script>

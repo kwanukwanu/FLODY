@@ -11,7 +11,7 @@
   </div> -->
 
   <b-container>
-    <b-row>
+    <b-row v-if="target">
       <!-- <b-col v-if="sender" cols ="3">
       </b-col>
       <b-col cols = "9">
@@ -83,6 +83,7 @@ export default {
     photoUrl: { type: String, default: '' },
     sender: { type: Boolean, default: false },
     date: {type: Date, default: ''},
+    target: { type: Boolean, default: true },
   },
   data() {
     return {
