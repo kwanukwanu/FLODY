@@ -66,6 +66,7 @@ const memberStore = {
           console.log(response.data.msg);
           if (response.data.msg === "SUCCESS") {
             console.log("확인");
+            console.log(response.data.item);
             commit("SET_USER_INFO", response.data.item);
           } else {
             console.log("유저 정보 없음!!");

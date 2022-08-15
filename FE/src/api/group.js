@@ -27,11 +27,10 @@ async function modify_todo(todo_no, success, fail) {
   await api.put(`/group?todo_no=${todo_no}`).then(success).catch(fail);
 }
 
-// 로그인 그룹 목록 조회
-async function get_group_list_by_userId(userId, success, fail) {
+// 로그인한 아이디의 스터디 그룹 목록 조회
+async function get_group_list_by_mygroups(success, fail) {
   console.log("axios 수행 시작");
-  console.log(userId);
-  await api.get(`/groups?userId=${userId}`, JSON.stringify(userId)).then(success).catch(fail);
+  await api.get(`/groups/mygroups`).then(success).catch(fail);
 }
 
 // 단일 그룹 목록 조회
@@ -100,11 +99,18 @@ async function delete_group_member(groNo, success, fail) {
   await api.delete(`/group/member?groNo=${groNo}`).then(success).catch(fail);
 }
 
+// 검색어로 스터디 그룹 조회
+async function get_group_by_keyword(keyword, success, fail) {
+  console.log("axios 수행 시작");
+  console.log(keyword);
+  await api.get(`/group/search?keyword=${keyword}`, JSON.stringify(keyword)).then(success).catch(fail)
+}
+
 export {
   get_todo_list,
   get_todos,
   modify_todo,
-  get_group_list_by_userId,
+  get_group_list_by_mygroups,
   get_group_one,
   insert_group,
   modify_group,
@@ -113,5 +119,6 @@ export {
   get_group_member_one,
   insert_group_member,
   modify_group_member,
-  delete_group_member
+  delete_group_member,
+  get_group_by_keyword
 };
