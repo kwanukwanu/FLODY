@@ -36,60 +36,82 @@
         <div id="tab">
           <ul>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br/>chlwogus_
+              <a>
+                <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px;">
+                </b-avatar>
+                <!-- cursor: pointer;
+                  v-b-modal.modal-14 -->
+              </a><br />chlwogus_
             </li>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />mirikwon_
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />mirikwon_
             </li>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />hilooboys_
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />hilooboys_
             </li>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />dogandcat_
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />dogandcat_
             </li>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />maratangboy
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />maratangboy
             </li>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />wearef5
-            </li>
-                        <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />chlwogus_
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />wearef5
             </li>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />mirikwon_
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />chlwogus_
             </li>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />hilooboys_
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />mirikwon_
             </li>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />dogandcat_
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />hilooboys_
             </li>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />maratangboy
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />dogandcat_
             </li>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />wearef5
-            </li>
-                        <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />chlwogus_
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />maratangboy
             </li>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />mirikwon_
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />wearef5
             </li>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />hilooboys_
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />chlwogus_
             </li>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />dogandcat_
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />mirikwon_
             </li>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />maratangboy
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />hilooboys_
             </li>
             <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px"></b-avatar><br />wearef5
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />dogandcat_
             </li>
-            
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />maratangboy
+            </li>
+            <li>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
+              </b-avatar><br />wearef5
+            </li>
+
           </ul>
         </div>
       </b-card>
@@ -175,6 +197,27 @@
       </b-container>
     </b-card>
   </b-modal>
+
+  <!-- <b-modal hide-footer hide-header id="modal-14" style="text-align: center; min-height: 20rem; max-width: 12rem;" size="sm" >
+    <b-container>
+      <b-row style="margin-bottom:8px">
+        <b-col cols="9"></b-col>
+        <b-col cols="3" style="text-align:right;">
+          <b-button @click="Cancel" size="sm"
+            style="color: #A48282; background-color:white; border-color: white; padding: 0px 8px;"
+            data-bs-dismiss="modal" aria-label="Close"><svg width="24" height="24" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6 6 18M6 6l12 12" stroke="#444" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg></b-button>
+        </b-col>
+      </b-row>
+      <b-avatar variant="info" src="https://placekitten.com/300/300" size="120px" style="margin-bottom:5px" />
+      pussy_cat<br>최재현
+      <hr />
+      메시지 보내기
+    </b-container>
+  </b-modal> -->
 </template>
 
 <script>
