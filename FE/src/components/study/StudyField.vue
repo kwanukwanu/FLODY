@@ -1,7 +1,6 @@
 <template>
-  <!-- <h2>field</h2> -->
   <b-card style="width:60rem; border-color: #a48282; margin-top:30px; margin-left: 7px;">
-  <div id="fi" > 
+  <!-- <div id="fi" > 
     <study-field-items
     id="flower"
     v-for="(item,index) in flowers"
@@ -9,18 +8,56 @@
     v-bind="item"
     >
     </study-field-items>
-    <!-- <img id="flower" src="@/assets/flower7_1.png" class="w-10" style="height: 100px; cursor: grab; position: relative; left: 0px; top: 0px;" @mousedown="startDrag($event)"/> -->
-  </div>
+  </div> -->
+  <table>
+    <tr id="il">
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"><img src="@/assets/flower7_1.png" style="max-width: 100%; height: 100%;" /></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"><img src="@/assets/flower6_1.png" style="max-width: 100%; height: 100%;" /></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"><img src="@/assets/flower5_1.png" style="max-width: 100%; height: 100%;" /></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"><img src="@/assets/flower4_1.png" style="max-width: 100%; height: 100%;" /></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"><img src="@/assets/flower3_1.png" style="max-width: 100%; height: 100%;" /></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"><img src="@/assets/flower2_1.png" style="max-width: 100%; height: 100%;" /></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"><img src="@/assets/flower1_1.png" style="max-width: 100%; height: 100%;" /></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+    </tr>
+    <tr>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+    </tr>
+    <tr>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+    </tr>
+  </table>
 </b-card>
 </template>
 
 <script>
-import StudyFieldItems from "@/components/study/items/StudyFieldItems.vue";
+// import StudyFieldItems from "@/components/study/items/StudyFieldItems.vue";
 
 export default {
-  components:{
-    StudyFieldItems,
-  },
+  // components:{
+  //   StudyFieldItems,
+  // },
   data(){
     return{
       flowerElements : null,
@@ -240,6 +277,8 @@ export default {
       el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
     }
 
+    const il = document.getElementById('il');
+    console.log(il);
   },
   updated() {
 
@@ -267,21 +306,21 @@ export default {
       overflow: hidden;
       border-radius: 7px;
       touch-action: none;
-    }
-    #item {
-      width: 100px;
-      height: 100px;
-      background-color: rgb(245, 230, 99);
-      border: 10px solid rgba(136, 136, 136, .5);
-      border-radius: 50%;
-      touch-action: none;
-      user-select: none;
-    }
-    #item:active {
-      background-color: rgba(168, 218, 220, 1.00);
-    }
-    #item:hover {
-      cursor: pointer;
-      border-width: 20px;
-    }
+}
+#item {
+  width: 100px;
+  height: 100px;
+  background-color: rgb(245, 230, 99);
+  border: 10px solid rgba(136, 136, 136, .5);
+  border-radius: 50%;
+  touch-action: none;
+  user-select: none;
+}
+#item:active {
+  background-color: rgba(168, 218, 220, 1.00);
+}
+#item:hover {
+  cursor: pointer;
+  border-width: 20px;
+}
 </style>
