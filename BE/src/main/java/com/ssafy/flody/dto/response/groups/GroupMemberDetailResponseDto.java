@@ -9,11 +9,13 @@ import lombok.NoArgsConstructor;
 public class GroupMemberDetailResponseDto {
     Long gmNo;
     String email;
+    String profile;
     String role;
 
     public GroupMemberDetailResponseDto(GMembers member) {
         this.gmNo = member.getGmNo();
         this.email = member.getUser().getEmail();
+        this.profile = member.getUser().getProfile();
         this.role = member.getRole().getName();
     }
 }

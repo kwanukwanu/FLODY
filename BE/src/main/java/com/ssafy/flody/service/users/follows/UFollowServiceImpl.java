@@ -22,7 +22,7 @@ import java.util.List;
 public class UFollowServiceImpl implements UFollowService {
     private final UsersRepository usersRepository;
     private final FollowsRepository followRepository;
-    public List<UserFollowResponseDto> findUserFollowers(String email) throws Exception {
+    public List<UserFollowResponseDto> findUserFollowers(String email) {
         Users following = findUser(email);
         List<Follows> entityList = followRepository.findAllByFollowing(following);
         List<UserFollowResponseDto> list = new ArrayList<>();
@@ -31,7 +31,7 @@ public class UFollowServiceImpl implements UFollowService {
         }
         return list;
     }
-    public List<UserFollowResponseDto> findUserFollowings(String email) throws Exception {
+    public List<UserFollowResponseDto> findUserFollowings(String email) {
         Users follower = findUser(email);
         List<Follows> entityList = followRepository.findAllByFollower(follower);
         List<UserFollowResponseDto> list = new ArrayList<>();
@@ -56,5 +56,13 @@ public class UFollowServiceImpl implements UFollowService {
     public Users findUser(String email) {
         return usersRepository.findById(email)
                 .orElseThrow(() -> new IllegalArgumentException("User Not Found"));
+    }
+
+    public int findFollowerNum(String email) {
+        return findUserFollowers(email).size();
+    }
+
+    public int findFollowingNum(String email) {
+        return findUserFollowings(email).size();
     }
 }
