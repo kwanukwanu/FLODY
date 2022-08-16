@@ -4,7 +4,7 @@
       <b-row>
         <b-col cols="3">
           <div class="pic">
-            <b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar>
+            <b-avatar variant="info" :src="userInfo.profile" size="44px"></b-avatar>
           </div>
         </b-col>
 
@@ -12,7 +12,7 @@
           <b-row>
             <b-col>
               <b-card-text style="margin-left:3px; font-weight: bold; font-size: large;"
-                @click="getClickNickname(userInfo.nickname)">{{ userInfo.name }}</b-card-text>
+                @click="getClickNickname(userInfo.nickname, userInfo.profile)">{{ userInfo.nickname }}</b-card-text>
             </b-col>
           </b-row>
           <b-row>
@@ -69,6 +69,8 @@
 <script>
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { add_goal } from "@/api/goal.js";
+
 import MyPageItems from './items/MyPageItems.vue';
 
 const store = useStore();
@@ -82,23 +84,18 @@ export default {
     const profile = computed(() => store.state.newspidStore.profile);
     const userInfo = computed(() => store.state.memberStore.userInfo);
     const clickNickname = computed(() => store.state.newspidStore.clickNickname);
-
-    return { store, userInfo, profile, clickNickname };
+    const plans = computed(() => store.state.memberStore.goals);
+    return { plans, store, userInfo, profile, clickNickname };
   },
   data() {
     return {
+      count: 0,
       d_day: null,
-      plans: [
-        {
-          subject: "정보처리기사",
-          mod: 10,
-        },
-        {
-          subject: "OPIC",
-          mod: 3,
-        }
-      ],
+      goal_name: "",
     }
+  },
+  watch: {
+    count: `getPlans`,
   },
   methods: {
     logout() {
@@ -107,19 +104,49 @@ export default {
       if (this.$route.path != "/")
         this.$router.push({ name: "home" });
     },
-    getClickNickname(clickNickname) {
+    getClickNickname(clickNickname, profile) {
       console.log(clickNickname);
-      this.store.dispatch("newspidStore/setClickNickname", clickNickname);
+      const data = {
+        nickName: clickNickname,  // 닉네임 적용
+        profile: profile,         // 사진 변경
+        board_num: 44,
+        follower: 22,
+        follow: 13,
+        name: "홍시영",
+        contents: "비트 찍고 랩하지만 코딩도 잘 하는 기리보이입니다.",
+      }
+      this.store.dispatch("newspidStore/setprofile", data);
     },
-    addPlans() {
+    async addPlans() {
+      console.log(this.goal_name);
       console.log(this.d_day);
+      const data = {
+        name: this.goal_name,
+        dueDate: this.d_day,
+      };
+      await add_goal(
+        data,
+        ({ data }) => {
+          let msg = "등록에 문제가 발생하였습니다!";
+          if (data === "SUCCESS") {
+            msg = "등록 완료";
+          }
+          alert(msg);
+          this.count++;
+        },
+        (error) => {
+          console.log(error);
+        });
     },
-    getPlans() {
+    getPlans(userId) {
       // 여기서 axios를 통해 목표를 받아온다.
+      console.log("get Plans!");
+      console.log(userId);
+      this.store.dispatch("memberStore/setgoals", userId);
     },
   },
   mounted() {
-    this.getPlans();
+    this.getPlans(this.userInfo.email);
   }
 }
 </script>

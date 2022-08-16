@@ -14,10 +14,10 @@ export default {
   setup() {
     const store = useStore();
     const newspids = computed(() => store.state.newspidStore.newspids);
-
     return { store, newspids };
   },
   mounted() {
+    // 뉴스피드 목록을 받아와서 저장한다.
     //this.store.dispatch("newspidStore/setClickNickname", false);
   }
 }
