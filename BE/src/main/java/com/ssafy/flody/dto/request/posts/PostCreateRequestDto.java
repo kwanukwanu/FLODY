@@ -28,7 +28,7 @@ public class PostCreateRequestDto {
     private int likeCnt = 0;
     private int commentCnt = 0;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date postDate = findToday();
+    private Date postDate = new Date(System.currentTimeMillis());
 
     @Builder
     public PostCreateRequestDto(String title, String content, String hashtag){
@@ -51,10 +51,10 @@ public class PostCreateRequestDto {
                 .build();
     }
 
-    private Date findToday() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date(System.currentTimeMillis()));
-        cal.add(Calendar.DATE, 1);
-        return cal.getTime();
-    }
+//    private Date findToday() {
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(new Date(System.currentTimeMillis()));
+//        cal.add(Calendar.DATE, 1);
+//        return cal.getTime();
+//    }
 }

@@ -15,7 +15,7 @@ import java.util.Date;
 public class GroupCreateRequestDto {
     private String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date foundDate = findToday();
+    private Date foundDate = new Date(System.currentTimeMillis());
 
     @Builder
     public GroupCreateRequestDto(String name, Date foundDate) {
@@ -29,10 +29,10 @@ public class GroupCreateRequestDto {
                 .foundDate(foundDate)
                 .build();
     }
-    private Date findToday() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date(System.currentTimeMillis()));
-        cal.add(Calendar.DATE, 1);
-        return cal.getTime();
-    }
+//    private Date findToday() {
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(new Date(System.currentTimeMillis()));
+//        cal.add(Calendar.DATE, 1);
+//        return cal.getTime();
+//    }
 }

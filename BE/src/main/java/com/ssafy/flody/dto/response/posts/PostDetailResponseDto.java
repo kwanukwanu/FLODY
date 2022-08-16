@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Getter
 public class PostDetailResponseDto {
-    private Long id;
+    private Long posNo;
     private String writer;
     private String category;
     private String coverage;
@@ -22,7 +22,7 @@ public class PostDetailResponseDto {
     private Date postDate;
 
     public PostDetailResponseDto(Posts entity){
-        this.id = entity.getPosNo();
+        this.posNo = entity.getPosNo();
         this.writer = entity.getUser().getNickname();
         this.category = entity.getCategory().getName();
         this.coverage = entity.getCoverage().getName();

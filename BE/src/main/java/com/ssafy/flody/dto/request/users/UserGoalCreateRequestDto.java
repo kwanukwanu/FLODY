@@ -15,7 +15,7 @@ import java.util.Date;
 public class UserGoalCreateRequestDto {
     private String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date registDate = findToday();
+    private Date registDate = new Date(System.currentTimeMillis());
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
 
@@ -28,10 +28,10 @@ public class UserGoalCreateRequestDto {
                 .build();
     }
 
-    private Date findToday() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date(System.currentTimeMillis()));
-        cal.add(Calendar.DATE, 1);
-        return cal.getTime();
-    }
+//    private Date findToday() {
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(new Date(System.currentTimeMillis()));
+//        cal.add(Calendar.DATE, 1);
+//        return cal.getTime();
+//    }
 }
