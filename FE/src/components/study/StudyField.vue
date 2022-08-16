@@ -10,7 +10,7 @@
     </study-field-items>
   </div> -->
   <table>
-    <tr id="il">
+    <tr>
       <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"><img src="@/assets/flower7_1.png" style="max-width: 100%; height: 100%;" /></div></td>
       <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"><img src="@/assets/flower6_1.png" style="max-width: 100%; height: 100%;" /></div></td>
       <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"><img src="@/assets/flower5_1.png" style="max-width: 100%; height: 100%;" /></div></td>
@@ -45,7 +45,7 @@
       <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
       <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
       <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
-      <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td>
+      <!-- <td><div style="border: solid 1px; border-color: #a48282; border-radius: 10%; width: 80px; height: 80px; text-align: center;"></div></td> -->
     </tr>
   </table>
 </b-card>
@@ -164,41 +164,41 @@ export default {
 
   },
   mounted() {
-    var dragItem = document.querySelectorAll("#flower");
-    console.log(dragItem);
-    console.log("----------------");
-    console.log(this.flowers[0].pos.posX)
-    var container = document.querySelector("#fi");
-    var flowers = this.flowers;
+    // var dragItem = document.querySelectorAll("#flower");
+    // console.log(dragItem);
+    // console.log("----------------");
+    // console.log(this.flowers[0].pos.posX)
+    // var container = document.querySelector("#fi");
+    // var flowers = this.flowers;
 
     // var active = false;
-    var currentX;
-    var currentY;
+    // var currentX;
+    // var currentY;
     // var initialX;
     // var initialY;
     // var xOffset = 0;
     // var yOffset = 0;
 
-    container.addEventListener("mousedown", dragStart, false);
-    container.addEventListener("mouseup", dragEnd, false);
-    container.addEventListener("mousemove", drag, false);
+    // container.addEventListener("mousedown", dragStart, false);
+    // container.addEventListener("mouseup", dragEnd, false);
+    // container.addEventListener("mousemove", drag, false);
 
 
-    function dragStart(e) {
+    // function dragStart(e) {
       // console.log(e.target.__vueParentComponent.props.index);
       // console.log(e.clientY);
       // console.log(e);
       // console.log(flowers[e.target.__vueParentComponent.props.index].pos.posX)
-      for(var i = 0; i < dragItem.length; i++) {
-        if(e.target === dragItem[i]) {
-          console.log(dragItem[i])
-          flowers[i].pos.active = true;
+      // for(var i = 0; i < dragItem.length; i++) {
+      //   if(e.target === dragItem[i]) {
+      //     console.log(dragItem[i])
+      //     flowers[i].pos.active = true;
 
-          flowers[i].pos.posX = e.pageX - flowers[i].pos.xOffset;
-          flowers[i].pos.posY = e.pageY - flowers[i].pos.yOffset;
-          console.log(i + "번째 꽃의 X : " + flowers[i].pos.posX + ", Y : " + flowers[i].pos.posY);
-        }
-      }
+      //     flowers[i].pos.posX = e.pageX - flowers[i].pos.xOffset;
+      //     flowers[i].pos.posY = e.pageY - flowers[i].pos.yOffset;
+      //     console.log(i + "번째 꽃의 X : " + flowers[i].pos.posX + ", Y : " + flowers[i].pos.posY);
+      //   }
+      // }
       // if (e.type === "touchstart") {
       //   initialX = e.touches[0].clientX - xOffset;
       //   initialY = e.touches[0].clientY - yOffset;
@@ -216,21 +216,21 @@ export default {
       // }
     }
 
-    function dragEnd() {
+    // function dragEnd() {
       // initialX = currentX;
       // initialY = currentY;
 
       // active = false;
-      for(var i = 0; i < dragItem.length; i++) {
-        if(flowers[i].pos.active) {
-          flowers[i].pos.posX = currentX;
-          flowers[i].pos.posY = currentY;
-          flowers[i].pos.active = false;
-        }
-      }
-    }
+    //   for(var i = 0; i < dragItem.length; i++) {
+    //     if(flowers[i].pos.active) {
+    //       flowers[i].pos.posX = currentX;
+    //       flowers[i].pos.posY = currentY;
+    //       flowers[i].pos.active = false;
+    //     }
+    //   }
+    // }
 
-    function drag(e) {
+    // function drag(e) {
       // if (active) {
       
       //   e.preventDefault();
@@ -248,21 +248,21 @@ export default {
 
       //   setTranslate(currentX, currentY, dragItem[0]);
       // }
-      for(var i = 0; i < dragItem.length; i++) {
-        if(flowers[i].pos.active) {
-        e.preventDefault();
-        currentX = e.pageX - flowers[i].pos.posX;
-        currentY = e.pageY - flowers[i].pos.posY;
+    //   for(var i = 0; i < dragItem.length; i++) {
+    //     if(flowers[i].pos.active) {
+    //     e.preventDefault();
+    //     currentX = e.pageX - flowers[i].pos.posX;
+    //     currentY = e.pageY - flowers[i].pos.posY;
 
-        flowers[i].pos.xOffset = currentX;
-        flowers[i].pos.yOffset = currentY;
+    //     flowers[i].pos.xOffset = currentX;
+    //     flowers[i].pos.yOffset = currentY;
 
-        setTranslate(currentX, currentY, dragItem[i], i);
-        }
-      }
-    }
+    //     setTranslate(currentX, currentY, dragItem[i], i);
+    //     }
+    //   }
+    // }
 
-    function setTranslate(xPos, yPos, el) {
+    // function setTranslate(xPos, yPos, el) {
       // if(xPos < 0) {
       //   xPos = 0;
       // } else if(xPos > 900) {
@@ -274,15 +274,15 @@ export default {
       // } else if(yPos > 400) {
       //   yPos = 400;
       // }
-      el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
-    }
+  //     el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+  //   }
 
-    const il = document.getElementById('il');
-    console.log(il);
-  },
-  updated() {
+  //   const il = document.getElementById('il');
+  //   console.log(il);
+  // },
+  // updated() {
 
-  }
+  // }
 }
 
 </script>

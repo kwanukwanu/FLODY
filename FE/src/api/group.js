@@ -16,9 +16,9 @@ async function get_todos(dates, success, fail) {
   console.log("todos 불러오기");
   console.log(dates);
   await api
-    .post("/group/todos", JSON.stringify(dates))
-    .then(success)
-    .catch(fail);
+  .post("/group/todos", JSON.stringify(dates))
+  .then(success)
+  .catch(fail);
 }
 
 // todo 수정
@@ -38,11 +38,18 @@ async function get_group_one(groNo, success, fail) {
   console.log("axios 수행 시작");
   console.log(groNo);
   await api
-    .get(`/group?groNo=${groNo}`, JSON.stringify(groNo)).then(success).catch(fail);
+  .get(`/group?groNo=${groNo}`, JSON.stringify(groNo)).then(success).catch(fail);
+}
+
+// 검색어로 스터디 그룹 조회
+async function get_group_by_keyword(keyword, success, fail) {
+  console.log("axios 수행 시작");
+  console.log(keyword);
+  await api.get(`/group/search?keyword=${keyword}`, JSON.stringify(keyword)).then(success).catch(fail)
 }
 
 // 그룹 추가
-async function insert_group(name, success, fail) {
+async function regist_group(name, success, fail) {
   console.log("axios 수행 시작");
   console.log(name);
   await api.post(`/group`, JSON.stringify(name)).then(success).catch(fail);
@@ -77,7 +84,7 @@ async function get_group_member_one(gmNo, success, fail) {
 }
 
 // 그룹 내 멤버 추가
-async function insert_group_member(memberInfo, success, fail) {
+async function regist_group_member(memberInfo, success, fail) {
   console.log("axios 수행 시작");
   console.log(memberInfo);
   await api.post(`/group/member`, JSON.stringify(memberInfo)).then(success).catch(fail);
@@ -99,11 +106,42 @@ async function delete_group_member(groNo, success, fail) {
   await api.delete(`/group/member?groNo=${groNo}`).then(success).catch(fail);
 }
 
-// 검색어로 스터디 그룹 조회
-async function get_group_by_keyword(keyword, success, fail) {
-  console.log("axios 수행 시작");
-  console.log(keyword);
-  await api.get(`/group/search?keyword=${keyword}`, JSON.stringify(keyword)).then(success).catch(fail)
+
+// 그룹 목표 리스트 조회
+async function get_group_goal_list(groNo, success, fail) {
+  console.log("get_group_goal_list의 axios 수행 시작");
+  console.log(groNo);
+  await api.get(`/group/goals?groNo=${groNo}`, JSON.stringify(groNo)).then(success).catch(fail);
+}
+
+// 그룹 단일 목표 조회
+async function get_group_goal_one(ggNo, success, fail) {
+  console.log("get_group_goal_one의 axios 수행 시작");
+  console.log(ggNo);
+  await api.get(`/group/goal?ggNo=${ggNo}`, JSON.stringify(ggNo)).then(success).catch(fail);
+}
+
+// 그룹 목표 추가
+async function regist_group_goal(groNo, goalInfo, success, fail) {
+  console.log("regist_group_goal의 axios 수행 시작");
+  console.log("그룹 번호 : " + groNo);
+  console.log(goalInfo);
+  await api.post(`/group/goal?groNo=${groNo}`, JSON.stringify(goalInfo)).then(success).catch(fail);
+}
+
+// 그룹 목표 수정
+async function modify_group_goal(ggNo, goalInfo, success, fail) {
+  console.log("modify_group_goal의 axios 수행 시작");
+  console.log("그룹 목표 번호 : " + ggNo);
+  console.log(goalInfo);
+  await api.put(`/group/goal?ggNo=${ggNo}`, JSON.stringify(goalInfo)).then(success).catch(fail);
+}
+
+// 그룹 목표 삭제
+async function delete_group_goal(ggNo, success, fail) {
+  console.log("delete_group_goal의 axios 수행 시작");
+  console.log(ggNo);
+  await api.delete(`/group/goal?ggNo=${ggNo}`).then(success).catch(fail);
 }
 
 export {
@@ -112,13 +150,18 @@ export {
   modify_todo,
   get_group_list_by_mygroups,
   get_group_one,
-  insert_group,
+  regist_group,
   modify_group,
   delete_group,
   get_group_member_list_by_groNo,
   get_group_member_one,
-  insert_group_member,
+  regist_group_member,
   modify_group_member,
   delete_group_member,
-  get_group_by_keyword
+  get_group_by_keyword,
+  get_group_goal_list,
+  get_group_goal_one,
+  regist_group_goal,
+  modify_group_goal,
+  delete_group_goal,
 };
