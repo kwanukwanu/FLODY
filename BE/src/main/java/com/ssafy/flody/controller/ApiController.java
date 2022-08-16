@@ -111,6 +111,11 @@ public class ApiController {
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/user/followers")
+    public ResponseEntity<Map<String, Object>> UserFollowerList(@RequestHeader(value = HEADER_AUTH) String token) throws Exception {
+        return getResponseEntity(uFollowService.findUserFollowers(jwtService.decodeToken(token)));
+    }
+
     @GetMapping("/user/followings")
     public ResponseEntity<Map<String, Object>> UserFollowingList(@RequestHeader(value = HEADER_AUTH) String token) throws Exception {
         return getResponseEntity(uFollowService.findUserFollowings(jwtService.decodeToken(token)));
@@ -169,6 +174,16 @@ public class ApiController {
     @DeleteMapping("/user/schedule")
     public ResponseEntity<Map<String, Object>> UserScheduleRemove(@RequestParam Long usNo) {
         return getResponseEntity(uScheduleService.removeUserSchedule(usNo));
+    }
+
+    @GetMapping("/user/daygoals")
+    public ResponseEntity<Map<String, Object>> UserDayGoalList(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) throws Exception {
+        return getResponseEntity(uGoalService.findUserDayGoals(jwtService.decodeToken(token), date));
+    }
+
+    @GetMapping("/user/monthgoals")
+    public ResponseEntity<Map<String, Object>> UserMonthGoalList(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam @DateTimeFormat(pattern = "yyyy-MM") Date date) throws Exception {
+        return getResponseEntity(uGoalService.findUserMonthGoals(jwtService.decodeToken(token), date));
     }
 
     @GetMapping("/user/goals") // 내 목표 목록

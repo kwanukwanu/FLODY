@@ -12,9 +12,7 @@ import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +31,32 @@ public class UGoalServiceImpl implements UGoalService {
         }
         return list;
     };
+
+    public List<UserGoalResponseDto> findUserDayGoals(String email, Date date) {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
+        cal.setTime(date);
+        cal.add(Calendar.DATE, -1);
+        Date dueDate = cal.getTime();
+        List<UGoals> entityList = userGoalRepository.findAllByUserAndDueDateAfter(findUser(email), dueDate);
+        List<UserGoalResponseDto> list = new ArrayList<>();
+        for (UGoals goal : entityList) {
+            list.add(new UserGoalResponseDto(goal));
+        }
+        return list;
+    }
+
+    public List<UserGoalResponseDto> findUserMonthGoals(String email, Date date) {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
+        cal.setTime(date);
+        cal.add(Calendar.DATE, -1);
+        Date dueDate = cal.getTime();
+        List<UGoals> entityList = userGoalRepository.findAllByUserAndDueDateAfter(findUser(email), dueDate);
+        List<UserGoalResponseDto> list = new ArrayList<>();
+        for (UGoals goal : entityList) {
+            list.add(new UserGoalResponseDto(goal));
+        }
+        return list;
+    }
 
     public UserGoalResponseDto findUserGoal(Long ugNo) {
         return new UserGoalResponseDto(userGoalRepository.findById(ugNo)
