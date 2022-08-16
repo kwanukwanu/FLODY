@@ -12,4 +12,5 @@ public interface PostService {
     public Long addPost(String email, PostCreateRequestDto requestDto);
     public Long modifyPost(PostUpdateRequestDto requestDto);
     public Long removePost(Long posNo);
+    public int findPostNum(String email);
 }

@@ -1,6 +1,7 @@
 package com.ssafy.flody.controller;
 
 import com.ssafy.flody.domain.groups.Groups;
+import com.ssafy.flody.dto.request.flowers.GardenCreateRequestDto;
 import com.ssafy.flody.dto.request.posts.PostCreateRequestDto;
 import com.ssafy.flody.dto.request.comments.CommentCreateRequestDto;
 import com.ssafy.flody.dto.request.comments.CommentUpdateRequestDto;
@@ -11,10 +12,10 @@ import com.ssafy.flody.dto.request.users.*;
 import com.ssafy.flody.dto.response.groups.MyGroupMemberListResponseDto;
 import com.ssafy.flody.service.JWTService;
 import com.ssafy.flody.service.comments.CommentService;
+import com.ssafy.flody.service.flowers.FlowerService;
 import com.ssafy.flody.service.groups.GroupService;
 import com.ssafy.flody.service.groups.goals.GroupGoalService;
 import com.ssafy.flody.service.groups.members.GroupMemberService;
-import com.ssafy.flody.service.groups.schedules.GroupScheduleService;
 import com.ssafy.flody.service.posts.PostService;
 import com.ssafy.flody.service.posts.like.PLikeService;
 import com.ssafy.flody.service.posts.report.PReportService;
@@ -53,7 +54,6 @@ public class ApiController {
     private final GroupMemberService groupMemberService;
     private final PostService postService;
     private final CommentService commentService;
-
     private final GroupGoalService groupGoalService;
 
     private final GroupScheduleService groupScheduleService;
@@ -61,6 +61,7 @@ public class ApiController {
     private final PLikeService postLikeService;
     private final PReportService postReportService;
     private final PScrapService postScrapService;
+    private final FlowerService flowerService;
     // USER
     @GetMapping("/users")
     public ResponseEntity<Map<String, Object>> UserList() {
@@ -69,7 +70,7 @@ public class ApiController {
 
     // 유저 단일 조회
     @GetMapping("/user")
-    public ResponseEntity<Map<String, Object>> UserDetails(@RequestParam String email) {
+    public ResponseEntity<Map<String, Object>> UserDetails(@RequestParam String email) throws Exception {
         return getResponseEntity(userService.findUserById(email));
     }
 
@@ -348,38 +349,29 @@ public class ApiController {
     }
 
     @GetMapping("/group/schedules")
-    public ResponseEntity<Map<String, Object>> GroupScheduleList(@RequestParam Long groNo) throws Exception{
-        return getResponseEntity(groupScheduleService.findAllGroupSchedules(groNo));
-    }
-
-    @GetMapping("/group/dayschedules")
-    public ResponseEntity<Map<String, Object>> GroupDayScheduleList(@RequestParam Long groNo, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) throws Exception {
-        return getResponseEntity(groupScheduleService.findGroupDaySchedules(groNo, date));
-    }
-
-    @GetMapping("/group/monthschedules")
-    public ResponseEntity<Map<String, Object>> GroupMonthScheduleList(@RequestParam Long groNo, @RequestParam @DateTimeFormat(pattern = "yyyy-MM") Date date) throws Exception {
-        return getResponseEntity(groupScheduleService.findGroupMonthSchedules(groNo, date));
+    public ResponseEntity<Map<String, Object>> GroupScheduleList(@RequestParam Long id) {
+        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
+        return getMapResponseEntity(id);
     }
 
     @GetMapping("/group/schedule")
-    public ResponseEntity<Map<String, Object>> GroupScheduleDetails(@RequestParam Long gsNo) {
-        return getResponseEntity(groupScheduleService.findGroupSchedule(gsNo));
+    public ResponseEntity<Map<String, Object>> GroupScheduleDetails(@RequestParam Long id) {
+        return getMapResponseEntity(id);
     }
 
     @PostMapping("/group/schedule")
-    public ResponseEntity<Map<String, Object>> GroupScheduleAdd(@RequestParam Long groNo, @RequestBody GroupScheduleCreateRequestDto requestDto) throws Exception {
-        return getResponseEntity(groupScheduleService.addGroupSchedule(groNo, requestDto));
+    public ResponseEntity<String> GroupScheduleAdd(@RequestBody GroupScheduleCreateRequestDto requestDto) {
+        return getStringResponseEntity(requestDto);
     }
 
     @PutMapping("/group/schedule")
-    public ResponseEntity<Map<String, Object>> GroupScheduleModify(@RequestParam Long gsNo, @RequestBody GroupScheduleUpdateRequestDto requestDto) throws Exception{
-        return getResponseEntity(groupScheduleService.modifyGroupSchedule(gsNo, requestDto));
+    public ResponseEntity<String> GroupScheduleModify(@RequestBody GroupScheduleUpdateRequestDto requestDto) {
+        return getStringResponseEntity(requestDto);
     }
 
     @DeleteMapping("/group/schedule")
-    public ResponseEntity<Map<String, Object>> GroupScheduleRemove(@RequestParam Long gsNo) {
-        return getResponseEntity(groupScheduleService.removeGroupSchedule(gsNo));
+    public ResponseEntity<String> GroupScheduleRemove(@RequestParam Long id) {
+        return getStringResponseEntity(id);
     }
 
     @GetMapping("/group/goals")
@@ -492,16 +484,16 @@ public class ApiController {
     }
 
     // DIRECT MESSAGE
-    @GetMapping("/direct-messages")
-    public ResponseEntity<Map<String, Object>> DMessageList(@RequestParam Long id) {
-        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
-        return getMapResponseEntity(id);
-    }
+//    @GetMapping("/direct-messages")
+//    public ResponseEntity<Map<String, Object>> DMessageList(@RequestParam Long id) {
+//        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
+//        return getMapResponseEntity(id);
+//    }
 
-    @GetMapping("/direct-message")
-    public ResponseEntity<Map<String, Object>> DMessageDetails(@RequestParam Long id) {
-        return getMapResponseEntity(id);
-    }
+//    @GetMapping("/direct-message")
+//    public ResponseEntity<Map<String, Object>> DMessageDetails(@RequestParam Long id) {
+//        return getMapResponseEntity(id);
+//    }
 
 //    DMessage 관련 Dto 추가 생성 필요
 //    @PostMapping("/direct-message")
@@ -514,37 +506,35 @@ public class ApiController {
 //        return getStringResponseEntity(requestDto);
 //    }
 
-    @DeleteMapping("/direct-message")
-    public ResponseEntity<String> DMessageRemove(@RequestParam Long id) {
-        return getStringResponseEntity(id);
-    }
+//    @DeleteMapping("/direct-message")
+//    public ResponseEntity<String> DMessageRemove(@RequestParam Long id) {
+//        return getStringResponseEntity(id);
+//    }
 
     // FLOWER
     @GetMapping("/flowers")
-    public ResponseEntity<Map<String, Object>> FlowerList(@RequestParam Long id) {
-        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
-        return getMapResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> FlowerList(@RequestHeader(value = HEADER_AUTH) String token) throws Exception {
+        return getResponseEntity(flowerService.findFlowers(jwtService.decodeToken(token)));
     }
 
     @GetMapping("/flower")
-    public ResponseEntity<Map<String, Object>> FlowerDetails(@RequestParam Long id) {
-        return getMapResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> FlowerDetails(@RequestParam Long garNo) {
+        return getResponseEntity(flowerService.findFlowerById(garNo));
     }
 
-//    Flower 관련 Dto 추가 생성 필요
-//    @PostMapping("/flower")
-//    public ResponseEntity<String> FlowerAdd(@RequestBody FlowerCreateRequestDto requestDto) {
-//        return getStringResponseEntity(requestDto);
-//    }
+    @PostMapping("/flower")
+    public ResponseEntity<Map<String, Object>> FlowerAdd(@RequestHeader(value = HEADER_AUTH) String token) throws Exception {
+        return getResponseEntity(flowerService.addFlower(jwtService.decodeToken(token)));
+    }
 
-//    @PutMapping("/flower")
-//    public ResponseEntity<String> FlowerModify(@RequestBody FlowerUpdateRequestDto requestDto) {
-//        return getStringResponseEntity(requestDto);
-//    }
+    @PutMapping("/flower")
+    public ResponseEntity<Map<String, Object>> FlowerModify(@RequestParam Long garNo, @RequestParam int exp) {
+        return getResponseEntity(flowerService.modifyFlower(garNo, exp));
+    }
 
     @DeleteMapping("/flower")
-    public ResponseEntity<String> FlowerRemove(@RequestParam Long id) {
-        return getStringResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> FlowerRemove(@RequestParam Long garNo) {
+        return getResponseEntity(flowerService.removeFlower(garNo));
     }
 
     // LICENSE
