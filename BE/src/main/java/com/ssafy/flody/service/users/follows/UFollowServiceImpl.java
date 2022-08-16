@@ -22,6 +22,15 @@ import java.util.List;
 public class UFollowServiceImpl implements UFollowService {
     private final UsersRepository usersRepository;
     private final FollowsRepository followRepository;
+    public List<UserFollowResponseDto> findUserFollowers(String email) throws Exception {
+        Users following = findUser(email);
+        List<Follows> entityList = followRepository.findAllByFollowing(following);
+        List<UserFollowResponseDto> list = new ArrayList<>();
+        for (Follows follows : entityList) {
+            list.add(new UserFollowResponseDto(follows));
+        }
+        return list;
+    }
     public List<UserFollowResponseDto> findUserFollowings(String email) throws Exception {
         Users follower = findUser(email);
         List<Follows> entityList = followRepository.findAllByFollower(follower);

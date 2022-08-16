@@ -37,8 +37,10 @@ public class UScheduleServiceImpl implements UScheduleService {
         cal.setTime(date);
         cal.add(Calendar.DATE, 1);
         Date from = cal.getTime();
-        cal.add(Calendar.DATE, -1);
+        System.out.println(from);
+        cal.add(Calendar.DATE, -2);
         Date upto = cal.getTime();
+        System.out.println(upto);
         List<USchedules> entityList = userScheduleRepository.findAllByUserAndStartDateBeforeAndEndDateAfter(findUser(email), from, upto);
         List<UserScheduleListResponseDto> list = new ArrayList<>();
         for (USchedules schedule : entityList) {
@@ -47,12 +49,16 @@ public class UScheduleServiceImpl implements UScheduleService {
         return list;
     }
     public List<UserScheduleListResponseDto> findUserMonthSchedules(String email, Date date) {
+        System.out.println(date);
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
         cal.setTime(date);
         cal.add(Calendar.MONTH, 1);
         Date from = cal.getTime();
+        System.out.println(from);
         cal.add(Calendar.MONTH, -1);
+        cal.add(Calendar.DATE, -1);
         Date upto = cal.getTime();
+        System.out.println(upto);
         List<USchedules> entityList = userScheduleRepository.findAllByUserAndStartDateBeforeAndEndDateAfter(findUser(email), from, upto);
         List<UserScheduleListResponseDto> list = new ArrayList<>();
         for (USchedules schedule : entityList) {
