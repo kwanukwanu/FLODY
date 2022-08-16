@@ -3406,6 +3406,13 @@
     "domhandler" "^4.2.0"
     "entities" "^2.0.0"
 
+"dom7@^4.0.4":
+  "integrity" "sha512-DSSgBzQ4rJWQp1u6o+3FVwMNnT5bzQbMb+o31TjYYeRi05uAcpF8koxdfzeoe5ElzPmua7W7N28YJhF7iEKqIw=="
+  "resolved" "https://registry.npmjs.org/dom7/-/dom7-4.0.4.tgz"
+  "version" "4.0.4"
+  dependencies:
+    "ssr-window" "^4.0.0"
+
 "domelementtype@^2.0.1", "domelementtype@^2.2.0":
   "integrity" "sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw=="
   "resolved" "https://registry.npmjs.org/domelementtype/-/domelementtype-2.3.0.tgz"
@@ -6337,6 +6344,11 @@
   "resolved" "https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz"
   "version" "1.0.3"
 
+"ssr-window@^4.0.0", "ssr-window@^4.0.2":
+  "integrity" "sha512-ISv/Ch+ig7SOtw7G2+qkwfVASzazUnvlDTwypdLoPoySv+6MqlOV10VwPSE6EWkGjhW50lUmghPmpYZXMu/+AQ=="
+  "resolved" "https://registry.npmjs.org/ssr-window/-/ssr-window-4.0.2.tgz"
+  "version" "4.0.2"
+
 "ssri@^8.0.1":
   "integrity" "sha512-97qShzy1AiyxvPNIkLWoGua7xoQzzPjQ0HAH4B0rWKo7SZ6USuPcrUiAFrws0UH8RrbWmgq3LMTObhPIHbbBeQ=="
   "resolved" "https://registry.npmjs.org/ssri/-/ssri-8.0.1.tgz"
@@ -6480,6 +6492,14 @@
     "csso" "^4.2.0"
     "picocolors" "^1.0.0"
     "stable" "^0.1.8"
+
+"swiper@^8.3.2":
+  "integrity" "sha512-8wsC7ORYvVSnLUoxs2+xmfLrDPNjBVQXMCFbOlqtHeON6wtu/blOyySDr8TCBCdse1bdcIbn7m8xJNxVFL8o4Q=="
+  "resolved" "https://registry.npmjs.org/swiper/-/swiper-8.3.2.tgz"
+  "version" "8.3.2"
+  dependencies:
+    "dom7" "^4.0.4"
+    "ssr-window" "^4.0.2"
 
 "table@^6.0.9":
   "integrity" "sha512-s/fitrbVeEyHKFa7mFdkuQMWlH1Wgw/yEXMt5xACT4ZpzWFluehAxRtUUQKPuWhaLAWhFcVx6w3oC8VKaUfPGA=="
@@ -6742,6 +6762,13 @@
   "resolved" "https://registry.npmjs.org/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz"
   "version" "2.3.4"
 
+"vue-infinite-slide-bar@^1.1.1":
+  "integrity" "sha512-/R8Z3WwfuaSVDZt2l9mFAvUuPTgJJZDtwR0DxEmdAprA6WwOgG3OrmgYy5OV0951OKlb6mBKzogES4hjmDbm1w=="
+  "resolved" "https://registry.npmjs.org/vue-infinite-slide-bar/-/vue-infinite-slide-bar-1.1.1.tgz"
+  "version" "1.1.1"
+  dependencies:
+    "vue" "^2.5.11"
+
 "vue-jwt-decode@^0.1.0":
   "integrity" "sha512-4iP0NzYHkAF7G13tYPc/nudk4oNpB8GCVZupc7lekxXok1XKEgefNaGTpDT14g7RKe5H9GaMphPduDj4UVfZwQ=="
   "resolved" "https://registry.npmjs.org/vue-jwt-decode/-/vue-jwt-decode-0.1.0.tgz"
@@ -6790,6 +6817,14 @@
     "@vue/shared" "3.2.37"
 
 "vue@^2.3.3":
+  "integrity" "sha512-ncwlZx5qOcn754bCu5/tS/IWPhXHopfit79cx+uIlLMyt3vCMGcXai5yCG5y+I6cDmEj4ukRYyZail9FTQh7lQ=="
+  "resolved" "https://registry.npmjs.org/vue/-/vue-2.7.8.tgz"
+  "version" "2.7.8"
+  dependencies:
+    "@vue/compiler-sfc" "2.7.8"
+    "csstype" "^3.1.0"
+
+"vue@^2.5.11":
   "integrity" "sha512-ncwlZx5qOcn754bCu5/tS/IWPhXHopfit79cx+uIlLMyt3vCMGcXai5yCG5y+I6cDmEj4ukRYyZail9FTQh7lQ=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-2.7.8.tgz"
   "version" "2.7.8"
