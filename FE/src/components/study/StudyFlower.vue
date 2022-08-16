@@ -12,8 +12,8 @@
         <b-row>
           <b-col cols="6" style="text-align:center">
             <img src="@/assets/flower1_1.png" class="w-25" style="height: 240px; width: 200px;" />
-            <b-progress max='50' class="w-25" style="margin-top: 20px; margin-left: 170px; margin-bottom: 20px;">
-              <b-progress-bar variant="success" value="30"></b-progress-bar>
+            <b-progress max='70' class="w-25" style="margin-top: 20px; margin-left: 170px; margin-bottom: 20px;">
+              <b-progress-bar variant="success" value="10"></b-progress-bar>
             </b-progress>
           </b-col>
           <b-col cols="6">
@@ -35,8 +35,8 @@
         <b-row>
           <b-col cols="6" style="text-align:center">
             <img src="@/assets/flower2_1.png" class="w-25" style="height: 240px; width: 200px;" />
-            <b-progress max='50' class="w-25" style="margin-top: 20px; margin-left: 170px; margin-bottom: 20px;">
-              <b-progress-bar variant="success" value="30"></b-progress-bar>
+            <b-progress max='70' class="w-25" style="margin-top: 20px; margin-left: 170px; margin-bottom: 20px;">
+              <b-progress-bar variant="success" value="20"></b-progress-bar>
             </b-progress>
           </b-col>
           <b-col cols="6">
@@ -60,7 +60,7 @@
         <b-row>
           <b-col cols="6" style="text-align:center">
             <img src="@/assets/flower3_1.png" class="w-25" style="height: 240px; width: 200px;" />
-            <b-progress max='50' class="w-25" style="margin-top: 20px; margin-left: 170px; margin-bottom: 20px;">
+            <b-progress max='70' class="w-25" style="margin-top: 20px; margin-left: 170px; margin-bottom: 20px;">
               <b-progress-bar variant="success" value="30"></b-progress-bar>
             </b-progress>
           </b-col>
@@ -85,8 +85,8 @@
         <b-row>
           <b-col cols="6" style="text-align:center">
             <img src="@/assets/flower4_1.png" class="w-25" style="height: 240px; width: 200px;" />
-            <b-progress max='50' class="w-25" style="margin-top: 20px; margin-left: 170px; margin-bottom: 20px;">
-              <b-progress-bar variant="success" value="30"></b-progress-bar>
+            <b-progress max='70' class="w-25" style="margin-top: 20px; margin-left: 170px; margin-bottom: 20px;">
+              <b-progress-bar variant="success" value="40"></b-progress-bar>
             </b-progress>
           </b-col>
           <b-col cols="6">
@@ -110,8 +110,8 @@
         <b-row>
           <b-col cols="6" style="text-align:center">
             <img src="@/assets/flower5_1.png" class="w-25" style="height: 240px; width: 200px;" />
-            <b-progress max='50' class="w-25" style="margin-top: 20px; margin-left: 170px; margin-bottom: 20px;">
-              <b-progress-bar variant="success" value="30"></b-progress-bar>
+            <b-progress max='70' class="w-25" style="margin-top: 20px; margin-left: 170px; margin-bottom: 20px;">
+              <b-progress-bar variant="success" value="50"></b-progress-bar>
             </b-progress>
           </b-col>
           <b-col cols="6">
@@ -135,8 +135,8 @@
         <b-row>
           <b-col cols="6" style="text-align:center">
             <img src="@/assets/flower6_1.png" class="w-25" style="height: 240px; width: 200px;" />
-            <b-progress max='50' class="w-25" style="margin-top: 20px; margin-left: 170px; margin-bottom: 20px;">
-              <b-progress-bar variant="success" value="30"></b-progress-bar>
+            <b-progress max='70' class="w-25" style="margin-top: 20px; margin-left: 170px; margin-bottom: 20px;">
+              <b-progress-bar variant="success" value="60"></b-progress-bar>
             </b-progress>
           </b-col>
           <b-col cols="6">
@@ -160,8 +160,8 @@
         <b-row>
           <b-col cols="6" style="text-align:center">
             <img src="@/assets/flower7_1.png" class="w-25" style="height: 240px; width: 200px;" />
-            <b-progress max='50' class="w-25" style="margin-top: 20px; margin-left: 170px; margin-bottom: 20px;">
-              <b-progress-bar variant="success" value="30"></b-progress-bar>
+            <b-progress max='70' class="w-25" style="margin-top: 20px; margin-left: 170px; margin-bottom: 20px;">
+              <b-progress-bar variant="success" value="70"></b-progress-bar>
             </b-progress>
           </b-col>
           <b-col cols="6">
@@ -185,20 +185,21 @@
 </template>
 
 <script>
-  import { Swiper, SwiperSlide } from 'swiper/vue';
-  import 'swiper/css';
-  export default {
-    components: {
-      Swiper,
-      SwiperSlide,
-    },
-  };
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+};
 </script>
 
 <style>
-.ment{
+.ment {
   margin-bottom: 17px;
 }
+
 /* html, body {
   width: 100%;  
   height: 100%;
@@ -250,7 +251,8 @@ h1 div:nth-child(7) { animation-delay: .6s; } */
                  0 50px 25px rgba(0, 0, 0, .2); */
   }
 }
-h8{
-  color:#E0D2D2;
+
+h8 {
+  color: #E0D2D2;
 }
 </style>
