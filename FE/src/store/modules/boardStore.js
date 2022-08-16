@@ -1,3 +1,4 @@
+import { get_boardList } from "@/api/board";
 const boardStore = {
   namespaced: true,
   state: {
@@ -128,6 +129,7 @@ const boardStore = {
         조회수: 1799,
       },
     ],
+    category: "",
     page: 1,
     max: 10,
   },
@@ -141,6 +143,9 @@ const boardStore = {
     getboardList: function (state) {
       return state.boardList;
     },
+    getCategory: function (state) {
+      return state.category;
+    },
   },
   mutations: {
     SET_SELECTED_BOARD: (state, selectedBoard) => {
@@ -152,6 +157,9 @@ const boardStore = {
     SET_BOARD_LIST: (state, boardList) => {
       state.boardList = boardList;
     },
+    SET_CATEGORY: (state, category) => {
+      state.category = category;
+    },
   },
   actions: {
     selectedBoard({ commit }, board) {
@@ -161,8 +169,24 @@ const boardStore = {
     boardListName({ commit }, boardListName) {
       commit("SET_BOARD_LIST_NAME", boardListName);
     },
-    set_boardList({ commit }, boardList) {
-      commit("SET_BOARD_LIST", boardList);
+
+    // 카테고리에 따라서 보드리스트를 적용한다.
+    async set_boardList({ commit }, category) {
+      await get_boardList(
+        category,
+        (response) => {
+          if (response.data.msg === "SUCCESS") {
+            console.log("게시판 불러오기 성공");
+            commit("SET_BOARD_LIST", response.data.item);
+          } else {
+            console.log("게시판 불러오기 오류");
+          }
+        },
+        () => {},
+      );
+    },
+    set_category({ commit }, category) {
+      commit("SET_CATEGORY", category);
     },
   },
 };

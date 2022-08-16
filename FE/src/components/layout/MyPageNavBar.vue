@@ -42,12 +42,12 @@
         <!-- <h2 style="text-align: center;">목표 등록</h2> -->
         <b-row style="margin-bottom: 10px;">
           <b-col>
-            <b-form-input placeholder="시험 이름을 입력하세요." required style="border: none;"></b-form-input>
+            <b-form-input v-model="name" placeholder="시험 이름을 입력하세요." required style="border: none;"></b-form-input>
           </b-col>
         </b-row>
         <b-row style="margin-bottom: 10px;">
           <b-col>
-            <b-form-input v-model="d_day" type="date" placeholder="날짜 선택" style="border: none;"></b-form-input>
+            <b-form-input v-model="dueDate" type="date" placeholder="날짜 선택" style="border: none;"></b-form-input>
           </b-col>
         </b-row>
         <br>
@@ -90,10 +90,11 @@ export default {
   data() {
     return {
       count: 0,
-      d_day: null,
-      goal_name: "",
+      dueDate: null,
+      name: "",
     }
   },
+  // 개수, 즉 count 가 변화하면 getPlans를 다시 호출한다.
   watch: {
     count: `getPlans`,
   },
@@ -118,17 +119,17 @@ export default {
       this.store.dispatch("newspidStore/setprofile", data);
     },
     async addPlans() {
-      console.log(this.goal_name);
-      console.log(this.d_day);
+      console.log(this.name);
+      console.log(this.dueDate);
       const data = {
-        name: this.goal_name,
-        dueDate: this.d_day,
+        name: this.name,
+        dueDate: this.dueDate,
       };
       await add_goal(
         data,
         ({ data }) => {
           let msg = "등록에 문제가 발생하였습니다!";
-          if (data === "SUCCESS") {
+          if (data.msg === "SUCCESS") {
             msg = "등록 완료";
           }
           alert(msg);
@@ -138,13 +139,14 @@ export default {
           console.log(error);
         });
     },
-    getPlans() {
+    async getPlans() {
       // 여기서 axios를 통해 목표를 받아온다.
-      this.store.dispatch("memberStore/setgoals");
+      await this.store.dispatch("memberStore/setgoals");
     },
   },
   mounted() {
     this.getPlans();
+    this.count = this.plans.length;
   }
 }
 </script>

@@ -2,7 +2,10 @@
 import { login } from "@/api/member.js";
 import { getUserInfo } from "../../api/member";
 import { get_goals } from "@/api/goal.js";
+import { apiInstance } from "@/api";
 // 회원가입 및 로그인을 수행하는 js파일
+
+const api = apiInstance();
 
 const memberStore = {
   namespaced: true,
@@ -12,12 +15,12 @@ const memberStore = {
     userInfo: null,
     goals: [
       {
-        subject: "정보처리기사",
-        mod: 10,
+        name: "정보처리기사",
+        dueDate: "2022-09-01",
       },
       {
-        subject: "OPIC",
-        mod: 3,
+        name: "OPIC",
+        dueDate: "2022-08-30",
       },
     ],
   }),
@@ -55,7 +58,8 @@ const memberStore = {
             let token = response.data.token;
             commit("SET_IS_LOGIN", true);
             commit("SET_IS_LOGIN_ERROR", false);
-            sessionStorage.setItem("token", token);
+            sessionStorage.setItem(`token`, token);
+            api.defaults.headers[`token`] = token;
           } else {
             console.log("로그인 실패");
             commit("SET_IS_LOGIN", false);
@@ -65,6 +69,13 @@ const memberStore = {
         () => {},
       );
       console.log("login 끝");
+    },
+
+    setLogout({ commit }) {
+      commit("SET_USER_INFO", " ");
+      commit("SET_IS_LOGIN", false);
+      sessionStorage.removeItem("token"); //로그 아웃하면 액세스 토큰을 지워라
+      api.defaults.headers["token"] = null;
     },
 
     getUserInfo({ commit }, token) {
@@ -90,25 +101,21 @@ const memberStore = {
         },
       );
     },
-    setLogout({ commit }) {
-      commit("SET_USER_INFO", " ");
-      commit("SET_IS_LOGIN", false);
-      sessionStorage.removeItem("token"); //로그 아웃하면 액세스 토큰을 지워라
-    },
-    async setgoals({ commit }) {
-      await get_goals(
-        sessionStorage.getItem("token"),
-        (response) => {
+
+    setgoals({ commit }) {
+      get_goals(
+        (success) => {
           console.log("목표 전달 응답 확인");
-          if (response.msg === "SUCCESS") {
+          console.log(success);
+          if (success.msg === "SUCCESS") {
             console.log("목표 저장");
-            commit("SET_GOALS", response);
+            commit("SET_GOALS", success.item);
           } else {
-            console.log("응답 실패!");
+            console.log(" set_goals : 응답 실패!");
           }
         },
         (error) => {
-          console.log("응답 실패!");
+          console.log(" set_goals :: 연결 실패!");
           console.log(error);
         },
       );
