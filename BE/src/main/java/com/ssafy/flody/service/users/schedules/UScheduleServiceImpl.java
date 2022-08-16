@@ -13,9 +13,7 @@ import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +29,34 @@ public class UScheduleServiceImpl implements UScheduleService {
         List<UserScheduleListResponseDto> list = new ArrayList<>();
         for (USchedules uSchedules : entityList) {
             list.add(new UserScheduleListResponseDto(uSchedules));
+        }
+        return list;
+    }
+    public List<UserScheduleListResponseDto> findUserDaySchedules(String email, Date date) {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
+        cal.setTime(date);
+        cal.add(Calendar.DATE, 1);
+        Date from = cal.getTime();
+        cal.add(Calendar.DATE, -1);
+        Date upto = cal.getTime();
+        List<USchedules> entityList = userScheduleRepository.findAllByUserAndStartDateBeforeAndEndDateAfter(findUser(email), from, upto);
+        List<UserScheduleListResponseDto> list = new ArrayList<>();
+        for (USchedules schedule : entityList) {
+            list.add(new UserScheduleListResponseDto(schedule));
+        }
+        return list;
+    }
+    public List<UserScheduleListResponseDto> findUserMonthSchedules(String email, Date date) {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
+        cal.setTime(date);
+        cal.add(Calendar.MONTH, 1);
+        Date from = cal.getTime();
+        cal.add(Calendar.MONTH, -1);
+        Date upto = cal.getTime();
+        List<USchedules> entityList = userScheduleRepository.findAllByUserAndStartDateBeforeAndEndDateAfter(findUser(email), from, upto);
+        List<UserScheduleListResponseDto> list = new ArrayList<>();
+        for (USchedules schedule : entityList) {
+            list.add(new UserScheduleListResponseDto(schedule));
         }
         return list;
     }

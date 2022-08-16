@@ -5,10 +5,13 @@ import com.ssafy.flody.dto.request.users.UserScheduleUpdateRequestDto;
 import com.ssafy.flody.dto.response.users.UserScheduleDetailResponseDto;
 import com.ssafy.flody.dto.response.users.UserScheduleListResponseDto;
 
+import java.util.Date;
 import java.util.List;
 
 public interface UScheduleService {
     public List<UserScheduleListResponseDto> findUserSchedules(String email) throws Exception;
+    public List<UserScheduleListResponseDto> findUserDaySchedules(String email, Date date);
+    public List<UserScheduleListResponseDto> findUserMonthSchedules(String email, Date date);
     public UserScheduleDetailResponseDto findUserSchedule(Long usNo);
     public Long addUserSchedule(String email, UserScheduleCreateRequestDto requestDto);
     public Long modifyUserSchedule(Long usNo, UserScheduleUpdateRequestDto requestDto);

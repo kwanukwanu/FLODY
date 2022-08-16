@@ -18,12 +18,13 @@ public class CommentUpdateRequestDto {
     private Long comNo;
     private String content;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date postDate = findToday();
+    private Date postDate = new Date(System.currentTimeMillis());
 
-    private Date findToday() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date(System.currentTimeMillis()));
-        cal.add(Calendar.DATE, 1);
-        return cal.getTime();
-    }
+//    private Date findToday() {
+//        System.out.println(new Date(System.currentTimeMillis()));
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(new Date(System.currentTimeMillis()));
+//        cal.add(Calendar.DATE, 1);
+//        return cal.getTime();
+//    }
 }

@@ -19,10 +19,12 @@ import com.ssafy.flody.service.users.follows.UFollowService;
 import com.ssafy.flody.service.users.goals.UGoalService;
 import com.ssafy.flody.service.users.schedules.UScheduleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,9 +111,9 @@ public class ApiController {
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/user/follows")
-    public ResponseEntity<Map<String, Object>> UserFollowList(@RequestHeader(value = HEADER_AUTH) String token) throws Exception {
-        return getResponseEntity(uFollowService.findUserFollows(jwtService.decodeToken(token)));
+    @GetMapping("/user/followings")
+    public ResponseEntity<Map<String, Object>> UserFollowingList(@RequestHeader(value = HEADER_AUTH) String token) throws Exception {
+        return getResponseEntity(uFollowService.findUserFollowings(jwtService.decodeToken(token)));
     }
 
     @GetMapping("/user/follow")
@@ -120,8 +122,8 @@ public class ApiController {
     }
 
     @GetMapping("/user/unfollow")
-    public ResponseEntity<Map<String, Object>> UserUnfollow(@RequestParam Long folNo) {
-        return getResponseEntity(uFollowService.removeUserFollow(folNo));
+    public ResponseEntity<Map<String, Object>> UserUnfollow(@RequestParam String email) {
+        return getResponseEntity(uFollowService.removeUserFollow(email));
     }
 
     @GetMapping("/user/likes")
@@ -137,6 +139,16 @@ public class ApiController {
     @GetMapping("/user/schedules") // 내 스케줄만 궁금하잖아
     public ResponseEntity<Map<String, Object>> UserScheduleList(@RequestHeader(value = HEADER_AUTH) String token) throws Exception {
         return getResponseEntity(uScheduleService.findUserSchedules(jwtService.decodeToken(token)));
+    }
+
+    @GetMapping("/user/dayschedules")
+    public ResponseEntity<Map<String, Object>> UserDayScheduleList(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) throws Exception {
+        return getResponseEntity(uScheduleService.findUserDaySchedules(jwtService.decodeToken(token), date));
+    }
+
+    @GetMapping("/user/monthschedules")
+    public ResponseEntity<Map<String, Object>> UserMonthScheduleList(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam @DateTimeFormat(pattern = "yyyy-MM") Date date) throws Exception {
+        return getResponseEntity(uScheduleService.findUserMonthSchedules(jwtService.decodeToken(token), date));
     }
 
     @GetMapping("/user/schedule") // 내 스케줄 하나, 근데 스케줄 Id가 어차피 주어짐

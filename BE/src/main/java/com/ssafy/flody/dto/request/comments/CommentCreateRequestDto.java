@@ -20,7 +20,7 @@ public class CommentCreateRequestDto {
     private Long upper;
     private String content;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date postDate = findToday();
+    private Date postDate = new Date(System.currentTimeMillis());
     private int kids = 0;
 
     @Builder
@@ -41,10 +41,10 @@ public class CommentCreateRequestDto {
                 .build();
     }
 
-    public Date findToday() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date(System.currentTimeMillis()));
-        cal.add(Calendar.DATE, 1);
-        return cal.getTime();
-    }
+//    public Date findToday() {
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(new Date(System.currentTimeMillis()));
+//        cal.add(Calendar.DATE, 1);
+//        return cal.getTime();
+//    }
 }
