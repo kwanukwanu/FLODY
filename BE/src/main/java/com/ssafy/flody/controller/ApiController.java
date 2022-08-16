@@ -7,16 +7,11 @@ import com.ssafy.flody.dto.request.comments.CommentUpdateRequestDto;
 import com.ssafy.flody.dto.request.groups.*;
 import com.ssafy.flody.dto.request.posts.PostUpdateRequestDto;
 import com.ssafy.flody.dto.request.users.*;
-import com.ssafy.flody.dto.response.groups.GroupDetailResponseDto;
-import com.ssafy.flody.dto.response.groups.GroupMemberDetailResponseDto;
 import com.ssafy.flody.dto.response.groups.MyGroupMemberListResponseDto;
-import com.ssafy.flody.dto.response.posts.PostDetailResponseDto;
-import com.ssafy.flody.dto.response.users.UserFollowResponseDto;
-import com.ssafy.flody.dto.response.users.UserGoalResponseDto;
-import com.ssafy.flody.dto.response.users.UserScheduleListResponseDto;
 import com.ssafy.flody.service.JWTService;
 import com.ssafy.flody.service.comments.CommentService;
 import com.ssafy.flody.service.groups.GroupService;
+import com.ssafy.flody.service.groups.goals.GroupGoalService;
 import com.ssafy.flody.service.groups.members.GroupMemberService;
 import com.ssafy.flody.service.posts.PostService;
 import com.ssafy.flody.service.users.UserService;
@@ -52,6 +47,7 @@ public class ApiController {
     private final PostService postService;
     private final CommentService commentService;
 
+    private final GroupGoalService groupGoalService;
     // USER
     @GetMapping("/users")
     public ResponseEntity<Map<String, Object>> UserList() {
@@ -340,30 +336,30 @@ public class ApiController {
     }
 
     @GetMapping("/group/goals")
-    public ResponseEntity<Map<String, Object>> GroupGoalList(@RequestParam Long id) {
+    public ResponseEntity<Map<String, Object>> GroupGoalList(@RequestParam Long groNo) {
         // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
-        return getMapResponseEntity(id);
+        return getResponseEntity(groupGoalService.findAllGroupGoals(groNo));
     }
 
     @GetMapping("/group/goal")
-    public ResponseEntity<Map<String, Object>> GroupGoalDetails(@RequestParam Long id) {
-        return getMapResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> GroupGoalDetails(@RequestParam Long ggNo) {
+        return getResponseEntity(groupGoalService.findGroupGoal(ggNo));
     }
 
     @PostMapping("/group/goal")
-    public ResponseEntity<String> GroupGoalAdd(@RequestBody GroupGoalCreateRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
+    public ResponseEntity<Map<String, Object>> GroupGoalAdd(@RequestParam Long groNo, @RequestHeader(value = HEADER_AUTH) String token, @RequestBody GroupGoalCreateRequestDto requestDto) throws Exception{
+        return getResponseEntity(groupGoalService.addGroupGoal(groNo, jwtService.decodeToken(token), requestDto));
     }
 
 //    GroupGoalUpdateRequestDto 추가 필요
-//    @PutMapping("/group/goal")
-//    public ResponseEntity<String> GroupGoalModify(@RequestBody GroupGoalUpateRequestDto requestDto) {
-//        return getStringResponseEntity(requestDto);
-//    }
+    @PutMapping("/group/goal")
+    public ResponseEntity<Map<String, Object>> GroupGoalModify(@RequestParam Long ggNo, @RequestBody GroupGoalUpdateRequestDto requestDto) throws Exception {
+        return getResponseEntity(groupGoalService.modifyGroupGoal(ggNo, requestDto));
+    }
 
     @DeleteMapping("/group/goal")
-    public ResponseEntity<String> GroupGoalRemove(@RequestParam Long id) {
-        return getStringResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> GroupGoalRemove(@RequestParam Long ggNo) {
+        return getResponseEntity(groupGoalService.removeGroupGoal(ggNo));
     }
 
     // Board
