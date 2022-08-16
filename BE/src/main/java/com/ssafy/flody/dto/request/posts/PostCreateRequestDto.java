@@ -50,11 +50,4 @@ public class PostCreateRequestDto {
                 .postDate(postDate)
                 .build();
     }
-
-//    private Date findToday() {
-//        Calendar cal = Calendar.getInstance();
-//        cal.setTime(new Date(System.currentTimeMillis()));
-//        cal.add(Calendar.DATE, 1);
-//        return cal.getTime();
-//    }
 }

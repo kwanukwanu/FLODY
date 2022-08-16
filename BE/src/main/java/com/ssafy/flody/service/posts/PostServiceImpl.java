@@ -80,4 +80,8 @@ public class PostServiceImpl implements PostService {
         return coverageRepository.findByName(coverage)
                 .orElseThrow(() -> new IllegalArgumentException("Coverage Not Found"));
     }
+
+    public int findPostNum(String email) {
+        return postRepository.findAllByUser(findUser(email)).size();
+    }
 }

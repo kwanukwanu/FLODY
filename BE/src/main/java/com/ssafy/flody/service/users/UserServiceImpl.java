@@ -8,6 +8,8 @@ import com.ssafy.flody.dto.request.users.UserLoginRequestDto;
 import com.ssafy.flody.dto.request.users.UserPasswordUpdateRequestDto;
 import com.ssafy.flody.dto.request.users.UserUpdateRequestDto;
 import com.ssafy.flody.dto.response.users.UserInfoResponseDto;
+import com.ssafy.flody.service.posts.PostService;
+import com.ssafy.flody.service.users.follows.UFollowService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,6 +26,8 @@ public class UserServiceImpl implements UserService {
     private final UsersRepository usersRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
+    private final UFollowService followService;
+    private final PostService postService;
     @Override
     public UserDetails findUserForToken(String email) throws UsernameNotFoundException {
         return (UserDetails) usersRepository.findById(email)
@@ -35,14 +39,22 @@ public class UserServiceImpl implements UserService {
         List<Users> entityList = usersRepository.findAll();
         List<UserInfoResponseDto> list = new ArrayList<>();
         for (Users user: entityList) {
-            list.add(new UserInfoResponseDto(user));
+            list.add(new UserInfoResponseDto(user,
+                    followService.findFollowerNum(user.getEmail()),
+                    followService.findFollowingNum(user.getEmail()),
+                    postService.findPostNum(user.getEmail())));
         }
         return list;
     }
 
     @Override
-    public UserInfoResponseDto findUserById(String email) {
-        return new UserInfoResponseDto(findUser(email));
+    public UserInfoResponseDto findUserById(String email) throws Exception {
+        return new UserInfoResponseDto(
+                findUser(email),
+                followService.findFollowerNum(email),
+                followService.findFollowingNum(email),
+                postService.findPostNum(email)
+                );
     }
 
     @Override

@@ -15,7 +15,7 @@ public interface UserService {
 
     public List<UserInfoResponseDto> findUsers();
 
-    UserInfoResponseDto findUserById(String email);
+    UserInfoResponseDto findUserById(String email) throws Exception;
 
     public Boolean validateEmail(String email);
     public String addUser(UserCreateRequestDto requestDto);
