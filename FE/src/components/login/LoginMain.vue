@@ -127,9 +127,9 @@
             </b-col>
           </b-row>
           <br />
-          <b-row>
+          <!-- <b-row>
             <login-register></login-register>
-          </b-row>
+          </b-row> -->
         </b-container>
       </b-card>
     </b-row>
@@ -143,11 +143,11 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
 
-import LoginRegister from "./LoginRegister.vue";
+// import LoginRegister from "./LoginRegister.vue";
 import LoginModalFind from "./modal/LoginModalFind.vue";
 
 export default {
-  components: { LoginRegister, LoginModalFind },
+  components: { LoginModalFind }, //LoginRegister,
   data() {
     return {
       fields: ["first_name", "last_name", "show_details"],
