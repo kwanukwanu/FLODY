@@ -13,6 +13,7 @@ import com.ssafy.flody.service.comments.CommentService;
 import com.ssafy.flody.service.groups.GroupService;
 import com.ssafy.flody.service.groups.goals.GroupGoalService;
 import com.ssafy.flody.service.groups.members.GroupMemberService;
+import com.ssafy.flody.service.groups.schedules.GroupScheduleService;
 import com.ssafy.flody.service.posts.PostService;
 import com.ssafy.flody.service.users.UserService;
 import com.ssafy.flody.service.users.follows.UFollowService;
@@ -50,6 +51,8 @@ public class ApiController {
     private final CommentService commentService;
 
     private final GroupGoalService groupGoalService;
+
+    private final GroupScheduleService groupScheduleService;
     // USER
     @GetMapping("/users")
     public ResponseEntity<Map<String, Object>> UserList() {
@@ -337,29 +340,38 @@ public class ApiController {
     }
 
     @GetMapping("/group/schedules")
-    public ResponseEntity<Map<String, Object>> GroupScheduleList(@RequestParam Long id) {
-        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
-        return getMapResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> GroupScheduleList(@RequestParam Long groNo) throws Exception{
+        return getResponseEntity(groupScheduleService.findAllGroupSchedules(groNo));
+    }
+
+    @GetMapping("/group/dayschedules")
+    public ResponseEntity<Map<String, Object>> GroupDayScheduleList(@RequestParam Long groNo, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) throws Exception {
+        return getResponseEntity(groupScheduleService.findGroupDaySchedules(groNo, date));
+    }
+
+    @GetMapping("/group/monthschedules")
+    public ResponseEntity<Map<String, Object>> GroupMonthScheduleList(@RequestParam Long groNo, @RequestParam @DateTimeFormat(pattern = "yyyy-MM") Date date) throws Exception {
+        return getResponseEntity(groupScheduleService.findGroupMonthSchedules(groNo, date));
     }
 
     @GetMapping("/group/schedule")
-    public ResponseEntity<Map<String, Object>> GroupScheduleDetails(@RequestParam Long id) {
-        return getMapResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> GroupScheduleDetails(@RequestParam Long gsNo) {
+        return getResponseEntity(groupScheduleService.findGroupSchedule(gsNo));
     }
 
     @PostMapping("/group/schedule")
-    public ResponseEntity<String> GroupScheduleAdd(@RequestBody GroupScheduleCreateRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
+    public ResponseEntity<Map<String, Object>> GroupScheduleAdd(@RequestParam Long groNo, @RequestBody GroupScheduleCreateRequestDto requestDto) throws Exception {
+        return getResponseEntity(groupScheduleService.addGroupSchedule(groNo, requestDto));
     }
 
     @PutMapping("/group/schedule")
-    public ResponseEntity<String> GroupScheduleModify(@RequestBody GroupScheduleUpdateRequestDto requestDto) {
-        return getStringResponseEntity(requestDto);
+    public ResponseEntity<Map<String, Object>> GroupScheduleModify(@RequestParam Long gsNo, @RequestBody GroupScheduleUpdateRequestDto requestDto) throws Exception{
+        return getResponseEntity(groupScheduleService.modifyGroupSchedule(gsNo, requestDto));
     }
 
     @DeleteMapping("/group/schedule")
-    public ResponseEntity<String> GroupScheduleRemove(@RequestParam Long id) {
-        return getStringResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> GroupScheduleRemove(@RequestParam Long gsNo) {
+        return getResponseEntity(groupScheduleService.removeGroupSchedule(gsNo));
     }
 
     @GetMapping("/group/goals")
