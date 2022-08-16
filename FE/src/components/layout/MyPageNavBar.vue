@@ -138,15 +138,13 @@ export default {
           console.log(error);
         });
     },
-    getPlans(userId) {
+    getPlans() {
       // 여기서 axios를 통해 목표를 받아온다.
-      console.log("get Plans!");
-      console.log(userId);
-      this.store.dispatch("memberStore/setgoals", userId);
+      this.store.dispatch("memberStore/setgoals");
     },
   },
   mounted() {
-    this.getPlans(this.userInfo.email);
+    this.getPlans();
   }
 }
 </script>
