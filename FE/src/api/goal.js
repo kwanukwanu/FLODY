@@ -3,8 +3,8 @@ const api = apiInstance();
 
 // 로그인 (수정 완)
 async function get_goals(token, success, fail) {
-  console.log(token);
-  await api.post(`/user/goal`).then(success).catch(fail);
+  console.log("token : " + token);
+  await api.post(`/user/goals`).then(success).catch(fail);
 }
 
 async function get_goal_one(userNo, success, fail) {
@@ -12,8 +12,7 @@ async function get_goal_one(userNo, success, fail) {
   await api.get(`/user/goal?ugNo=${userNo}`).then(success).catch(fail);
 }
 
-async function add_goal(token, goal, success, fail) {
-  console.log(token);
+async function add_goal(goal, success, fail) {
   await api.post(`/user/goal`, JSON.stringify(goal)).then(success).catch(fail);
 }
 

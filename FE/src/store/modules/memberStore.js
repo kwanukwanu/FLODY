@@ -1,7 +1,7 @@
 //import jwt_decode from "vue-jwt-decode";
 import { login } from "@/api/member.js";
 import { getUserInfo } from "../../api/member";
-import { get_goal_one } from "@/api/goal.js";
+import { get_goals } from "@/api/goal.js";
 // 회원가입 및 로그인을 수행하는 js파일
 
 const memberStore = {
@@ -52,10 +52,10 @@ const memberStore = {
           console.log(response);
           if (response.data.msg == "SUCCESS") {
             console.log("로그인 성공");
-            let token = response.data["access-token"];
+            let token = response.data.token;
             commit("SET_IS_LOGIN", true);
             commit("SET_IS_LOGIN_ERROR", false);
-            sessionStorage.setItem("access-token", token);
+            sessionStorage.setItem("token", token);
           } else {
             console.log("로그인 실패");
             commit("SET_IS_LOGIN", false);
@@ -93,14 +93,13 @@ const memberStore = {
     setLogout({ commit }) {
       commit("SET_USER_INFO", " ");
       commit("SET_IS_LOGIN", false);
-      sessionStorage.removeItem("access-token"); //로그 아웃하면 액세스 토큰을 지워라
+      sessionStorage.removeItem("token"); //로그 아웃하면 액세스 토큰을 지워라
     },
-    setgoals({ commit }, userId) {
-      console.log(userId);
-      get_goal_one(
-        userId,
+    async setgoals({ commit }) {
+      await get_goals(
+        sessionStorage.getItem("token"),
         (response) => {
-          console.log("응답 확인");
+          console.log("목표 전달 응답 확인");
           if (response.msg === "SUCCESS") {
             console.log("목표 저장");
             commit("SET_GOALS", response);

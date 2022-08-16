@@ -79,7 +79,7 @@
   <br>
   <b-container>
     <b-row class="justify-content-md-center">
-      <b-card style="height: 27rem; max-width: 40rem; background-color: #F8F3F3;">
+      <b-card style="height: 31rem; max-width: 40rem; background-color: #F8F3F3;">
         <b-container ref="form">
           <br>
           <b-row>
@@ -93,6 +93,12 @@
           <b-row>
             <b-col>
               <b-form-input v-model="user.name" placeholder="성명" style="border: none;"></b-form-input>
+            </b-col>
+          </b-row>
+          <br>
+          <b-row>
+            <b-col>
+              <b-form-input v-model="user.nickname" placeholder="닉네임" style="border: none;"></b-form-input>
             </b-col>
           </b-row>
           <br>
@@ -117,16 +123,20 @@
             </b-col>
           </b-row>
           <br>
-          <b-col>
-            <div class="button">
-              <b-button text @click="submit" style="color: #453535; background-color: #E1D3D2; border: none;">회원가입
-              </b-button>
-            </div>
-            <div class="button">
-              <b-button text @click="back" style="color: #453535; background-color: #E1D3D2; border: none;"> 취소
-              </b-button>
-            </div>
-          </b-col>
+          <b-row>
+            <b-col style="padding:0px 4px">
+              <div class="button" style="text-align:right">
+                <b-button text @click="submit" style="color: #453535; background-color: #E1D3D2; border: none;">회원가입
+                </b-button>
+              </div>
+            </b-col>
+            <b-col style="padding:0px 4px">
+              <div class="button" style="text-align:left">
+                <b-button text @click="back" style="color:  #453535; background-color: #F1EAE9; border: none;"> 취소
+                </b-button>
+              </div>
+            </b-col>
+          </b-row>
         </b-container>
       </b-card>
     </b-row>
