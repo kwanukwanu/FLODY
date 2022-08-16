@@ -5,7 +5,11 @@ import lombok.Getter;
 
 @Getter
 public class PostLikeListResponseDto {
+    Long posNo;
+    String title;
 
     public PostLikeListResponseDto(PLikes entity){
+        this.posNo = entity.getPost().getPosNo();
+        this.title = entity.getPost().getTitle();
     }
 }

@@ -5,6 +5,7 @@ import com.ssafy.flody.dto.request.posts.PostCreateRequestDto;
 import com.ssafy.flody.dto.request.comments.CommentCreateRequestDto;
 import com.ssafy.flody.dto.request.comments.CommentUpdateRequestDto;
 import com.ssafy.flody.dto.request.groups.*;
+import com.ssafy.flody.dto.request.posts.PostReportRequestDto;
 import com.ssafy.flody.dto.request.posts.PostUpdateRequestDto;
 import com.ssafy.flody.dto.request.users.*;
 import com.ssafy.flody.dto.response.groups.MyGroupMemberListResponseDto;
@@ -15,6 +16,9 @@ import com.ssafy.flody.service.groups.goals.GroupGoalService;
 import com.ssafy.flody.service.groups.members.GroupMemberService;
 import com.ssafy.flody.service.groups.schedules.GroupScheduleService;
 import com.ssafy.flody.service.posts.PostService;
+import com.ssafy.flody.service.posts.like.PLikeService;
+import com.ssafy.flody.service.posts.report.PReportService;
+import com.ssafy.flody.service.posts.scrap.PScrapService;
 import com.ssafy.flody.service.users.UserService;
 import com.ssafy.flody.service.users.follows.UFollowService;
 import com.ssafy.flody.service.users.goals.UGoalService;
@@ -53,6 +57,10 @@ public class ApiController {
     private final GroupGoalService groupGoalService;
 
     private final GroupScheduleService groupScheduleService;
+
+    private final PLikeService postLikeService;
+    private final PReportService postReportService;
+    private final PScrapService postScrapService;
     // USER
     @GetMapping("/users")
     public ResponseEntity<Map<String, Object>> UserList() {
@@ -135,13 +143,13 @@ public class ApiController {
     }
 
     @GetMapping("/user/likes")
-    public ResponseEntity<Map<String, Object>> UserLikeList(@RequestParam Long id) {
-        return getMapResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> UserLikeList(@RequestHeader(value = HEADER_AUTH) String token) throws Exception {
+        return getResponseEntity(userService.findPostLikes(jwtService.decodeToken(token)));
     }
 
     @GetMapping("/user/scraps")
-    public ResponseEntity<Map<String, Object>> UserScrapList(@RequestParam Long id) {
-        return getMapResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> UserScrapList(@RequestHeader(value = HEADER_AUTH) String token) throws Exception {
+        return getResponseEntity(userService.findPostScraps(jwtService.decodeToken(token)));
     }
 
     @GetMapping("/user/schedules") // 내 스케줄만 궁금하잖아
@@ -428,18 +436,27 @@ public class ApiController {
     }
 
     @GetMapping("/post/like")
-    public ResponseEntity<String> PostLike(@RequestParam Long id) {
-        return getStringResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> PostLikeAdd(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam Long posNo ) throws Exception {
+        return getResponseEntity(postLikeService.addPostLike(jwtService.decodeToken(token), posNo ));
+    }
+    @DeleteMapping("/post/like")
+    public ResponseEntity<Map<String, Object>> PoseLikeRemove(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam Long posNo ) throws Exception {
+        return getResponseEntity(postLikeService.removePostLike(jwtService.decodeToken(token), posNo ));
     }
 
     @GetMapping("/post/scrap")
-    public ResponseEntity<String> PostScrap(@RequestParam Long id) {
-        return getStringResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> PostScrapAdd(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam Long posNo) throws Exception {
+        return getResponseEntity(postScrapService.addPostScrap(jwtService.decodeToken(token), posNo ));
     }
 
-    @GetMapping("/post/report")
-    public ResponseEntity<String> PostReport(@RequestParam Long id) {
-        return getStringResponseEntity(id);
+    @DeleteMapping("/post/scrap")
+    public ResponseEntity<Map<String, Object>> PostScrapRemove(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam Long posNo) throws Exception {
+        return getResponseEntity(postScrapService.removePostScrap(jwtService.decodeToken(token), posNo ));
+    }
+
+    @PostMapping("/post/report")
+    public ResponseEntity<Map<String, Object>> PostReport(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam Long posNo, PostReportRequestDto requestDto) throws Exception{
+        return getResponseEntity(postReportService.addPostReport(jwtService.decodeToken(token),posNo, requestDto));
     }
 
     // COMMENT

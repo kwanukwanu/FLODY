@@ -4,6 +4,8 @@ import com.ssafy.flody.dto.request.users.UserCreateRequestDto;
 import com.ssafy.flody.dto.request.users.UserLoginRequestDto;
 import com.ssafy.flody.dto.request.users.UserPasswordUpdateRequestDto;
 import com.ssafy.flody.dto.request.users.UserUpdateRequestDto;
+import com.ssafy.flody.dto.response.posts.PostLikeListResponseDto;
+import com.ssafy.flody.dto.response.posts.ScrapListResponseDto;
 import com.ssafy.flody.dto.response.users.UserInfoResponseDto;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,4 +29,8 @@ public interface UserService {
     public String removeUser(String email) throws Exception;
 
     public String loginUser(UserLoginRequestDto requestDto);
+
+    public List<PostLikeListResponseDto> findPostLikes(String email);
+
+    public List<ScrapListResponseDto> findPostScraps(String email);
 }
