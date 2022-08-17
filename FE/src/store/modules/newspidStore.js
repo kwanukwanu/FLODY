@@ -186,7 +186,16 @@ const newspidStore = {
     setFollowers({commit}, followers){
       commit("SET_FOLLOWERS",followers);
     },
-    set_profile({commit},profile){
+    set_profile({commit},userInfo){
+      const profile={
+        profile: userInfo.profile,
+        name: userInfo.name,
+        nickname: userInfo.nickname,
+        followers: userInfo.followers,
+        followings: userInfo.followings,
+        posts: userInfo.posts,
+        introduction: userInfo.introduction,
+      }
       commit("SET_PROFILE",profile);
     }
   },

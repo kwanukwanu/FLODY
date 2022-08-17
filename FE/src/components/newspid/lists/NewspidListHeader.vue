@@ -19,7 +19,7 @@
                 style="color: blue; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 14px;">
                 • 팔로우</b-button> -->
     </b-row>
-    <b-row style="font-size:12px; width:70%">런던</b-row>
+    <b-row style="font-size:12px; width:70%">대한민국</b-row>
   </b-col>
   <b-col cols="1" style="padding: 0px 0px; margin-top: 8px;">
     <b-button size="sm" variant="link" style="width: 40px; text-decoration: none; padding:0px 0px;" v-b-modal.modal-4>
