@@ -62,6 +62,7 @@ public class Comments {
 
     public void update(String content, Date postDate) {
         this.content = content;
-        this.postDate = postDate;
+        if (postDate != null)
+            this.postDate = postDate;
     }
 }
