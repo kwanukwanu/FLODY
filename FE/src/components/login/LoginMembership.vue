@@ -305,4 +305,10 @@ export default {
   margin-top: 10px;
   text-align: center;
 }
+.btn{
+  --bs-btn-focus-shadow-rgb: white;
+}
+.btn_secondary{
+    --bs-btn-focus-shadow-rgb: white;
+}
 </style>

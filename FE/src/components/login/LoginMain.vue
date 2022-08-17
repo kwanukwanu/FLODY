@@ -224,6 +224,6 @@ export default {
   --bs-btn-focus-shadow-rgb: white;
 }
 .btn_secondary{
-  
+    --bs-btn-focus-shadow-rgb: white;
 }
 </style>
