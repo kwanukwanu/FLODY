@@ -1,7 +1,7 @@
 <template>
     <b-row>
         <b-col cols="8">
-            <b-card-text class="test_name">{{ title }}</b-card-text>
+            <b-card-text class="test_name" @click="deleteGoal()">{{ title }}</b-card-text>
         </b-col>
         <b-col cols="4">
             <b-card-text class="howmuchleft" style="color:#BC6464; font-weight: bold;">D-{{ dateSet }}</b-card-text>
@@ -28,6 +28,14 @@ export default {
                 return (res - res % 1) + 1;
             else return res;
         }
+    },
+    methods: {
+      deleteGoal() {
+        let result = confirm("Do you want to delete this goal?");
+        if(result == true) {
+          alert("삭제");
+        }
+      }
     }
 }
 </script>
