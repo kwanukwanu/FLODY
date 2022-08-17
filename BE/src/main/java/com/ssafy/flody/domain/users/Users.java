@@ -31,14 +31,10 @@ public class Users {
     private Boolean admin;
 
     public void update(String profile, String nickname, String address, String phone) {
-        if (profile != null)
-            this.profile = profile;
-        if (nickname != null)
-            this.nickname = nickname;
-        if (address != null)
-            this.address = address;
-        if (phone != null)
-            this.phone = phone;
+        this.profile = profile;
+        this.nickname = nickname;
+        this.address = address;
+        this.phone = phone;
     }
 
     public void changePassword(String password) {

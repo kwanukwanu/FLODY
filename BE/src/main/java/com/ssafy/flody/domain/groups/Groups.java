@@ -14,14 +14,13 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "s_groups")
 public class Groups {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long groNo;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false, updatable = false)
+    @CreatedDate
     private Date foundDate;
 
     public void update(String name) {

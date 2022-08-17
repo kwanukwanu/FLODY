@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Calendar;
 import java.util.Date;
 
 @Getter
@@ -15,12 +14,11 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "g_schedules")
 public class GSchedules {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long gsNo;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Groups.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Groups.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "gro_no")
     private Groups group;
     @Column(nullable = false)
@@ -33,12 +31,4 @@ public class GSchedules {
     private Date endDate;
     @Column(nullable = false)
     private Boolean done;
-
-    public void update(String title, String detail, Date startDate, Date endDate, Boolean done) {
-        this.title = title;
-        this.detail = detail;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.done = done;
-    }
 }

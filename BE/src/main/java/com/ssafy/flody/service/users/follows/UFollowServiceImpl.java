@@ -13,7 +13,6 @@ import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -22,18 +21,10 @@ import java.util.List;
 public class UFollowServiceImpl implements UFollowService {
     private final UsersRepository usersRepository;
     private final FollowsRepository followRepository;
-    public List<UserFollowResponseDto> findUserFollowers(String email) {
-        Users following = findUser(email);
-        List<Follows> entityList = followRepository.findAllByFollowing(following);
-        List<UserFollowResponseDto> list = new ArrayList<>();
-        for (Follows follows : entityList) {
-            list.add(new UserFollowResponseDto(follows));
-        }
-        return list;
-    }
-    public List<UserFollowResponseDto> findUserFollowings(String email) {
+    public List<UserFollowResponseDto> findUserFollows(String email) throws Exception {
         Users follower = findUser(email);
-        List<Follows> entityList = followRepository.findAllByFollower(follower);
+        List<Follows> entityList = (List<Follows>) followRepository.findByFollower(follower)
+                .orElseThrow(() -> new IllegalArgumentException("Follower Not Found"));
         List<UserFollowResponseDto> list = new ArrayList<>();
         for (Follows follows : entityList) {
             list.add(new UserFollowResponseDto(follows));
@@ -46,23 +37,14 @@ public class UFollowServiceImpl implements UFollowService {
         return followRepository.save(new UserFollowRequestDto().toEntity(follower, following)).getFolNo();
     }
 
-    public String removeUserFollow(String email) {
-        Follows follow = followRepository.findByFollowing(findUser(email))
-                .orElseThrow(() -> new IllegalArgumentException("Relation Not Found"));
-        followRepository.delete(follow);
-        return email;
+    public Long removeUserFollow(Long folNo) {
+        followRepository.delete(followRepository.findById(folNo)
+                .orElseThrow(() -> new IllegalArgumentException("Follow Not Found")));
+        return folNo;
     }
 
     public Users findUser(String email) {
         return usersRepository.findById(email)
                 .orElseThrow(() -> new IllegalArgumentException("User Not Found"));
-    }
-
-    public int findFollowerNum(String email) {
-        return findUserFollowers(email).size();
-    }
-
-    public int findFollowingNum(String email) {
-        return findUserFollowings(email).size();
     }
 }

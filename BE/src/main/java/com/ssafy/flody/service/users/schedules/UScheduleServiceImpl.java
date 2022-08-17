@@ -13,7 +13,8 @@ import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,44 +26,11 @@ public class UScheduleServiceImpl implements UScheduleService {
     @Transactional
     public List<UserScheduleListResponseDto> findUserSchedules(String email) throws Exception {
         Users user = findUser(email);
-        List<USchedules> entityList = userScheduleRepository.findAllByUser(user);
+        List<USchedules> entityList = (List<USchedules>) userScheduleRepository.findByUser(user)
+                .orElseThrow(() -> new NotFoundException("Schedule Not Found"));
         List<UserScheduleListResponseDto> list = new ArrayList<>();
         for (USchedules uSchedules : entityList) {
             list.add(new UserScheduleListResponseDto(uSchedules));
-        }
-        return list;
-    }
-    public List<UserScheduleListResponseDto> findUserDaySchedules(String email, Date date) {
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
-        cal.setTime(date);
-        cal.add(Calendar.DATE, 1);
-        Date from = cal.getTime();
-        System.out.println(from);
-        cal.add(Calendar.DATE, -2);
-        Date upto = cal.getTime();
-        System.out.println(upto);
-        List<USchedules> entityList = userScheduleRepository.findAllByUserAndStartDateBeforeAndEndDateAfter(findUser(email), from, upto);
-        List<UserScheduleListResponseDto> list = new ArrayList<>();
-        for (USchedules schedule : entityList) {
-            list.add(new UserScheduleListResponseDto(schedule));
-        }
-        return list;
-    }
-    public List<UserScheduleListResponseDto> findUserMonthSchedules(String email, Date date) {
-        System.out.println(date);
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
-        cal.setTime(date);
-        cal.add(Calendar.MONTH, 1);
-        Date from = cal.getTime();
-        System.out.println(from);
-        cal.add(Calendar.MONTH, -1);
-        cal.add(Calendar.DATE, -1);
-        Date upto = cal.getTime();
-        System.out.println(upto);
-        List<USchedules> entityList = userScheduleRepository.findAllByUserAndStartDateBeforeAndEndDateAfter(findUser(email), from, upto);
-        List<UserScheduleListResponseDto> list = new ArrayList<>();
-        for (USchedules schedule : entityList) {
-            list.add(new UserScheduleListResponseDto(schedule));
         }
         return list;
     }
@@ -88,14 +56,13 @@ public class UScheduleServiceImpl implements UScheduleService {
                 requestDto.getEndDate(),
                 requestDto.getDone()
         );
-        return userScheduleRepository.save(uSchedules).getUsNo();
+        return usNo;
     }
 
     @Transactional
     public Long removeUserSchedule(Long usNo) {
-        USchedules schedule = userScheduleRepository.findById(usNo)
-                        .orElseThrow(() -> new IllegalArgumentException("Schedule Not Found"));
-        userScheduleRepository.delete(schedule);
+        userScheduleRepository.delete(userScheduleRepository.findById(usNo)
+                .orElseThrow(() -> new IllegalArgumentException("Schedule Not Found")));
         return usNo;
     }
 

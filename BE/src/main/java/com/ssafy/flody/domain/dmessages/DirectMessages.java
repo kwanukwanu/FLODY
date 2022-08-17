@@ -19,10 +19,10 @@ public class DirectMessages {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long dmNo;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "sender")
     private Users sender;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "receiver")
     private Users receiver;
     @Column(nullable = false)
