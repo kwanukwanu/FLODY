@@ -21,6 +21,9 @@ public class Users {
     private String profile;
     @Column(nullable = false)
     private String name;
+
+    @Column
+    private String introduction;
     @Column(nullable = false)
     private String nickname;
     @Column
@@ -30,7 +33,7 @@ public class Users {
     @Column(nullable = false)
     private Boolean admin;
 
-    public void update(String profile, String nickname, String address, String phone) {
+    public void update(String profile, String nickname, String address, String phone, String introduction) {
         if (profile != null)
             this.profile = profile;
         if (nickname != null)
@@ -39,6 +42,8 @@ public class Users {
             this.address = address;
         if (phone != null)
             this.phone = phone;
+        if (introduction != null)
+            this.introduction = introduction;
     }
 
     public void changePassword(String password) {
