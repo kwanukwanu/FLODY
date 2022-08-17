@@ -104,7 +104,6 @@ const memberStore = {
 
     setgoals({ commit }) {
       get_goals(
-        null,
         (success) => {
           console.log("목표 전달 응답 확인");
           console.log(success);
