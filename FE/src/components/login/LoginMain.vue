@@ -173,6 +173,21 @@ export default {
       if (this.isLogin) {
         console.log("로그인 성공, 유저 정보를 받아옵니다.");
         await this.store.dispatch("memberStore/getUserInfo", this.user.email); // 정보를 받아서 vuex의 user에 저장한다.
+        console.log("userInfo를 받는다");
+        const userInfo = this.store.state.memberStore.userInfo;
+        console.log("profile 작성");
+        console.log(userInfo);
+        const profile={
+            profile: userInfo.profile,
+            name: userInfo.name,
+            nickname: userInfo.nickname,
+            followers: userInfo.followers,
+            followings: userInfo.followings,
+            posts: userInfo.posts,
+        }
+        console.log("dispatch 수행")
+        this.store.dispatch("newspidStore/set_profile",profile);
+        console.log("페이지 이동");
         this.$router.push("/about"); // 라우터 페이지 이동
       }
       else {

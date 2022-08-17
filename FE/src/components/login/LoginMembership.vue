@@ -84,9 +84,14 @@
           <br>
           <b-row>
             <b-col>
-              <b-form-input v-model="user.email" placeholder="이메일 주소" required style="border: none;"
-                @keyup="emailChecking()">
-              </b-form-input>
+              <b-input-group>
+                <b-form-input v-model="user.email" :state="isUserid" placeholder="이메일 주소" required style="border: none;"
+                  @keyup="emailChecking()">
+                </b-form-input>
+                <b-input-group-append>
+                  <b-button @click="idDuplicateChecking"> 중복확인 </b-button>
+                </b-input-group-append>
+              </b-input-group>
             </b-col>
           </b-row>
           <br>
@@ -104,14 +109,15 @@
           <br>
           <b-row>
             <b-col>
-              <b-form-input v-model="user.password" type="password" placeholder="비밀번호" style="border: none;"
+              <b-form-input v-model="user.password" :state="pwcheck.value" type="password" placeholder="비밀번호" style="border: none;"
                 @keyup="pwChecking"></b-form-input>
             </b-col>
           </b-row>
           <br>
           <b-row>
             <b-col>
-              <b-form-input type="password" v-model="password" placeholder="비밀번호 확인" style="border: none;"></b-form-input>
+              <b-form-input type="password" :state="isSame" v-model="password" placeholder="비밀번호 확인" style="border: none;"
+              @keyup="pwChecking2"></b-form-input>
             </b-col>
           </b-row>
           <br>
@@ -144,29 +150,40 @@
 </template>
 
 <script>
-import { registMember } from '@/api/member.js';
+import { registMember, userIdDuplicated } from '@/api/member.js';
 
 export default {
   data() {
     return {
       user: {
-        email: "myssafy@ssafy.com",
-        password: "ssafyssafy",
-        profile: "@/assets/logo.png",
-        name: "김싸피",
-        nickname: "닉네임",
-        address: "이곳은 주소입니다.",
-        phone: "010-1111-2222",
-        admin: 'false',
+        email: "admin@ssafy.com",
+        password: "admin123",
+        profile: "https://placekitten.com/200/100",
+        name: "김관리",
+        nickname: "관리자",
+        address: "SSAFY 대전캠퍼스",
+        phone: "010-1234-4567",
+        admin: 'true',
+        followers: 0,
+        followings: 0,
+        posts: 0,
       },
       password:"",
       isduplicate: true, // 아이디 중복 여부
       isUserid: false, // 아이디 존재여부
-      idcheck: false, // 아이디 길이 확인
-      emailcheck: false,
+      idcheck: false, // 아이디 길이 확인 = 최종 체크
+      pwcheck: {
+        value: false, // 비밀번호 무결성 확인
+        key:{
+          isUpper: true, // 대문자 포함여부
+          isLower: true, // 소문자 포함여부
+          isSpecial : true, // 특수문자 포함여부
+        }
+      },
+      isSame: false, // 비밀번호 동일 확인
       namecheck: false,
+      addrcheck: false,
       phonecheck: false,
-      pwcheck: false,
     }
   },
   methods: {
@@ -178,6 +195,7 @@ export default {
 
     idChecking() {
       if (!this.isduplicate) this.isduplicate = true;
+      if(this.isUserid) this.isUserid = false;
       if (this.user.email.length > 4) {
         console.log("아이디 체크");
         this.idcheck = true;
@@ -185,22 +203,54 @@ export default {
         this.idcheck = false;
       }
     },
-
-    pwChecking() {
-      if (this.user.password.length > 7) {
-        this.pwcheck = true;
-      } else {
-        this.pwcheck = false;
+    async idDuplicateChecking(){
+      console.log(this.user.email);
+      if(this.isUserid && !this.isduplicate)
+        alert("이미 확인한 아이디입니다.");
+      else{
+        await userIdDuplicated(
+          this.user.email,
+          ( response ) => {
+            console.log(response);
+            let msg = "중복 발생!";
+            if (response.data.msg === "SUCCESS") {
+              msg = "사용가능한 아이디입니다.";
+              this.isduplicate = false;
+            }
+            alert(msg);
+          },
+          (error) => {
+            console.log("연결 오류!");
+            console.log(error);
+          },
+        );
+        if(this.idcheck && !this.isduplicate)
+          this.isUserid = true;
+        else
+          this.isUserid = false;
       }
     },
+    pwChecking() {
+      // 현재는 글자수만 확인
+      if (this.user.password.length > 7) {
+        this.pwcheck.value = true;
+      } else {
+        this.pwcheck.value = false;
+      }
+      this.pwChecking2();
+    },
     pwChecking2(){
-      if(this.user.password === this.password){
+      console.log(this.user.password+" "+this.password);
+      console.log(this.user.password==this.password);
+      //패스워드 동일 여부 확인
+      if(this.user.password==this.password){
         this.isSame = true;
       }
       else{
         this.isSame = false;
       }
     },
+    // 이메일이 맞는지 확인
     emailCheck() {
       var re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -209,6 +259,7 @@ export default {
       console.log(this.emailcheck);
     },
 
+    // 이메일 체크
     emailChecking() {
       this.emailCheck();
       this.idChecking();
@@ -280,21 +331,39 @@ export default {
     },
 
     async registMember() {
-      await registMember(
-        this.user,
-        ({ data }) => {
-          let msg = "등록 처리시 문제가 발생했습니다.";
-          console.log(data);
-          if (data === "SUCCESS") {
-            msg = "등록이 완료되었습니다.";
-          }
-          alert(msg);
-          this.$router.push("/");
-        },
-        (error) => {
-          console.log(error);
-        },
-      );
+      if(!this.isUserid)
+      {
+        if(this.isduplicate)
+          alert("중복체크를 수행하세요");
+        else
+          alert("아이디를 입력하세요")
+      }
+      else if(!this.pwcheck)
+      {
+        alert("패스워드를 8자 이상으로 입력하세요");
+      }
+      else if(!this.isSame)
+      {
+        alert("패스워드가 일치하는지 확인하세요");
+      }
+      else
+      {
+        await registMember(
+          this.user,
+          ({ data }) => {
+            let msg = "등록 처리시 문제가 발생했습니다.";
+            console.log(data);
+            if (data === "SUCCESS") {
+              msg = "등록이 완료되었습니다.";
+            }
+            alert(msg);
+            this.$router.push("/");
+          },
+          (error) => {
+            console.log(error);
+          },
+        );
+      }
     },
     back() {
       this.$router.push("/");
@@ -312,11 +381,5 @@ export default {
 .button {
   margin-top: 10px;
   text-align: center;
-}
-.btn{
-  --bs-btn-focus-shadow-rgb: white;
-}
-.btn_secondary{
-    --bs-btn-focus-shadow-rgb: white;
 }
 </style>
