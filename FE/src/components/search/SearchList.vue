@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-table striped hover :items="items"></b-table>
+    <b-table responsive hover :items="items"></b-table>
     <div class="paging">
       <b-button
         variant="link"
@@ -57,5 +57,8 @@ export default {
 <style>
 .paging {
   text-align: center;
+}
+.table{
+  --bs-table-hover-bg: #f8f4f4
 }
 </style>

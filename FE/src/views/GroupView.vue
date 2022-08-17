@@ -18,7 +18,7 @@
     todolist의 success 개수를 체크해 최대값이 되면 
     -->
     <br>
-    <b-row>
+    <b-row style="height: 180px;">
       <b-card class="wrap-vertical">
 
         <!-- <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
@@ -118,13 +118,16 @@
     </b-row>
     <b-row>
       <b-col>
-        <b-card style="max-width:25rem; border-color: #a48282;">
+        <b-card style="max-width:35rem; border-color: #a48282;">
           <group-calendar></group-calendar>
         </b-card>
       </b-col>
       <b-col>
         <group-todo></group-todo>
       </b-col>
+    </b-row>
+    <b-row>
+      <group-field></group-field>
     </b-row>
   </b-container>
 
@@ -227,12 +230,14 @@ import { useStore } from "vuex";
 import GroupHeader from "@/components/group/GroupHeader.vue";
 import GroupCalendar from "@/components/group/GroupCalandar.vue";
 import GroupTodo from "@/components/group/GroupTodo.vue";
+import GroupField from "@/components/group/GroupField.vue";
 
 export default {
   components: {
     GroupHeader,
     GroupCalendar,
     GroupTodo,
+    GroupField
   },
   data() {
     //todo : description(할 일), isComplete(완료여부), dates(날짜), color(색상표시)

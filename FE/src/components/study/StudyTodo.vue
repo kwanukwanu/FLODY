@@ -1,5 +1,5 @@
 <template>
-  <b-card style="border-color: #a48282; max-width: 35rem; height:304px; overflow-y: scroll;" id="tab_todo">
+  <b-card style="border-color: #a48282; max-width: 35rem; height:304px;">
     <b-row>
       <b-col cols="10">
         <span style="text-align:left; font-weight:bold; font-size: large; vertical-align:-webkit-baseline-middle;">Todo
@@ -16,10 +16,12 @@
       </b-col>
     </b-row>
     <hr />
-    <ul style="list-style-type :none;">
-      <study-todo-items v-for="(item, index) in todo_list" :key="item.index = index" v-bind="item">
-      </study-todo-items>
-    </ul>
+    <div id="tab_todo" style="height:205px; overflow-y: scroll;">
+      <ul style="list-style-type :none;">
+        <study-todo-items v-for="(item, index) in todo_list" :key="item.index = index" v-bind="item">
+        </study-todo-items>
+      </ul>
+    </div>
   </b-card>
   <study-todo-modals></study-todo-modals>
 </template>
