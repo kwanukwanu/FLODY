@@ -18,6 +18,7 @@ import com.ssafy.flody.service.groups.goals.GroupGoalService;
 import com.ssafy.flody.service.groups.members.GroupMemberService;
 import com.ssafy.flody.service.groups.schedules.GroupScheduleService;
 import com.ssafy.flody.service.posts.PostService;
+import com.ssafy.flody.service.posts.like.CLikeService;
 import com.ssafy.flody.service.posts.like.PLikeService;
 import com.ssafy.flody.service.posts.report.PReportService;
 import com.ssafy.flody.service.posts.scrap.PScrapService;
@@ -63,6 +64,8 @@ public class ApiController {
     private final PReportService postReportService;
     private final PScrapService postScrapService;
     private final FlowerService flowerService;
+
+    private final CLikeService commentLikeService;
     // USER
     @GetMapping("/users")
     public ResponseEntity<Map<String, Object>> UserList() {
@@ -490,8 +493,13 @@ public class ApiController {
     }
 
     @GetMapping("/comment/like")
-    public ResponseEntity<String> CommentLike(@RequestParam Long id) {
-        return getStringResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> CommentLikeAdd(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam Long comNo) throws Exception {
+        return getResponseEntity(commentLikeService.addCommentLike(jwtService.decodeToken(token), comNo ));
+    }
+
+    @DeleteMapping("/comment/like")
+    public ResponseEntity<Map<String, Object>> CommentLikeRemove(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam Long comNo) throws Exception {
+        return getResponseEntity(commentLikeService.removeCommentLike(jwtService.decodeToken(token), comNo ));
     }
 
     // DIRECT MESSAGE
