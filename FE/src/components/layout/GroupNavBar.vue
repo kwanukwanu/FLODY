@@ -16,7 +16,7 @@
         </b-col>
       </b-row>
       <hr style="margin: 5px;" />
-      <group-nav-items v-for="group in groupItem" :key="group" v-bind="group">
+      <group-nav-items v-for="group in myGroupItem" :key="group" v-bind="group">
 
       </group-nav-items>
 
@@ -33,9 +33,9 @@ export default {
   components: { GroupNavItems },
   setup() {
     const store = useStore();
-    const groupItem = computed(() => store.state.groupStore.groupItem);
+    const myGroupItem = computed(() => store.state.groupStore.myGroupItem);
 
-    return { store, groupItem };
+    return { store, myGroupItem };
   },
   data() {
     return {
@@ -103,7 +103,8 @@ export default {
     },
   },
   mounted() {
-    this.store.dispatch("groupStore/set_group_item");
+    this.store.dispatch("groupStore/set_my_group_item");
+    console.log(this.myGroupItem);
   }
 }
 </script>

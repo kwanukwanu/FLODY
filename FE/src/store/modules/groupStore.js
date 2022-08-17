@@ -1,10 +1,11 @@
-import { get_todo_list, get_group_list_by_mygroups } from "@/api/group";
+import { get_todo_list, get_group_list_by_mygroups, get_group_by_keyword } from "@/api/group";
 
 const groupStore = {
   namespaced: true,
   state: {
     isMyGroup: false,
-    groupItem: [],
+    myGroupItem: [],
+    groupSearchResult: [],
     selectGroups: {
       name: "none",
       goal: "none",
@@ -75,8 +76,11 @@ const groupStore = {
     SET_TODO_LIST: (state, todo_list) => {
       state.todo_list = todo_list;
     },
-    SET_GROUP_ITEM: (state, groupItem) => {
-      state.groupItem = groupItem;
+    SET_MY_GROUP_ITEM: (state, myGroupItem) => {
+      state.myGroupItem = myGroupItem;
+    },
+    SET_GROUP_SEARCH_RESULT: (state, groupSearchResult) => {
+      state.groupSearchResult = groupSearchResult;
     }
   },
   actions: {
@@ -105,13 +109,13 @@ const groupStore = {
         () => {},
       );
     },
-    async set_group_item({commit}) {
+    async set_my_group_item({commit}) {
       await get_group_list_by_mygroups(
         (response) => {
           console.log(response);
           if(response.data.msg == "SUCCESS") {
             console.log("성공");
-            commit("SET_GROUP_ITEM", response.data.item);
+            commit("SET_MY_GROUP_ITEM", response.data.item);
           } else {
             console.log("실패");
           }
@@ -120,7 +124,28 @@ const groupStore = {
           console.log(error);
         }
       )
-    }
+    },
+    async set_group_search_result({commit}, keyword) {
+      await get_group_by_keyword(
+        keyword,
+        (response) => {
+          console.log(response);
+          if(response.data.msg == "SUCCESS") {
+            console.log("스터디 검색 완료!!!");
+            commit("SET_GROUP_SEARCH_RESULT", response.data.item);
+          } else {
+            console.log("스터디 검색 실패 ㅠㅠ");
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      ) 
+    },
+    init_group_search_result({commit}) {     
+      commit("SET_GROUP_SEARCH_RESULT", null);
+    },
+    
   },
 };
 
