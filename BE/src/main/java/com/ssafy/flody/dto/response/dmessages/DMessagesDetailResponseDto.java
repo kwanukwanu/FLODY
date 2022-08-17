@@ -13,11 +13,11 @@ public class DMessagesDetailResponseDto {
     private Boolean like;
     private Boolean check;
 
-    public DMessagesDetailResponseDto(DirectMessages entity){
-        this.type = entity.getType();
-        this.content = entity.getContent();
-        this.time = entity.getTime();
-        this.like = entity.getLike();
-        this.check = entity.getCheck();
-    }
+//    public DMessagesDetailResponseDto(DirectMessages entity){
+//        this.type = entity.getType();
+//        this.content = entity.getContent();
+//        this.time = entity.getTime();
+//        this.like = entity.getLike();
+//        this.check = entity.getCheck();
+//    }
 }

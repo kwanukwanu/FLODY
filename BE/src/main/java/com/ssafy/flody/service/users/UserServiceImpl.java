@@ -87,7 +87,8 @@ public class UserServiceImpl implements UserService {
                 requestDto.getProfile(),
                 requestDto.getNickname(),
                 requestDto.getAddress(),
-                requestDto.getPhone()
+                requestDto.getPhone(),
+                requestDto.getIntroduction()
         );
         return usersRepository.save(user).getEmail();
     }

@@ -13,6 +13,7 @@ public class UserUpdateRequestDto {
     @Nullable
     private String profile;
     private String nickname;
+    private String introduction;
     private String address;
     private String phone;
 }

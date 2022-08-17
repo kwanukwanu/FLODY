@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Builder
@@ -21,16 +22,23 @@ public class Users {
     private String profile;
     @Column(nullable = false)
     private String name;
+
+    @Column
+    private String introduction;
     @Column(nullable = false)
     private String nickname;
     @Column
     private String address;
     @Column(nullable = false)
     private String phone;
-    @Column(nullable = false)
+    @Column
     private Boolean admin;
 
-    public void update(String profile, String nickname, String address, String phone) {
+    @OneToMany(mappedBy = "email", cascade = CascadeType.ALL)
+    private List<Users> children;
+
+
+    public void update(String profile, String nickname, String address, String phone, String introduction) {
         if (profile != null)
             this.profile = profile;
         if (nickname != null)
@@ -39,6 +47,8 @@ public class Users {
             this.address = address;
         if (phone != null)
             this.phone = phone;
+        if (introduction != null)
+            this.introduction = introduction;
     }
 
     public void changePassword(String password) {
