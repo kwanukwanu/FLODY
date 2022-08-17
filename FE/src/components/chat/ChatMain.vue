@@ -23,7 +23,7 @@
     <div class="mx-5" style="font-size: 14px;">
       <chat-message v-for="{ id, text, userPhotoURL, userName, userId, createdAt, targetId } in messages" :key="id"
         :name="userName" :photo-url="userPhotoURL" :sender="userId2 === userId" :date="createdAt" 
-        :target="(targetId2 === targetId && userName2 === userName) || (targetId2 ===  userName && userName2 === targetId)">
+        :target="(targetId2 === targetId && userId2 === userId) || (targetId2 ===  userId && userId2 === targetId)">
         {{ text }}
         <!-- <span v-if="targetId2 === targetId">{{text}}</span> -->
       </chat-message>
