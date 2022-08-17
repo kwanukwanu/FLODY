@@ -59,7 +59,7 @@ const memberStore = {
             commit("SET_IS_LOGIN", true);
             commit("SET_IS_LOGIN_ERROR", false);
             sessionStorage.setItem(`token`, token);
-            api.defaults.headers['token'] = token;
+            api.defaults.headers[`token`] = token;
           } else {
             console.log("로그인 실패");
             commit("SET_IS_LOGIN", false);
@@ -104,6 +104,7 @@ const memberStore = {
 
     setgoals({ commit }) {
       get_goals(
+        null,
         (success) => {
           console.log("목표 전달 응답 확인");
           console.log(success);

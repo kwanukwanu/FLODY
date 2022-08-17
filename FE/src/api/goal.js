@@ -4,7 +4,7 @@ import {api} from "./index.js";
 
 // 로그인 (수정 완)
 async function get_goals(success, fail) {
-  api.get(`/user/goals`).then(success).catch(fail);
+  await api.get(`/user/goals`).then(success).catch(fail);
 }
 
 async function get_goal_one(userNo, success, fail) {

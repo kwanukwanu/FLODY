@@ -78,4 +78,10 @@ export default {
 </script>
 
 <style>
+.btn-link{
+--bs-btn-focus-shadow-rgb: white;
+}
+.btn-secondary{
+  --bs-btn-focus-shadow-rgb: white;
+}
 </style>

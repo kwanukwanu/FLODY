@@ -418,4 +418,7 @@ export default {
 .comment {
   border-color: #a48282;
 }
+.btn-link{
+  --bs-btn-focus-shadow-rgb: white;
+}
 </style>
