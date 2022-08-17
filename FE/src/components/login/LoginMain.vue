@@ -213,4 +213,11 @@ export default {
 .button_2 {
   text-align: center;
 }
+
+.form-select {
+  box-shadow: none !important;
+}
+.form-control{
+  box-shadow: none !important;
+}
 </style>
