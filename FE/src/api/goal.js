@@ -1,5 +1,6 @@
-import { apiInstance } from "./index.js";
-const api = apiInstance();
+//import { apiInstance } from "./index.js";
+//const api = apiInstance();
+import {api} from "./index.js";
 
 // 로그인 (수정 완)
 async function get_goals(success, fail) {

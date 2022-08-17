@@ -1,5 +1,6 @@
-import { apiInstance } from "./index.js";
-const api = apiInstance();
+//import { apiInstance } from "./index.js";
+//const api = apiInstance();
+import {api} from "./index.js";
 
 // 유저 스케줄 목록 : doc.13
 async function get_schedules(token, success, fail) {

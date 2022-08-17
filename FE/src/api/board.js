@@ -1,5 +1,6 @@
-import { apiInstance } from "./index.js";
-const api = apiInstance();
+//import { apiInstance } from "./index.js";
+//const api = apiInstance();
+import {api} from "./index.js";
 
 // category별 게시글을 받아온다.
 async function get_boardList(category, success, fail) {

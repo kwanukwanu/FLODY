@@ -2,10 +2,10 @@
 import { login } from "@/api/member.js";
 import { getUserInfo } from "../../api/member";
 import { get_goals } from "@/api/goal.js";
-import { apiInstance } from "@/api";
+import { api } from "@/api";
 // 회원가입 및 로그인을 수행하는 js파일
 
-const api = apiInstance();
+//const api = apiInstance();
 
 const memberStore = {
   namespaced: true,
@@ -59,7 +59,7 @@ const memberStore = {
             commit("SET_IS_LOGIN", true);
             commit("SET_IS_LOGIN_ERROR", false);
             sessionStorage.setItem(`token`, token);
-            api.defaults.headers[`token`] = token;
+            api.defaults.headers['token'] = token;
           } else {
             console.log("로그인 실패");
             commit("SET_IS_LOGIN", false);
@@ -107,9 +107,9 @@ const memberStore = {
         (success) => {
           console.log("목표 전달 응답 확인");
           console.log(success);
-          if (success.msg === "SUCCESS") {
+          if (success.data.msg === "SUCCESS") {
             console.log("목표 저장");
-            commit("SET_GOALS", success.item);
+            commit("SET_GOALS", success.data.item);
           } else {
             console.log(" set_goals : 응답 실패!");
           }

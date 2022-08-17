@@ -1,5 +1,6 @@
-import { apiInstance } from "./index.js";
-const api = apiInstance();
+//import { apiInstance } from "./index.js";
+//const api = apiInstance();
+import {api} from "./index.js";
 
 // 날짜별 todolist를 받는다 (년, 월 을 받는다)
 async function get_todo_list(dates, success, fail) {
