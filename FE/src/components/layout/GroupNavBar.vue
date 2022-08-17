@@ -16,7 +16,7 @@
         </b-col>
       </b-row>
       <hr style="margin: 5px;" />
-      <group-nav-items v-for="group in group_items" :key="group" v-bind="group">
+      <group-nav-items v-for="group in groupItem" :key="group" v-bind="group">
 
       </group-nav-items>
 
@@ -26,8 +26,17 @@
 
 <script>
 import GroupNavItems from "./items/GroupNavItems.vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
+
 export default {
   components: { GroupNavItems },
+  setup() {
+    const store = useStore();
+    const groupItem = computed(() => store.state.groupStore.groupItem);
+
+    return { store, groupItem };
+  },
   data() {
     return {
       group_items: [
@@ -94,7 +103,7 @@ export default {
     },
   },
   mounted() {
-
+    this.store.dispatch("groupStore/set_group_item");
   }
 }
 </script>

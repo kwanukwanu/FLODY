@@ -31,7 +31,7 @@ async function modify_todo(todo_no, success, fail) {
 // 로그인한 아이디의 스터디 그룹 목록 조회
 async function get_group_list_by_mygroups(success, fail) {
   console.log("axios 수행 시작");
-  await api.get(`/groups/mygroups`).then(success).catch(fail);
+  await api.get(`/group/mygroups`).then(success).catch(fail);
 }
 
 // 단일 그룹 목록 조회

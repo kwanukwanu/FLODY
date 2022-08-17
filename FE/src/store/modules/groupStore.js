@@ -1,9 +1,10 @@
-import { get_todo_list } from "@/api/group";
+import { get_todo_list, get_group_list_by_mygroups } from "@/api/group";
 
 const groupStore = {
   namespaced: true,
   state: {
     isMyGroup: false,
+    groupItem: [],
     selectGroups: {
       name: "none",
       goal: "none",
@@ -74,6 +75,9 @@ const groupStore = {
     SET_TODO_LIST: (state, todo_list) => {
       state.todo_list = todo_list;
     },
+    SET_GROUP_ITEM: (state, groupItem) => {
+      state.groupItem = groupItem;
+    }
   },
   actions: {
     selectGroups({ commit }, group) {
@@ -101,6 +105,22 @@ const groupStore = {
         () => {},
       );
     },
+    async set_group_item({commit}) {
+      await get_group_list_by_mygroups(
+        (response) => {
+          console.log(response);
+          if(response.data.msg == "SUCCESS") {
+            console.log("성공");
+            commit("SET_GROUP_ITEM", response.data.item);
+          } else {
+            console.log("실패");
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
   },
 };
 
