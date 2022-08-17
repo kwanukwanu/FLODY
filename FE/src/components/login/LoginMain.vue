@@ -105,12 +105,12 @@
           </div>
           <br />
           <b-row>
-            <b-col>
+            <!-- <b-col>
               <div class="button_2">
                 <b-button v-b-modal.find variant="link" @click="findID()" style="color: #b99b9a; text-decoration: none; font-weight: 100;
                   ">아이디 찾기</b-button>
               </div>
-            </b-col>
+            </b-col> -->
             <b-col>
               <div class="button_2">
                 <b-button v-b-modal.find variant="link" @click="findPW()" style="color: #b99b9a; text-decoration: none">
@@ -133,7 +133,7 @@
         </b-container>
       </b-card>
     </b-row>
-    <b-modal hide-footer title="아이디/비밀번호 찾기" centered id="find" size="lg" style="text-align: center;">
+    <b-modal hide-footer hide-header centered id="find" size="md" style="text-align: center;">
       <login-modal-find />
     </b-modal>
   </b-container>
