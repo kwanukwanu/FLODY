@@ -37,7 +37,7 @@ public class Posts {
     private String title;
     @Column
     private String content;
-    @Column(nullable = false)
+    @Column
     private String hashtag;
     @Column(nullable = false)
     private int likeCnt;

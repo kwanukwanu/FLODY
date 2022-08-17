@@ -12,6 +12,7 @@ import com.ssafy.flody.dto.request.posts.PostCreateRequestDto;
 import com.ssafy.flody.dto.request.posts.PostUpdateRequestDto;
 import com.ssafy.flody.dto.response.posts.PostDetailResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,8 +26,12 @@ public class PostServiceImpl implements PostService {
     private final UsersRepository userRepository;
     private final CoveragesRepository coverageRepository;
 
-    public List<PostDetailResponseDto> findPosts(String category) {
-        List<Posts> entityList = postRepository.findAllByCategory(findCategory(category));
+    public List<PostDetailResponseDto> findPosts(String category, Pageable pageable) {
+        List<Posts> entityList;
+        if (category.equals("게시판"))
+            entityList = postRepository.findAllByCategoryNotOrderByPosNoDesc(findCategory("뉴스피드"), pageable);
+        else
+            entityList = postRepository.findAllByCategoryOrderByPosNoDesc(findCategory(category), pageable);
         List<PostDetailResponseDto> list = new ArrayList<>();
         for (Posts post : entityList) {
             list.add(new PostDetailResponseDto(post));

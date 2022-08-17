@@ -17,11 +17,9 @@ public class PostUpdateRequestDto {
     private String hashtag;
 
     @Builder
-    public PostUpdateRequestDto(
-            String title, String content, String hashtag
-    ){
-        this.title = title;
-        this.content = content;
-        this.hashtag = hashtag;
+    public PostUpdateRequestDto(String title, String content, String hashtag) {
+        if (title != null) this.title = title;
+        if (content != null) this.content = content;
+        if (hashtag != null) this.hashtag = hashtag;
     }
 }
