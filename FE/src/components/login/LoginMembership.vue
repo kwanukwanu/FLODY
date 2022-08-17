@@ -111,7 +111,7 @@
           <br>
           <b-row>
             <b-col>
-              <b-form-input type="password" placeholder="비밀번호 확인" style="border: none;"></b-form-input>
+              <b-form-input type="password" v-model="password" placeholder="비밀번호 확인" style="border: none;"></b-form-input>
             </b-col>
           </b-row>
           <br>
@@ -150,18 +150,19 @@ export default {
   data() {
     return {
       user: {
-        email: "ssafy@ssafy.com",
-        password: "1234567",
-        profile: "default01.png",
+        email: "myssafy@ssafy.com",
+        password: "ssafyssafy",
+        profile: "@/assets/logo.png",
         name: "김싸피",
         nickname: "닉네임",
-        address: "대전 유성구",
+        address: "이곳은 주소입니다.",
         phone: "010-1111-2222",
         admin: 'false',
       },
-      isduplicate: true,
-      isUserid: false,
-      idcheck: false,
+      password:"",
+      isduplicate: true, // 아이디 중복 여부
+      isUserid: false, // 아이디 존재여부
+      idcheck: false, // 아이디 길이 확인
       emailcheck: false,
       namecheck: false,
       phonecheck: false,
@@ -192,7 +193,14 @@ export default {
         this.pwcheck = false;
       }
     },
-
+    pwChecking2(){
+      if(this.user.password === this.password){
+        this.isSame = true;
+      }
+      else{
+        this.isSame = false;
+      }
+    },
     emailCheck() {
       var re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

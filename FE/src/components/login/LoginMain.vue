@@ -152,8 +152,8 @@ export default {
     return {
       fields: ["first_name", "last_name", "show_details"],
       user: {
-        email: "ssafy@ssafy.com",
-        password: "1234567",
+        email: "myssafy@ssafy.com",
+        password: "ssafyssafy",
       },
       idfind: false,
       pwfind: false,

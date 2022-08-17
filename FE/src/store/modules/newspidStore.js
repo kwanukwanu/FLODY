@@ -149,6 +149,8 @@ const newspidStore = {
         },
       ],
     ],
+    follows:[],
+    followers:[],
   },
   getters: {
     getSelectedBoard: function (state) {
@@ -183,17 +185,17 @@ const newspidStore = {
     setprofile({ commit }, profile) {
       commit("SET_PROFILE", profile);
     },
-    setcomments({ commit }, pidNo) {
-      // 뉴스피드의 숫자를 받아서 comment를 가져온다.
-      //const comments = getcomments(pidNo);
-      const comments = commit("getComments");
+    setcomments({ commit }, comments) {
+      commit("SET_COMMENTS",comments);
       console.log("setcomments");
       console.log(comments);
-      return comments[pidNo];
     },
     setClickNickname({ commit }, clickNickname) {
       commit("SET_CLICK_NICKNAME", clickNickname);
     },
+    setFollowers({commit}, followers){
+      commit("SET_FOLLOWERS",followers);
+    }
   },
 };
 
