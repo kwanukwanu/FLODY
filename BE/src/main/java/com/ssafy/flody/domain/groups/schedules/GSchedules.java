@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -31,7 +33,7 @@ public class GSchedules {
     private Date startDate;
     @Column(nullable = false)
     private Date endDate;
-    @Column(nullable = false)
+    @Column
     private Boolean done;
 
     public void update(String title, String detail, Date startDate, Date endDate, Boolean done) {
