@@ -31,10 +31,28 @@ export default {
     },
     methods: {
       deleteGoal() {
-        let result = confirm("Do you want to delete this goal?");
-        if(result == true) {
-          alert("삭제");
-        }
+        // let result = confirm("Do you want to delete this goal?");
+        // if(result == true) {
+        //   alert("삭제");
+        // }
+        this.$swal.fire({
+                    title: '정말로 그렇게 하시겠습니까?',
+                    text: "다시 되돌릴 수 없습니다. 신중하세요.",
+                    icon: 'error',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '삭제',
+                    cancelButtonText: '취소'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.$swal.fire(
+                            '승인이 완료되었습니다.',
+                            '화끈하시네요~!',
+                            'success'
+                        )
+                    }
+                })
       }
     }
 }
