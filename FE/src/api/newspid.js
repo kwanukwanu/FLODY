@@ -17,4 +17,12 @@ async function addcomments(comments, success, fail) {
     .catch(fail);
 }
 
-export { getcomments, addcomments };
+async function get_follows(success, fail){
+  await api.get(`/user/followings`).then(success).catch(fail);
+}
+
+async function get_followers(success, fail){
+  await api.get(`/user/follows`).then(success).catch(fail);
+}
+
+export { getcomments, addcomments ,get_follows, get_followers};

@@ -1,7 +1,7 @@
 <template>
     <b-row>
         <b-col cols="8">
-            <b-card-text class="test_name">{{ name }}</b-card-text>
+            <b-card-text class="test_name">{{ title }}</b-card-text>
         </b-col>
         <b-col cols="4">
             <b-card-text class="howmuchleft" style="color:#BC6464; font-weight: bold;">D-{{ dateSet }}</b-card-text>
@@ -12,7 +12,7 @@
 <script>
 export default {
     props: {
-        name: String,
+        title: String,
         dueDate: String,
     },
     mounted() {
