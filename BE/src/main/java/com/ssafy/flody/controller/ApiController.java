@@ -1,7 +1,6 @@
 package com.ssafy.flody.controller;
 
 import com.ssafy.flody.domain.groups.Groups;
-import com.ssafy.flody.dto.request.flowers.GardenCreateRequestDto;
 import com.ssafy.flody.dto.request.posts.PostCreateRequestDto;
 import com.ssafy.flody.dto.request.comments.CommentCreateRequestDto;
 import com.ssafy.flody.dto.request.comments.CommentUpdateRequestDto;
@@ -17,6 +16,7 @@ import com.ssafy.flody.service.groups.GroupService;
 import com.ssafy.flody.service.groups.goals.GroupGoalService;
 import com.ssafy.flody.service.groups.members.GroupMemberService;
 import com.ssafy.flody.service.groups.schedules.GroupScheduleService;
+import com.ssafy.flody.service.licenses.LicenseService;
 import com.ssafy.flody.service.posts.PostService;
 import com.ssafy.flody.service.posts.like.CLikeService;
 import com.ssafy.flody.service.posts.like.PLikeService;
@@ -66,6 +66,7 @@ public class ApiController {
     private final FlowerService flowerService;
 
     private final CLikeService commentLikeService;
+    private final LicenseService licenseService;
     // USER
     @GetMapping("/users")
     public ResponseEntity<Map<String, Object>> UserList() {
@@ -564,16 +565,16 @@ public class ApiController {
         return getMapResponseEntity(id);
     }
 
-    @GetMapping("/license")
-    public ResponseEntity<Map<String, Object>> LicenseDetails(@RequestParam Long id) {
-        return getMapResponseEntity(id);
-    }
+//    @GetMapping("/license")
+//    public ResponseEntity<Map<String, Object>> LicenseDetails(@RequestParam Long id) {
+//        return getMapResponseEntity(id);
+//    }
 
 //    License 관련 Dto 추가 생성 필요
-//    @PostMapping("/license")
-//    public ResponseEntity<String> LicenseAdd(@RequestBody LicenseCreateRequestDto requestDto) {
-//        return getStringResponseEntity(requestDto);
-//    }
+    @GetMapping("/license")
+    public ResponseEntity<Map<String, Object>> LicenseAdd() throws Exception {
+        return getResponseEntity(licenseService.getLicense());
+    }
 
 //    @PutMapping("/license")
 //    public ResponseEntity<String> LicenseModify(@RequestBody LicenseUpdateRequestDto requestDto) {

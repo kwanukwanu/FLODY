@@ -49,7 +49,8 @@ public class GroupServiceImpl implements GroupService {
     public Long modifyGroup(GroupUpdateRequestDto requestDto) {
         Groups group = findGroup(requestDto.getGroNo());
         group.update(
-                requestDto.getName()
+                requestDto.getName(),
+                requestDto.getIntroduction()
         );
         return groupRepository.save(group).getGroNo();
     }
