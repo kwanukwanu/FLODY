@@ -84,6 +84,7 @@ public class UserServiceImpl implements UserService {
     public String modifyUser(String email, UserUpdateRequestDto requestDto) throws Exception {
         Users user = findUser(email);
         user.update(
+                requestDto.getIntroduction(),
                 requestDto.getProfile(),
                 requestDto.getNickname(),
                 requestDto.getAddress(),
