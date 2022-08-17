@@ -23,12 +23,17 @@ public class Groups {
     private Long groNo;
     @Column(nullable = false)
     private String name;
+    @Column
+    private String introduction;
     @Column(nullable = false, updatable = false)
     private Date foundDate;
 
     @OneToMany(mappedBy = "groNo", cascade = CascadeType.ALL)
     private List<Groups> children;
-    public void update(String name) {
-        this.name = name;
+    public void update(String name, String introduction) {
+        if (name != null)
+            this.name = name;
+        if (introduction != null)
+            this.introduction = introduction;
     }
 }

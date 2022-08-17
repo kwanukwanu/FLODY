@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -14,18 +15,22 @@ import java.util.Date;
 @NoArgsConstructor
 public class GroupCreateRequestDto {
     private String name;
+    @Nullable
+    private String introduction;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date foundDate = new Date(System.currentTimeMillis());
 
     @Builder
-    public GroupCreateRequestDto(String name, Date foundDate) {
+    public GroupCreateRequestDto(String name, String introduction, Date foundDate) {
         this.name = name;
+        this.introduction = introduction;
         this.foundDate = foundDate;
     }
 
     public Groups toEntity(){
         return Groups.builder()
                 .name(name)
+                .introduction(introduction)
                 .foundDate(foundDate)
                 .build();
     }
