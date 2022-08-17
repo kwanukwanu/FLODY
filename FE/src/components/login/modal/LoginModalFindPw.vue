@@ -1,6 +1,6 @@
 <template>
     <b-card>
-        <h1>비밀번호 찾기</h1>
+        <!-- <h1>비밀번호 찾기</h1> -->
         <b-container>
             <b-row class="justify-content-md-center">
                 <b-card style="height: 27rem; max-width: 40rem; background-color: #F8F3F3;">
@@ -67,4 +67,8 @@ export default {
 </script>
 
 <style>
+.btn-close{
+  box-shadow: none !important;
+  outline: none !important;
+}
 </style>
