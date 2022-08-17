@@ -199,6 +199,14 @@ export default {
   color: black;
 }
 
+.btn-secondary{
+  --bs-btn-focus-shadow-rgb: white;
+}
+
+.btn-link{
+  --bs-btn-focus-shadow-rgb: white;
+}
+
 /* .page-link{
   color:black;
 }
