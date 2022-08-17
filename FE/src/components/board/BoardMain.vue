@@ -174,4 +174,8 @@ export default {
   border-color: #e4dada;
   max-width: 32rem;
 }
+
+.table{
+  --bs-table-hover-bg: #f8f4f4
+}
 </style>
