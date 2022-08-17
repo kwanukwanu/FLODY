@@ -23,7 +23,9 @@ public class PostCreateRequestDto {
     private String coverage = "전체공개";
     @Nullable
     private String title;
+    @Nullable
     private String content;
+    @Nullable
     private String hashtag;
     private int likeCnt = 0;
     private int commentCnt = 0;

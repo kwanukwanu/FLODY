@@ -27,6 +27,7 @@ import com.ssafy.flody.service.users.follows.UFollowService;
 import com.ssafy.flody.service.users.goals.UGoalService;
 import com.ssafy.flody.service.users.schedules.UScheduleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -317,8 +318,8 @@ public class ApiController {
     }
 
     @GetMapping("/group/search")
-    public ResponseEntity<Map<String, Object>> GroupSearchList(@RequestParam String keyword) throws Exception {
-        return getResponseEntity(groupService.findGroupsByName(keyword));
+    public ResponseEntity<Map<String, Object>> GroupSearchList(@RequestParam String keyword, Pageable pageable) throws Exception {
+        return getResponseEntity(groupService.findGroupsByName(keyword, pageable));
     }
 
     // Get GroupMembers
@@ -418,8 +419,8 @@ public class ApiController {
 
     // Board
     @GetMapping("/posts")
-    public ResponseEntity<Map<String, Object>> PostList(@RequestParam String category) {
-        return getResponseEntity(postService.findPosts(category));
+    public ResponseEntity<Map<String, Object>> PostList(@RequestParam String category, Pageable pageable) {
+        return getResponseEntity(postService.findPosts(category, pageable));
     }
 
     @GetMapping("/post")

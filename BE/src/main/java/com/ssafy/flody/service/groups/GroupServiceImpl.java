@@ -12,6 +12,7 @@ import com.ssafy.flody.dto.response.groups.GroupDetailResponseDto;
 import com.ssafy.flody.dto.response.users.UserInfoResponseDto;
 import com.ssafy.flody.service.JWTService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -71,8 +72,8 @@ public class GroupServiceImpl implements GroupService {
         return myGroups;
     }
 
-    public List<GroupDetailResponseDto> findGroupsByName(String keyword) throws Exception {
-        List<Groups> entityList = groupRepository.findByNameContainingIgnoreCase(keyword);
+    public List<GroupDetailResponseDto> findGroupsByName(String keyword, Pageable pageable) throws Exception {
+        List<Groups> entityList = groupRepository.findByNameContainingIgnoreCaseOrderByGroNoDesc(keyword, pageable);
         List<GroupDetailResponseDto> list = new ArrayList<>();
         for(Groups group : entityList) {
             list.add(new GroupDetailResponseDto(group));
