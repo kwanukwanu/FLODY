@@ -311,7 +311,7 @@
         </div>
       </b-col>
       <b-col cols="10">
-        <b-form-input class="comment" placeholder="댓글 달기..."></b-form-input>
+        <b-form-input class="comment" placeholder="댓글 달기..." style="border-color: rgb(164, 130, 130);"></b-form-input>
       </b-col>
       <b-col>
         <div style="color: #bc6464; padding: 6px 0px; font-weight: bold">
@@ -421,4 +421,17 @@ export default {
 .btn-link{
   --bs-btn-focus-shadow-rgb: white;
 }
+.form-select {
+  box-shadow: none !important;
+  outline: none !important;
+}
+.form-control{
+  box-shadow: none !important;
+  outline: none !important;
+}
+.btn-close{
+  box-shadow: none !important;
+  outline: none !important;
+}
+
 </style>

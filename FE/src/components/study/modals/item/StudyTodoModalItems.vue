@@ -70,4 +70,8 @@ export default {
 </script>
 
 <style>
+.btn-close{
+  box-shadow: none !important;
+  outline: none !important;
+}
 </style>

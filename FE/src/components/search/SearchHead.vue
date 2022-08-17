@@ -45,4 +45,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.form-select {
+  box-shadow: none !important;
+}
+.form-control{
+  box-shadow: none !important;
+}
+</style>

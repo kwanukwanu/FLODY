@@ -81,16 +81,16 @@
   <b-row style="margin-bottom: 10px">
     <b-col cols="3">
       <b-form-select v-model="selected" :options="options" class="mb-3" value-field="item" text-field="name"
-        disabled-field="notEnabled">
+        disabled-field="notEnabled" style="border-color: rgb(164, 130, 130);">
 
       </b-form-select>
     </b-col>
     <b-col cols="3">
       <b-form-select v-model="selected_2" :options="options_2" class="mb-3" value-field="item" text-field="name"
-        disabled-field="notEnabled"></b-form-select>
+        disabled-field="notEnabled" style="border-color: rgb(164, 130, 130);"></b-form-select>
     </b-col>
     <b-col cols="5">
-      <b-form-input placeholder="검색어를 입력해주세요"></b-form-input>
+      <b-form-input placeholder="검색어를 입력해주세요" style="border-color: rgb(164, 130, 130);"></b-form-input>
     </b-col>
     <b-col cols="1">
       <b-button style="color: #453535; background-color: #e1d3d2; border: none"><svg width="22" height="22" fill="none"
@@ -205,6 +205,15 @@ export default {
 
 .btn-link{
   --bs-btn-focus-shadow-rgb: white;
+}
+
+.form-select {
+  box-shadow: none !important;
+  outline: none !important;
+}
+.form-control{
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 /* .page-link{
