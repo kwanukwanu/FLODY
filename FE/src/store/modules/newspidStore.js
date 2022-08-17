@@ -3,54 +3,7 @@
 const newspidStore = {
   namespaced: true,
   state: {
-    isMyBoard: false,
     clickNickname: false,
-    selectedPid: {},
-    newspids: [
-      {
-        pidNo: 0,
-        author: "adrianycc",
-        profile: "https://placekitten.com/300/300",
-        contents: "오늘도 나는 공부를 놓지 않는다. 내 자신에 취한다",
-        tags: ["영국", "런던", "스터디"],
-        creativetimes: {
-          year: 2022,
-          month: 8,
-          date: 10,
-          hour: 11,
-          min: 57,
-          sec: 30,
-        },
-        picture: "https://placekitten.com/400/",
-        favor: 878,
-      },
-      {
-        pidNo: 1,
-        author: "Brown_Cat",
-        profile: "https://placekitten.com/300/400",
-        contents: "오늘도 OPIC 공부 열심히 하기!",
-        tags: ["OPIC", "스터디"],
-        creativetimes: {
-          year: 2022,
-          month: 8,
-          date: 9,
-          hour: 23,
-          min: 57,
-          sec: 30,
-        },
-        picture: "https://placekitten.com/300/300",
-        favor: 732,
-      },
-    ],
-    profile: {
-      nickName: "ssafy3",
-      profile: "png0",
-      board_num: 44,
-      follower: 22,
-      follow: 13,
-      name: "홍시영",
-      contents: "비트 찍고 랩하지만 코딩도 잘 하는 기리보이입니다.",
-    },
     comments: [
       [
         {
@@ -149,8 +102,48 @@ const newspidStore = {
         },
       ],
     ],
+    isMyBoard: false,
     follows:[],
     followers:[],
+    selectedPid: {},
+    profile:{},
+    newspids: [
+      {
+        pidNo: 0,
+        author: "adrianycc",
+        profile: "https://placekitten.com/300/300",
+        contents: "오늘도 나는 공부를 놓지 않는다. 내 자신에 취한다",
+        tags: ["영국", "런던", "스터디"],
+        creativetimes: {
+          year: 2022,
+          month: 8,
+          date: 10,
+          hour: 11,
+          min: 57,
+          sec: 30,
+        },
+        picture: "https://placekitten.com/400/",
+        favor: 878,
+      },
+      {
+        pidNo: 1,
+        author: "Brown_Cat",
+        profile: "https://placekitten.com/300/400",
+        contents: "오늘도 OPIC 공부 열심히 하기!",
+        tags: ["OPIC", "스터디"],
+        creativetimes: {
+          year: 2022,
+          month: 8,
+          date: 9,
+          hour: 23,
+          min: 57,
+          sec: 30,
+        },
+        picture: "https://placekitten.com/300/300",
+        favor: 732,
+      },
+    ],
+    
   },
   getters: {
     getSelectedBoard: function (state) {
@@ -167,23 +160,20 @@ const newspidStore = {
     SET_SELECTED_BOARD: (state, selectedBoard) => {
       state.selectedBoard = selectedBoard;
     },
-    SET_PROFILE: (state, profile) => {
-      state.profile = profile;
-    },
     SET_COMMENTS: (state, comments) => {
       state.comments = comments;
     },
     SET_CLICK_NICKNAME: (state, clickNickname) => {
       state.clickNickname = clickNickname;
     },
+    SET_PROFILE:(state, profile)=>{
+      state.profile = profile;
+    }
   },
   actions: {
     selectedBoard({ commit }, board) {
       commit("SET_SELECTED_BOARD", board);
       console.log(board);
-    },
-    setprofile({ commit }, profile) {
-      commit("SET_PROFILE", profile);
     },
     setcomments({ commit }, comments) {
       commit("SET_COMMENTS",comments);
@@ -195,6 +185,9 @@ const newspidStore = {
     },
     setFollowers({commit}, followers){
       commit("SET_FOLLOWERS",followers);
+    },
+    set_profile({commit},profile){
+      commit("SET_PROFILE",profile);
     }
   },
 };

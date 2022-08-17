@@ -78,11 +78,11 @@ const memberStore = {
       api.defaults.headers["token"] = null;
     },
 
-    getUserInfo({ commit }, token) {
+    async getUserInfo({ commit }, token) {
       //let decode_token = jwt_decode(token);
       console.log(token);
       // axios 필요
-      getUserInfo(
+      await getUserInfo(
         //decode_token.userid,
         token,
         (response) => {

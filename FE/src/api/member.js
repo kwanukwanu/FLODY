@@ -23,7 +23,7 @@ async function getUserInfo(userid, success, fail) {
 
 // 중복확인
 async function userIdDuplicated(userid, success, fail) {
-  api.get(`/user/checkEmail/${userid}`).then(success).catch(fail);
+  await api.get(`/user/checkEmail?email=${userid}`).then(success).catch(fail);
 }
 
 // 회원정보 수정(완)
@@ -36,8 +36,6 @@ function modifyMember(user, success, fail) {
 
 // 회원가입
 async function registMember(user, success, fail) {
-  console.log("멤버 등록");
-  console.log(user);
   await api.post(`/user`, JSON.stringify(user)).then(success).catch(fail);
 }
 // 회원탈퇴
