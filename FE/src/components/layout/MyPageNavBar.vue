@@ -164,7 +164,7 @@ export default {
   margin-top: 6px;
 }
 
-.modal{
-  --bs-btn-focus-shadow-rgb: white;
+.btn-link {
+    --bs-btn-focus-shadow-rgb: white;
 }
 </style>

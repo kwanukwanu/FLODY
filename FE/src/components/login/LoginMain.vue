@@ -220,4 +220,10 @@ export default {
 .form-control{
   box-shadow: none !important;
 }
+.btn{
+  --bs-btn-focus-shadow-rgb: white;
+}
+.btn_secondary{
+  
+}
 </style>

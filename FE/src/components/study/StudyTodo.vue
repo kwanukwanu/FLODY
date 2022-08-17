@@ -82,20 +82,20 @@ input[type=checkbox]:checked+label.strikethrough {
   color: #9F9F9F;
 }
 
-#todosField::-webkit-scrollbar {
-  width: 6px;
+#tab_todo::-webkit-scrollbar {
+  width: 10px;
 }
 
-#todosField::-webkit-scrollbar-track {
+#tab_todo::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-#todosField::-webkit-scrollbar-thumb {
-  border-radius: 3px;
-  background-color: gray;
+#tab_todo::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color:#E4DADA;
 }
 
-#todosField::-webkit-scrollbar-button {
+#tab_todo::-webkit-scrollbar-button {
   width: 0;
   height: 0;
 }
