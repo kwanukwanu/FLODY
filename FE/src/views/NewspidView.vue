@@ -18,7 +18,7 @@ export default {
   },
   mounted() {
     // 뉴스피드 목록을 받아와서 저장한다.
-    //this.store.dispatch("newspidStore/setClickNickname", false);
+    this.store.dispatch("newspidStore/setnewpids");
   }
 }
 </script>

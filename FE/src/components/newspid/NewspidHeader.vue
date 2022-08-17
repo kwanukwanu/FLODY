@@ -59,7 +59,7 @@
   </b-container>
   <!-- <hr> -->
 
-  <b-container v-else-if="profile.nickname == userInfo.nickname">
+  <b-container v-else-if="profile.email == userInfo.email">
     <br>
     <!-- <b-row align-v="center"> -->
     <b-row style="margin-bottom:27px">
@@ -96,9 +96,9 @@
           <b-col style="text-align: left; padding: 0;">
             <span>게시글 </span>
             <a style="cursor:pointer" v-b-modal.modal-10>
-              <span style="font-weight:bold;">{{ profile.posts}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <span style="font-weight:bold;">{{ profile.posts }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
               <span>팔로워</span>
-              <span style="font-weight:bold;">{{profile.followers}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <span style="font-weight:bold;">{{ profile.followers }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             </a>
             <a style="cursor:pointer" v-b-modal.modal-11>
               <span style="font-weight:bold;"></span>
@@ -148,7 +148,7 @@ export default {
   },
   setup() {
     const store = useStore();
-    const profile = computed(()=>store.state.newspidStore.profile);
+    const profile = computed(() => store.state.newspidStore.profile);
     const userInfo = computed(() => store.state.memberStore.userInfo);
     const clickNickname = computed(() => store.state.newspidStore.clickNickname);
     return { store, profile, userInfo, clickNickname };

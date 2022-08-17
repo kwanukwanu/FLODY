@@ -31,7 +31,6 @@ export default {
     contents: String,       // 작성 내용 
     tags: Array,            // 태그
     creativetimes: Object,    // 작성 날짜
-    picture: String,        // 사진
     favor: Number,          // 좋아요 개수
   },
   components: {

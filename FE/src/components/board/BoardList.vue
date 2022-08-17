@@ -170,12 +170,14 @@ export default {
   setup() {
     const store = useStore();
     const boardListname = computed(() => store.state.boardStore.boardListName);
+    const category = computed(() => store.state.boardStore.category);
     const items_popular = computed(() => store.state.boardStore.boardList);
-    return { store, boardListname, items_popular };
+    return { store, category, boardListname, items_popular };
   },
   mounted() {
     console.log("selected list : ");
     console.log(this.boardListname);
+    //this.store.dispatch("/boardStore/set_boardList",this.category);
   },
   methods: {
     movePage(num) {
@@ -199,11 +201,11 @@ export default {
   color: black;
 }
 
-.btn-secondary{
+.btn-secondary {
   --bs-btn-focus-shadow-rgb: white;
 }
 
-.btn-link{
+.btn-link {
   --bs-btn-focus-shadow-rgb: white;
 }
 
@@ -211,7 +213,8 @@ export default {
   box-shadow: none !important;
   outline: none !important;
 }
-.form-control{
+
+.form-control {
   box-shadow: none !important;
   outline: none !important;
 }

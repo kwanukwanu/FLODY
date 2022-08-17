@@ -1,6 +1,6 @@
 //import { apiInstance } from "./index.js";
 //const api = apiInstance();
-import {api} from "./index.js";
+import { api } from "./index.js";
 
 // 로그인 (수정 완)
 async function login(user, success, fail) {
@@ -27,11 +27,22 @@ async function userIdDuplicated(userid, success, fail) {
 }
 
 // 회원정보 수정(완)
-function modifyMember(user, success, fail) {
+async function modifyMember(user, success, fail) {
   console.log("멤버 수정");
   console.log(user);
   // 수정할 유저 정보 전체를 보낸다.
-  api.put(`/user`, JSON.stringify(user)).then(success).catch(fail);
+  await api.put(`/user`, JSON.stringify(user)).then(success).catch(fail);
+}
+
+// 비밀번호 수정(완)
+async function modifyPassword(password, success, fail) {
+  console.log("멤버 수정");
+  console.log(password);
+  // 수정할 유저 정보 전체를 보낸다.
+  await api
+    .put(`/user/password`, JSON.stringify(password))
+    .then(success)
+    .catch(fail);
 }
 
 // 회원가입
@@ -61,6 +72,7 @@ export {
   userIdDuplicated,
   getUserInfo,
   modifyMember,
+  modifyPassword,
   registMember,
   userDelete,
   userfollow,

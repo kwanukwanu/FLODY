@@ -103,10 +103,10 @@ const newspidStore = {
       ],
     ],
     isMyBoard: false,
-    follows:[],
-    followers:[],
+    follows: [],
+    followers: [],
     selectedPid: {},
-    profile:{},
+    profile: {},
     newspids: [
       {
         pidNo: 0,
@@ -143,7 +143,6 @@ const newspidStore = {
         favor: 732,
       },
     ],
-    
   },
   getters: {
     getSelectedBoard: function (state) {
@@ -166,9 +165,12 @@ const newspidStore = {
     SET_CLICK_NICKNAME: (state, clickNickname) => {
       state.clickNickname = clickNickname;
     },
-    SET_PROFILE:(state, profile)=>{
+    SET_PROFILE: (state, profile) => {
       state.profile = profile;
-    }
+    },
+    SET_NEWSPIDS: (state, newspids) => {
+      state.newspids = newspids;
+    },
   },
   actions: {
     selectedBoard({ commit }, board) {
@@ -176,18 +178,19 @@ const newspidStore = {
       console.log(board);
     },
     setcomments({ commit }, comments) {
-      commit("SET_COMMENTS",comments);
+      commit("SET_COMMENTS", comments);
       console.log("setcomments");
       console.log(comments);
     },
     setClickNickname({ commit }, clickNickname) {
       commit("SET_CLICK_NICKNAME", clickNickname);
     },
-    setFollowers({commit}, followers){
-      commit("SET_FOLLOWERS",followers);
+    setFollowers({ commit }, followers) {
+      commit("SET_FOLLOWERS", followers);
     },
-    set_profile({commit},userInfo){
-      const profile={
+    set_profile({ commit }, userInfo) {
+      const profile = {
+        email: userInfo.email,
         profile: userInfo.profile,
         name: userInfo.name,
         nickname: userInfo.nickname,
@@ -195,9 +198,12 @@ const newspidStore = {
         followings: userInfo.followings,
         posts: userInfo.posts,
         introduction: userInfo.introduction,
-      }
-      commit("SET_PROFILE",profile);
-    }
+      };
+      commit("SET_PROFILE", profile);
+    },
+    set_newspids({ commit }) {
+      commit("SET_NEWSPID");
+    },
   },
 };
 

@@ -152,8 +152,8 @@ export default {
     return {
       fields: ["first_name", "last_name", "show_details"],
       user: {
-        email: "myssafy@ssafy.com",
-        password: "ssafyssafy",
+        email: "admin@ssafy.com",
+        password: "admin321",
       },
       idfind: false,
       pwfind: false,
@@ -175,7 +175,7 @@ export default {
         await this.store.dispatch("memberStore/getUserInfo", this.user.email); // 정보를 받아서 vuex의 user에 저장한다.
         console.log("userInfo를 받는다");
         const userInfo = this.store.state.memberStore.userInfo;
-        this.store.dispatch("newspidStore/set_profile",userInfo);
+        this.store.dispatch("newspidStore/set_profile", userInfo);
         this.$router.push("/about"); // 라우터 페이지 이동
       }
       else {
@@ -220,13 +220,16 @@ export default {
 .form-select {
   box-shadow: none !important;
 }
-.form-control{
+
+.form-control {
   box-shadow: none !important;
 }
-.btn{
+
+.btn {
   --bs-btn-focus-shadow-rgb: white;
 }
-.btn_secondary{
-    --bs-btn-focus-shadow-rgb: white;
+
+.btn_secondary {
+  --bs-btn-focus-shadow-rgb: white;
 }
 </style>
