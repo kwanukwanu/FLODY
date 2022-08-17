@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Calendar;
 import java.util.Date;
 
 @Getter
@@ -20,7 +19,7 @@ public class USchedules {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long usNo;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "use_email")
     private Users user;
     @Column(nullable = false)
@@ -35,26 +34,10 @@ public class USchedules {
     private Boolean done;
 
     public void update(String title, String detail, Date startDate, Date endDate, Boolean done) {
-        if (title != null)
-            this.title = title;
-        if (detail != null)
-            this.detail = detail;
-        Calendar cal = Calendar.getInstance();
-        if (startDate != null)
-            this.startDate = startDate;
-        else {
-            cal.setTime(this.startDate);
-            cal.add(Calendar.DATE, 1);
-            this.startDate = cal.getTime();
-        }
-        if (endDate != null)
-            this.endDate = endDate;
-        else {
-            cal.setTime(this.endDate);
-            cal.add(Calendar.DATE, 1);
-            this.endDate = cal.getTime();
-        }
-        if (done != null)
-            this.done = done;
+        this.title = title;
+        this.detail = detail;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.done = done;
     }
 }

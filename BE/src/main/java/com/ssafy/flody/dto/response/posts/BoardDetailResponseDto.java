@@ -6,14 +6,18 @@ import lombok.Getter;
 import java.util.Date;
 
 @Getter
-public class PostListResponseDto {
+public class BoardDetailResponseDto {
     private String title;
+    private String content;
+    private String hashtag;
     private Integer likeCnt;
     private Integer commentCnt;
     private Date postDate;
 
-    public PostListResponseDto(Posts entity){
+    public BoardDetailResponseDto(Posts entity){
         this.title = entity.getTitle();
+        this.content = entity.getContent();
+        this.hashtag = entity.getHashtag();
         this.likeCnt = entity.getLikeCnt();
         this.commentCnt = entity.getCommentCnt();
         this.postDate = entity.getPostDate();
