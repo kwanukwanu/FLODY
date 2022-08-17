@@ -16,7 +16,7 @@ export default {
         dueDate: String,
     },
     mounted() {
-        console.log(this.name + " , " + this.dueDate);
+        console.log(this.title + " , " + this.dueDate);
     },
     computed: {
         dateSet() {

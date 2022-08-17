@@ -138,7 +138,7 @@
         <b-row id="study_button" align-h="around">
           <b-col id="study_button_application">
             <b-button id="study_button_application_button" text @click="gotoPage('/study')" style="margin-top: 20px;">
-              신청하기</b-button>
+              가입하기</b-button>
           </b-col>
         </b-row>
         <br><br>
