@@ -5,15 +5,20 @@ import com.ssafy.flody.domain.groups.schedules.GSchedules;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Getter
 @NoArgsConstructor
 public class GroupScheduleCreateRequestDto {
     private String title;
     private String detail;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
     private Boolean done = false;
 
@@ -35,5 +40,11 @@ public class GroupScheduleCreateRequestDto {
                 .endDate(endDate)
                 .done(done)
                 .build();
+    }
+
+    private Date findToday() {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
+        cal.setTime(new Date(System.currentTimeMillis()));
+        return cal.getTime();
     }
 }

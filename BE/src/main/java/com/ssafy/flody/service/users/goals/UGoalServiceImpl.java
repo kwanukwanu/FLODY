@@ -12,27 +12,51 @@ import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 @SuppressWarnings("unchecked") // type unchecked error 발생하는거 안보여줌. 좋은 방법은 아님.
 public class UGoalServiceImpl implements UGoalService {
-    private UGoalsRepository userGoalRepository;
-    private UsersRepository userRepository;
+    private final UGoalsRepository userGoalRepository;
+    private final UsersRepository userRepository;
 
     @Transactional
-    public List<UserGoalResponseDto> findUserGoals(String email) throws Exception{
+    public List<UserGoalResponseDto> findUserGoals(String email) throws Exception {
         Users user = findUser(email);
-        List<UGoals> entityList = (List<UGoals>) userGoalRepository.findByUser(user)
-                .orElseThrow(() -> new NotFoundException("Goal Not Found"));
+        List<UGoals> entityList = userGoalRepository.findAllByUser(user);
         List<UserGoalResponseDto> list = new ArrayList<>();
         for (UGoals uGoals : entityList) {
             list.add(new UserGoalResponseDto(uGoals));
         }
         return list;
     };
+
+    public List<UserGoalResponseDto> findUserDayGoals(String email, Date date) {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
+        cal.setTime(date);
+        cal.add(Calendar.DATE, -1);
+        Date dueDate = cal.getTime();
+        List<UGoals> entityList = userGoalRepository.findAllByUserAndDueDateAfter(findUser(email), dueDate);
+        List<UserGoalResponseDto> list = new ArrayList<>();
+        for (UGoals goal : entityList) {
+            list.add(new UserGoalResponseDto(goal));
+        }
+        return list;
+    }
+
+    public List<UserGoalResponseDto> findUserMonthGoals(String email, Date date) {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
+        cal.setTime(date);
+        cal.add(Calendar.DATE, -1);
+        Date dueDate = cal.getTime();
+        List<UGoals> entityList = userGoalRepository.findAllByUserAndDueDateAfter(findUser(email), dueDate);
+        List<UserGoalResponseDto> list = new ArrayList<>();
+        for (UGoals goal : entityList) {
+            list.add(new UserGoalResponseDto(goal));
+        }
+        return list;
+    }
 
     public UserGoalResponseDto findUserGoal(Long ugNo) {
         return new UserGoalResponseDto(userGoalRepository.findById(ugNo)
@@ -47,10 +71,9 @@ public class UGoalServiceImpl implements UGoalService {
         UGoals uGoals = userGoalRepository.findById(ugNo)
                 .orElseThrow(() -> new IllegalArgumentException("Schedule Not Found"));
         uGoals.update(requestDto.getName(),
-                requestDto.getRegistDate(),
                 requestDto.getDueDate()
         );
-        return ugNo;
+        return userGoalRepository.save(uGoals).getUgNo();
     };
 
     public Long removeUserGoal(Long ugNo) {

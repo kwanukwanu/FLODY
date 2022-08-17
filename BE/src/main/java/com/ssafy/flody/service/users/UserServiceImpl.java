@@ -1,13 +1,22 @@
 package com.ssafy.flody.service.users;
 
 import com.ssafy.flody.config.JwtTokenProvider;
+import com.ssafy.flody.domain.posts.likes.PLikes;
+import com.ssafy.flody.domain.posts.likes.PLikesRepository;
+import com.ssafy.flody.domain.posts.scraps.Scraps;
+import com.ssafy.flody.domain.posts.scraps.ScrapsRepository;
 import com.ssafy.flody.domain.users.Users;
 import com.ssafy.flody.domain.users.UsersRepository;
 import com.ssafy.flody.dto.request.users.UserCreateRequestDto;
 import com.ssafy.flody.dto.request.users.UserLoginRequestDto;
 import com.ssafy.flody.dto.request.users.UserPasswordUpdateRequestDto;
 import com.ssafy.flody.dto.request.users.UserUpdateRequestDto;
+import com.ssafy.flody.dto.response.posts.PostLikeListResponseDto;
+import com.ssafy.flody.dto.response.posts.ScrapListResponseDto;
 import com.ssafy.flody.dto.response.users.UserInfoResponseDto;
+import com.ssafy.flody.service.posts.like.PLikeService;
+import com.ssafy.flody.service.posts.PostService;
+import com.ssafy.flody.service.users.follows.UFollowService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,6 +33,11 @@ public class UserServiceImpl implements UserService {
     private final UsersRepository usersRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
+
+    private final PLikesRepository postLikeRepository;
+    private final ScrapsRepository scrapsRepository;
+    private final UFollowService followService;
+    private final PostService postService;
     @Override
     public UserDetails findUserForToken(String email) throws UsernameNotFoundException {
         return (UserDetails) usersRepository.findById(email)
@@ -35,14 +49,22 @@ public class UserServiceImpl implements UserService {
         List<Users> entityList = usersRepository.findAll();
         List<UserInfoResponseDto> list = new ArrayList<>();
         for (Users user: entityList) {
-            list.add(new UserInfoResponseDto(user));
+            list.add(new UserInfoResponseDto(user,
+                    followService.findFollowerNum(user.getEmail()),
+                    followService.findFollowingNum(user.getEmail()),
+                    postService.findPostNum(user.getEmail())));
         }
         return list;
     }
 
     @Override
-    public UserInfoResponseDto findUserById(String email) {
-        return new UserInfoResponseDto(findUser(email));
+    public UserInfoResponseDto findUserById(String email) throws Exception {
+        return new UserInfoResponseDto(
+                findUser(email),
+                followService.findFollowerNum(email),
+                followService.findFollowingNum(email),
+                postService.findPostNum(email)
+                );
     }
 
     @Override
@@ -102,8 +124,28 @@ public class UserServiceImpl implements UserService {
         return jwtTokenProvider.createToken(user.getEmail());
     }
 
+    public List<PostLikeListResponseDto> findPostLikes(String email){
+        Users user = findUser(email);
+        List<PLikes> entityList = postLikeRepository.findAllByUser(user);
+        List<PostLikeListResponseDto> list = new ArrayList<>();
+        for (PLikes like : entityList){
+            list.add(new PostLikeListResponseDto(like));
+        }
+        return list;
+    }
+
+    public List<ScrapListResponseDto> findPostScraps(String email){
+        Users user = findUser(email);
+        List<Scraps> entityList = scrapsRepository.findAllByUser(user);
+        List<ScrapListResponseDto> list = new ArrayList<>();
+        for (Scraps scrap : entityList){
+            list.add(new ScrapListResponseDto(scrap));
+        }
+        return list;
+    }
     private Users findUser(String email) {
         return usersRepository.findById(email)
                 .orElseThrow(() -> new IllegalArgumentException(email + "은(는) 존재하지 않는 유저입니다."));
     }
+
 }

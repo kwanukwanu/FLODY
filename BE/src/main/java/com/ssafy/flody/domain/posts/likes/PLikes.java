@@ -15,14 +15,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "P_Likes")
-@IdClass(PLikesId.class)
 public class PLikes {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long plNo;
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
     @JoinColumn(name = "use_email")
     private Users user;
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Posts.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Posts.class)
     @JoinColumn(name = "pos_no")
     private Posts post;
 }

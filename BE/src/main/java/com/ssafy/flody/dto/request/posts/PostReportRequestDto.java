@@ -17,7 +17,7 @@ public class PostReportRequestDto {
         this.content = content;
     }
 
-    public PReports toEntity(Users user, Posts post){
+    public PReports toEntity(Users user, Posts post, String content){
         return PReports.builder()
                 .user(user)
                 .post(post)

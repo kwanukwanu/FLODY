@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,10 +22,10 @@ public class Comments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long comNo;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
     @JoinColumn(name = "use_email")
     private Users user;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Posts.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Posts.class)
     @JoinColumn(name = "pos_no")
     private Posts post;
     //    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Comments.class, cascade = CascadeType.ALL)
@@ -36,8 +37,29 @@ public class Comments {
     private Long upper;
     @Column(nullable = false)
     private String content;
-    @CreatedDate
+    @Column(nullable = false)
     private Date postDate;
     @Column(nullable = false)
     private int kids;
+
+    public void addKid(Date postDate) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(postDate);
+        cal.add(Calendar.DATE, 1);
+        this.postDate = cal.getTime();
+        kids++;
+    }
+
+    public void subKid(Date postDate) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(postDate);
+        cal.add(Calendar.DATE, 1);
+        this.postDate = cal.getTime();
+        kids--;
+    }
+
+    public void update(String content, Date postDate) {
+        this.content = content;
+        this.postDate = postDate;
+    }
 }
