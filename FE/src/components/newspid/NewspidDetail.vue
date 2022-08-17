@@ -6,8 +6,7 @@
           <!-- fluid alt="Responsive image" -->
 
           <!-- 사진 종류에 따라 크기가 맞지 않음 = 조정 필요-->
-
-          <b-img :src="picture" style="width: 100%; height: auto; max-width:700px; display:block; margin:0 auto;">
+          <b-img :src="picture" style="width: 100%; height: auto; max-width:700px; max-height: 440px; display:inline-block; margin:0 auto;">
           </b-img>
         </b-col>
         <b-col style="background-color: #ffffff;">

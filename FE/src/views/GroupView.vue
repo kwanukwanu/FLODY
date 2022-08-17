@@ -367,14 +367,14 @@ input[type=checkbox]:checked+label.strikethrough {
 }
 
 #todosField::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 #todosField::-webkit-scrollbar-track {
   background-color: transparent;
 }
 #todosField::-webkit-scrollbar-thumb {
   border-radius: 3px;
-  background-color: gray;
+  background-color: #E4DADA;
 }
 #todosField::-webkit-scrollbar-button {
   width: 0;

@@ -54,9 +54,21 @@
                         </b-col>
                     </b-container>
                 </b-card> -->
-            <br>
+            <b-row style="padding:0px 0px">
+                <b-col cols="9" style="padding:0px 0px"></b-col>
+                <b-col cols="3" style="text-align:right; padding:0px 0px">
+                    <b-button @click="Cancel" size="sm"
+                        style="color: #A48282; background-color:white; border-color: white; padding: 0px 8px;"
+                        data-bs-dismiss="modal" aria-label="Close"><svg width="24" height="24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 6 6 18M6 6l12 12" stroke="#444" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg></b-button>
+                </b-col>
+            </b-row>
+
             <b-row>
-                <div style="text-align: center; margin-bottom:8px">
+                <div style="text-align: center; margin-bottom:8px;">
                     <svg width="96" height="101" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M48 92.5c22.091 0 40-18.824 40-42.045S70.091 8.409 48 8.409 8 27.234 8 50.455C8 73.675 25.909 92.5 48 92.5Z"
@@ -68,17 +80,19 @@
                 </div>
             </b-row>
             <div style="font-weight:bold; font-size: 16px; margin-bottom: 7px;">로그인에 문제가 있나요?</div>
-            <div style="font-size:14px; margin-bottom:12px">아래의 정보를 입력하시면 계정에 다시 액세스할 수 있는<br>링크를 보내드립니다.</div>
-            <br><br/>
+            <div style="font-size:14px; margin-bottom:18px">아래의 정보를 입력하시면 계정에 다시 액세스할 수 있는<br>링크를 보내드립니다.</div>
+            <br><br />
             <b-row>
                 <b-col>
-                    <b-form-input placeholder="이메일 주소" required style="border-color: #B99B9A; margin-bottom: 12px;" @keyup="emailChecking()">
+                    <b-form-input placeholder="이메일 주소" required style="border-color: #B99B9A; margin-bottom: 12px;"
+                        @keyup="emailChecking()">
                     </b-form-input>
                 </b-col>
             </b-row>
             <b-row>
                 <b-col>
-                    <b-form-input placeholder="휴대폰 번호" style="border-color: #B99B9A; margin-bottom: 12px;" @keyup="getMask(user.phone)">
+                    <b-form-input placeholder="휴대폰 번호" style="border-color: #B99B9A; margin-bottom: 12px;"
+                        @keyup="getMask(user.phone)">
                     </b-form-input>
                 </b-col>
             </b-row>
@@ -89,7 +103,8 @@
                 </b-col>
             </b-row>
             <br>
-            <b-button size="sm" style="width:90%; background-color:#B5C8C3; border-color: #B5C8C3;">로그인 링크 보내기</b-button>
+            <b-button size="sm" style="width:90%; background-color:#B5C8C3; border-color: #B5C8C3;">로그인 링크 보내기
+            </b-button>
             <br>
         </b-row>
     </b-container>
