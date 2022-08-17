@@ -39,6 +39,7 @@ public class LicenseServiceImpl implements LicenseService {
         rd.close();
         conn.disconnect();
 //        System.out.println(sb.toString());
+        // 일단 commit 해야하니까
         JSONObject json = XML.toJSONObject(sb.toString());
         String prettyJson = json.toString(4);
         System.out.println(prettyJson);
