@@ -122,7 +122,7 @@ const newspidStore = {
           min: 57,
           sec: 30,
         },
-        picture: "https://placekitten.com/400/",
+        picture: "https://placekitten.com/300/400",
         favor: 878,
       },
       {

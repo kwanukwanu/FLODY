@@ -74,4 +74,21 @@ export default {
   box-shadow: none !important;
   outline: none !important;
 }
+#todosField::-webkit-scrollbar {
+  width: 5px;
+}
+
+#todosField::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+#todosField::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color:#E4DADA;
+}
+
+#todosField::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
 </style>
