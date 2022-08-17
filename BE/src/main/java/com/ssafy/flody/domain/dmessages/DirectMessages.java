@@ -25,14 +25,14 @@ public class DirectMessages {
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
     @JoinColumn(name = "receiver")
     private Users receiver;
-    @Column(nullable = false)
-    private Boolean type;
+    @Column
+    private boolean type;
     @Column(nullable = false)
     private String content;
     @Column(nullable = false)
     private Date time;
-    @Column(nullable = false)
-    private Boolean like;
-    @Column(nullable = false)
-    private Boolean check;
+    @Column
+    private boolean like;
+    @Column
+    private boolean check;
 }
