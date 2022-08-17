@@ -1,7 +1,6 @@
 package com.ssafy.flody.controller;
 
 import com.ssafy.flody.domain.groups.Groups;
-import com.ssafy.flody.dto.request.flowers.GardenCreateRequestDto;
 import com.ssafy.flody.dto.request.posts.PostCreateRequestDto;
 import com.ssafy.flody.dto.request.comments.CommentCreateRequestDto;
 import com.ssafy.flody.dto.request.comments.CommentUpdateRequestDto;
@@ -16,6 +15,7 @@ import com.ssafy.flody.service.flowers.FlowerService;
 import com.ssafy.flody.service.groups.GroupService;
 import com.ssafy.flody.service.groups.goals.GroupGoalService;
 import com.ssafy.flody.service.groups.members.GroupMemberService;
+import com.ssafy.flody.service.groups.schedules.GroupScheduleService;
 import com.ssafy.flody.service.posts.PostService;
 import com.ssafy.flody.service.posts.like.PLikeService;
 import com.ssafy.flody.service.posts.report.PReportService;
