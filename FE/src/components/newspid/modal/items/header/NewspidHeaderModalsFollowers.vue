@@ -53,10 +53,12 @@
                             <b-avatar variant="info" src="https://placekitten.com/300/204" size="44px"></b-avatar>
                         </b-col>
                         <b-col cols="7">
-                            <b-row class="nickname">pussycat <b-button
+                            <b-row class="nickname">pussycat 
+                                <!-- <b-button
                                     style="color: #0095F6; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 12px;">
-                                    • 팔로우</b-button>
+                                    • 팔로우</b-button> -->
                             </b-row>
+                            <!-- (팔로우되어있는 경우) -->
                             <b-row class="realname">신영제</b-row>
                         </b-col>
                         <b-col cols="3" style="text-align:right" data-bs-dismiss="modal" aria-label="Close">

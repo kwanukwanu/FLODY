@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-card style="max-width:70rem; border-color: #A48282; max-height: 19.5rem;">
+    <b-card style="max-width:70rem; border-color: #A48282; max-height: 19rem;">
       <b-row>
         <b-col>
           <router-link :to="{ name: 'boardlist' }" style="text-decoration:none; color: inherit;"
@@ -29,7 +29,7 @@
     <b-row>
 
       <b-col>
-        <b-card style="max-width:35rem; border-color: #A48282; max-height: 19.5rem;">
+        <b-card style="max-width:35rem; border-color: #A48282; max-height: 19rem;">
           <router-link :to="{ name: 'boardlist' }" style="text-decoration:none; color: inherit;"
             @click="gotoList('자유게시판')">
             <span
@@ -53,7 +53,7 @@
       </b-col>
 
       <b-col>
-        <b-card style="max-width:35rem; border-color: #A48282; max-height: 19.5rem;">
+        <b-card style="max-width:35rem; border-color: #A48282; max-height: 19rem;">
           <router-link :to="{ name: 'boardlist' }" style="text-decoration:none; color: inherit;"
             @click="gotoList('공부 꿀팁')">
             <span
@@ -77,7 +77,7 @@
       </b-col>
     </b-row>
     <br>
-    <b-card style="max-width:70rem; border-color: #A48282; max-height: 19.5rem;">
+    <b-card style="max-width:70rem; border-color: #A48282; max-height: 19rem;">
       <b-row>
         <b-col>
           <router-link :to="{ name: 'boardlist' }" style="text-decoration:none; color: inherit;"
