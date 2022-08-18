@@ -14,6 +14,11 @@ const groupStore = {
     groupSearchResult: [],
     groupInfo: [],
     groupMember: [],
+    input: {
+      keyword: "",
+      pageNow: 0,
+      size: 5,
+    },
     selectGroups: {
       groNo: 0,
       name: "none",
@@ -140,9 +145,9 @@ const groupStore = {
         }
       )
     },
-    async set_group_search_result({commit}, keyword) {
+    async set_group_search_result({commit}, input) {
       await get_group_by_keyword(
-        keyword,
+        input,
         (response) => {
           console.log(response);
           if(response.data.msg == "SUCCESS") {

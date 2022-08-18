@@ -42,6 +42,7 @@ export default {
             if(response.data.item[idx].role == "OWNER") {
               this.leader = response.data.item[idx].email;
             }
+            console.log(this.index + "의 " + this.leader);
           }
         } else {
           console.log("멤버 탐색 실패 ㅠㅠ");
