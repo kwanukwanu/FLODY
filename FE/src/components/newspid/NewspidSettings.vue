@@ -11,7 +11,7 @@
                             <div style="margin-left:1px; font-size:large;">{{ set_userInfo.email }}</div>
                         </b-row>
                         <b-row style="color:#064635; font-size: small;">
-                            <a> 프로필 사진 바꾸기(불가)
+                            <a> 프로필 사진 바꾸기(무작위)
                             </a>
                         </b-row>
                     </b-col>
@@ -169,9 +169,16 @@ export default {
         this.set_userInfo.profile = this.userInfo.profile;
         this.set_userInfo.name = this.userInfo.name;
         this.set_userInfo.email = this.userInfo.email;
+        this.set_userInfo.address = this.userInfo.address;
+        this.set_userInfo.nickname = this.userInfo.nickname;
+        this.set_userInfo.phone = this.userInfo.phone;
+        this.set_userInfo.introduction = this.userInfo.introduction;
     },
     methods: {
         async submit_profile() {
+            const url = "https://placekitten.com/300/" + ((Math.floor(Math.random() * (9 - 1)) + 1) * 100);
+            this.set_userInfo.profile = url;
+            console.log(this.set_userInfo);
             await modifyMember(
                 this.set_userInfo,
                 (response) => {
