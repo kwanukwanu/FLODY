@@ -560,8 +560,8 @@ public class ApiController {
 
     // LICENSE
     @GetMapping("/licenses")
-    public ResponseEntity<Map<String, Object>> LicenseList(@RequestParam(defaultValue = "") String fldnm, @RequestParam(defaultValue = "") String mfldnm, @RequestParam String category, @RequestParam(defaultValue = "") String keyword) {
-        return getResponseEntity(licenseService.findLicenses(fldnm, mfldnm, category, keyword));
+    public ResponseEntity<Map<String, Object>> LicenseList(@RequestParam(defaultValue = "") String fldnm, @RequestParam(defaultValue = "") String mfldnm, @RequestParam String category, @RequestParam(defaultValue = "") String keyword, Pageable pageable) {
+        return getResponseEntity(licenseService.findLicenses(fldnm, mfldnm, category, keyword, pageable));
     }
 
     @GetMapping("/license/fields")
