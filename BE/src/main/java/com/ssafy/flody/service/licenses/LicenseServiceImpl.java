@@ -16,6 +16,7 @@ import com.ssafy.flody.domain.licenses.tjobs.TJobs;
 import com.ssafy.flody.domain.licenses.tjobs.TJobsRepository;
 import com.ssafy.flody.dto.response.licenses.LicensesResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedInputStream;
@@ -25,10 +26,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import org.json.JSONObject;
 import org.json.XML;
@@ -229,7 +227,7 @@ public class LicenseServiceImpl implements LicenseService {
         }
     }
 
-    public List<LicensesResponseDto> findLicenses(String fldnm, String mfldnm, String category, String keyword) {
+    public List<LicensesResponseDto> findLicenses(String fldnm, String mfldnm, String category, String keyword, Pageable pageable) {
 
         System.out.println(fldnm);
         System.out.println(mfldnm);
@@ -238,31 +236,46 @@ public class LicenseServiceImpl implements LicenseService {
 
         Fields field;
         MFields mField;
-        List<Licenses> entityList;
+        List<Licenses> entityList = new ArrayList<>();
         List<LicensesResponseDto> list = new ArrayList<>();
-//        if (category.equals("학과명")) {
-//            Departments department = departmentRepository.findByUdeptnm(keyword)
-//                    .orElseThrow(() -> new IllegalArgumentException("Department Not Found"));
-//            List<TJobs> tJobsList = tJobRepository.findAllByDepartment(department);
-//
-//            List<SJobs> sJobsList = sJobRepository.findAllByDepartment(department);
-//
-//        }
-//        else
-        if (!fldnm.equals("")&&!mfldnm.equals("")) {
-            entityList = licenseRepository.findAllByFieldAndMfieldAndJmfldnmContainingIgnoreCase(findField(fldnm), findMField(mfldnm), keyword);
+        if (category.equals("학과명")) {
+            List<Departments> departmentList = departmentRepository.findByUdeptnmContainingIgnoreCase(keyword);
+            for (Departments department : departmentList) {
+                List<TJobs> tJobsList = tJobRepository.findAllByDepartment(department);
+                for (TJobs tJobs : tJobsList) {
+                    entityList.addAll(licenseRepository.findAllByMfield(tJobs.getMField()));
+                }
+                List<SJobs> sJobsList = sJobRepository.findAllByDepartment(department);
+                for (SJobs sJobs : sJobsList) {
+                    entityList.addAll(licenseRepository.findAllBySeries(sJobs.getSeries()));
+                }
+            }
+            Set<Licenses> tempSet = new HashSet<>(entityList);
+            entityList = new ArrayList<>(tempSet);
+            for (Licenses license : entityList) {
+                list.add(new LicensesResponseDto(license));
+            }
+        } else {
+            if (!fldnm.equals("")&&!mfldnm.equals("")) {
+                entityList = licenseRepository.findAllByFieldAndMfieldAndJmfldnmContainingIgnoreCase(findField(fldnm), findMField(mfldnm), keyword);
+            } else if (!fldnm.equals("")){
+                entityList = licenseRepository.findAllByFieldAndJmfldnmContainingIgnoreCase(findField(fldnm), keyword);
+            } else {
+                entityList = licenseRepository.findAllByJmfldnmContainingIgnoreCase(keyword);
+            }
+            for (Licenses license : entityList) {
+                list.add(new LicensesResponseDto(license));
+            }
         }
-        else if (!fldnm.equals("")){
-            entityList = licenseRepository.findAllByFieldAndJmfldnmContainingIgnoreCase(findField(fldnm), keyword);
-        }
-        else {
-            entityList = licenseRepository.findAllByJmfldnmContainingIgnoreCase(keyword);
-        }
+        Comparator<LicensesResponseDto> comparator = new Comparator<LicensesResponseDto>() {
+            @Override
+            public int compare(LicensesResponseDto o1, LicensesResponseDto o2) {
+                return (int) (o2.getLisNo() - o1.getLisNo());
+            }
+        };
 
-        for (Licenses license : entityList) {
-            list.add(new LicensesResponseDto(license));
-        }
-        return list;
+        Collections.sort(list, comparator);
+        return list.subList(pageable.getPageNumber() * pageable.getPageSize(), (pageable.getPageNumber() + 1) * pageable.getPageSize());
     }
 
     public List<String> findAllFields() {
