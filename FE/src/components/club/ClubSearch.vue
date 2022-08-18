@@ -83,7 +83,7 @@
             <b-row>
               <b-card class="study_intro_content" style="height:150px; overflow-y: scroll;">
                 <b-container fluid="sm">
-                  의지박약 친구들끼리 머리 맞대고 공부하실분들을 찾습니다!</b-container>
+                  {{ groupInfo.introduction }}</b-container>
               </b-card>
             </b-row>
           </b-col>
@@ -105,7 +105,7 @@
                     <li class="study_people_person"><b-avatar variant="info" src="https://placekitten.com/300/206" size="20px"></b-avatar> fire_boy</li>
                     <li class="study_people_person"><b-avatar variant="info" src="https://placekitten.com/300/207" size="20px"></b-avatar> chicken_grandma</li>
                   </ul> -->
-                    <div class="person">
+                    <!-- <div class="person">
                       <b-avatar variant="info" src="https://placekitten.com/300/200" size="20px"></b-avatar> Super_girl
                     </div>
                     <div class="person">
@@ -129,7 +129,10 @@
                     <div class="person">
                       <b-avatar variant="info" src="https://placekitten.com/300/207" size="20px"></b-avatar>
                       chicken_papa
-                    </div>
+                    </div> -->
+                    <club-search-member-item v-for="(item, index) in groupMember" :key="(item.index = index)" v-bind="item">
+
+                    </club-search-member-item>
                   </div>
                 </b-container>
               </b-card>
@@ -213,7 +216,7 @@
         </b-row> -->
         <b-row id="study_letter_line2" style="margin-bottom: 20px; margin-top: 20px;">
           <b-col id="study_letter_input_space">
-            <b-form-textarea id="study_letter_input" v-model="textEx1" placeholder="스터디 소개글을 입력하세요." rows="3"
+            <b-form-textarea id="study_letter_input" v-model="newStudyName.introduction" placeholder="스터디 소개글을 입력하세요." rows="3"
               max-rows="6" style="border: none">
             </b-form-textarea>
           </b-col>
@@ -230,20 +233,28 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 
 import ClubSearchItem from "./Item/ClubSearchItem.vue"
+import ClubSearchMemberItem from "./Item/ClubSearchMemberItem.vue"
 
 export default{
-  components: { ClubSearchItem },
+  components: { 
+    ClubSearchItem, 
+    ClubSearchMemberItem
+  },
   setup() {
     const store = useStore();
     const myGroupItem = computed(() => store.state.groupStore.myGroupItem);
     const groupSearchResult = computed(() => store.state.groupStore.groupSearchResult);
+    const groupInfo = computed(() => store.state.groupStore.groupInfo);
+    const groupMember = computed(() => store.state.groupStore.groupMember);
+    const myInfo = computed(() => store.state.memberStore.userInfo);
 
-    return { store, myGroupItem, groupSearchResult };
+    return { store, myGroupItem, groupSearchResult, groupInfo, groupMember, myInfo };
   },
   data() {
       return {
         newStudyName: {
           name: "",
+          introduction: "",
         },
         studyGNo: 0,
         newStudyMember: [
@@ -269,7 +280,27 @@ export default{
       }
   },
   methods: {
-    gotoPage(link) {
+    async gotoPage(link) {
+      console.log("regist_group_member 실행");
+      let memberInfo = new Object();
+        memberInfo.email = this.myInfo.email;
+        memberInfo.groNo = this.groupInfo.groNo;
+      await regist_group_member(
+        memberInfo,
+        (response) => {
+          console.log(response);
+          if(response.data.msg == "SUCCESS") {
+            console.log("해당 스터디원으로 등록 완료!!!");
+          } else {
+            console.log("해당 스터디원으로 등록 실패 ㅠㅠ");
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+      await this.store.dispatch("groupStore/set_my_group_item");
+
       console.log(link);
       this.$router.push(link);
     },
@@ -378,6 +409,8 @@ export default{
   },
   mounted() {
     this.store.dispatch("groupStore/init_group_search_result");
+    this.store.dispatch("groupStore/init_group_info");
+    this.store.dispatch("groupStore/init_group_member");
   }
 }
 </script>

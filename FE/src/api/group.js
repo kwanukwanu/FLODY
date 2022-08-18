@@ -50,10 +50,10 @@ async function get_group_by_keyword(keyword, success, fail) {
 }
 
 // 그룹 추가
-async function regist_group(name, success, fail) {
+async function regist_group(groupInfo, success, fail) {
   console.log("axios 수행 시작");
-  console.log(name);
-  await api.post(`/group`, JSON.stringify(name)).then(success).catch(fail);
+  console.log(groupInfo);
+  await api.post(`/group`, JSON.stringify(groupInfo)).then(success).catch(fail);
 }
 
 // 그룹 수정

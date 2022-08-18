@@ -1,4 +1,10 @@
-import { get_todo_list, get_group_list_by_mygroups, get_group_by_keyword } from "@/api/group";
+import { 
+  get_todo_list, 
+  get_group_list_by_mygroups, 
+  get_group_by_keyword,
+  get_group_one,
+  get_group_member_list_by_groNo,
+ } from "@/api/group";
 
 const groupStore = {
   namespaced: true,
@@ -6,6 +12,8 @@ const groupStore = {
     isMyGroup: false,
     myGroupItem: [],
     groupSearchResult: [],
+    groupInfo: [],
+    groupMember: [],
     selectGroups: {
       name: "none",
       goal: "none",
@@ -81,6 +89,12 @@ const groupStore = {
     },
     SET_GROUP_SEARCH_RESULT: (state, groupSearchResult) => {
       state.groupSearchResult = groupSearchResult;
+    },
+    SET_GROUP_INFO: (state, groupInfo) => {
+      state.groupInfo = groupInfo;
+    },
+    SET_GROUP_MEMBER: (state, groupMember) => {
+      state.groupMember = groupMember;
     }
   },
   actions: {
@@ -145,7 +159,47 @@ const groupStore = {
     init_group_search_result({commit}) {     
       commit("SET_GROUP_SEARCH_RESULT", null);
     },
-    
+    async set_group_info({commit}, groNo) {
+      await get_group_one(
+        groNo,
+        (response) => {
+          console.log(response);
+          if(response.data.msg == "SUCCESS") {
+            console.log("그룹 정보 탐색 성공!!!");
+            commit("SET_GROUP_INFO", response.data.item);
+          } else {
+            console.log("그룹 정보 탐색 실패 ㅠㅠ");
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    },
+    init_group_info({commit}) {
+      const data = "";
+      commit("SET_GROUP_INFO", data);
+    },
+    async set_group_member({commit}, groNo) {
+      await get_group_member_list_by_groNo(
+        groNo,
+        (response) => {
+          console.log(response);
+          if(response.data.msg == "SUCCESS") {
+            console.log("그룹 멤버 탐색 성공!!!");
+            commit("SET_GROUP_MEMBER", response.data.item);
+          } else {
+            console.log("그룹 멤버 탐색 실패 ㅠㅠ");
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    },
+    init_group_member({commit}) {
+      commit("SET_GROUP_MEMBER", null);
+    },
   },
 };
 

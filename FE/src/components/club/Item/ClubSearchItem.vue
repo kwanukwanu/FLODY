@@ -1,5 +1,5 @@
 <template>
-  <b-tr style="padding: 5">
+  <b-tr style="padding: 5" @click="studyInfo()">
     <b-td>{{ index + 1 }}</b-td>
     <b-td>{{ name }}</b-td>
     <b-td>{{ leader }}</b-td>
@@ -8,6 +8,7 @@
 
 <script>
 import { get_group_member_list_by_groNo } from "@/api/group";
+import {computed} from "vue";
 import {useStore} from "vuex";
 
 export default {
@@ -25,7 +26,10 @@ export default {
   },
   setup(){
     const store = useStore();
-    return {store};
+    const groupInfo = computed(() => store.state.groupStore.groupInfo);
+    const groupMember = computed(() => store.state.groupStore.groupMember);
+
+    return {store, groupInfo, groupMember};
   },
   mounted() {
     get_group_member_list_by_groNo(
@@ -47,6 +51,18 @@ export default {
         console.log(error);
       }
     ) 
+  },
+  methods: {
+    async studyInfo() {
+      console.log("get_group_one 시작");
+      await this.store.dispatch("groupStore/set_group_info", this.groNo);
+      console.log(this.groupInfo);
+      console.log("get_group_one 종료");
+      console.log("get_group_member_list_by_groNo 시작");
+      await this.store.dispatch("groupStore/set_group_member", this.groNo);
+      console.log(this.groupMember);
+      console.log("get_group_member_list_by_groNo 종료");
+    }
   }
 };
 </script>
