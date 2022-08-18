@@ -51,7 +51,7 @@
           </b-col>
         </b-row>
         <br>
-        <b-button text @click="addPlans()" style="color: #453535; background-color: #E1D3D2; border: none">등록</b-button>
+        <b-button text @click="addPlans()" style="color: #453535; background-color: #E1D3D2; border: none" data-bs-dismiss="modal" aria-label="Close">등록</b-button>
         <!-- <template #modal-footer="{ cancel, ok }">
             <b-button size="sm" variant="danger" @click="cancel()">
               취소
@@ -128,11 +128,11 @@ export default {
       await add_goal(
         data,
         ({ data }) => {
-          let msg = "등록에 문제가 발생하였습니다!";
+          // let msg = "등록에 문제가 발생하였습니다!";
           if (data.msg === "SUCCESS") {
-            msg = "등록 완료";
+            // msg = "등록 완료";
           }
-          alert(msg);
+          // alert(msg);
           this.count++;
         },
         (error) => {
