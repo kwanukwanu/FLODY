@@ -560,10 +560,18 @@ public class ApiController {
 
     // LICENSE
     @GetMapping("/licenses")
-    public ResponseEntity<Map<String, Object>> LicenseList(@RequestParam Long id) {
-        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
-        // 여기에 filter 처리를 위한 parameter도 추가 예정
-        return getMapResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> LicenseList(@RequestParam(defaultValue = "") String fldnm, @RequestParam(defaultValue = "") String mfldnm, @RequestParam String category, @RequestParam(defaultValue = "") String keyword) {
+        return getResponseEntity(licenseService.findLicenses(fldnm, mfldnm, category, keyword));
+    }
+
+    @GetMapping("/license/fields")
+    public ResponseEntity<Map<String, Object>> FieldList() {
+        return getResponseEntity(licenseService.findAllFields());
+    }
+
+    @GetMapping("/license/mfields")
+    public ResponseEntity<Map<String, Object>> MFieldList(String fldnm) {
+        return getResponseEntity(licenseService.findAllMFields(fldnm));
     }
 
 //    @GetMapping("/license")
@@ -572,7 +580,7 @@ public class ApiController {
 //    }
 
 //    License 관련 Dto 추가 생성 필요
-    @GetMapping("/license")
+    @GetMapping("/license/unavailable")
     public ResponseEntity<Map<String, Object>> LicenseAdd() throws Exception {
         return getResponseEntity(licenseService.getLicense());
     }

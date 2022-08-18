@@ -19,5 +19,5 @@ public class Serieses {
     @Column(nullable = false)
     private String seriesnm;
     @Column(nullable = false)
-    private int seriescd;
+    private String seriescd;
 }

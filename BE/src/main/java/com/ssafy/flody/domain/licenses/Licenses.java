@@ -29,9 +29,11 @@ public class Licenses {
     @JoinColumn(name = "ser_no")
     private Serieses series;
     @Column(nullable = false)
-    private int jmcd;
+    private String jmcd;
     @Column(nullable = false)
     private String jmfldnm;
     @Column(nullable = false)
     private String qualgbcd;
+    @Column(nullable = false)
+    private String qualgbnm;
 }
