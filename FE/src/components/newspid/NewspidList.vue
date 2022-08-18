@@ -32,6 +32,7 @@ export default {
     tags: Array,            // 태그
     creativetimes: Object,    // 작성 날짜
     favor: Number,          // 좋아요 개수
+    comments: Array,
   },
   components: {
     NewspidListHeader,

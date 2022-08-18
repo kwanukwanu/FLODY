@@ -43,7 +43,7 @@ import NewspidItem from "@/components/newspid/items/NewspidItem.vue"
 
 import { computed } from "vue";
 import { useStore } from "vuex";
-import { getcomments } from "@/api/newspid.js";
+//import { getcomments } from "@/api/newspid.js";
 
 export default {
   props: {
@@ -53,13 +53,14 @@ export default {
     contents: String,       // 작성 내용 
     tags: Array,            // 태그
     creativetimes: Object,    // 작성 날짜
+    comments: Array,
   },
   components: {
     NewspidItem,
   },
   data() {
     return {
-      comments: null,
+      //comments: null,
       //tags: ["영국", "런던", "스터디"],
       //Myname: "Brown_Cat",
     }
@@ -79,7 +80,7 @@ export default {
     }
   },
   mounted() {
-    this.comments = getcomments(this.pidNo);
+    //this.comments = getcomments(this.pidNo);
   },
   computed: {
     setTimes() {
