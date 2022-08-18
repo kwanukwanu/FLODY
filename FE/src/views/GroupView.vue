@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { get_group_member_list_by_groNo, delete_group_member } from "@/api/group";
+import { get_group_member_list_by_groNo, delete_group_member, regist_group_schedule } from "@/api/group";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
@@ -93,8 +93,8 @@ export default {
     const todos = computed(() => store.state.calendarStore.todos);
     const selectGroup = computed(() => store.state.groupStore.selectGroups);
     const myInfo = computed(() => store.state.memberStore.userInfo);
-
-    return { store, todos, selectGroup, myInfo };
+    const selectedDate = computed(() => store.state.groupStore.selectedDate);
+    return { store, todos, selectGroup, myInfo, selectedDate };
   },
   methods: {
     todosInsert() {
@@ -116,6 +116,7 @@ export default {
                                 </svg>
                               `;
 
+        text.className = 'newTodos';
         text.textContent = todo_content.value
         todo_content.value = ''
 
@@ -129,8 +130,42 @@ export default {
         todo_content.value = ''
       }
     },
-    submit_todo() {
-      //const todos = document.getElementsByClassName('')
+    async submit_todo() {
+      const todos = document.getElementsByClassName('newTodos');
+      console.log("for문");
+      for (let idx = 0; idx < todos.length; idx++) {
+        console.log("idx : " + idx);
+        let tmp = new Object();
+        tmp.title = todos[idx].innerHTML;
+        tmp.detail = null;
+        tmp.startDate = this.selectedDate;
+        tmp.endDate = this.selectedDate;
+        tmp.done = false;
+        console.log(tmp);
+        // this.newStudyMember.push(tmp);
+
+        await regist_group_schedule(
+          this.selectGroup.groNo, tmp,
+          (response) => {
+            console.log(response);
+            if (response.data.msg == "SUCCESS") {
+              console.log("새로운 to-do 리스트 등록 완료!!!");
+            } else {
+              console.log("새로운 to-do 리스트 등록 실패 ㅠㅠ");
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        )
+      }
+      const date = this.selectedDate;
+      const d = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+      const data = {
+        groNo: this.selectGroup.groNo,
+        selectedDate: d
+      }
+      this.store.dispatch("groupStore/set_todo_list", data);
     },
     async gotoPage(link) {
       // 선택한 스터디의 전체 멤버 조회
