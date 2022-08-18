@@ -2,8 +2,9 @@
   <b-card style="border-color: #a48282; max-width: 35rem; height:304px;">
     <b-row>
       <b-col cols="10">
-        <span style="text-align:left; font-weight:bold; font-size: large; vertical-align:-webkit-baseline-middle;">Todo
-          List</span>
+        <span style="text-align:left; font-weight:bold; font-size: large; vertical-align:-webkit-baseline-middle;">
+          Todo List
+        </span>
       </b-col>
       <b-col cols="2">
         <span style="text-align:right;">
@@ -40,23 +41,29 @@ export default {
     return { store, todos };
   },
   mounted() {
+    console.log("todos");
     console.log(this.todos);
   },
+  method: {
+  }
 }
 
 </script>
 
 <style>
 #tab_todo::-webkit-scrollbar {
-  width:10px;
+  width: 10px;
 }
+
 #tab_todo::-webkit-scrollbar-track {
   background-color: transparent;
 }
+
 #tab_todo::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #E4DADA;
 }
+
 #tab_todo::-webkit-scrollbar-button {
   width: 0;
   height: 0;

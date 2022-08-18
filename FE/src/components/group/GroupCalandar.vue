@@ -23,14 +23,24 @@ export default {
   },
   mounted() {
     console.log("date : ");
-    console.log(new Date());
-    this.store.dispatch("groupStore/set_todo_list", this.selectGroup.groNo, new Date());
+    const date = new Date();
+    const d = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    const data = {
+      groNo: this.selectGroup.groNo,
+      selectedDate: d
+    }
+    this.store.dispatch("groupStore/set_todo_list", data);
     console.log(this.todo_list);
   },
   methods: {
     // 참고 : https://vcalendar.io/examples/datepickers.html
     onDayClick(day) {
       this.store.dispatch("groupStore/set_selectedDate", day.id);
+      const data = {
+        groNo: this.selectGroup.groNo,
+        selectedDate: day.id,
+      }
+      this.store.dispatch("groupStore/set_todo_list", data);
     },
     onUpdatePage(data) {
       //console.log("update:from-page");
@@ -96,9 +106,9 @@ export default {
 
         // popover 생성
         ...this.todo_list.map((item) => ({
-          dates: item.dates,
+          dates: item.endDate,
           popover: {
-            label: item.description,
+            label: item.title,
             visibility: 'focus',
           }
         })),

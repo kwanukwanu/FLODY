@@ -8,14 +8,7 @@ const calendarStore = {
       months: 8,
       days: 11,
     },
-    todos: [
-      {
-        dates: { years: 2022, months: 8, days: 11 },
-        isComplete: false,
-        color: "red",
-        nums: 0,
-      },
-    ],
+    todos: [],
     todo_list: [
       {
         dates: { years: 2022, months: 8, days: 11 },

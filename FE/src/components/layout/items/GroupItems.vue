@@ -1,6 +1,6 @@
 <template>
     <li style="text-align: left; margin-top: 8px;">
-        <b-avatar size="30px" :src="src" style="margin: 0px 3px 0px 0px;">
+        <b-avatar size="30px" :src="profile" style="margin: 0px 3px 0px 0px;">
         </b-avatar>
         {{ email }}
     </li>
@@ -10,13 +10,15 @@
 export default {
     props: {
         email: String,
-        src: String,
+        gmNo: Number,
+        profile: String,
+        role: String,
     },
 }
 </script>
 
 <style>
-li{
+li {
     margin-bottom: 9px;
 }
 </style>

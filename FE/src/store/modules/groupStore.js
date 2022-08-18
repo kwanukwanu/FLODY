@@ -28,24 +28,15 @@ const groupStore = {
       date: null,
     },
     groupNum: 0,
-    selectedDate: {
-      year: 2022,
-      months: 8,
-      days: 11,
-    },
-    todos: [
-      {
-        dates: { years: 2022, months: 8, days: 11 },
-        isComplete: false,
-        color: "red",
-        nums: 0,
-      },
-    ],
+    selectedDate: "2022-08-18",
+    todos: [],
     todo_list: [
       {
-        dates: { years: 2022, months: 8, days: 11 },
-        description: "네트워크 뽀사기",
-        isComplete: false,
+        title: "",
+        detail: "",
+        startDate: "yyyy-MM-dd",
+        endDate: "yyyy-MM-dd",
+        done: false,
       },
       {
         dates: { years: 2022, months: 8, days: 11 },
@@ -113,13 +104,13 @@ const groupStore = {
       commit("SET_SELECTED_DATE", selectedDate);
       console.log(":: " + selectedDate);
     },
-    async set_todo_list({ commit }, groNo, selectedDate) {
+    async set_todo_list({ commit }, data) {
       console.log("set_todo_list");
-      console.log(groNo);
-      console.log(selectedDate);
+      console.log(data.groNo);
+      console.log(data.selectedDate);
       await get_group_schedule_ofDay(
-        groNo,
-        selectedDate,
+        data.groNo,
+        data.selectedDate,
         (response) => {
           console.log(response);
           if (response.data.msg === "SUCCESS") {
@@ -163,10 +154,10 @@ const groupStore = {
         },
         (error) => {
           console.log(error);
-        }
-      )
+        },
+      );
     },
-    async set_group_search_result({commit}, keyword) {
+    async set_group_search_result({ commit }, keyword) {
       await get_group_by_keyword(
         keyword,
         (response) => {
