@@ -104,6 +104,7 @@ export default {
   },
   mounted() {
     this.store.dispatch("groupStore/set_my_group_item");
+    console.log("------------------------");
     console.log(this.myGroupItem);
   }
 }
