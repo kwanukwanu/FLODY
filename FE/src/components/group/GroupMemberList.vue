@@ -15,19 +15,19 @@ import { useStore } from "vuex";
 import GroupMemberListItem from "./items/GroupMemberListItem.vue";
 
 export default {
-    components: {
-        GroupMemberListItem,
-    },
-    setup() {
-        const store = useStore();
-        const memberList = computed(() => store.state.groupStore.groupMember);
-        const selectGroup = computed(() => store.state.groupStore.selectGroups);
-        return { store, memberList, selectGroup };
-    },
-    mounted() {
-        console.log("groupInfo");
-        console.log(this.selectGroup);
-    }
+  components: {
+    GroupMemberListItem,
+  },
+  setup() {
+    const store = useStore();
+    const memberList = computed(() => store.state.groupStore.groupMember);
+    const selectGroup = computed(() => store.state.groupStore.selectGroups);
+    return { store, memberList, selectGroup };
+  },
+  mounted() {
+    console.log("groupInfo");
+    console.log(this.selectGroup);
+  }
 }
 </script>
 
