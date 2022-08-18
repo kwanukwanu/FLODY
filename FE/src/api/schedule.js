@@ -35,10 +35,7 @@ async function get_user_schedule_ofMonth(date, success, fail) {
 
 async function get_user_schedule_ofDay(date, success, fail) {
   console.log("스케줄 불러오기(일)");
-  await api
-    .post(`/user/dayschedules`, JSON.stringify(date))
-    .then(success)
-    .catch(fail);
+  await api.post(`/user/dayschedules?date=${date}`).then(success).catch(fail);
 }
 
 // 스케줄 수정

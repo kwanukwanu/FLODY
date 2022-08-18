@@ -24,8 +24,8 @@ export default {
   },
   setup() {
     const store = useStore();
-    const todos = computed(() => store.state.calendarStore.todos);
-    const todo_list = computed(() => store.state.calendarStore.todo_list);
+    const todos = computed(() => store.state.memberStore.todos);
+    const todo_list = computed(() => store.state.memberStore.todo_list);
     return { store, todos, todo_list };
   },
   methods: {

@@ -24,7 +24,7 @@
 
             </div>
             <br />
-            <b-button text @click="submit" style="color: #453535; background-color: #e1d3d2; border: none">등록
+            <b-button text @click="submit_todo()" style="color: #453535; background-color: #e1d3d2; border: none">등록
             </b-button>
         </b-container>
     </b-card>

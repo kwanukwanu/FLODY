@@ -26,6 +26,7 @@ const memberStore = {
       },
     ],
     todo_list: [],
+    todos: [],
   }),
   getters: {
     checkUserInfo: function (state) {
