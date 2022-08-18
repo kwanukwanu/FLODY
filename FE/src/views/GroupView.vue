@@ -1,120 +1,10 @@
 <template>
-  <!-- <h1>Group View</h1>
-  <ul>
-    <li><router-link to="/group/main">그룹 메인</router-link></li>    
-    <li><router-link to="/group/calandar">그룹 캘린더</router-link></li>    
-    <li><router-link to="/group/todo">그룹 todo리스트</router-link></li>    
-    <li><router-link to="/group/chart">그룹 차트</router-link></li>    
-  </ul> -->
-  <router-view />
+  <!-- <router-view /> -->
   <b-container>
     <group-header></group-header>
-
-    <!--
-    전체 todos를 가져온다.
-    기본 날짜를 현재 날짜로 정한다
-    해당 날짜에 해당하는 todolist를 받아온다
-    todolist를 체크할때마다 해당 list의 complete 값을 변경해준다 (axios 변경)
-    todolist의 success 개수를 체크해 최대값이 되면 
-    -->
     <br>
     <b-row style="height: 180px;">
-      <b-card class="wrap-vertical">
-
-        <!-- <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
-        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
-        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
-        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
-        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
-        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
-        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
-        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
-        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
-        <b-card-group style="width:10rem; height:12rem; "><b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar></b-card-group>
-         -->
-
-        <div id="tab">
-          <ul>
-            <li>
-              <a>
-                <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px;">
-                </b-avatar>
-                <!-- cursor: pointer;
-                  v-b-modal.modal-14 -->
-              </a><br />chlwogus_
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />mirikwon_
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />hilooboys_
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />dogandcat_
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />maratangboy
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />wearef5
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />chlwogus_
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />mirikwon_
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />hilooboys_
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />dogandcat_
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />maratangboy
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />wearef5
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />chlwogus_
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />mirikwon_
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />hilooboys_
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />dogandcat_
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />maratangboy
-            </li>
-            <li>
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="70px" style="margin-bottom:5px">
-              </b-avatar><br />wearef5
-            </li>
-
-          </ul>
-        </div>
-      </b-card>
+      <group-member-list></group-member-list>
     </b-row>
     <b-row>
       <b-col>
@@ -134,46 +24,6 @@
   <b-modal hide-footer id="modal-8" centered no-stacking title="할 일 등록" style="text-align: center">
     <b-card style="min-height: 12rem; max-width: 30rem; background-color: #f8f3f3">
       <b-container ref="form">
-        <!-- <h2 style="text-align: center;">목표 등록</h2> -->
-        <!-- <b-table-simple>
-          <tbody id="mytest">
-            <tr style="margin-bottom: 20px">
-              <td cols="11" style="text-align:left; font-weight: 600;">
-                &nbsp;&nbsp;Todo 추가
-              </td>
-              <td cols="1">
-                <span id="add" style="vertical-align: middle;">
-                  <b-button size="sm" style="border:none; background:none; padding: 0px 0px" @click="addRow()">
-                    <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:red;">
-                      <path
-                        d="M10 6.667v6.666M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z"
-                        stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                  </b-button>
-                </span>
-              </td>
-            </tr>
-          </tbody>
-          
-
-          <tbody id="mytest_2">
-            <tr style="margin-bottom: 20px">
-              <td cols="11">
-                <b-form-input id="holder" placeholder="내용 입력..." required style="border: none"></b-form-input>
-              </td>
-              <td cols="1">
-                <span id="delete" style="vertical-align: middle;">
-                  <b-button size="sm" style="border:none; background:none; padding: 0px 0px" @click="deleteRow()">
-                    <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z" stroke="#444"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                  </b-button>
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </b-table-simple> -->
         <b-row style="margin-bottom: 10px;">
           <b-col cols="10" style="padding: 0; margin-left: 10px;">
             <b-form-input placeholder="내용 입력..." id="todo_content" aria-placeholder="할 일..." required
@@ -192,35 +42,13 @@
           </b-col>
         </b-row>
         <div id="todosField" style="height:50px; overflow-y: scroll;">
-
         </div>
-
         <br />
         <b-button text @click="submit" style="color: #453535; background-color: #e1d3d2; border: none">등록</b-button>
       </b-container>
     </b-card>
   </b-modal>
 
-  <!-- <b-modal hide-footer hide-header id="modal-14" style="text-align: center; min-height: 20rem; max-width: 12rem;" size="sm" >
-    <b-container>
-      <b-row style="margin-bottom:8px">
-        <b-col cols="9"></b-col>
-        <b-col cols="3" style="text-align:right;">
-          <b-button @click="Cancel" size="sm"
-            style="color: #A48282; background-color:white; border-color: white; padding: 0px 8px;"
-            data-bs-dismiss="modal" aria-label="Close"><svg width="24" height="24" fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <path d="M18 6 6 18M6 6l12 12" stroke="#444" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg></b-button>
-        </b-col>
-      </b-row>
-      <b-avatar variant="info" src="https://placekitten.com/300/300" size="120px" style="margin-bottom:5px" />
-      pussy_cat<br>최재현
-      <hr />
-      메시지 보내기
-    </b-container>
-  </b-modal> -->
 </template>
 
 <script>
@@ -228,6 +56,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 
 import GroupHeader from "@/components/group/GroupHeader.vue";
+import GroupMemberList from "@/components/group/GroupMemberList.vue";
 import GroupCalendar from "@/components/group/GroupCalandar.vue";
 import GroupTodo from "@/components/group/GroupTodo.vue";
 import GroupField from "@/components/group/GroupField.vue";
@@ -235,6 +64,7 @@ import GroupField from "@/components/group/GroupField.vue";
 export default {
   components: {
     GroupHeader,
+    GroupMemberList,
     GroupCalendar,
     GroupTodo,
     GroupField
@@ -259,72 +89,19 @@ export default {
     return { store, todos };
   },
   methods: {
-    // addRow() {
-    // var tbody = document.getElementById('mytest_2');
-    // var row = tbody.insertRow(tbody.rows.length); // 하단에 추가
-    // var cell1 = row.insertCell(0);
-    // var cell2 = row.insertCell(1);
-    // cell1.innerHTML = document.getElementById('holder').outerHTML;
-    // cell2.innerHTML = document.getElementById('delete').outerHTML;
-    // },
-
-    // deleteRow() {
-    // var tbody = document.getElementById('mytest_2');
-    // tbody.deleteRow(this.row);
-
-    //   //   let field=document.getElementById('mytest');
-    //   //   const text = document.getElementById('add');
-    //   //   text.innerHTML =`
-    //   //   <b-table-simple>
-    //   //   <tbody id="mytest_2">
-    //   //       <tr style="margin-bottom: 20px">
-    //   //         <td cols="11">
-    //   //           <b-form-input id="holder" placeholder="내용 입력..." required style="border: none"></b-form-input>
-    //   //         </td>
-    //   //         <td cols="1">
-    //   //           <span id="delete" style="vertical-align: middle;">
-    //   //             <b-button size="sm" style="border:none; background:none; padding: 0px 0px" @click="deleteRow()">
-    //   //               <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //   //                 <path d="M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z" stroke="#444"
-    //   //                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    //   //               </svg>
-    //   //             </b-button>
-    //   //           </span>
-    //   //         </td>
-    //   //       </tr>
-    //   //     </tbody>
-    //   //     </b-table-simple>          
-    //   //     `;
-
-    //   //   const deleteButton = document.getElementById('delete');
-    //   //   deleteButton.innerHTML=`
-    //   //               <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //   //                 <path d="M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z" stroke="#444"
-    //   //                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    //   //               </svg>          
-    //   //                         `;
-
-        
-    //   //   field.appendChild(text)
-
-    //   //   deleteButton.addEventListener('click', (event) => {
-    //   //       field.removeChild(event.currentTarget.parentNode)
-    //   //   })
-    //   // }
-    // },
     todosInsert() {
       let todo_content = document.getElementById('todo_content');
       let todos_field = document.getElementById('todosField');
       console.log(todo_content.value);
       console.log(todos_field);
-      if(todo_content.value !== '') {
+      if (todo_content.value !== '') {
         const item = document.createElement('div')
         // text
         const text = document.createElement('span');
         // 제거하기 버튼
         const deleteButton = document.createElement('a');
-                                // <span id="delete" class="material-icons" style="vertical-align: sub; cursor: pointer;">delete</span>
-        deleteButton.innerHTML=`
+        // <span id="delete" class="material-icons" style="vertical-align: sub; cursor: pointer;">delete</span>
+        deleteButton.innerHTML = `
                                 <svg id="delete" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: sub; cursor: pointer;">
                                   <path d="M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z" stroke="#444"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -332,16 +109,16 @@ export default {
                               `;
 
         text.textContent = todo_content.value
-        todo_content.value=''
-    
+        todo_content.value = ''
+
         item.appendChild(text)
         item.appendChild(deleteButton)
         todos_field.appendChild(item)
 
         deleteButton.addEventListener('click', (event) => {
-            todos_field.removeChild(event.currentTarget.parentNode)
+          todos_field.removeChild(event.currentTarget.parentNode)
         })
-        todo_content.value =''
+        todo_content.value = ''
       }
     },
   },
@@ -369,49 +146,59 @@ input[type=checkbox]:checked+label.strikethrough {
 #todosField::-webkit-scrollbar {
   width: 5px;
 }
+
 #todosField::-webkit-scrollbar-track {
   background-color: transparent;
 }
+
 #todosField::-webkit-scrollbar-thumb {
   border-radius: 3px;
   background-color: #E4DADA;
 }
+
 #todosField::-webkit-scrollbar-button {
   width: 0;
   height: 0;
 }
 
-.wrap-vertical{
-  width:58rem; 
-  border-color:#a48282; 
-  margin-bottom:70px; 
-  margin-left: 11px; 
+.wrap-vertical {
+  width: 58rem;
+  border-color: #a48282;
+  margin-bottom: 70px;
+  margin-left: 11px;
   height: 10rem;
 }
-ul{
-  list-style:none;
+
+ul {
+  list-style: none;
 }
-#tab ul{
-  white-space:nowrap; 
-  overflow-x: scroll; 
-  text-align:center;
+
+#tab ul {
+  white-space: nowrap;
+  overflow-x: scroll;
+  text-align: center;
 }
-#tab ul li{
-  display:inline-block;
+
+#tab ul li {
+  display: inline-block;
   margin-right: 25px;
-  font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   font-size: 14px;
 }
+
 #tab ul::-webkit-scrollbar {
-  height:10px;
+  height: 10px;
 }
+
 #tab ul::-webkit-scrollbar-track {
   background-color: transparent;
 }
+
 #tab ul::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #E4DADA;
 }
+
 #tab ul::-webkit-scrollbar-button {
   width: 0;
   height: 0;

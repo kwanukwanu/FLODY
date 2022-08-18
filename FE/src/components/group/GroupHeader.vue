@@ -1,17 +1,19 @@
 <template>
-    <b-row>
-        <b-col>
-            <b-row>
-                <h4 style="font-weight:bold">{{ selectGroup.name }}</h4>
-            </b-row>
-            <b-row>
-                <h5>({{ selectGroup.goal }})</h5>
-            </b-row>
-        </b-col>
-        <b-col>
-            <h1 style="color:red; font-weight:600; text-align: right;">D-3</h1>
-        </b-col>
-    </b-row>
+    <b-card>
+        <b-row>
+            <b-col>
+                <b-row>
+                    <h4 style="font-weight:bold">{{ selectGroup.name }}</h4>
+                </b-row>
+                <!-- <b-row>
+                    <h5>({{ selectGroup.goal }})</h5>
+                </b-row> -->
+            </b-col>
+            <!-- <b-col>
+                <h1 style="color:red; font-weight:600; text-align: right;">D-3</h1>
+            </b-col> -->
+        </b-row>
+    </b-card>
 </template>
 
 <script>

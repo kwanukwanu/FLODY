@@ -1,10 +1,10 @@
-import { 
-  get_todo_list, 
-  get_group_list_by_mygroups, 
+import {
+  get_todo_list,
+  get_group_list_by_mygroups,
   get_group_by_keyword,
   get_group_one,
   get_group_member_list_by_groNo,
- } from "@/api/group";
+} from "@/api/group";
 
 const groupStore = {
   namespaced: true,
@@ -15,7 +15,9 @@ const groupStore = {
     groupInfo: [],
     groupMember: [],
     selectGroups: {
+      groNo: -1,
       name: "none",
+      memberList: [],
       goal: "none",
       date: null,
     },
@@ -95,7 +97,7 @@ const groupStore = {
     },
     SET_GROUP_MEMBER: (state, groupMember) => {
       state.groupMember = groupMember;
-    }
+    },
   },
   actions: {
     selectGroups({ commit }, group) {
@@ -123,11 +125,11 @@ const groupStore = {
         () => {},
       );
     },
-    async set_my_group_item({commit}) {
+    async set_my_group_item({ commit }) {
       await get_group_list_by_mygroups(
         (response) => {
           console.log(response);
-          if(response.data.msg == "SUCCESS") {
+          if (response.data.msg == "SUCCESS") {
             console.log("성공");
             commit("SET_MY_GROUP_ITEM", response.data.item);
           } else {
@@ -136,15 +138,15 @@ const groupStore = {
         },
         (error) => {
           console.log(error);
-        }
-      )
+        },
+      );
     },
-    async set_group_search_result({commit}, keyword) {
+    async set_group_search_result({ commit }, keyword) {
       await get_group_by_keyword(
         keyword,
         (response) => {
           console.log(response);
-          if(response.data.msg == "SUCCESS") {
+          if (response.data.msg == "SUCCESS") {
             console.log("스터디 검색 완료!!!");
             commit("SET_GROUP_SEARCH_RESULT", response.data.item);
           } else {
@@ -153,18 +155,18 @@ const groupStore = {
         },
         (error) => {
           console.log(error);
-        }
-      ) 
+        },
+      );
     },
-    init_group_search_result({commit}) {     
+    init_group_search_result({ commit }) {
       commit("SET_GROUP_SEARCH_RESULT", null);
     },
-    async set_group_info({commit}, groNo) {
+    async set_group_info({ commit }, groNo) {
       await get_group_one(
         groNo,
         (response) => {
           console.log(response);
-          if(response.data.msg == "SUCCESS") {
+          if (response.data.msg == "SUCCESS") {
             console.log("그룹 정보 탐색 성공!!!");
             commit("SET_GROUP_INFO", response.data.item);
           } else {
@@ -173,19 +175,19 @@ const groupStore = {
         },
         (error) => {
           console.log(error);
-        }
-      )
+        },
+      );
     },
-    init_group_info({commit}) {
+    init_group_info({ commit }) {
       const data = "";
       commit("SET_GROUP_INFO", data);
     },
-    async set_group_member({commit}, groNo) {
+    async set_group_member({ commit }, groNo) {
       await get_group_member_list_by_groNo(
         groNo,
         (response) => {
           console.log(response);
-          if(response.data.msg == "SUCCESS") {
+          if (response.data.msg == "SUCCESS") {
             console.log("그룹 멤버 탐색 성공!!!");
             commit("SET_GROUP_MEMBER", response.data.item);
           } else {
@@ -194,10 +196,10 @@ const groupStore = {
         },
         (error) => {
           console.log(error);
-        }
-      )
+        },
+      );
     },
-    init_group_member({commit}) {
+    init_group_member({ commit }) {
       commit("SET_GROUP_MEMBER", null);
     },
   },

@@ -1,5 +1,7 @@
 //import { getcomments } from "@/api/newspid.js";
 
+import { get_boardList } from "@/api/board";
+
 const newspidStore = {
   namespaced: true,
   state: {
@@ -201,8 +203,25 @@ const newspidStore = {
       };
       commit("SET_PROFILE", profile);
     },
-    set_newspids({ commit }) {
-      commit("SET_NEWSPID");
+    // 뉴스피드 불러오기
+    async set_newspids({ commit }) {
+      const data = {
+        page: 1,
+        category: "뉴스피드",
+        board: 5,
+      };
+      await get_boardList(
+        data,
+        (response) => {
+          if (response.data.msg === "SUCCESS") {
+            console.log("게시판 불러오기 성공");
+            commit("SET_NEWSPIDS", response.data.item);
+          } else {
+            console.log("게시판 불러오기 오류");
+          }
+        },
+        () => {},
+      );
     },
   },
 };
