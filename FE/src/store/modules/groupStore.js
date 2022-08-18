@@ -1,9 +1,10 @@
 import {
-  get_todo_list,
   get_group_list_by_mygroups,
   get_group_by_keyword,
   get_group_one,
   get_group_member_list_by_groNo,
+  get_group_schedule_ofDay,
+  get_group_schedule_ofMonth,
 } from "@/api/group";
 
 const groupStore = {
@@ -103,28 +104,47 @@ const groupStore = {
     selectGroups({ commit }, group) {
       commit("SET_SELECT_GROUP", group);
     },
-    set_todos({ commit }, todos) {
-      commit("SET_TODOS", todos);
-    },
     set_selectedDate({ commit }, selectedDate) {
       commit("SET_SELECTED_DATE", selectedDate);
+      console.log(":: " + selectedDate);
     },
-    async set_todo_list({ commit }, date) {
-      await get_todo_list(
-        date,
+    async set_todo_list({ commit }, groNo, selectedDate) {
+      console.log("set_todo_list");
+      console.log(groNo);
+      console.log(selectedDate);
+      await get_group_schedule_ofDay(
+        groNo,
+        selectedDate,
         (response) => {
-          console.log("message : " + response);
           console.log(response);
-          if (response.msg == "SUCCESS") {
-            console.log("리스트 받아오기 성공");
-            commit("SET_TODO_LIST", response.item.list);
-          } else {
-            console.log("받아오기 실패");
+          if (response.data.msg === "SUCCESS") {
+            console.log("todoList setting");
+            commit("SET_TODO_LIST", response.data.item);
           }
         },
-        () => {},
+        (error) => {
+          console.log(error);
+        },
       );
     },
+
+    async set_todos({ commit }, groNo, selectedDate) {
+      await get_group_schedule_ofMonth(
+        groNo,
+        selectedDate,
+        (response) => {
+          console.log(response);
+          if (response.data.msg === "SUCCESS") {
+            console.log("todoList setting");
+            commit("SET_TODOS", response.data.item);
+          }
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
+    },
+
     async set_my_group_item({ commit }) {
       await get_group_list_by_mygroups(
         (response) => {
