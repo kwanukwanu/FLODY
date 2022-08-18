@@ -26,9 +26,9 @@
       </b-col>
     </b-row>
     <b-row>
-      <!-- <newspid-item v-for="(item) in items" :key="item.index" v-bind="item"> -->
-      <newspid-item v-for="{ contents, favor, profile, tags, times, userId, index } in comments" :key="index"
-        :contents="contents" :favor="favor" :profilePic="profile" :tags="tags" :times="times" :userId="userId">
+      <newspid-item v-for="(item, index) in comments" :key="item.index = index" v-bind="item">
+        <!-- <newspid-item v-for="{ contents, favor, profile, tags, times, userId, index } in comments" :key="index"
+        :contents="contents" :favor="favor" :profilePic="profile" :tags="tags" :times="times" :userId="userId"> -->
       </newspid-item>
     </b-row>
     <b-row
@@ -54,6 +54,7 @@ export default {
     tags: Array,            // 태그
     creativetimes: Object,    // 작성 날짜
     comments: Array,
+
   },
   components: {
     NewspidItem,
@@ -81,6 +82,8 @@ export default {
   },
   mounted() {
     //this.comments = getcomments(this.pidNo);
+    console.log("ListBody----------------------");
+    console.log(this.comments);
   },
   computed: {
     setTimes() {

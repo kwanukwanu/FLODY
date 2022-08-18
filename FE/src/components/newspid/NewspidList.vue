@@ -46,7 +46,7 @@ export default {
   },
   mounted() {
     console.log("NewspidList")
-    console.log(this.author);
+    console.log(this.comments);
   }
 
 }

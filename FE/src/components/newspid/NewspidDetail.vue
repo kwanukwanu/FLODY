@@ -6,7 +6,8 @@
           <!-- fluid alt="Responsive image" -->
 
           <!-- 사진 종류에 따라 크기가 맞지 않음 = 조정 필요-->
-          <b-img :src="picture" style="width: 100%; height: auto; max-width:700px; max-height: 440px; display:inline-block; margin:0 auto;">
+          <b-img :src="picture"
+            style="width: 100%; height: auto; max-width:700px; max-height: 440px; display:inline-block; margin:0 auto;">
           </b-img>
         </b-col>
         <b-col style="background-color: #ffffff;">
@@ -40,6 +41,7 @@ import { useStore } from "vuex";
 import NewspidList from "@/components/newspid/NewspidList.vue";
 import NewspidDetailModals from "@/components/newspid/modal/NewspidDetailModals.vue";
 
+
 export default {
   components: { NewspidList, NewspidDetailModals },
   props: {
@@ -51,10 +53,17 @@ export default {
     creativetimes: Object,    // 작성 날짜
     picture: String,        // 사진
     favor: Number,          // 좋아요 개수
+    comments: Array,        // 댓글들
   },
   setup() {
     const store = useStore();
     return { store };
+  },
+  mounted() {
+    console.log("Detail-----------------------------");
+    console.log(this.pidNo);
+    console.log(this.author);
+    console.log(this.comments);
   },
   methods: {
     Delete() {

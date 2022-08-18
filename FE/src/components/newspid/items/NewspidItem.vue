@@ -64,7 +64,7 @@ export default {
     tags: Array,
     times: Object,
     favor: Number,
-    profile: String,
+    profilePic: String,
   },
   setup() {
     const store = useStore();

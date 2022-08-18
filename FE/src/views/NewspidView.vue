@@ -17,8 +17,8 @@ export default {
     return { store, newspids };
   },
   mounted() {
-    // 뉴스피드 목록을 받아와서 저장한다.
-    this.store.dispatch("newspidStore/setnewpids");
+    console.log("newspids--------------------");
+    console.log(this.newspids);
   }
 }
 </script>
