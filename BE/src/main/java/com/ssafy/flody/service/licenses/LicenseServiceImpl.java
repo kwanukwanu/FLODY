@@ -240,6 +240,13 @@ public class LicenseServiceImpl implements LicenseService {
         List<LicensesResponseDto> list = new ArrayList<>();
         if (category.equals("학과명")) {
             List<Departments> departmentList = departmentRepository.findByUdeptnmContainingIgnoreCase(keyword);
+            if (!fldnm.equals("") && !mfldnm.equals("")) {
+
+            } else if (!fldnm.equals("")) {
+
+            } else {
+
+            }
             for (Departments department : departmentList) {
                 List<TJobs> tJobsList = tJobRepository.findAllByDepartment(department);
                 for (TJobs tJobs : tJobsList) {

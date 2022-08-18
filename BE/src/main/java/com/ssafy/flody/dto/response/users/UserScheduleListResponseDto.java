@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Getter
 public class UserScheduleListResponseDto {
@@ -19,14 +20,12 @@ public class UserScheduleListResponseDto {
     private Boolean done;
 
     public UserScheduleListResponseDto(USchedules entity){
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
         this.usNo = entity.getUsNo();
         this.title = entity.getTitle();
         cal.setTime(entity.getStartDate());
-        cal.add(Calendar.DATE, 1);
         this.startDate = cal.getTime();
         cal.setTime(entity.getEndDate());
-        cal.add(Calendar.DATE, 1);
         this.endDate = cal.getTime();
         this.done = entity.getDone();
     }

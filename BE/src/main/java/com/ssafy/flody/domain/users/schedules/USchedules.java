@@ -41,21 +41,10 @@ public class USchedules {
             this.title = title;
         if (detail != null)
             this.detail = detail;
-        Calendar cal = Calendar.getInstance();
         if (startDate != null)
             this.startDate = startDate;
-        else {
-            cal.setTime(this.startDate);
-            cal.add(Calendar.DATE, 1);
-            this.startDate = cal.getTime();
-        }
         if (endDate != null)
             this.endDate = endDate;
-        else {
-            cal.setTime(this.endDate);
-            cal.add(Calendar.DATE, 1);
-            this.endDate = cal.getTime();
-        }
         if (done != null)
             this.done = done;
     }

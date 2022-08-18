@@ -37,10 +37,15 @@ public class GSchedules {
     private Boolean done;
 
     public void update(String title, String detail, Date startDate, Date endDate, Boolean done) {
-        this.title = title;
-        this.detail = detail;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.done = done;
+        if (title != null)
+            this.title = title;
+        if (detail != null)
+            this.detail = detail;
+        if (startDate != null)
+            this.startDate = startDate;
+        if (endDate != null)
+            this.endDate = endDate;
+        if (done != null)
+            this.done = done;
     }
 }
