@@ -31,18 +31,8 @@ export default {
   methods: {
     // 참고 : https://vcalendar.io/examples/datepickers.html
     onDayClick(day) {
-      console.log("click");
-      console.log(day);
-      console.log(day.id);
-      const idx = this.days.findIndex((d) => d.id === day.id);
-      if (idx >= 0) {
-        this.days.splice(idx, 1);
-      } else {
-        this.days.push({
-          id: day.id,
-          date: day.date,
-        });
-      }
+      this.store.dispatch("memberStore/set_selectedDate", day.id);
+      this.store.dispatch("memberStore/set_todo_list", day.id);
     },
     onUpdatePage(data) {
       //console.log("update:from-page");
@@ -76,6 +66,13 @@ export default {
       //console.log("transitionEnd");
       console.log(data);
     },
+  },
+  mounted() {
+    console.log("date : ");
+    const date = new Date();
+    const d = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    this.store.dispatch("memberStore/set_todo_list", d);
+    console.log(this.todo_list);
   },
   computed: {
     dates() {

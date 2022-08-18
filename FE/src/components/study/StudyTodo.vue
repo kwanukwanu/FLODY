@@ -42,27 +42,10 @@ export default {
     const isTodos = false;
 
     const store = useStore();
-    const todo_list = computed(() => store.state.calendarStore.todo_list);
+    const todo_list = computed(() => store.state.memberStore.todo_list);
     return { isTodos, store, todo_list };
   },
-  mounted() {
-    console.log("todolist");
-    console.log(this.todo_list);
-  },
   methods: {
-    // addRow() {
-    // var tbody = document.getElementById('mytest_2');
-    // var row = tbody.insertRow(tbody.rows.length); // 하단에 추가
-    // var cell1 = row.insertCell(0);
-    // var cell2 = row.insertCell(1);
-    // cell1.innerHTML = document.getElementById('holder').outerHTML;
-    // cell2.innerHTML = document.getElementById('delete').outerHTML;
-    // },
-
-    // deleteRow() {
-    // var tbody = document.getElementById('mytest_2');
-    // tbody.deleteRow(this.row);
-    // },
 
   }
 }
@@ -94,7 +77,7 @@ input[type=checkbox]:checked+label.strikethrough {
 
 #tab_todo::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color:#E4DADA;
+  background-color: #E4DADA;
 }
 
 #tab_todo::-webkit-scrollbar-button {

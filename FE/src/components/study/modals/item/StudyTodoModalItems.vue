@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import { add_schedule } from "@/api/schedule";
+
 export default {
     methods: {
         todosInsert() {
@@ -50,8 +52,9 @@ export default {
                                   <path d="M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z" stroke="#444"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                              `;
+                                `;
 
+                text.className = 'newTodos';
                 text.textContent = todo_content.value
                 todo_content.value = ''
 
@@ -65,30 +68,68 @@ export default {
                 todo_content.value = ''
             }
         },
+        async submit_todo() {
+            const todos = document.getElementsByClassName('newTodos');
+            console.log("for문");
+            for (let idx = 0; idx < todos.length; idx++) {
+                console.log("idx : " + idx);
+                let tmp = new Object();
+                tmp.title = todos[idx].innerHTML;
+                tmp.detail = null;
+                tmp.startDate = this.selectedDate;
+                tmp.endDate = this.selectedDate;
+                tmp.done = false;
+                console.log(tmp);
+                // this.newStudyMember.push(tmp);
+
+                await add_schedule(
+                    tmp,
+                    (response) => {
+                        console.log(response);
+                        if (response.data.msg == "SUCCESS") {
+                            console.log("새로운 to-do 리스트 등록 완료!!!");
+                        } else {
+                            console.log("새로운 to-do 리스트 등록 실패 ㅠㅠ");
+                        }
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                )
+            }
+            const date = this.selectedDate;
+            const d = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            const data = {
+                groNo: this.selectGroup.groNo,
+                selectedDate: d
+            }
+            this.store.dispatch("groupStore/set_todo_list", data);
+        },
     }
 }
 </script>
 
 <style>
-.btn-close{
-  box-shadow: none !important;
-  outline: none !important;
+.btn-close {
+    box-shadow: none !important;
+    outline: none !important;
 }
+
 #todosField::-webkit-scrollbar {
-  width: 5px;
+    width: 5px;
 }
 
 #todosField::-webkit-scrollbar-track {
-  background-color: transparent;
+    background-color: transparent;
 }
 
 #todosField::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color:#E4DADA;
+    border-radius: 10px;
+    background-color: #E4DADA;
 }
 
 #todosField::-webkit-scrollbar-button {
-  width: 0;
-  height: 0;
+    width: 0;
+    height: 0;
 }
 </style>

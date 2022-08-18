@@ -1,6 +1,6 @@
 //import { getcomments } from "@/api/newspid.js";
-
 import { get_boardList } from "@/api/board";
+import { getUserInfo } from "@/api/member";
 
 const newspidStore = {
   namespaced: true,
@@ -14,7 +14,7 @@ const newspidStore = {
     newspids: [
       {
         pidNo: 0,
-        author: "ssafy01@naver.com",
+        author: "test01@naver.com",
         profile: "https://placekitten.com/300/300",
         contents: "오늘도 나는 공부를 놓지 않는다. 내 자신에 취한다",
         tags: ["영국", "런던", "스터디"],
@@ -210,8 +210,32 @@ const newspidStore = {
       console.log("setcomments");
       console.log(comments);
     },
-    setClickNickname({ commit }, clickNickname) {
+
+    async setClickNickname({ commit }, clickNickname) {
       commit("SET_CLICK_NICKNAME", clickNickname);
+      await getUserInfo(
+        clickNickname,
+        (response) => {
+          console.log(response);
+          if (response.data.msg === "SUCCESS") {
+            const profile = {
+              email: response.data.item.email,
+              profile: response.data.item.profile,
+              name: response.data.item.name,
+              nickname: response.data.item.nickname,
+              followers: response.data.item.followers,
+              followings: response.data.item.followings,
+              posts: response.data.item.posts,
+              introduction: response.data.item.introduction,
+            };
+            commit("SET_PROFILE", profile);
+            console.log("end");
+          }
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
     },
     setFollowers({ commit }, followers) {
       commit("SET_FOLLOWERS", followers);

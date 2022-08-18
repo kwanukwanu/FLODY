@@ -1,6 +1,6 @@
 <template>
   <!-- <div v-if="clickNickname == ' '"></div> -->
-  <b-container v-if="userInfo.nickname != userInfo.nickname">
+  <b-container v-if="profile.email != userInfo.email">
     <br>
     <b-row style="margin-bottom:27px">
       <b-col cols="3" style="padding: 0px; text-align: center;">
@@ -97,21 +97,23 @@
             <span>게시글 </span>
             <a style="cursor:pointer" v-b-modal.modal-10>
               <span style="font-weight:bold;">
-              <!-- {{ profile.posts }} -->
-              3
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <!-- {{ profile.posts }} -->
+                3
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </span>
               <span>팔로워</span>
               <span style="font-weight:bold;">
-              <!-- {{ profile.followers }} -->
-              75
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <!-- {{ profile.followers }} -->
+                75
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </span>
             </a>
             <a style="cursor:pointer" v-b-modal.modal-11>
               <span style="font-weight:bold;"></span>
               <span>팔로우</span>
               <span style="font-weight:bold;">
-              <!-- {{ profile.followings }} -->
-              88
+                <!-- {{ profile.followings }} -->
+                88
               </span>
             </a>
           </b-col>

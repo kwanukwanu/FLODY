@@ -17,8 +17,6 @@ export default {
     return { store, newspids };
   },
   mounted() {
-    console.log("newspids--------------------");
-    console.log(this.newspids);
   }
 }
 </script>

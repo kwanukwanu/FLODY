@@ -3,6 +3,7 @@ import { login } from "@/api/member.js";
 import { getUserInfo } from "../../api/member";
 import { get_goals } from "@/api/goal.js";
 import { api } from "@/api";
+import { get_user_schedule_ofDay } from "@/api/schedule";
 // 회원가입 및 로그인을 수행하는 js파일
 
 //const api = apiInstance();
@@ -13,6 +14,7 @@ const memberStore = {
     isLogin: false, // 로그인 여부
     isLoginError: null, // 로그인 에러 확인
     userInfo: null,
+    selectedDate: null,
     goals: [
       {
         name: "정보처리기사",
@@ -23,6 +25,7 @@ const memberStore = {
         dueDate: "2022-08-30",
       },
     ],
+    todo_list: [],
   }),
   getters: {
     checkUserInfo: function (state) {
@@ -42,6 +45,12 @@ const memberStore = {
     },
     SET_GOALS: (state, goals) => {
       state.goals = goals;
+    },
+    SET_TODO_LIST: (state, todo_list) => {
+      state.todo_list = todo_list;
+    },
+    SET_SELECTEDDATE: (state, selectedDate) => {
+      state.selectedDate = selectedDate;
     },
   },
   actions: {
@@ -119,6 +128,25 @@ const memberStore = {
           console.log(error);
         },
       );
+    },
+    async set_todo_list({ commit }, selectedDate) {
+      console.log(selectedDate);
+      await get_user_schedule_ofDay(
+        selectedDate,
+        (response) => {
+          console.log(response);
+          if (response.data.msg === "SUCCESS") {
+            console.log("todoList setting");
+            commit("SET_TODO_LIST", response.data.item);
+          }
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
+    },
+    set_selectedDate({ commit }, selectedDate) {
+      commit("SET_SELECTEDDATE", selectedDate);
     },
   },
 };

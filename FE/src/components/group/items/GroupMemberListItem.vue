@@ -1,12 +1,15 @@
 <template>
     <li>
         <a>
-            <b-avatar variant="info" :src="memberInfo.profile" size="70px" style="margin-bottom:5px;">
+            <b-avatar variant="info" :src="memberInfo.profile" size="70px" style="margin-bottom:5px;"
+                @click="getClickNickname(memberInfo.email)">
             </b-avatar>
             <!-- cursor: pointer;
                   v-b-modal.modal-14 -->
-        </a><br /> 
-        <a v-if="role == `OWNER`">👑</a> {{ email }}
+        </a><br />
+        <a @click="getClickNickname(memberInfo.email)">
+            <a v-if="role == `OWNER`">👑</a> {{ email }}
+        </a>
     </li>
 </template>
 
@@ -39,7 +42,13 @@ export default {
     mount() {
         console.log("email : " + this.email);
     },
-
+    methods: {
+        async getClickNickname(clickNickname) {
+            console.log(clickNickname);
+            await this.store.dispatch("newspidStore/setClickNickname", clickNickname);
+            this.$router.push("/newspid");
+        }
+    }
 }
 </script>
 
