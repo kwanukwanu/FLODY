@@ -5,7 +5,8 @@
             </b-avatar>
             <!-- cursor: pointer;
                   v-b-modal.modal-14 -->
-        </a><br />{{ email }}<a v-if="role == `OWNER`"> (owner) </a>
+        </a><br /> 
+        <a v-if="role == `OWNER`">👑</a> {{ email }}
     </li>
 </template>
 
