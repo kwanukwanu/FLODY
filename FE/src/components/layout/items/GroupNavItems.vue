@@ -36,6 +36,7 @@ export default {
         GroupItems,
     },
     props: {
+        groNo: Number,
         groName: String,
         goal: String,
         date: Date,
@@ -52,6 +53,7 @@ export default {
     methods: {
         gotoPage() {
             const data = {
+                groNo: this.groNo,
                 name: this.groName,
                 goal: this.goal,
                 date: this.date,

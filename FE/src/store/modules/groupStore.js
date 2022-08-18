@@ -15,6 +15,7 @@ const groupStore = {
     groupInfo: [],
     groupMember: [],
     selectGroups: {
+      groNo: 0,
       name: "none",
       goal: "none",
       date: null,

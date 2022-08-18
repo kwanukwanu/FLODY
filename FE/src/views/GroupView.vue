@@ -129,6 +129,11 @@
     <b-row>
       <group-field></group-field>
     </b-row>
+    <div style="text-align: center; margin-top: 20px; ">
+      <b-button text @click="gotoPage('/study')" 
+      style="color: #453535; background-color: #E1D3D2; border: none;">
+              스터디 나가기</b-button>
+    </div>
   </b-container>
 
   <b-modal hide-footer id="modal-8" centered no-stacking title="할 일 등록" style="text-align: center">
@@ -224,6 +229,7 @@
 </template>
 
 <script>
+import { get_group_member_list_by_groNo, delete_group_member } from "@/api/group";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
@@ -255,8 +261,10 @@ export default {
   setup() {
     const store = useStore();
     const todos = computed(() => store.state.calendarStore.todos);
+    const selectGroup = computed(() => store.state.groupStore.selectGroups);
+    const myInfo = computed(() => store.state.memberStore.userInfo);
 
-    return { store, todos };
+    return { store, todos, selectGroup, myInfo };
   },
   methods: {
     // addRow() {
@@ -344,6 +352,57 @@ export default {
         todo_content.value =''
       }
     },
+    async gotoPage(link) {
+      // 선택한 스터디의 전체 멤버 조회
+      let members = [];
+      await get_group_member_list_by_groNo(
+        this.selectGroup.groNo,
+         (response) => {
+          console.log(response);
+          if(response.data.msg == "SUCCESS") {
+            console.log("선택한 스터디의 전체 멤버 조회 완료!!!");
+            members = response.data.item;
+          } else {
+            console.log("선택한 스터디의 전체 멤버 조회 실패 ㅠㅠ");
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+
+      console.log(members);
+
+      // 삭제할 그룹 멤버 넘버 조회
+      let gmNoDelete = -1;
+      for(let idx = 0; idx < members.length; idx++) {
+        if(members[idx].email === this.myInfo.email) {
+          gmNoDelete = members[idx].gmNo;
+        }
+      }
+
+      await delete_group_member(
+        gmNoDelete,
+        (response) => {
+          console.log(response);
+          if(response.data.msg == "SUCCESS") {
+            console.log("선택한 스터디 나가기 완료!!!");
+            members = response.data.item;
+          } else {
+            console.log("선택한 스터디 나가기 실패 ㅠㅠ");
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+
+      await this.store.dispatch("groupStore/set_my_group_item");
+
+
+      console.log(link);
+      this.$router.push(link);
+    }
   },
   computed: {
   },
