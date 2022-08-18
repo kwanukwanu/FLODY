@@ -171,7 +171,8 @@
   <br />
   <b-row>
     <b-col cols="2" style="padding: 0px 12px; text-align: right">
-      <a style="text-align: right; padding: 0px; text-decoration: none">🤍❤️</a>
+    <!--좋아요 안 눌렀을 시에는 🤍-->
+      <a style="text-align: right; padding: 0px; text-decoration: none">❤️</a>
       좋아요 8
     </b-col>
     <b-col cols="2" style="padding: 0px 0px; text-align: left">

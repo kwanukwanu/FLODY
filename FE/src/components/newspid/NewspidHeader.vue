@@ -34,14 +34,19 @@
         </b-row>
         <b-row style="margin-bottom:10px;">
           <b-col style="text-align: left; padding: 0;">
-            <span>게시글 </span><span style="font-weight:bold;">{{ profile.posts }}
+            <span>게시글 </span><span style="font-weight:bold;">
+            <!-- {{ profile.posts }} -->
+            5
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <a style="cursor:pointer" v-b-modal.modal-10><span>팔로워
-              </span><span style="font-weight:bold;">&nbsp;{{ profile.followers
-              }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-            <a style="cursor:pointer" v-b-modal.modal-11><span>팔로우 </span><span style="font-weight:bold;">&nbsp;{{
-                profile.followings
-            }}</span></a>
+              </span><span style="font-weight:bold;">&nbsp;
+              <!-- {{ profile.followers }} -->
+              101
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+            <a style="cursor:pointer" v-b-modal.modal-11><span>팔로우 </span><span style="font-weight:bold;">&nbsp;
+            <!-- {{profile.followings}} -->
+            98
+            </span></a>
           </b-col>
         </b-row>
         <b-row style="font-weight: bold;">

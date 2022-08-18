@@ -1,12 +1,12 @@
 <template>
-  <b-card class="wrap-vertical">
-    <div id="tab">
-      <ul>
-        <group-member-list-item v-for="item in selectGroup.memberList" :key="item" v-bind="item">
-        </group-member-list-item>
-      </ul>
-    </div>
-  </b-card>
+    <b-card class="wrap-vertical">
+        <div id="tab">
+            <ul style="padding: 0px 0px 0px 0px; margin:0px 0px 0px 0px">
+                <group-member-list-item v-for="item in selectGroup.memberList" :key="item" v-bind="item">
+                </group-member-list-item>
+            </ul>
+        </div>
+    </b-card>
 </template>
 
 <script>

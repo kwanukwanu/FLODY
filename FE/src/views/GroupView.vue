@@ -3,7 +3,7 @@
   <b-container>
     <group-header></group-header>
     <br>
-    <b-row style="height: 180px;">
+    <b-row style="height: 11.5rem;">
       <group-member-list></group-member-list>
     </b-row>
     <b-row>
