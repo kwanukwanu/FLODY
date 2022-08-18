@@ -109,15 +109,15 @@
           <br>
           <b-row>
             <b-col>
-              <b-form-input v-model="user.password" :state="pwcheck.value" type="password" placeholder="비밀번호" style="border: none;"
-                @keyup="pwChecking"></b-form-input>
+              <b-form-input v-model="user.password" :state="pwcheck.value" type="password" placeholder="비밀번호"
+                style="border: none;" @keyup="pwChecking"></b-form-input>
             </b-col>
           </b-row>
           <br>
           <b-row>
             <b-col>
-              <b-form-input type="password" :state="isSame" v-model="password" placeholder="비밀번호 확인" style="border: none;"
-              @keyup="pwChecking2"></b-form-input>
+              <b-form-input type="password" :state="isSame" v-model="password" placeholder="비밀번호 확인"
+                style="border: none;" @keyup="pwChecking2"></b-form-input>
             </b-col>
           </b-row>
           <br>
@@ -158,26 +158,26 @@ export default {
       user: {
         email: "admin@ssafy.com",
         password: "admin123",
-        profile: "https://placekitten.com/200/100",
+        profile: "https://placekitten.com/200/500",
         name: "김관리",
         nickname: "관리자",
         address: "SSAFY 대전캠퍼스",
         phone: "010-1234-4567",
         admin: 'true',
-        followers: 0,
-        followings: 0,
-        posts: 0,
+        followers: 88,
+        followings: 95,
+        posts: 3,
       },
-      password:"",
+      password: "",
       isduplicate: true, // 아이디 중복 여부
       isUserid: false, // 아이디 존재여부
       idcheck: false, // 아이디 길이 확인 = 최종 체크
       pwcheck: {
         value: false, // 비밀번호 무결성 확인
-        key:{
+        key: {
           isUpper: true, // 대문자 포함여부
           isLower: true, // 소문자 포함여부
-          isSpecial : true, // 특수문자 포함여부
+          isSpecial: true, // 특수문자 포함여부
         }
       },
       isSame: false, // 비밀번호 동일 확인
@@ -195,7 +195,7 @@ export default {
 
     idChecking() {
       if (!this.isduplicate) this.isduplicate = true;
-      if(this.isUserid) this.isUserid = false;
+      if (this.isUserid) this.isUserid = false;
       if (this.user.email.length > 4) {
         console.log("아이디 체크");
         this.idcheck = true;
@@ -203,14 +203,14 @@ export default {
         this.idcheck = false;
       }
     },
-    async idDuplicateChecking(){
+    async idDuplicateChecking() {
       console.log(this.user.email);
-      if(this.isUserid && !this.isduplicate)
+      if (this.isUserid && !this.isduplicate)
         alert("이미 확인한 아이디입니다.");
-      else{
+      else {
         await userIdDuplicated(
           this.user.email,
-          ( response ) => {
+          (response) => {
             console.log(response);
             let msg = "중복 발생!";
             if (response.data.msg === "SUCCESS") {
@@ -224,7 +224,7 @@ export default {
             console.log(error);
           },
         );
-        if(this.idcheck && !this.isduplicate)
+        if (this.idcheck && !this.isduplicate)
           this.isUserid = true;
         else
           this.isUserid = false;
@@ -239,14 +239,14 @@ export default {
       }
       this.pwChecking2();
     },
-    pwChecking2(){
-      console.log(this.user.password+" "+this.password);
-      console.log(this.user.password==this.password);
+    pwChecking2() {
+      console.log(this.user.password + " " + this.password);
+      console.log(this.user.password == this.password);
       //패스워드 동일 여부 확인
-      if(this.user.password==this.password){
+      if (this.user.password == this.password) {
         this.isSame = true;
       }
-      else{
+      else {
         this.isSame = false;
       }
     },
@@ -331,23 +331,19 @@ export default {
     },
 
     async registMember() {
-      if(!this.isUserid)
-      {
-        if(this.isduplicate)
+      if (!this.isUserid) {
+        if (this.isduplicate)
           alert("중복체크를 수행하세요");
         else
           alert("아이디를 입력하세요")
       }
-      else if(!this.pwcheck)
-      {
+      else if (!this.pwcheck) {
         alert("패스워드를 8자 이상으로 입력하세요");
       }
-      else if(!this.isSame)
-      {
+      else if (!this.isSame) {
         alert("패스워드가 일치하는지 확인하세요");
       }
-      else
-      {
+      else {
         await registMember(
           this.user,
           ({ data }) => {
