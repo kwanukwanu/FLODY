@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -15,6 +16,7 @@ import java.util.TimeZone;
 @NoArgsConstructor
 public class GroupScheduleCreateRequestDto {
     private String title;
+    @Nullable
     private String detail;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
