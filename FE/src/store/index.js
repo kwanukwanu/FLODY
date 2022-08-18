@@ -8,6 +8,7 @@ import calendarStore from "@/store/modules/calendarStore.js";
 import boardStore from "@/store/modules/boardStore.js";
 import newspidStore from "@/store/modules/newspidStore.js";
 import chatStore from "@/store/modules/chatStore.js";
+import licenseStore from "@/store/modules/licenseStore.js"
 
 export default createStore({
   modules: {
@@ -17,6 +18,7 @@ export default createStore({
     boardStore,
     newspidStore,
     chatStore,
+    licenseStore,
   },
   plugins: [
     createdPersistedState({
