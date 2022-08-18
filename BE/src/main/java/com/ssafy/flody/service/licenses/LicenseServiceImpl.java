@@ -275,7 +275,11 @@ public class LicenseServiceImpl implements LicenseService {
         };
 
         Collections.sort(list, comparator);
-        return list.subList(pageable.getPageNumber() * pageable.getPageSize(), (pageable.getPageNumber() + 1) * pageable.getPageSize());
+        int page = pageable.getPageNumber();
+        int size = pageable.getPageSize();
+        int from = page * size;
+        int upto = Math.min(list.size(), (page + 1) * size);
+        return list.subList(from, upto);
     }
 
     public List<String> findAllFields() {
