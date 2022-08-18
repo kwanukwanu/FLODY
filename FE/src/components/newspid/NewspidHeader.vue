@@ -37,9 +37,9 @@
             <span>게시글 </span><span style="font-weight:bold;">{{ profile.posts }}
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <a style="cursor:pointer" v-b-modal.modal-10><span>팔로워
-              </span><span style="font-weight:bold;">{{ profile.followers
+              </span><span style="font-weight:bold;">&nbsp;{{ profile.followers
               }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-            <a style="cursor:pointer" v-b-modal.modal-11><span>팔로우 </span><span style="font-weight:bold;">{{
+            <a style="cursor:pointer" v-b-modal.modal-11><span>팔로우 </span><span style="font-weight:bold;">&nbsp;{{
                 profile.followings
             }}</span></a>
           </b-col>
@@ -96,14 +96,23 @@
           <b-col style="text-align: left; padding: 0;">
             <span>게시글 </span>
             <a style="cursor:pointer" v-b-modal.modal-10>
-              <span style="font-weight:bold;">{{ profile.posts }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <span style="font-weight:bold;">
+              <!-- {{ profile.posts }} -->
+              3
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
               <span>팔로워</span>
-              <span style="font-weight:bold;">{{ profile.followers }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <span style="font-weight:bold;">
+              <!-- {{ profile.followers }} -->
+              75
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             </a>
             <a style="cursor:pointer" v-b-modal.modal-11>
               <span style="font-weight:bold;"></span>
               <span>팔로우</span>
-              <span style="font-weight:bold;">{{ profile.followings }}</span>
+              <span style="font-weight:bold;">
+              <!-- {{ profile.followings }} -->
+              88
+              </span>
             </a>
           </b-col>
         </b-row>
@@ -114,7 +123,8 @@
         </b-row>
         <b-row>
           <b-col cols="8" style="text-align: left; padding: 0;">
-            <div>{{ userInfo.introduction }}</div>
+            <div>{{ userInfo.introduction }}
+            </div>
           </b-col>
           <!-- <b-col cols="4">
             <div style="text-align:right;">
