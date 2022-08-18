@@ -13,7 +13,7 @@
               @click="getClickNickname(profile.nickname)">{{ profile.nickname }}</span>
             <b-button size="sm" variant="link"
               style="color: black; text-decoration: none; font-weight: 100; border: 1px solid; vertical-align:super;"
-              v-b-modal.chatting2 @click="getTargetId(profile.nickname)">
+              v-b-modal.chatting2 @click="getTargetId(profile.email)">
               메시지 보내기</b-button>
             <b-button size="sm" variant="link"
               style="color: black; background-color: white; text-decoration: none; font-weight: 100; border: 1px solid; margin-left: 12px; vertical-align:super;"
