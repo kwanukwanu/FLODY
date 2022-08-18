@@ -43,10 +43,12 @@ async function get_group_one(groNo, success, fail) {
 }
 
 // 검색어로 스터디 그룹 조회
-async function get_group_by_keyword(keyword, success, fail) {
+async function get_group_by_keyword(input, success, fail) {
   console.log("axios 수행 시작");
-  console.log(keyword);
-  await api.get(`/group/search?keyword=${keyword}`).then(success).catch(fail)
+  console.log(input.keyword);
+  console.log(input.pageNow);
+  console.log(input.size);
+  await api.get(`/group/search?keyword=${input.keyword}&page=${input.pageNow}&size=${input.size}`).then(success).catch(fail)
 }
 
 // 그룹 추가

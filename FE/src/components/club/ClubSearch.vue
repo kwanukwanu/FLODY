@@ -62,17 +62,60 @@
               </b-tr>
             </b-thead>
             <tbody>
-              <club-search-item v-for="(item, index) in groupSearchResult" :key="(item.index = index)" v-bind="item">
+              <club-search-item v-for="(item, index) in groupSearchResult" :key="(item.index = ((5) * (searchInput.pageNow)) + index)" v-bind="item">
               </club-search-item>
             </tbody>
         </b-table-simple>
 
-        <div id="table_pagination" style="text-align: center; margin-bottom: 60px;">
+        <!-- <div id="table_pagination" style="text-align: center; margin-bottom: 60px;">
           <b-button class="page_button" variant="link">&lt; </b-button>
-          <b-button class="page_button" variant="link">1</b-button>
-          <b-button class="page_button" variant="link">2</b-button>
-          <b-button class="page_button" variant="link">3</b-button>
+          <b-button class="page_button" variant="link" @click="pageNum($event)" v-if="input.pageNow < (resultLength / 5) - 1">1</b-button>
+          <b-button class="page_button" variant="link" @click="pageNum($event)">2</b-button>
+          <b-button class="page_button" variant="link" @click="pageNum($event)">3</b-button>
           <b-button class="page_button" variant="link">&gt; </b-button>
+        </div> -->
+        <div class="paging" style="text-align: center; margin-bottom: 60px;">
+          <span v-if="searchInput.pageNow > 2">
+            <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100; border: solid 1px; border-color: #A48282;" 
+              @click="pageNum(-3)">&lt;</b-button>
+          </span>
+          <span v-else></span>
+          <!-- <span v-if="input.pageNow > 2">
+          <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" 
+            @click="pageNum($event)">{{ input.pageNow - 2 }}</b-button>
+          </span>
+          <span v-else></span> -->
+          <span v-if="searchInput.pageNow > 1">
+          <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100; border: solid 1px; border-color: #A48282;" 
+            @click="pageNum(-2)">{{ searchInput.pageNow - 1 }}</b-button>
+          </span>
+          <span v-else></span>
+          <span v-if="searchInput.pageNow > 0">
+          <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100; border: solid 1px; border-color: #A48282;" 
+            @click="pageNum(-1)">{{ searchInput.pageNow }}</b-button>
+          </span>
+          <span v-else></span>
+          <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100; border: solid 1px; border-color: #A48282;">{{ searchInput.pageNow + 1 }}</b-button>
+          <span v-if="searchInput.pageNow < (resultLength / 5) - 1">
+          <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100; border: solid 1px; border-color: #A48282;" 
+            @click="pageNum(1)">{{ searchInput.pageNow + 2 }}</b-button>
+          </span>
+          <span v-else></span>
+          <span v-if="searchInput.pageNow < (resultLength / 5) - 2">
+          <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100; border: solid 1px; border-color: #A48282;" 
+            @click="pageNum(2)">{{ searchInput.pageNow + 3 }}</b-button>
+          </span>
+          <span v-else></span>
+          <!-- <span v-if="searchInput.pageNow < (resultLength / 5) - 3">
+          <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" 
+            @click="pageNum($event)">{{ searchInput.pageNow + 4 }}</b-button>
+          </span>
+          <span v-else></span> -->
+          <span v-if="searchInput.pageNow < (resultLength / 5) - 3">
+          <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100; border: solid 1px; border-color: #A48282;" 
+            @click="pageNum(3)">&gt;</b-button>
+          </span>
+          <span v-else></span>
         </div>
 
         <b-row id="study_info">
@@ -247,8 +290,9 @@ export default{
     const groupInfo = computed(() => store.state.groupStore.groupInfo);
     const groupMember = computed(() => store.state.groupStore.groupMember);
     const myInfo = computed(() => store.state.memberStore.userInfo);
+    const searchInput = computed(() => store.state.groupStore.input);
 
-    return { store, myGroupItem, groupSearchResult, groupInfo, groupMember, myInfo };
+    return { store, myGroupItem, groupSearchResult, groupInfo, groupMember, myInfo, searchInput };
   },
   data() {
       return {
@@ -258,6 +302,11 @@ export default{
         },
         studyGNo: 0,
         newStudyMember: [
+
+        ],
+        
+        resultLength: 0,
+        pageIdx: [
 
         ],
         items: [
@@ -400,9 +449,29 @@ export default{
     async studySearch() {
       let keyword = document.getElementById('study_search_input').value;
       console.log(keyword)
+      this.searchInput.keyword = keyword;
+
+      let countLength = new Object();
+      countLength.keyword = keyword;
+      await this.store.dispatch("groupStore/set_group_search_result", countLength);
+      console.log(this.groupSearchResult);
+      this.resultLength = this.groupSearchResult.length;
+      console.log(this.resultLength);
+      for(let idx = 0; idx < this.resultLength / 5; idx++) {
+        this.pageIdx.push(idx);
+      }
+      console.log(this.pageIdx);
 
       console.log("get_group_by_keyword 시작");
-      await this.store.dispatch("groupStore/set_group_search_result", keyword);
+      await this.store.dispatch("groupStore/set_group_search_result", this.searchInput);
+      console.log(this.groupSearchResult);
+      console.log("get_group_by_keyword 시작");
+    },
+    async pageNum(num) {
+      this.searchInput.pageNow = this.searchInput.pageNow + num;
+
+      console.log("get_group_by_keyword 시작");
+      await this.store.dispatch("groupStore/set_group_search_result", this.searchInput);
       console.log(this.groupSearchResult);
       console.log("get_group_by_keyword 시작");
     }
