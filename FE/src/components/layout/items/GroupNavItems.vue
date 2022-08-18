@@ -2,7 +2,7 @@
     <b-row style="text-align: left; margin-bottom: 10px;">
         <details>
             <summary style="font-weight: bold; margin-top: 7px;">
-                {{ groNo }} : {{ groName }}
+                {{ groName }}
                 <!-- <b-button size="sm" variant="link" @click="gotoPage('/group')">
                     <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
