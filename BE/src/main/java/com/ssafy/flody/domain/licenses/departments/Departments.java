@@ -19,5 +19,5 @@ public class Departments {
     @Column(nullable = false)
     private String udeptnm;
     @Column(nullable = false)
-    private int udeptcd;
+    private String udeptcd;
 }

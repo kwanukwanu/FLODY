@@ -20,5 +20,5 @@ public class MFields {
     @Column(nullable = false)
     private String mobligfldnm;
     @Column(nullable = false)
-    private int mobligfldcd;
+    private String mobligfldcd;
 }
