@@ -473,12 +473,6 @@ public class ApiController {
         return getResponseEntity(commentService.findComments(posNo));
     }
 
-    // 댓글은 단일조회할 일이 없다는 판단
-//    @GetMapping("/comment")
-//    public ResponseEntity<Map<String, Object>> CommentDetails(@RequestParam Long id) {
-//        return getMapResponseEntity(id);
-//    }
-
     @PostMapping("/comment")
     public ResponseEntity<Map<String, Object>> CommentAdd(@RequestHeader(value = HEADER_AUTH) String token, @RequestBody CommentCreateRequestDto requestDto) throws Exception {
         return getResponseEntity(commentService.addComment(jwtService.decodeToken(token), requestDto));
@@ -503,34 +497,6 @@ public class ApiController {
     public ResponseEntity<Map<String, Object>> CommentLikeRemove(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam Long comNo) throws Exception {
         return getResponseEntity(commentLikeService.removeCommentLike(jwtService.decodeToken(token), comNo ));
     }
-
-    // DIRECT MESSAGE
-//    @GetMapping("/direct-messages")
-//    public ResponseEntity<Map<String, Object>> DMessageList(@RequestParam Long id) {
-//        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
-//        return getMapResponseEntity(id);
-//    }
-
-//    @GetMapping("/direct-message")
-//    public ResponseEntity<Map<String, Object>> DMessageDetails(@RequestParam Long id) {
-//        return getMapResponseEntity(id);
-//    }
-
-//    DMessage 관련 Dto 추가 생성 필요
-//    @PostMapping("/direct-message")
-//    public ResponseEntity<String> DMessageAdd(@RequestBody DMessageCreateRequestDto requestDto) {
-//        return getStringResponseEntity(requestDto);
-//    }
-
-//    @PutMapping("/direct-message")
-//    public ResponseEntity<String> DMessageModify(@RequestBody DMessageUpdateRequestDto requestDto) {
-//        return getStringResponseEntity(requestDto);
-//    }
-
-//    @DeleteMapping("/direct-message")
-//    public ResponseEntity<String> DMessageRemove(@RequestParam Long id) {
-//        return getStringResponseEntity(id);
-//    }
 
     // FLOWER
     @GetMapping("/flowers")
@@ -560,7 +526,7 @@ public class ApiController {
 
     // LICENSE
     @GetMapping("/licenses")
-    public ResponseEntity<Map<String, Object>> LicenseList(@RequestParam(defaultValue = "") String fldnm, @RequestParam(defaultValue = "") String mfldnm, @RequestParam String category, @RequestParam(defaultValue = "") String keyword, Pageable pageable) {
+    public ResponseEntity<Map<String, Object>> LicenseList(@RequestParam(defaultValue = "") String fldnm, @RequestParam(defaultValue = "") String mfldnm, @RequestParam(defaultValue = "종목명") String category, @RequestParam(defaultValue = "") String keyword, Pageable pageable) {
         return getResponseEntity(licenseService.findLicenses(fldnm, mfldnm, category, keyword, pageable));
     }
 
@@ -574,25 +540,9 @@ public class ApiController {
         return getResponseEntity(licenseService.findAllMFields(fldnm));
     }
 
-//    @GetMapping("/license")
-//    public ResponseEntity<Map<String, Object>> LicenseDetails(@RequestParam Long id) {
-//        return getMapResponseEntity(id);
-//    }
-
-//    License 관련 Dto 추가 생성 필요
     @GetMapping("/license/unavailable")
     public ResponseEntity<Map<String, Object>> LicenseAdd() throws Exception {
         return getResponseEntity(licenseService.getLicense());
-    }
-
-//    @PutMapping("/license")
-//    public ResponseEntity<String> LicenseModify(@RequestBody LicenseUpdateRequestDto requestDto) {
-//        return getStringResponseEntity(requestDto);
-//    }
-
-    @DeleteMapping("/license")
-    public ResponseEntity<String> LicenseRemove(@RequestParam Long id) {
-        return getStringResponseEntity(id);
     }
 
 
@@ -609,48 +559,6 @@ public class ApiController {
             result.put("msg", FAIL);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-        return new ResponseEntity<>(result, status);
-    }
-
-    public ResponseEntity<Map<String, Object>> getMapResponseEntity(Object obj) {
-        Map<String, Object> result = new HashMap<>();
-        HttpStatus status;
-
-        try {
-            if ("test".equals(obj) || obj.equals(1L)) {
-                result.put("item", obj);
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("item", obj);
-                result.put("msg", FAIL);
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result.put("item", obj);
-            result.put("msg", ERROR);
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-
-        return new ResponseEntity<>(result, status);
-    }
-
-    public ResponseEntity<String> getStringResponseEntity(Object obj) {
-        String result;
-        HttpStatus status;
-
-        try {
-            result = obj.toString();
-            if ("test".equals(obj) || obj.equals(1L)) {
-//                result = SUCCESS;
-            } else {
-//                result = FAIL;
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            result = ERROR;
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-
         return new ResponseEntity<>(result, status);
     }
 }
