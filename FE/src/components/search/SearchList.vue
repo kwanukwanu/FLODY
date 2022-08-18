@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <b-table responsive hover :items="items"></b-table> -->
-    <b-table-simple style="cursor:pointer" fixed hover>
+    <b-table-simple fixed hover>
           <b-thead style="background-color: #f8f8ff">
               <b-tr>
                 <b-th>번호</b-th>
