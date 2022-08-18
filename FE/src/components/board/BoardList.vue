@@ -42,41 +42,51 @@
     </b-card>
     <br />
     <div class="paging">
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page > 5"
+      <span v-if="page > 5">
+        <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100"
         @click="movePage(-5)">&lt;
       </b-button>
-      <b-button variant="link" v-else></b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page > 3"
+      </span>
+      <span v-else></span>
+      <span v-if="page > 3">
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100"
         @click="movePage(-3)">{{ page - 3 }}</b-button>
-      <b-button variant="link" v-else></b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page > 2"
+      </span>
+      <span v-else></span>
+      <span v-if="page > 2">
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" 
         @click="movePage(-2)">{{ page - 2 }}</b-button>
-      <b-button variant="link" v-else></b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page > 1"
+      </span>
+      <span v-else></span>
+      <span v-if="page > 1">
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" 
         @click="movePage(-1)">{{ page - 1 }}</b-button>
-      <b-button variant="link" v-else></b-button>
+      </span>
+      <span v-else></span>
       <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100">{{ page }}</b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page < max - 1"
+      <span v-if="page < max - 1">
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" 
         @click="movePage(1)">{{ page + 1 }}</b-button>
-      <b-button variant="link" v-else></b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page < max - 2"
+      </span>
+      <span v-else></span>
+      <span v-if="page < max - 2">
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" 
         @click="movePage(2)">{{ page + 2 }}</b-button>
-      <b-button variant="link" v-else></b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page < max - 3"
+      </span>
+      <span v-else></span>
+      <span v-if="page < max - 3">
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" 
         @click="movePage(3)">{{ page + 3 }}</b-button>
-      <b-button variant="link" v-else></b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page < max - 5"
-        @click="movePage(5)">&gt;
-      </b-button>
-      <b-button variant="link" v-else></b-button>
+      </span>
+      <span v-else></span>
+      <span v-if="page < max - 5">
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" 
+        @click="movePage(5)">&gt;</b-button>
+      </span>
+      <span v-else></span>
     </div>
-    <!-- <div class="overflow-auto">
-      <div>
-        <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" first-number></b-pagination>
-      </div>
-    </div> -->
   </b-container>
-  <br /><br />
+  <br />
 
   <b-row style="margin-bottom: 10px">
     <b-col cols="3">
@@ -140,6 +150,8 @@ export default {
   components: { BoardListItem },
   data() {
     return {
+      page: 1,
+      max: 10,
       selected: 'A',
       options: [
         { item: 'A', name: '전체기간' },
