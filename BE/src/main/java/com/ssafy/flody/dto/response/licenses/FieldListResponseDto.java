@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class FieldListResponseDto {
     private String obligfldnm;
-    private Integer oblilgfldcd;
+    private String oblilgfldcd;
 
     public FieldListResponseDto(Fields entity){
         this.obligfldnm = entity.getObligfldnm();

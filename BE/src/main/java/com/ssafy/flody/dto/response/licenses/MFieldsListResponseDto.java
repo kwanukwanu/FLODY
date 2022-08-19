@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class MFieldsListResponseDto {
     private String mobligfldnm;
-    private Integer moblilgfldcd;
+    private String moblilgfldcd;
 
     public MFieldsListResponseDto(MFields entity){
         this.mobligfldnm = entity.getMobligfldnm();

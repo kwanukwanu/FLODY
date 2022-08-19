@@ -15,7 +15,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PostCreateRequestDto {
     private String title;
+    @Nullable
     private String content;
+    @Nullable
     private String hashtag;
     private int likeCnt = 0;
     private int commentCnt = 0;

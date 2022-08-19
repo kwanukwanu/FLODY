@@ -13,7 +13,9 @@ import lombok.Setter;
 public class UserCreateRequestDto {
     private String email;
     private String password;
-    private String profile;
+
+    private String introduction;
+    private String profile = "basic profile.jpg";
     private String name;
     private String nickname;
     private String address;
@@ -23,9 +25,10 @@ public class UserCreateRequestDto {
     @Builder
     public UserCreateRequestDto(
             String email, String password, String profile, String name, String nickname,
-            String address, String phone, Boolean admin ){
+            String address, String phone, Boolean admin, String introduction){
                 this.email = email;
                 this.password = password;
+                this.introduction = introduction;
                 this.profile = profile;
                 this.name = name;
                 this.nickname = nickname;
@@ -39,6 +42,7 @@ public class UserCreateRequestDto {
                 return Users.builder()
                         .email(email)
                         .password(password)
+                        .introduction(introduction)
                         .profile(profile)
                         .name(name)
                         .nickname(nickname)

@@ -7,6 +7,8 @@ import lombok.Getter;
 public class UserInfoResponseDto {
     private String email;
     private String password;
+
+    private String introduction;
     private String profile;
     private String name;
     private String nickname;
@@ -16,6 +18,7 @@ public class UserInfoResponseDto {
     public UserInfoResponseDto(Users entity){
         this.email = entity.getEmail();
         this.password = entity.getPassword();
+        this.introduction = entity.getIntroduction();
         this.profile = entity.getProfile();
         this.name = entity.getName();
         this.nickname = entity.getNickname();

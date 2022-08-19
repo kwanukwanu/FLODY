@@ -3,7 +3,9 @@ package com.ssafy.flody.dto.response.groups;
 import com.ssafy.flody.domain.groups.schedules.GSchedules;
 import lombok.Getter;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Getter
 public class GroupScheduleDetailResponseDto {
@@ -14,10 +16,14 @@ public class GroupScheduleDetailResponseDto {
     private Boolean done;
 
     public GroupScheduleDetailResponseDto(GSchedules entity){
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
+        this.gsNo = entity.getGsNo();
         this.title = entity.getTitle();
         this.detail = entity.getDetail();
-        this.startDate = entity.getStartDate();
-        this.endDate = entity.getEndDate();
+        cal.setTime(entity.getStartDate());
+        this.startDate = cal.getTime();
+        cal.setTime(entity.getEndDate());
+        this.endDate = cal.getTime();
         this.done = entity.getDone();
     }
 }

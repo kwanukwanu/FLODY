@@ -13,9 +13,13 @@ public class GroupScheduleListResponseDto {
     private Boolean done;
 
     public GroupScheduleListResponseDto(GSchedules entity){
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
+        this.gsNo = entity.getGsNo();
         this.title = entity.getTitle();
-        this.startDate = entity.getStartDate();
-        this.endDate = entity.getEndDate();
+        cal.setTime(entity.getStartDate());
+        this.startDate = cal.getTime();
+        cal.setTime(entity.getEndDate());
+        this.endDate = cal.getTime();
         this.done = entity.getDone();
     }
 }

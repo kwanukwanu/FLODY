@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -30,14 +32,19 @@ public class USchedules {
     private Date startDate;
     @Column(nullable = false)
     private Date endDate;
-    @Column(nullable = false)
+    @Column
     private Boolean done;
 
     public void update(String title, String detail, Date startDate, Date endDate, Boolean done) {
-        this.title = title;
-        this.detail = detail;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.done = done;
+        if (title != null)
+            this.title = title;
+        if (detail != null)
+            this.detail = detail;
+        if (startDate != null)
+            this.startDate = startDate;
+        if (endDate != null)
+            this.endDate = endDate;
+        if (done != null)
+            this.done = done;
     }
 }

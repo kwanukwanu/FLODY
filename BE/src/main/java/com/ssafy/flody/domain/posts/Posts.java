@@ -7,10 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Builder
@@ -34,7 +37,7 @@ public class Posts {
     private String title;
     @Column
     private String content;
-    @Column(nullable = false)
+    @Column
     private String hashtag;
     @Column(nullable = false)
     private int likeCnt;
@@ -42,4 +45,16 @@ public class Posts {
     private int commentCnt;
     @CreatedDate
     private Date postDate;
+
+    @OneToMany(mappedBy = "posNo", cascade = CascadeType.ALL)
+    private List<Posts> children;
+
+    public void update(String title, String content, String hashtag) {
+        if(title != null)
+            this.title = title;
+        if(content != null)
+            this.content = content;
+        if(hashtag != null)
+            this.hashtag = hashtag;
+    }
 }

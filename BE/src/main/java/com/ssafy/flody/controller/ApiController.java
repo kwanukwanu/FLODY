@@ -1,5 +1,6 @@
 package com.ssafy.flody.controller;
 
+import com.ssafy.flody.domain.groups.Groups;
 import com.ssafy.flody.dto.request.posts.PostCreateRequestDto;
 import com.ssafy.flody.dto.request.comments.CommentCreateRequestDto;
 import com.ssafy.flody.dto.request.comments.CommentUpdateRequestDto;
@@ -12,11 +13,20 @@ import com.ssafy.flody.dto.response.users.UserScheduleListResponseDto;
 import com.ssafy.flody.service.JWTService;
 import com.ssafy.flody.service.groups.GroupService;
 import com.ssafy.flody.service.groups.members.GroupMemberService;
+import com.ssafy.flody.service.groups.schedules.GroupScheduleService;
+import com.ssafy.flody.service.licenses.LicenseService;
+import com.ssafy.flody.service.posts.PostService;
+import com.ssafy.flody.service.posts.like.CLikeService;
+import com.ssafy.flody.service.posts.like.PLikeService;
+import com.ssafy.flody.service.posts.report.PReportService;
+import com.ssafy.flody.service.posts.scrap.PScrapService;
 import com.ssafy.flody.service.users.UserService;
 import com.ssafy.flody.service.users.follows.UFollowService;
 import com.ssafy.flody.service.users.goals.UGoalService;
 import com.ssafy.flody.service.users.schedules.UScheduleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +52,15 @@ public class ApiController {
     private final GroupService groupService;
     private final GroupMemberService groupMemberService;
 
+    private final GroupScheduleService groupScheduleService;
+
+    private final PLikeService postLikeService;
+    private final PReportService postReportService;
+    private final PScrapService postScrapService;
+    private final FlowerService flowerService;
+
+    private final CLikeService commentLikeService;
+    private final LicenseService licenseService;
     // USER
     @GetMapping("/users") // 모든 유저 리스트 출력 (필요한 기능이 생각나진 않음)
     public ResponseEntity<Map<String, Object>> UserList() {
@@ -532,6 +551,18 @@ public class ApiController {
         }
         return new ResponseEntity<>(result, status);
     }
+
+    @GetMapping("/group/search")
+    public ResponseEntity<Map<String, Object>> GroupSearchList(@RequestParam String keyword, Pageable pageable) throws Exception {
+        return getResponseEntity(groupService.findGroupsByName(keyword, pageable));
+    }
+
+    // Get GroupMembers
+    @GetMapping("/group/members")
+    public ResponseEntity<Map<String, Object>> GroupMemberList(@RequestParam Long groNo) {
+        return getResponseEntity(groupMemberService.findMembers(groNo));
+    }
+
     // Get GroupMember
     @GetMapping("/group/{groNo}")
     public ResponseEntity<Map<String, Object>> GroupMemberDetails() {
@@ -660,11 +691,9 @@ public class ApiController {
     }
 
     // Board
-    @GetMapping("/boards")
-    public ResponseEntity<Map<String, Object>> BoardList(@RequestParam String category) {
-        // 개인 피드는 여기에 RequestParam 걸어서 option처럼 주는게 어떨까 싶습니다.
-        // 추가로 정렬도 RequestParam으로 주면 좋을 것 같습니다.
-        return getMapResponseEntity(category);
+    @GetMapping("/posts")
+    public ResponseEntity<Map<String, Object>> PostList(@RequestParam String category, Pageable pageable) {
+        return getResponseEntity(postService.findPosts(category, pageable));
     }
 
     @GetMapping("/board")
@@ -729,36 +758,13 @@ public class ApiController {
     }
 
     @GetMapping("/comment/like")
-    public ResponseEntity<String> CommentLike(@RequestParam Long id) {
-        return getStringResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> CommentLikeAdd(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam Long comNo) throws Exception {
+        return getResponseEntity(commentLikeService.addCommentLike(jwtService.decodeToken(token), comNo ));
     }
 
-    // DIRECT MESSAGE
-    @GetMapping("/direct-messages")
-    public ResponseEntity<Map<String, Object>> DMessageList(@RequestParam Long id) {
-        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
-        return getMapResponseEntity(id);
-    }
-
-    @GetMapping("/direct-message")
-    public ResponseEntity<Map<String, Object>> DMessageDetails(@RequestParam Long id) {
-        return getMapResponseEntity(id);
-    }
-
-//    DMessage 관련 Dto 추가 생성 필요
-//    @PostMapping("/direct-message")
-//    public ResponseEntity<String> DMessageAdd(@RequestBody DMessageCreateRequestDto requestDto) {
-//        return getStringResponseEntity(requestDto);
-//    }
-
-//    @PutMapping("/direct-message")
-//    public ResponseEntity<String> DMessageModify(@RequestBody DMessageUpdateRequestDto requestDto) {
-//        return getStringResponseEntity(requestDto);
-//    }
-
-    @DeleteMapping("/direct-message")
-    public ResponseEntity<String> DMessageRemove(@RequestParam Long id) {
-        return getStringResponseEntity(id);
+    @DeleteMapping("/comment/like")
+    public ResponseEntity<Map<String, Object>> CommentLikeRemove(@RequestHeader(value = HEADER_AUTH) String token, @RequestParam Long comNo) throws Exception {
+        return getResponseEntity(commentLikeService.removeCommentLike(jwtService.decodeToken(token), comNo ));
     }
 
     // FLOWER
@@ -791,74 +797,39 @@ public class ApiController {
 
     // LICENSE
     @GetMapping("/licenses")
-    public ResponseEntity<Map<String, Object>> LicenseList(@RequestParam Long id) {
-        // header에서 token을 추출해 id값을 지정하는 방식으로 변경 예정
-        // 여기에 filter 처리를 위한 parameter도 추가 예정
-        return getMapResponseEntity(id);
+    public ResponseEntity<Map<String, Object>> LicenseList(@RequestParam(defaultValue = "") String fldnm, @RequestParam(defaultValue = "") String mfldnm, @RequestParam(defaultValue = "종목명") String category, @RequestParam(defaultValue = "") String keyword, Pageable pageable) {
+        return getResponseEntity(licenseService.findLicenses(fldnm, mfldnm, category, keyword, pageable));
     }
 
-    @GetMapping("/license")
-    public ResponseEntity<Map<String, Object>> LicenseDetails(@RequestParam Long id) {
-        return getMapResponseEntity(id);
+    @GetMapping("/license/fields")
+    public ResponseEntity<Map<String, Object>> FieldList() {
+        return getResponseEntity(licenseService.findAllFields());
     }
 
-//    License 관련 Dto 추가 생성 필요
-//    @PostMapping("/license")
-//    public ResponseEntity<String> LicenseAdd(@RequestBody LicenseCreateRequestDto requestDto) {
-//        return getStringResponseEntity(requestDto);
-//    }
+    @GetMapping("/license/mfields")
+    public ResponseEntity<Map<String, Object>> MFieldList(String fldnm) {
+        return getResponseEntity(licenseService.findAllMFields(fldnm));
+    }
 
-//    @PutMapping("/license")
-//    public ResponseEntity<String> LicenseModify(@RequestBody LicenseUpdateRequestDto requestDto) {
-//        return getStringResponseEntity(requestDto);
-//    }
-
-    @DeleteMapping("/license")
-    public ResponseEntity<String> LicenseRemove(@RequestParam Long id) {
-        return getStringResponseEntity(id);
+    @GetMapping("/license/unavailable")
+    public ResponseEntity<Map<String, Object>> LicenseAdd() throws Exception {
+        return getResponseEntity(licenseService.getLicense());
     }
 
 
     // COMMON METHODS
-    public ResponseEntity<Map<String, Object>> getMapResponseEntity(Object obj) {
+    public ResponseEntity<Map<String, Object>> getResponseEntity(Object obj) {
         Map<String, Object> result = new HashMap<>();
         HttpStatus status;
-
         try {
-            if ("test".equals(obj) || obj.equals(1L)) {
-                result.put("item", obj);
-                result.put("msg", SUCCESS);
-            } else {
-                result.put("item", obj);
-                result.put("msg", FAIL);
-            }
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
             result.put("item", obj);
-            result.put("msg", ERROR);
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-
-        return new ResponseEntity<>(result, status);
-    }
-
-    public ResponseEntity<String> getStringResponseEntity(Object obj) {
-        String result;
-        HttpStatus status;
-
-        try {
-            result = obj.toString();
-            if ("test".equals(obj) || obj.equals(1L)) {
-//                result = SUCCESS;
-            } else {
-//                result = FAIL;
-            }
+            result.put("msg", SUCCESS);
             status = HttpStatus.ACCEPTED;
         } catch (Exception e) {
-            result = ERROR;
+            result.put("item", e.getMessage());
+            result.put("msg", FAIL);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-
         return new ResponseEntity<>(result, status);
     }
 }

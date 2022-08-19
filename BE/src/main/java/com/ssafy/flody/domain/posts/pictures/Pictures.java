@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -21,7 +23,7 @@ public class Pictures {
     @JoinColumn(name = "pos_no")
     private Posts post;
     @Column(nullable = false)
-    private int order;
+    private int pOrder;
     @Column(nullable = false)
     private String url;
 }

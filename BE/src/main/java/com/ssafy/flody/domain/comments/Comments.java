@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -40,4 +42,26 @@ public class Comments {
     private Date postDate;
     @Column(nullable = false)
     private int kids;
+
+    public void addKid(Date postDate) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(postDate);
+        cal.add(Calendar.DATE, 1);
+        this.postDate = cal.getTime();
+        kids++;
+    }
+
+    public void subKid(Date postDate) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(postDate);
+        cal.add(Calendar.DATE, 1);
+        this.postDate = cal.getTime();
+        kids--;
+    }
+
+    public void update(String content, Date postDate) {
+        this.content = content;
+        if (postDate != null)
+            this.postDate = postDate;
+    }
 }

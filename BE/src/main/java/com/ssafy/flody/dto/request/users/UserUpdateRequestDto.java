@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class UserUpdateRequestDto {
     private String profile;
     private String nickname;
+    private String introduction;
     private String address;
     private String phone;
 

@@ -4,6 +4,7 @@ import com.ssafy.flody.domain.users.schedules.USchedules;
 import lombok.Getter;
 
 import java.util.Date;
+import java.util.TimeZone;
 
 @Getter
 public class UserScheduleListResponseDto {
@@ -14,9 +15,13 @@ public class UserScheduleListResponseDto {
     private Boolean done;
 
     public UserScheduleListResponseDto(USchedules entity){
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
+        this.usNo = entity.getUsNo();
         this.title = entity.getTitle();
-        this.startDate = entity.getStartDate();
-        this.endDate = entity.getEndDate();
+        cal.setTime(entity.getStartDate());
+        this.startDate = cal.getTime();
+        cal.setTime(entity.getEndDate());
+        this.endDate = cal.getTime();
         this.done = entity.getDone();
     }
 }

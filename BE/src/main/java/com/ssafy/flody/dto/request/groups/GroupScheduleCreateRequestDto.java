@@ -5,6 +5,8 @@ import com.ssafy.flody.domain.groups.schedules.GSchedules;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 import java.util.Date;
 
@@ -12,6 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class GroupScheduleCreateRequestDto {
     private String title;
+    @Nullable
     private String detail;
     private Date startDate;
     private Date endDate;

@@ -19,5 +19,5 @@ public class Fields {
     @Column(nullable = false)
     private String obligfldnm;
     @Column(nullable = false)
-    private int obligfldcd;
+    private String obligfldcd;
 }
