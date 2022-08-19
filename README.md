@@ -6,7 +6,7 @@
 
 | Application                          | Domain                        | Language                         | Framework                            |
 | ------------------------------------ | ----------------------------- | -------------------------------- | ------------------------------------ |
-| :white_check_mark: Desktop Web       | :white_check_mark:Web Design  | :white_check_mark: JavaScript    | :white_check_mark:Vue.js             |
+| :white_check_mark: Desktop Web       | :white_check_mark: Web Design  | :white_check_mark: JavaScript    | :white_check_mark:Vue.js             |
 | :black_square_button: Mobile Web     | :black_square_button: Web RCT | :black_square_button: TypeScript | :black_square_button:React           |
 | :black_square_button: Responsive Web | :black_square_button: Web IoT | :black_square_button: C/C++      | :black_square_button: Angular        |
 | :black_square_button: Android App    | :black_square_button: Mobile  | :black_square_button: C#         | :black_square_button: Node.js        |
