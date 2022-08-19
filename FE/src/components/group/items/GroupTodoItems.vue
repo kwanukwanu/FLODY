@@ -1,7 +1,7 @@
 <template>
     <li>
         <div class="checkbox">
-            <input type="checkbox" name="packersOff" :id="index" :checked="isComplete" @click="logingCheckbox()"
+            <input type="checkbox" name="packersOff" :id="index" :checked="done" @click="logingCheckbox()"
                 style="margin-right: 7px" />
             <label :for="index" class="strikethrough">{{ title }}</label>
         </div>
