@@ -21,14 +21,14 @@
           </span>
         </b-row>
         <b-row style="margin-bottom: 10px;">
-          <time style="text-align: left; padding: 0px; color: gray; font-size: 12px;">15시간전</time>
+          <time style="text-align: left; padding: 0px; color: gray; font-size: 12px;">{{ setTimes }}</time>
         </b-row>
       </b-col>
     </b-row>
     <b-row>
-      <!-- <newspid-item v-for="(item) in items" :key="item.index" v-bind="item"> -->
-      <newspid-item v-for="{ contents, favor, profile, tags, times, userId, index } in comments" :key="index"
-        :contents="contents" :favor="favor" :profilePic="profile" :tags="tags" :times="times" :userId="userId">
+      <newspid-item v-for="(item, index) in comments" :key="item.index = index" v-bind="item">
+        <!-- <newspid-item v-for="{ contents, favor, profile, tags, times, userId, index } in comments" :key="index"
+        :contents="contents" :favor="favor" :profilePic="profile" :tags="tags" :times="times" :userId="userId"> -->
       </newspid-item>
     </b-row>
     <b-row
@@ -43,22 +43,25 @@ import NewspidItem from "@/components/newspid/items/NewspidItem.vue"
 
 import { computed } from "vue";
 import { useStore } from "vuex";
+//import { getcomments } from "@/api/newspid.js";
 
 export default {
   props: {
-    author: String,
-    profile: String,
-    contents: String,
-    tags: Array,
-    creativetimes: Date,
-    favor: Number,
+    pidNo: Number,          // 뉴스피드 번호
+    author: String,         // 뉴스피드 작성자
+    profile: String,        // 작성자 사진
+    contents: String,       // 작성 내용 
+    tags: Array,            // 태그
+    creativetimes: Object,    // 작성 날짜
     comments: Array,
+
   },
   components: {
     NewspidItem,
   },
   data() {
     return {
+      //comments: null,
       //tags: ["영국", "런던", "스터디"],
       //Myname: "Brown_Cat",
     }
@@ -78,7 +81,32 @@ export default {
     }
   },
   mounted() {
-    console.log(this.author);
+    //this.comments = getcomments(this.pidNo);
+    console.log("ListBody----------------------");
+    console.log(this.comments);
+  },
+  computed: {
+    setTimes() {
+      const now = new Date();
+      const year = this.creativetimes.year;
+      const month = this.creativetimes.month;
+      const date = this.creativetimes.date;
+      const hour = this.creativetimes.hour;
+      const min = this.creativetimes.min;
+
+      console.log("year : " + year);
+      if (now.getFullYear() - year > 0)
+        return (now.getFullYear() - year) + "년 전";
+      else if (now.getMonth() - month > 0) // year = 0 이므로
+        return (now.getMonth() - month) + "개월 전";
+      else if (now.getDate() - date > 0)
+        return (now.getDate() - date) + "일 전";
+      else if (now.getHours() - hour > 0)
+        return (now.getHours() - hour) + "시간 전";
+      else if (now.getMinutes() - min > 0)
+        return (now.getMinutes() - min) + "분 전";
+      else return "방금 전";
+    }
   }
 }
 </script>

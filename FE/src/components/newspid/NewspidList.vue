@@ -12,7 +12,7 @@
     <hr style="margin: 5px;">
     <!-- footer -->
     <b-row rows="2">
-      <newspid-list-footer></newspid-list-footer>
+      <newspid-list-footer v-bind="$props"></newspid-list-footer>
     </b-row>
   </div>
 
@@ -25,12 +25,13 @@ import NewspidListFooter from "@/components/newspid/lists/NewspidListFooter.vue"
 
 export default {
   props: {
-    author: String,
-    profile: String,
-    contents: String,
-    tags: Array,
-    creativetimes: Date,
-    favor: Number,
+    pidNo: Number,          // 뉴스피드 번호
+    author: String,         // 뉴스피드 작성자
+    profile: String,        // 작성자 사진
+    contents: String,       // 작성 내용 
+    tags: Array,            // 태그
+    creativetimes: Object,    // 작성 날짜
+    favor: Number,          // 좋아요 개수
     comments: Array,
   },
   components: {
@@ -45,7 +46,7 @@ export default {
   },
   mounted() {
     console.log("NewspidList")
-    console.log(this.author);
+    console.log(this.comments);
   }
 
 }

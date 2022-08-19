@@ -8,7 +8,7 @@
     <b-row>
       <span
         style="display: inline; padding: 0px; text-align: left; font-weight: 500; font-size: 14px; margin-top:5px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; width:70%">
-        <a @click="getClickNickname(author, profile)">{{ author }}</a>
+        <a @click="getClickNickname(author)">{{ author }}</a>
         <b-button
           style="color: black; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 14px;"
           v-b-modal.modal-5>
@@ -19,7 +19,7 @@
                 style="color: blue; background-color: white; border-color:white; width: 70px; text-decoration: none; padding: 0px 0px 0px 0px; font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 14px;">
                 • 팔로우</b-button> -->
     </b-row>
-    <b-row style="font-size:12px; width:70%">런던</b-row>
+    <b-row style="font-size:12px; width:70%">대한민국</b-row>
   </b-col>
   <b-col cols="1" style="padding: 0px 0px; margin-top: 8px;">
     <b-button size="sm" variant="link" style="width: 40px; text-decoration: none; padding:0px 0px;" v-b-modal.modal-4>
@@ -42,7 +42,7 @@ export default {
     profile: String,
     contents: String,
     tags: Array,
-    creativetimes: Date,
+    creativetimes: Object,
     favor: Number,
     comments: Array,
   },
@@ -54,21 +54,9 @@ export default {
     return { store, userInfo, clickNickname };
   },
   methods: {
-    getClickNickname(clickNickname, profile) {
+    getClickNickname(clickNickname) {
       console.log(clickNickname);
-      console.log(this.profile.nickName);
-      console.log(this.userInfo.nickname);
-      this.store.dispatch("newspidStore/setClickNickname", true);
-      const data = {
-        nickName: clickNickname,
-        profile: profile,
-        board_num: 44,
-        follower: 22,
-        follow: 13,
-        name: "홍시영",
-        contents: "비트 찍고 랩하지만 코딩도 잘 하는 기리보이입니다.",
-      }
-      this.store.dispatch("newspidStore/setprofile", data);
+      this.store.dispatch("newspidStore/setClickNickname", clickNickname);
     }
   },
   mounted() {
@@ -78,4 +66,11 @@ export default {
 </script>
 
 <style>
+.btn-link {
+  --bs-btn-focus-shadow-rgb: white;
+}
+
+.btn-secondary {
+  --bs-btn-focus-shadow-rgb: white;
+}
 </style>

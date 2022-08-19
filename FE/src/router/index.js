@@ -110,6 +110,11 @@ const routes = [
             path:"todo",
             name:"grouptodo",
             component:()=>import("@/components/group/GroupTodo.vue")
+          },
+          {
+            path:"field",
+            name:"groupfield",
+            component:()=>import("@/components/group/GroupField.vue")
           }
         ]
       },

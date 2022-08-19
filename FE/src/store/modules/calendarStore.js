@@ -1,3 +1,5 @@
+import { get_schedules_date } from "@/api/goal";
+
 const calendarStore = {
   namespaced: true,
   state: {
@@ -6,14 +8,7 @@ const calendarStore = {
       months: 8,
       days: 11,
     },
-    todos: [
-      {
-        dates: { years: 2022, months: 8, days: 11 },
-        isComplete: false,
-        color: "red",
-        nums: 0,
-      },
-    ],
+    todos: [],
     todo_list: [
       {
         dates: { years: 2022, months: 8, days: 11 },
@@ -48,8 +43,32 @@ const calendarStore = {
     ],
   },
   getters: {},
-  mutations: {},
-  actions: {},
+  mutations: {
+    SET_TODOS: (state, todos) => {
+      state.todos = todos;
+    },
+    SET_TODO_LIST: (state, todo_list) => {
+      state.todo_list = todo_list;
+    },
+  },
+  actions: {
+    async set_todos({ commit }, dates) {
+      await get_schedules_date(
+        dates,
+        (response) => {
+          if (response.data.msg === "SUCCESS") {
+            console.log("success todos");
+            commit("SET_TODOS", response.data.item);
+          } else {
+            console.log("responseError");
+          }
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
+    },
+  },
 };
 
 export default calendarStore;

@@ -42,55 +42,65 @@
     </b-card>
     <br />
     <div class="paging">
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page > 5"
+      <span v-if="page > 5">
+        <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100"
         @click="movePage(-5)">&lt;
       </b-button>
-      <b-button variant="link" v-else></b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page > 3"
+      </span>
+      <span v-else></span>
+      <span v-if="page > 3">
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100"
         @click="movePage(-3)">{{ page - 3 }}</b-button>
-      <b-button variant="link" v-else></b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page > 2"
+      </span>
+      <span v-else></span>
+      <span v-if="page > 2">
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" 
         @click="movePage(-2)">{{ page - 2 }}</b-button>
-      <b-button variant="link" v-else></b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page > 1"
+      </span>
+      <span v-else></span>
+      <span v-if="page > 1">
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" 
         @click="movePage(-1)">{{ page - 1 }}</b-button>
-      <b-button variant="link" v-else></b-button>
+      </span>
+      <span v-else></span>
       <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100">{{ page }}</b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page < max - 1"
+      <span v-if="page < max - 1">
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" 
         @click="movePage(1)">{{ page + 1 }}</b-button>
-      <b-button variant="link" v-else></b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page < max - 2"
+      </span>
+      <span v-else></span>
+      <span v-if="page < max - 2">
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" 
         @click="movePage(2)">{{ page + 2 }}</b-button>
-      <b-button variant="link" v-else></b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page < max - 3"
+      </span>
+      <span v-else></span>
+      <span v-if="page < max - 3">
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" 
         @click="movePage(3)">{{ page + 3 }}</b-button>
-      <b-button variant="link" v-else></b-button>
-      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" v-if="page < max - 5"
-        @click="movePage(5)">&gt;
-      </b-button>
-      <b-button variant="link" v-else></b-button>
+      </span>
+      <span v-else></span>
+      <span v-if="page < max - 5">
+      <b-button variant="link" style="color: black; text-decoration: none; font-weight: 100" 
+        @click="movePage(5)">&gt;</b-button>
+      </span>
+      <span v-else></span>
     </div>
-    <!-- <div class="overflow-auto">
-      <div>
-        <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" first-number></b-pagination>
-      </div>
-    </div> -->
   </b-container>
-  <br /><br />
+  <br />
 
   <b-row style="margin-bottom: 10px">
     <b-col cols="3">
       <b-form-select v-model="selected" :options="options" class="mb-3" value-field="item" text-field="name"
-        disabled-field="notEnabled">
+        disabled-field="notEnabled" style="border-color: rgb(164, 130, 130);">
 
       </b-form-select>
     </b-col>
     <b-col cols="3">
       <b-form-select v-model="selected_2" :options="options_2" class="mb-3" value-field="item" text-field="name"
-        disabled-field="notEnabled"></b-form-select>
+        disabled-field="notEnabled" style="border-color: rgb(164, 130, 130);"></b-form-select>
     </b-col>
     <b-col cols="5">
-      <b-form-input placeholder="검색어를 입력해주세요"></b-form-input>
+      <b-form-input placeholder="검색어를 입력해주세요" style="border-color: rgb(164, 130, 130);"></b-form-input>
     </b-col>
     <b-col cols="1">
       <b-button style="color: #453535; background-color: #e1d3d2; border: none"><svg width="22" height="22" fill="none"
@@ -140,6 +150,8 @@ export default {
   components: { BoardListItem },
   data() {
     return {
+      page: 1,
+      max: 10,
       selected: 'A',
       options: [
         { item: 'A', name: '전체기간' },
@@ -170,12 +182,14 @@ export default {
   setup() {
     const store = useStore();
     const boardListname = computed(() => store.state.boardStore.boardListName);
+    const category = computed(() => store.state.boardStore.category);
     const items_popular = computed(() => store.state.boardStore.boardList);
-    return { store, boardListname, items_popular };
+    return { store, category, boardListname, items_popular };
   },
   mounted() {
     console.log("selected list : ");
     console.log(this.boardListname);
+    //this.store.dispatch("/boardStore/set_boardList",this.category);
   },
   methods: {
     movePage(num) {
@@ -197,6 +211,24 @@ export default {
 .paging {
   text-align: center;
   color: black;
+}
+
+.btn-secondary {
+  --bs-btn-focus-shadow-rgb: white;
+}
+
+.btn-link {
+  --bs-btn-focus-shadow-rgb: white;
+}
+
+.form-select {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.form-control {
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 /* .page-link{

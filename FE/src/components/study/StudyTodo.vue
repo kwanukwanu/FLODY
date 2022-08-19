@@ -1,5 +1,5 @@
 <template>
-  <b-card style="border-color: #a48282; max-width: 35rem; height:304px; overflow-y: scroll;" id="tab_todo">
+  <b-card style="border-color: #a48282; max-width: 35rem; height:304px;">
     <b-row>
       <b-col cols="10">
         <span style="text-align:left; font-weight:bold; font-size: large; vertical-align:-webkit-baseline-middle;">Todo
@@ -16,10 +16,12 @@
       </b-col>
     </b-row>
     <hr />
-    <ul style="list-style-type :none;">
-      <study-todo-items v-for="(item, index) in todo_list" :key="item.index = index" v-bind="item">
-      </study-todo-items>
-    </ul>
+    <div id="tab_todo" style="height:205px; overflow-y: scroll;">
+      <ul style="list-style-type :none;">
+        <study-todo-items v-for="(item, index) in todo_list" :key="item.index = index" v-bind="item">
+        </study-todo-items>
+      </ul>
+    </div>
   </b-card>
   <study-todo-modals></study-todo-modals>
 </template>
@@ -40,27 +42,10 @@ export default {
     const isTodos = false;
 
     const store = useStore();
-    const todo_list = computed(() => store.state.calendarStore.todo_list);
+    const todo_list = computed(() => store.state.memberStore.todo_list);
     return { isTodos, store, todo_list };
   },
-  mounted() {
-    console.log("todolist");
-    console.log(this.todo_list);
-  },
   methods: {
-    // addRow() {
-    // var tbody = document.getElementById('mytest_2');
-    // var row = tbody.insertRow(tbody.rows.length); // 하단에 추가
-    // var cell1 = row.insertCell(0);
-    // var cell2 = row.insertCell(1);
-    // cell1.innerHTML = document.getElementById('holder').outerHTML;
-    // cell2.innerHTML = document.getElementById('delete').outerHTML;
-    // },
-
-    // deleteRow() {
-    // var tbody = document.getElementById('mytest_2');
-    // tbody.deleteRow(this.row);
-    // },
 
   }
 }
@@ -82,20 +67,20 @@ input[type=checkbox]:checked+label.strikethrough {
   color: #9F9F9F;
 }
 
-#todosField::-webkit-scrollbar {
-  width: 6px;
+#tab_todo::-webkit-scrollbar {
+  width: 10px;
 }
 
-#todosField::-webkit-scrollbar-track {
+#tab_todo::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-#todosField::-webkit-scrollbar-thumb {
-  border-radius: 3px;
-  background-color: gray;
+#tab_todo::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #E4DADA;
 }
 
-#todosField::-webkit-scrollbar-button {
+#tab_todo::-webkit-scrollbar-button {
   width: 0;
   height: 0;
 }

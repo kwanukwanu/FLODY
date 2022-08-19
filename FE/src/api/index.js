@@ -12,5 +12,6 @@ function apiInstance() {
   return instance;
 }
 
+const api = apiInstance();
 
-export { apiInstance };
+export { api };

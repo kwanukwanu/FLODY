@@ -1,19 +1,19 @@
 <template>
-  <div v-if="clickNickname == ' '"></div>
-  <b-container v-else-if="clickNickname != userInfo.nickname">
+  <!-- <div v-if="clickNickname == ' '"></div> -->
+  <b-container v-if="profile.email != userInfo.email">
     <br>
     <b-row style="margin-bottom:27px">
       <b-col cols="3" style="padding: 0px; text-align: center;">
-        <b-avatar variant="info" src="https://placekitten.com/300/200" size="145px"></b-avatar>
+        <b-avatar variant="info" :src="profile.profile" size="145px"></b-avatar>
       </b-col>
       <b-col>
         <b-row style="margin-bottom:10px;">
           <b-col style="text-align: left; padding: 0px;">
             <span style="font-weight: 100; font-size: 25px; margin-right: 12px;"
-              @click="getClickNickname(profile.nickName)">{{ profile.nickName }}</span>
+              @click="getClickNickname(profile.nickname)">{{ profile.nickname }}</span>
             <b-button size="sm" variant="link"
               style="color: black; text-decoration: none; font-weight: 100; border: 1px solid; vertical-align:super;"
-              v-b-modal.chatting2 @click="getTargetId(profile.nickName)">
+              v-b-modal.chatting2 @click="getTargetId(profile.email)">
               메시지 보내기</b-button>
             <b-button size="sm" variant="link"
               style="color: black; background-color: white; text-decoration: none; font-weight: 100; border: 1px solid; margin-left: 12px; vertical-align:super;"
@@ -34,14 +34,19 @@
         </b-row>
         <b-row style="margin-bottom:10px;">
           <b-col style="text-align: left; padding: 0;">
-            <span>게시글 </span><span style="font-weight:bold;">{{ profile.board_num }}
+            <span>게시글 </span><span style="font-weight:bold;">
+            <!-- {{ profile.posts }} -->
+            5
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <a style="cursor:pointer" v-b-modal.modal-10><span>팔로워
-              </span><span style="font-weight:bold;">{{ profile.follower
-              }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-            <a style="cursor:pointer" v-b-modal.modal-11><span>팔로우 </span><span style="font-weight:bold;">{{
-                profile.follow
-            }}</span></a>
+              </span><span style="font-weight:bold;">&nbsp;
+              <!-- {{ profile.followers }} -->
+              101
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+            <a style="cursor:pointer" v-b-modal.modal-11><span>팔로우 </span><span style="font-weight:bold;">&nbsp;
+            <!-- {{profile.followings}} -->
+            98
+            </span></a>
           </b-col>
         </b-row>
         <b-row style="font-weight: bold;">
@@ -51,7 +56,7 @@
         </b-row>
         <b-row>
           <b-col style="text-align: left; padding: 0;">
-            <div>{{ profile.contents }}</div>
+            <div>{{ profile.introduction }}</div>
           </b-col>
         </b-row>
       </b-col>
@@ -59,17 +64,17 @@
   </b-container>
   <!-- <hr> -->
 
-  <b-container v-else-if="clickNickname == userInfo.nickname">
+  <b-container v-else-if="profile.email == userInfo.email">
     <br>
     <!-- <b-row align-v="center"> -->
     <b-row style="margin-bottom:27px">
       <b-col cols="3" style="padding: 0px; text-align: center;">
-        <b-avatar variant="info" src="https://placekitten.com/300/300" size="145px"></b-avatar>
+        <b-avatar variant="info" :src="userInfo.profile" size="145px"></b-avatar>
       </b-col>
       <b-col>
         <b-row style="margin-bottom:10px;">
           <b-col style="text-align: left; padding: 0px;">
-            <span style="font-weight: 100; font-size: 25px; margin-right: 12px;">{{ profile.nickName }}</span>
+            <span style="font-weight: 100; font-size: 25px; margin-right: 12px;">{{ userInfo.nickname }}</span>
             <router-link :to="{ name: 'newspidsettings' }"><svg width="24" height="24" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" stroke="#444" stroke-width="2" stroke-linecap="round"
@@ -94,23 +99,39 @@
         </b-row>
         <b-row style="margin-bottom:10px;">
           <b-col style="text-align: left; padding: 0;">
-            <span>게시글 </span><a style="cursor:pointer" v-b-modal.modal-10><span style="font-weight:bold;">{{
-                profile.board_num
-            }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로워
-              </span><span style="font-weight:bold;">{{ profile.follower
-              }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a><a style="cursor:pointer" v-b-modal.modal-11><span
-                style="font-weight:bold;"></span><span>팔로우
-              </span><span style="font-weight:bold;">{{ profile.follow }}</span></a>
+            <span>게시글 </span>
+            <a style="cursor:pointer" v-b-modal.modal-10>
+              <span style="font-weight:bold;">
+                <!-- {{ profile.posts }} -->
+                3
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </span>
+              <span>팔로워</span>
+              <span style="font-weight:bold;">
+                <!-- {{ profile.followers }} -->
+                75
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </span>
+            </a>
+            <a style="cursor:pointer" v-b-modal.modal-11>
+              <span style="font-weight:bold;"></span>
+              <span>팔로우</span>
+              <span style="font-weight:bold;">
+                <!-- {{ profile.followings }} -->
+                88
+              </span>
+            </a>
           </b-col>
         </b-row>
         <b-row style="font-weight: bold;">
           <b-col style="text-align: left; padding: 0;">
-            <div>{{ profile.name }}</div>
+            <div>{{ userInfo.name }}</div>
           </b-col>
         </b-row>
         <b-row>
           <b-col cols="8" style="text-align: left; padding: 0;">
-            <div>{{ profile.contents }}</div>
+            <div>{{ userInfo.introduction }}
+            </div>
           </b-col>
           <!-- <b-col cols="4">
             <div style="text-align:right;">
@@ -160,7 +181,6 @@ export default {
     }
   },
   mounted() {
-    console.log("누구의 프로필 : " + this.clickNickname);
   }
 }
 </script>

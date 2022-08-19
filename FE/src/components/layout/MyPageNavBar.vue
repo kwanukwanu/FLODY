@@ -4,7 +4,7 @@
       <b-row>
         <b-col cols="3">
           <div class="pic">
-            <b-avatar variant="info" src="https://placekitten.com/300/300" size="44px"></b-avatar>
+            <b-avatar variant="info" :src="userInfo.profile" size="44px"></b-avatar>
           </div>
         </b-col>
 
@@ -12,7 +12,7 @@
           <b-row>
             <b-col>
               <b-card-text style="margin-left:3px; font-weight: bold; font-size: large;"
-                @click="getClickNickname(userInfo.nickname)">{{ userInfo.name }}</b-card-text>
+                @click="getClickNickname(userInfo.nickname, userInfo.profile)">{{ userInfo.nickname }}</b-card-text>
             </b-col>
           </b-row>
           <b-row>
@@ -42,16 +42,16 @@
         <!-- <h2 style="text-align: center;">목표 등록</h2> -->
         <b-row style="margin-bottom: 10px;">
           <b-col>
-            <b-form-input placeholder="시험 이름을 입력하세요." required style="border: none;"></b-form-input>
+            <b-form-input v-model="name" placeholder="시험 이름을 입력하세요." required style="border: none;"></b-form-input>
           </b-col>
         </b-row>
         <b-row style="margin-bottom: 10px;">
           <b-col>
-            <b-form-input v-model="d_day" type="date" placeholder="날짜 선택" style="border: none;"></b-form-input>
+            <b-form-input v-model="dueDate" type="date" placeholder="날짜 선택" style="border: none;"></b-form-input>
           </b-col>
         </b-row>
         <br>
-        <b-button text @click="addPlans()" style="color: #453535; background-color: #E1D3D2; border: none">등록</b-button>
+        <b-button text @click="addPlans()" style="color: #453535; background-color: #E1D3D2; border: none" data-bs-dismiss="modal" aria-label="Close">등록</b-button>
         <!-- <template #modal-footer="{ cancel, ok }">
             <b-button size="sm" variant="danger" @click="cancel()">
               취소
@@ -69,6 +69,8 @@
 <script>
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { add_goal } from "@/api/goal.js";
+
 import MyPageItems from './items/MyPageItems.vue';
 
 const store = useStore();
@@ -82,23 +84,19 @@ export default {
     const profile = computed(() => store.state.newspidStore.profile);
     const userInfo = computed(() => store.state.memberStore.userInfo);
     const clickNickname = computed(() => store.state.newspidStore.clickNickname);
-
-    return { store, userInfo, profile, clickNickname };
+    const plans = computed(() => store.state.memberStore.goals);
+    return { plans, store, userInfo, profile, clickNickname };
   },
   data() {
     return {
-      d_day: null,
-      plans: [
-        {
-          subject: "정보처리기사",
-          mod: 10,
-        },
-        {
-          subject: "OPIC",
-          mod: 3,
-        }
-      ],
+      count: 0,
+      dueDate: null,
+      name: "",
     }
+  },
+  // 개수, 즉 count 가 변화하면 getPlans를 다시 호출한다.
+  watch: {
+    count: `getPlans`,
   },
   methods: {
     logout() {
@@ -107,19 +105,50 @@ export default {
       if (this.$route.path != "/")
         this.$router.push({ name: "home" });
     },
-    getClickNickname(clickNickname) {
+    getClickNickname(clickNickname, profile) {
       console.log(clickNickname);
-      this.store.dispatch("newspidStore/setClickNickname", clickNickname);
+      const data = {
+        nickName: clickNickname,  // 닉네임 적용
+        profile: profile,         // 사진 변경
+        board_num: 44,
+        follower: 22,
+        follow: 13,
+        name: "홍시영",
+        contents: "비트 찍고 랩하지만 코딩도 잘 하는 기리보이입니다.",
+      }
+      this.store.dispatch("newspidStore/setprofile", data);
     },
-    addPlans() {
-      console.log(this.d_day);
+    async addPlans() {
+      console.log(this.name);
+      console.log(this.dueDate);
+      const data = {
+        name: this.name,
+        dueDate: this.dueDate,
+      };
+      this.name = "";
+      this.dueDate = null;
+      await add_goal(
+        data,
+        ({ data }) => {
+          // let msg = "등록에 문제가 발생하였습니다!";
+          if (data.msg === "SUCCESS") {
+            // msg = "등록 완료";
+          }
+          // alert(msg);
+          this.count++;
+        },
+        (error) => {
+          console.log(error);
+        });
     },
-    getPlans() {
+    async getPlans() {
       // 여기서 axios를 통해 목표를 받아온다.
+      await this.store.dispatch("memberStore/setgoals");
     },
   },
   mounted() {
     this.getPlans();
+    this.count = this.plans.length;
   }
 }
 </script>
@@ -135,5 +164,9 @@ export default {
 
 .pic {
   margin-top: 6px;
+}
+
+.btn-link {
+    --bs-btn-focus-shadow-rgb: white;
 }
 </style>

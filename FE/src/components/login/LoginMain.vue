@@ -105,12 +105,12 @@
           </div>
           <br />
           <b-row>
-            <b-col>
+            <!-- <b-col>
               <div class="button_2">
                 <b-button v-b-modal.find variant="link" @click="findID()" style="color: #b99b9a; text-decoration: none; font-weight: 100;
                   ">아이디 찾기</b-button>
               </div>
-            </b-col>
+            </b-col> -->
             <b-col>
               <div class="button_2">
                 <b-button v-b-modal.find variant="link" @click="findPW()" style="color: #b99b9a; text-decoration: none">
@@ -127,13 +127,13 @@
             </b-col>
           </b-row>
           <br />
-          <b-row>
+          <!-- <b-row>
             <login-register></login-register>
-          </b-row>
+          </b-row> -->
         </b-container>
       </b-card>
     </b-row>
-    <b-modal hide-footer title="아이디/비밀번호 찾기" centered id="find" size="lg" style="text-align: center;">
+    <b-modal hide-footer hide-header centered id="find" size="md" style="text-align: center;">
       <login-modal-find />
     </b-modal>
   </b-container>
@@ -143,17 +143,17 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
 
-import LoginRegister from "./LoginRegister.vue";
+// import LoginRegister from "./LoginRegister.vue";
 import LoginModalFind from "./modal/LoginModalFind.vue";
 
 export default {
-  components: { LoginRegister, LoginModalFind },
+  components: { LoginModalFind }, //LoginRegister,
   data() {
     return {
       fields: ["first_name", "last_name", "show_details"],
       user: {
-        email: "ssafy@ssafy.com",
-        password: "1234567",
+        email: "admin@ssafy.com",
+        password: "admin321",
       },
       idfind: false,
       pwfind: false,
@@ -173,6 +173,9 @@ export default {
       if (this.isLogin) {
         console.log("로그인 성공, 유저 정보를 받아옵니다.");
         await this.store.dispatch("memberStore/getUserInfo", this.user.email); // 정보를 받아서 vuex의 user에 저장한다.
+        console.log("userInfo를 받는다");
+        const userInfo = this.store.state.memberStore.userInfo;
+        this.store.dispatch("newspidStore/set_profile", userInfo);
         this.$router.push("/about"); // 라우터 페이지 이동
       }
       else {
@@ -212,5 +215,21 @@ export default {
 
 .button_2 {
   text-align: center;
+}
+
+.form-select {
+  box-shadow: none !important;
+}
+
+.form-control {
+  box-shadow: none !important;
+}
+
+.btn {
+  --bs-btn-focus-shadow-rgb: white;
+}
+
+.btn_secondary {
+  --bs-btn-focus-shadow-rgb: white;
 }
 </style>
