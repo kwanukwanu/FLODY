@@ -11,7 +11,7 @@
                             <div style="margin-left:1px; font-size:large;">{{ set_userInfo.email }}</div>
                         </b-row>
                         <b-row style="color:#064635; font-size: small;">
-                            <a> 프로필 사진 바꾸기(무작위)
+                            <a> 프로필 사진 바꾸기
                             </a>
                         </b-row>
                     </b-col>
@@ -94,7 +94,7 @@
                         이전 비밀번호
                     </b-col>
                     <b-col cols="9">
-                        <b-form-input id="content" placeholder="" style="width:500px;"
+                        <b-form-input type="password" id="content" placeholder="" style="width:500px;"
                             v-model="set_password.currentPassword">
                         </b-form-input>
                     </b-col>
@@ -105,7 +105,7 @@
                         새 비밀번호
                     </b-col>
                     <b-col cols="9">
-                        <b-form-input id="content" placeholder="" style="width:500px;"
+                        <b-form-input type="password" id="content" placeholder="" style="width:500px;"
                             v-model="set_password.newPassword">
                         </b-form-input>
                     </b-col>
@@ -117,7 +117,7 @@
                         새 비밀번호 확인
                     </b-col>
                     <b-col cols="9">
-                        <b-form-input id="content" placeholder="" style="width:500px;"
+                        <b-form-input id="content" type="password" placeholder="" style="width:500px;"
                             v-model="set_password.checkNewPassword">
                         </b-form-input>
                     </b-col>
