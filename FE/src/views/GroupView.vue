@@ -48,7 +48,7 @@
         <div id="todosField" style="height:50px; overflow-y: scroll;">
         </div>
         <br />
-        <b-button text @click="submit_todo" style="color: #453535; background-color: #e1d3d2; border: none">등록
+        <b-button text @click="submit_todo" style="color: #453535; background-color: #e1d3d2; border: none" data-bs-dismiss="modal" aria-label="Close">등록
         </b-button>
       </b-container>
     </b-card>

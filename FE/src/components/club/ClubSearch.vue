@@ -135,9 +135,9 @@
               <h6 id="study_people_title">스터디원 목록</h6>
             </b-row>
             <b-row>
-              <b-card class="study_intro_content_2" style="height:150px; overflow-y: scroll;">
+              <b-card class="study_intro_content_2" style="height:150px; overflow-y: scroll; padding:0px 0px">
                 <b-container fluid="sm">
-                  <div style="text-align:left">
+                  <div style="text-align:left; padding:0px 0px; font-size: 15px;">
                     <!-- <ul id="study_people_group">
                     <li class="study_people_person"><b-avatar variant="info" src="https://placekitten.com/300/200" size="20px"></b-avatar> Super_girl</li>
                     <li class="study_people_person"><b-avatar variant="info" src="https://placekitten.com/300/201" size="20px"></b-avatar> Bat_Man</li>
