@@ -92,7 +92,11 @@ export default {
           console.log(response);
           if (response.data.msg === "SUCCESS") {
             this.store.dispatch("groupStore/set_todo_list", data);
-            alert("삭제가 완료되었습니다.");
+            this.$swal.fire({
+              title: '삭제되었습니다.',
+              text: "",
+              icon: 'waring',
+            })
           }
         },
         (error) => {
