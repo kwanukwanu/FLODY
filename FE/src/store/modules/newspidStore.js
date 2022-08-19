@@ -14,7 +14,7 @@ const newspidStore = {
     newspids: [
       {
         pidNo: 0,
-        author: "test01@naver.com",
+        author: "dofl8787@naver.com",
         profile: "https://placekitten.com/300/300",
         contents: "오늘도 나는 공부를 놓지 않는다. 내 자신에 취한다",
         tags: ["영국", "런던", "스터디"],
