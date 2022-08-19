@@ -217,7 +217,7 @@ export default {
 
       console.log(link);
       this.$router.push(link);
-    }
+    },
   },
   computed: {
   },

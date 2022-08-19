@@ -4,7 +4,7 @@
       <input type="checkbox" name="packersOff" :id="index" :checked="done" @click="logingCheckbox()"
         style="margin-right: 7px" />
       <label :for="index" class="strikethrough">{{ title }}</label>
-      <b-button @click="submit" style="color: #453535; background-color: #e1d3d2; border: none">
+      <b-button @click="delete_todo()" style="color: #453535; background-color: #e1d3d2; border: none">
         <svg id="delete" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"
           style="vertical-align: sub; cursor: pointer;">
           <path d="M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z" stroke="#444"
@@ -19,7 +19,7 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
 
-import { modify_group_schedule } from "@/api/group";
+import { delete_group_schedule, modify_group_schedule } from "@/api/group";
 
 
 export default {
@@ -80,7 +80,26 @@ export default {
           console.log(error);
         }
       );
-    }
+    },
+    async delete_todo() {
+      const data = {
+        groNo: this.selectGroup.groNo,
+        selectedDate: this.selectDate,
+      };
+      await delete_group_schedule(
+        this.gsNo,
+        (response) => {
+          console.log(response);
+          if (response.data.msg === "SUCCESS") {
+            this.store.dispatch("groupStore/set_todo_list", data);
+            alert("삭제가 완료되었습니다.");
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
   }
 }
 </script>

@@ -73,7 +73,7 @@ async function modify_group(groupInfo, success, fail) {
 async function delete_group(groNo, success, fail) {
   console.log("axios 수행 시작");
   console.log(groNo);
-  await api.delete(`/group?groNo=${groNo}`).then(success).catch(fail);
+  await api.delete(`/group/schedule?groNo=${groNo}`).then(success).catch(fail);
 }
 
 // 그룹 내 멤버 전체 목록 조회
@@ -157,7 +157,7 @@ async function modify_group_schedule(gsNo, scheduleInfo, success, fail) {
 async function delete_group_schedule(gsNo, success, fail) {
   console.log("delete_group_schedule의 axios 수행 시작");
   console.log(gsNo);
-  await api.delete(`/group/schedules?gsNo=${gsNo}`).then(success).catch(fail);
+  await api.delete(`/group/schedule?gsNo=${gsNo}`).then(success).catch(fail);
 }
 
 // 날마다의 그룹 스케줄
