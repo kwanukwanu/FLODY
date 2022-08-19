@@ -6,8 +6,8 @@
 
 | Application                          | Domain                        | Language                         | Framework                            |
 | ------------------------------------ | ----------------------------- | -------------------------------- | ------------------------------------ |
-| :white_check_mark: Desktop Web       | :white_check_mark: Web Design  | :white_check_mark: JavaScript    | :white_check_mark:Vue.js             |
-| :black_square_button: Mobile Web     | :black_square_button: Web RCT | :black_square_button: TypeScript | :black_square_button:React           |
+| :white_check_mark: Desktop Web       | :white_check_mark: Web Design  | :white_check_mark: JavaScript    | :white_check_mark: Vue.js             |
+| :black_square_button: Mobile Web     | :black_square_button: Web RCT | :black_square_button: TypeScript | :black_square_button: React           |
 | :black_square_button: Responsive Web | :black_square_button: Web IoT | :black_square_button: C/C++      | :black_square_button: Angular        |
 | :black_square_button: Android App    | :black_square_button: Mobile  | :black_square_button: C#         | :black_square_button: Node.js        |
 | :black_square_button: iOS App        |                               | :black_square_button: Python     | :black_square_button: Flask/Django   |
@@ -37,7 +37,7 @@
 
 ## 팀 소개
 
-* **장종환 **: 팀장, 백엔드 개발
+* **장종환**: 팀장, 백엔드 개발
 * **김애리**: 팀원, 프론트엔드 개발
 * **정교준**: 팀원, 프론트엔드 개발
 * **정세한**: 팀원, 프론트엔드 개발
