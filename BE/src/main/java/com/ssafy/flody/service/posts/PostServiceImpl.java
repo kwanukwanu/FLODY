@@ -1,13 +1,5 @@
 package com.ssafy.flody.service.posts;
 
-import com.ssafy.flody.domain.posts.Posts;
-import com.ssafy.flody.domain.posts.PostsRepository;
-import com.ssafy.flody.domain.posts.categories.Categories;
-import com.ssafy.flody.domain.posts.categories.CategoriesRepository;
-import com.ssafy.flody.domain.posts.coverages.Coverages;
-import com.ssafy.flody.domain.posts.coverages.CoveragesRepository;
-import com.ssafy.flody.domain.users.Users;
-import com.ssafy.flody.domain.users.UsersRepository;
 import com.ssafy.flody.dto.request.posts.PostCreateRequestDto;
 import com.ssafy.flody.dto.request.posts.PostUpdateRequestDto;
 import com.ssafy.flody.dto.response.posts.PostDetailResponseDto;
@@ -15,11 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Service
-@RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
     private final PostsRepository postRepository;
     private final CategoriesRepository categoryRepository;

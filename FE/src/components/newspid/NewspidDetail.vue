@@ -4,11 +4,14 @@
       <b-row>
         <b-col>
           <!-- fluid alt="Responsive image" -->
-          <b-img src="https://placekitten.com/300/"
-            style="width: 100%; height: auto; max-width:700px; display:block; margin:0 auto;"></b-img>
+
+          <!-- 사진 종류에 따라 크기가 맞지 않음 = 조정 필요-->
+          <b-img :src="picture"
+            style="width: 100%; height: auto; max-width:700px; max-height: 440px; display:inline-block; margin:0 auto;">
+          </b-img>
         </b-col>
         <b-col style="background-color: #ffffff;">
-          <newspid-list></newspid-list>
+          <newspid-list v-bind="$props"></newspid-list>
         </b-col>
       </b-row>
       <b-row style="margin-top: 15px;">
@@ -28,106 +31,70 @@
       </b-row>
     </b-container>
   </b-card>
+  <newspid-detail-modals></newspid-detail-modals>
 
-  <b-modal hide-footer hide-title hide-header  centered id="modal-4" size="sm" style="text-align: center;">
-    <b-container>
-      <!-- 본인 게시물이라면 신고 안 보이도록 해야 함 -->
-      <b-row @click="Delete" style="text-align:center; cursor: pointer; color: red; font-weight: 600;">
-        <div style="text-align:center;" v-b-modal.modal-7>신고</div>
-      </b-row>
-      <hr />
-      <b-row @click="Delete" style="text-align:center; cursor: pointer; color: red; font-weight: 600;">
-        <div style="text-align:center;">삭제</div>
-      </b-row>
-      <hr />
-      <b-row @click="Modify" style="cursor: pointer;">
-        <div style="text-align:center;">수정</div>
-      </b-row>
-      <hr />
-      <b-row @click="Cancel" style="text-align:center; cursor: pointer;">
-        <div style="text-align:center;">취소</div>
-      </b-row>
-    </b-container>
-  </b-modal>
-
-  <b-modal hide-footer hide-title hide-header no-stacking centered id="modal-5" size="md" style="text-align: center;">
-    <b-container>
-      <b-row>
-        <b-col>
-          <div style="text-align:center;">
-            <b-avatar variant="info" src="https://placekitten.com/300/300" size="85px"></b-avatar>
-          </div>
-        </b-col>
-      </b-row>
-      <br>
-      <b-row>
-        <b-col style="margin-bottom:12px;">
-          @Brown_Cat님의 팔로우를 취소하시겠어요?
-        </b-col>
-      </b-row>
-      <hr />
-      <b-row @click="Modify" style="cursor: pointer; color: red; font-weight: bold;">
-        <div style="text-align:center;">팔로우 취소</div>
-      </b-row>
-      <hr />
-      <b-row @click="Cancel" style="text-align:center; cursor: pointer;">
-        <div style="text-align:center;" >취소</div>
-      </b-row>
-    </b-container>
-  </b-modal>
-
-  <b-modal hide-footer id="modal-7" centered no-stacking title="신고하기" style="text-align: center">
-    <b-card style="height: 23rem; max-width: 30rem; background-color: #f8f3f3">
-      <b-container ref="form">
-        <b-row style="margin-bottom: 10px">
-          <b-col>
-            <b-form-textarea id="content" placeholder="신고 내용" rows="10" max-rows="15" required style="border: none">
-            </b-form-textarea>
-          </b-col>
-        </b-row>
-        <br />
-        <b-button text @click="submit" style="color: #453535; background-color: #e1d3d2; border: none">제출</b-button>
-      </b-container>
-    </b-card>
-  </b-modal>
 </template>
 
 <script>
+import { useStore } from "vuex";
+
 import NewspidList from "@/components/newspid/NewspidList.vue";
+import NewspidDetailModals from "@/components/newspid/modal/NewspidDetailModals.vue";
+
 
 export default {
-  components:{ NewspidList },
-  methods:{
-    Delete(){
+  components: { NewspidList, NewspidDetailModals },
+  props: {
+    pidNo: Number,          // 뉴스피드 번호
+    author: String,         // 뉴스피드 작성자
+    profile: String,        // 작성자 사진
+    contents: String,       // 작성 내용 
+    tags: Array,            // 태그
+    creativetimes: Object,    // 작성 날짜
+    picture: String,        // 사진
+    favor: Number,          // 좋아요 개수
+    comments: Array,        // 댓글들
+  },
+  setup() {
+    const store = useStore();
+    return { store };
+  },
+  mounted() {
+    console.log("Detail-----------------------------");
+    console.log(this.pidNo);
+    console.log(this.author);
+    console.log(this.comments);
+  },
+  methods: {
+    Delete() {
       console.log("삭제");
     },
-    Modify(){
+    Modify() {
       console.log("수정");
-    }, 
+    },
     // 빠져나가는 함수 적용 필요
-    Cancel(){
+    Cancel() {
       console.log("취소");
-    }
-    
+    },
   },
 }
 
 </script>
 
 <style>
-
-
-.avatar{
+.avatar {
   margin-left: 5px;
   margin-top: 5px;
 }
-.bottom_time_line{
-  color: gray; 
+
+.bottom_time_line {
+  color: gray;
   font-size: small;
   text-align: left;
 }
-.bottom_like_comment{
-  color: gray; 
+
+.bottom_like_comment {
+  color: gray;
   font-size: small;
   text-align: left;
   font-weight: bold;

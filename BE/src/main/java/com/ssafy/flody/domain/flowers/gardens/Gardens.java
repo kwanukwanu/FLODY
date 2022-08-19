@@ -11,9 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 @Getter
 @Builder
@@ -24,30 +22,16 @@ public class Gardens {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long garNo;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Flowers.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Flowers.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "flo_no")
     private Flowers flower;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "use_email")
     private Users user;
-    @Column(nullable = false, updatable = false)
+    @CreatedDate
     private Date startDate;
     @Column
     private Date endDate;
     @Column(nullable = false)
     private int exp;
-
-    public void addExp(int exp) {
-        this.exp += exp;
-    }
-
-    public void evolve(Flowers flower) {
-        this.flower = flower;
-    }
-
-    public void bloom() {
-        this.exp = 0;
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
-        this.endDate = cal.getTime();
-    }
 }

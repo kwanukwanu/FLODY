@@ -1,16 +1,19 @@
 <template>
-  <b-container>
+  <!-- <div v-if="clickNickname == ' '"></div> -->
+  <b-container v-if="profile.email != userInfo.email">
     <br>
     <b-row style="margin-bottom:27px">
       <b-col cols="3" style="padding: 0px; text-align: center;">
-        <b-avatar variant="info" src="https://placekitten.com/300/200" size="145px"></b-avatar>
+        <b-avatar variant="info" :src="profile.profile" size="145px"></b-avatar>
       </b-col>
       <b-col>
         <b-row style="margin-bottom:10px;">
           <b-col style="text-align: left; padding: 0px;">
-            <span style="font-weight: 100; font-size: 25px; margin-right: 12px;">{{ profile.nickName }}</span>
+            <span style="font-weight: 100; font-size: 25px; margin-right: 12px;"
+              @click="getClickNickname(profile.nickname)">{{ profile.nickname }}</span>
             <b-button size="sm" variant="link"
-              style="color: black; text-decoration: none; font-weight: 100; border: 1px solid; vertical-align:super;">
+              style="color: black; text-decoration: none; font-weight: 100; border: 1px solid; vertical-align:super;"
+              v-b-modal.chatting2 @click="getTargetId(profile.email)">
               메시지 보내기</b-button>
             <b-button size="sm" variant="link"
               style="color: black; background-color: white; text-decoration: none; font-weight: 100; border: 1px solid; margin-left: 12px; vertical-align:super;"
@@ -31,12 +34,19 @@
         </b-row>
         <b-row style="margin-bottom:10px;">
           <b-col style="text-align: left; padding: 0;">
-            <span>게시글 </span><span style="font-weight:bold;">{{ profile.board_num }}
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로워
-            </span><span style="font-weight:bold;">{{ profile.follower
-            }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로우 </span><span style="font-weight:bold;">{{
-    profile.follow
-}}</span>
+            <span>게시글 </span><span style="font-weight:bold;">
+            <!-- {{ profile.posts }} -->
+            5
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <a style="cursor:pointer" v-b-modal.modal-10><span>팔로워
+              </span><span style="font-weight:bold;">&nbsp;
+              <!-- {{ profile.followers }} -->
+              101
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+            <a style="cursor:pointer" v-b-modal.modal-11><span>팔로우 </span><span style="font-weight:bold;">&nbsp;
+            <!-- {{profile.followings}} -->
+            98
+            </span></a>
           </b-col>
         </b-row>
         <b-row style="font-weight: bold;">
@@ -46,25 +56,25 @@
         </b-row>
         <b-row>
           <b-col style="text-align: left; padding: 0;">
-            <div>{{ profile.contents }}</div>
+            <div>{{ profile.introduction }}</div>
           </b-col>
         </b-row>
       </b-col>
     </b-row>
   </b-container>
-  <hr>
+  <!-- <hr> -->
 
-  <b-container>
+  <b-container v-else-if="profile.email == userInfo.email">
     <br>
     <!-- <b-row align-v="center"> -->
     <b-row style="margin-bottom:27px">
       <b-col cols="3" style="padding: 0px; text-align: center;">
-        <b-avatar variant="info" src="https://placekitten.com/300/300" size="145px"></b-avatar>
+        <b-avatar variant="info" :src="userInfo.profile" size="145px"></b-avatar>
       </b-col>
       <b-col>
         <b-row style="margin-bottom:10px;">
           <b-col style="text-align: left; padding: 0px;">
-            <span style="font-weight: 100; font-size: 25px; margin-right: 12px;">{{ profile.nickName }}</span>
+            <span style="font-weight: 100; font-size: 25px; margin-right: 12px;">{{ userInfo.nickname }}</span>
             <router-link :to="{ name: 'newspidsettings' }"><svg width="24" height="24" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" stroke="#444" stroke-width="2" stroke-linecap="round"
@@ -89,21 +99,39 @@
         </b-row>
         <b-row style="margin-bottom:10px;">
           <b-col style="text-align: left; padding: 0;">
-            <span>게시글 </span><span
-              style="font-weight:bold;">{{ profile.board_num }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로워
-            </span><span
-              style="font-weight:bold;">{{ profile.follower }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>팔로우
-            </span><span style="font-weight:bold;">{{ profile.follow }}</span>
+            <span>게시글 </span>
+            <a style="cursor:pointer" v-b-modal.modal-10>
+              <span style="font-weight:bold;">
+                <!-- {{ profile.posts }} -->
+                3
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </span>
+              <span>팔로워</span>
+              <span style="font-weight:bold;">
+                <!-- {{ profile.followers }} -->
+                75
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </span>
+            </a>
+            <a style="cursor:pointer" v-b-modal.modal-11>
+              <span style="font-weight:bold;"></span>
+              <span>팔로우</span>
+              <span style="font-weight:bold;">
+                <!-- {{ profile.followings }} -->
+                88
+              </span>
+            </a>
           </b-col>
         </b-row>
         <b-row style="font-weight: bold;">
           <b-col style="text-align: left; padding: 0;">
-            <div>{{ profile.name }}</div>
+            <div>{{ userInfo.name }}</div>
           </b-col>
         </b-row>
         <b-row>
           <b-col cols="8" style="text-align: left; padding: 0;">
-            <div>{{ profile.contents }}</div>
+            <div>{{ userInfo.introduction }}
+            </div>
           </b-col>
           <!-- <b-col cols="4">
             <div style="text-align:right;">
@@ -122,59 +150,55 @@
     </b-row>
   </b-container>
   <hr>
-
-  <b-modal hide-footer id="modal-3" centered title="새 게시물 만들기" style="text-align: center">
-    <b-card style="height: 28rem; max-width: 30rem; background-color: #f8f3f3">
-      <b-container ref="form">
-        <!-- <h2 style="text-align: center;">목표 등록</h2> -->
-        <b-row style="margin-bottom: 10px">
-          <b-col cols="2">
-            <b-avatar variant="info" src="https://placekitten.com/300/300" size="40px"></b-avatar>
-          </b-col>
-          <b-col cols="10" style="text-align: left; margin-top: 5px; font-weight: bold; padding-left: 0;">
-            Brown_cat
-          </b-col>
-        </b-row>
-        <b-row style="margin-bottom: 10px">
-          <b-col>
-            <b-form-textarea id="content" placeholder="문구 입력..." rows="10" max-rows="15" required style="border: none">
-            </b-form-textarea>
-          </b-col>
-        </b-row>
-        <!--반응형 구현 필요-->
-        <b-row>
-          <b-col cols="11">
-            <b-form-input placeholder="위치 추가" required style="border: none;"></b-form-input>
-          </b-col>
-          <b-col cols="1" style="margin-top:2px;">
-            <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 10.833a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="#444" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" />
-              <path
-                d="M10 18.333c3.333-3.333 6.667-6.318 6.667-10a6.667 6.667 0 0 0-13.334 0c0 3.682 3.334 6.667 6.667 10Z"
-                stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </b-col>
-        </b-row>
-        <br />
-        <b-button text @click="submit" style="color: #453535; background-color: #e1d3d2; border: none">게시</b-button>
-      </b-container>
-    </b-card>
-  </b-modal>
+  <newspid-header-modals></newspid-header-modals>
 </template>
 
 <script>
 import { computed } from "vue";
 import { useStore } from "vuex";
 
+import NewspidHeaderModals from "./modal/NewspidHeaderModals.vue";
+
 export default {
+  components: {
+    NewspidHeaderModals,
+  },
   setup() {
     const store = useStore();
     const profile = computed(() => store.state.newspidStore.profile);
-    return { store, profile };
+    const userInfo = computed(() => store.state.memberStore.userInfo);
+    const clickNickname = computed(() => store.state.newspidStore.clickNickname);
+    return { store, profile, userInfo, clickNickname };
+  },
+  methods: {
+    getTargetId(targetId) {
+      console.log(targetId);
+      this.store.dispatch("chatStore/set_targetId", targetId);
+    },
+    getClickNickname(clickNickname) {
+      console.log(clickNickname);
+      this.store.dispatch("newspidStore/setClickNickname", clickNickname);
+    }
+  },
+  mounted() {
   }
 }
 </script>
 
 <style>
+.person {
+  text-align: left;
+}
+
+.nickname {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.realname {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #8E8E8E;
+}
 </style>

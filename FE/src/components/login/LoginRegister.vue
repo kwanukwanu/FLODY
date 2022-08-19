@@ -1,14 +1,13 @@
 <template>
   <div>
-    <h2 v-if="user">Signed In User : {{ user }}</h2>
+    <!-- <h2 v-if="user">Signed In User : {{ user }}</h2>
     <div id="firebaseui-auth-container"></div>
-    <div id="loader">Loading...</div>
+    <div id="loader">Loading...</div> -->
     <img src="@/assets/google_logo.png" @click="googleSignIn" style="height: 40px; width: 40px; cursor: pointer;"/>
     <br />
     <div v-if="isSignedIn">
       <button @click="handleSignedOut">로그아웃</button>
     </div>
-    <router-link :to="{path:'/chat'}">채팅창</router-link>
   </div>
 </template>
 

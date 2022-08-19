@@ -19,7 +19,7 @@ public class Pictures {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long picNo;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Posts.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Posts.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "pos_no")
     private Posts post;
     @Column(nullable = false)

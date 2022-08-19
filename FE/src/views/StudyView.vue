@@ -5,10 +5,10 @@
     </b-col>
   </b-row>
   <b-row>
-    <b-col cols="6">
+    <b-col>
       <study-calender></study-calender>
     </b-col>
-    <b-col cols="6">
+    <b-col>
       <study-todo></study-todo>
     </b-col>
   </b-row>
@@ -29,5 +29,4 @@ export default {
 </script>
 
 <style>
-
 </style>

@@ -19,10 +19,10 @@ public class Follows {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long folNo;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "follower")
     private Users follower;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "following")
     private Users following;
 }

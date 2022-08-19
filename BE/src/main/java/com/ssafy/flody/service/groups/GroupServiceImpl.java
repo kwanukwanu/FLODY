@@ -2,10 +2,8 @@ package com.ssafy.flody.service.groups;
 
 import com.ssafy.flody.domain.groups.Groups;
 import com.ssafy.flody.domain.groups.GroupsRepository;
-import com.ssafy.flody.domain.groups.members.GMembers;
 import com.ssafy.flody.domain.groups.members.GMembersRepository;
 import com.ssafy.flody.domain.users.Users;
-import com.ssafy.flody.domain.users.UsersRepository;
 import com.ssafy.flody.dto.request.groups.GroupCreateRequestDto;
 import com.ssafy.flody.dto.request.groups.GroupUpdateRequestDto;
 import com.ssafy.flody.dto.response.groups.GroupDetailResponseDto;
@@ -23,8 +21,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GroupServiceImpl implements GroupService {
     private final GroupsRepository groupRepository;
-    private final GMembersRepository groupMemberRepository;
-    private final UsersRepository userRepository;
 
     @Transactional
     public List<GroupDetailResponseDto> findGroups() {
@@ -34,7 +30,7 @@ public class GroupServiceImpl implements GroupService {
             list.add(new GroupDetailResponseDto(group));
         }
         return list;
-    }
+    };
 
     @Transactional
     public GroupDetailResponseDto findGroupById(Long groNo) {
@@ -44,17 +40,17 @@ public class GroupServiceImpl implements GroupService {
     @Transactional
     public Long addGroup(GroupCreateRequestDto requestDto) {
         return groupRepository.save(requestDto.toEntity()).getGroNo();
-    }
+    };
 
     @Transactional
-    public Long modifyGroup(GroupUpdateRequestDto requestDto) {
-        Groups group = findGroup(requestDto.getGroNo());
+    public Long modifyGroup(Long groNo, GroupUpdateRequestDto requestDto) {
+        Groups group = findGroup(groNo);
         group.update(
                 requestDto.getName(),
                 requestDto.getIntroduction()
         );
         return groupRepository.save(group).getGroNo();
-    }
+    };
 
     @Transactional
     public Long removeGroup(Long groNo) {

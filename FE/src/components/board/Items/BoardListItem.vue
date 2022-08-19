@@ -1,6 +1,6 @@
 <template>
   <b-tr style="padding: 5" @click="intoBoard()">
-    <!-- <b-td>{{ 카테고리 }}</b-td> -->
+    <b-td>{{ 카테고리 }}</b-td>
     <b-td>{{ 번호 }}</b-td>
     <b-td>{{ 제목 }}</b-td>
     <b-td>{{ 글쓴이 }}</b-td>

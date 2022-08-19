@@ -9,7 +9,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.util.Calendar;
 import java.util.Date;
 
 @Getter
@@ -22,7 +21,7 @@ public class USchedules {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long usNo;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Users.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "use_email")
     private Users user;
     @Column(nullable = false)

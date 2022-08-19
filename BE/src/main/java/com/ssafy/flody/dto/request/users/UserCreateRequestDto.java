@@ -17,10 +17,10 @@ public class UserCreateRequestDto {
     private String introduction;
     private String profile = "basic profile.jpg";
     private String name;
-    private String nickname = "익명";
+    private String nickname;
     private String address;
     private String phone;
-    private Boolean admin = false;
+    private Boolean admin;
 
     @Builder
     public UserCreateRequestDto(

@@ -14,11 +14,8 @@ public class UserInfoResponseDto {
     private String nickname;
     private String address;
     private String phone;
-    private int followers;
-    private int followings;
-    private int posts;
 
-    public UserInfoResponseDto(Users entity, int followers, int followings, int posts){
+    public UserInfoResponseDto(Users entity){
         this.email = entity.getEmail();
         this.password = entity.getPassword();
         this.introduction = entity.getIntroduction();
@@ -27,8 +24,5 @@ public class UserInfoResponseDto {
         this.nickname = entity.getNickname();
         this.address = entity.getAddress();
         this.phone = entity.getPhone();
-        this.followers = followers;
-        this.followings = followings;
-        this.posts = posts;
     }
 }

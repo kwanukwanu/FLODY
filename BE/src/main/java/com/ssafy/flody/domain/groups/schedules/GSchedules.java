@@ -9,7 +9,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.util.Calendar;
 import java.util.Date;
 
 @Getter
@@ -17,12 +16,11 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "g_schedules")
 public class GSchedules {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long gsNo;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Groups.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Groups.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "gro_no")
     private Groups group;
     @Column(nullable = false)
