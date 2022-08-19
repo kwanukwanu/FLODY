@@ -150,6 +150,8 @@ export default {
             console.log(response);
             if (response.data.msg == "SUCCESS") {
               console.log("새로운 to-do 리스트 등록 완료!!!");
+              alert("등록이 완료되었습니다.");
+
             } else {
               console.log("새로운 to-do 리스트 등록 실패 ㅠㅠ");
             }
@@ -159,11 +161,9 @@ export default {
           }
         )
       }
-      const date = this.selectedDate;
-      const d = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
       const data = {
         groNo: this.selectGroup.groNo,
-        selectedDate: d
+        selectedDate: this.selectedDate
       }
       this.store.dispatch("groupStore/set_todo_list", data);
     },
