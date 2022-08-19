@@ -125,6 +125,8 @@ export default {
         name: this.name,
         dueDate: this.dueDate,
       };
+      this.name = "";
+      this.dueDate = null;
       await add_goal(
         data,
         ({ data }) => {
