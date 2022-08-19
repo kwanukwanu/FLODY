@@ -128,6 +128,7 @@
                 <b-container fluid="sm">
                   {{ groupInfo.introduction }}</b-container>
               </b-card>
+              
             </b-row>
           </b-col>
           <b-col cols="3" id="study_people" style="padding:0px 0px 20px 12px; margin-left: 50px;">
