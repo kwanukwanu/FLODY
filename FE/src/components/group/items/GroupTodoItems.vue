@@ -4,7 +4,7 @@
       <input type="checkbox" name="packersOff" :id="index" :checked="done" @click="logingCheckbox()"
         style="margin-right: 7px" />
       <label :for="index" class="strikethrough">{{ title }}</label>
-      <b-button @click="delete_todo()" style="color: #453535; background-color: #e1d3d2; border: none">
+      <b-button @click="delete_todo()" style="color: #453535; background-color: white; border: none; padding-left: 5px; margin-bottom: 5px;">
         <svg id="delete" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"
           style="vertical-align: sub; cursor: pointer;">
           <path d="M6.667 10h6.666m5 0a8.333 8.333 0 1 1-16.666 0 8.333 8.333 0 0 1 16.666 0Z" stroke="#444"
