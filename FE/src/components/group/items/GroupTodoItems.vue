@@ -95,7 +95,7 @@ export default {
             this.$swal.fire({
               title: '삭제되었습니다.',
               text: "",
-              icon: 'waring',
+              icon: 'warning',
             })
           }
         },
