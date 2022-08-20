@@ -21,6 +21,7 @@ public class FlowerServiceImpl implements FlowerService {
     private final UsersRepository userRepository;
     private final FlowersRepository flowerRepository;
 
+    // commit 시켜줘
     public List<GardenResponseDto> findFlowers(String email) {
         List<Gardens> entityList = gardenRepository.findAllByUser(findUser(email));
         List<GardenResponseDto> list = new ArrayList<>();
