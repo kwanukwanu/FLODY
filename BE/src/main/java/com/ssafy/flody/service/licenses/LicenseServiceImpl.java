@@ -240,21 +240,30 @@ public class LicenseServiceImpl implements LicenseService {
         List<LicensesResponseDto> list = new ArrayList<>();
         if (category.equals("학과명")) {
             List<Departments> departmentList = departmentRepository.findByUdeptnmContainingIgnoreCase(keyword);
-            if (!fldnm.equals("") && !mfldnm.equals("")) {
-
-            } else if (!fldnm.equals("")) {
-
-            } else {
-
-            }
-            for (Departments department : departmentList) {
-                List<TJobs> tJobsList = tJobRepository.findAllByDepartment(department);
-                for (TJobs tJobs : tJobsList) {
-                    entityList.addAll(licenseRepository.findAllByMfield(tJobs.getMField()));
+            if (!mfldnm.equals("")) {
+                for (Departments department : departmentList) {
+                    List<SJobs> sJobsList = sJobRepository.findAllByDepartment(department);
+                    for (SJobs sJobs : sJobsList) {
+                        entityList.addAll(licenseRepository.findAllByMfieldAndSeries(findMField(mfldnm), sJobs.getSeries()));
+                    }
                 }
-                List<SJobs> sJobsList = sJobRepository.findAllByDepartment(department);
-                for (SJobs sJobs : sJobsList) {
-                    entityList.addAll(licenseRepository.findAllBySeries(sJobs.getSeries()));
+            } else if (!fldnm.equals("")) {
+                for (Departments department : departmentList) {
+                    List<SJobs> sJobsList = sJobRepository.findAllByDepartment(department);
+                    for (SJobs sJobs : sJobsList) {
+                        entityList.addAll(licenseRepository.findAllByFieldAndSeries(findField(fldnm), sJobs.getSeries()));
+                    }
+                }
+            } else {
+                for (Departments department : departmentList) {
+                    List<TJobs> tJobsList = tJobRepository.findAllByDepartment(department);
+                    for (TJobs tJobs : tJobsList) {
+                        entityList.addAll(licenseRepository.findAllByMfield(tJobs.getMField()));
+                    }
+                    List<SJobs> sJobsList = sJobRepository.findAllByDepartment(department);
+                    for (SJobs sJobs : sJobsList) {
+                        entityList.addAll(licenseRepository.findAllBySeries(sJobs.getSeries()));
+                    }
                 }
             }
             Set<Licenses> tempSet = new HashSet<>(entityList);

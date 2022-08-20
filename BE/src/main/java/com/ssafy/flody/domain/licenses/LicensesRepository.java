@@ -10,6 +10,8 @@ import java.util.List;
 public interface LicensesRepository extends JpaRepository<Licenses, Long> {
     List<Licenses> findAllByMfield(MFields mfield);
     List<Licenses> findAllBySeries(Serieses series);
+    List<Licenses> findAllByFieldAndSeries(Fields fields, Serieses series);
+    List<Licenses> findAllByMfieldAndSeries(MFields mFields, Serieses series);
     List<Licenses> findAllByFieldAndMfieldAndJmfldnmContainingIgnoreCase(Fields field, MFields mField, String jmfldnm);
     List<Licenses> findAllByFieldAndJmfldnmContainingIgnoreCase(Fields field, String jmfldnm);
     List<Licenses> findAllByJmfldnmContainingIgnoreCase(String jmfldnm);
